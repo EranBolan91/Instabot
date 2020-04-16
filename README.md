@@ -1,2 +1,2 @@
 # Instabot
-Program that can like/follow/comment automatically
+Program that can like/follow/comment posts automatically

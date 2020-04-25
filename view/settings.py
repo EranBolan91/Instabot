@@ -19,7 +19,7 @@ class Settings():
         ttk.Label(self.window, text='SETTINGS ', font=self.headerFont) \
                     .grid(column=0, row=0, padx=10, pady=10)
 
-        self.title_amount = ttk.Label(self.window, text='LIKE/FOLLOW/COMMENT users who has more then {} likes '
+        self.title_amount = ttk.Label(self.window, text='LIKE/FOLLOW/COMMENT posts who have more then {} likes '
                                                                     .format(self.amount), font=self.titleFont)
         self.title_amount.grid(column=0, row=1, padx=10, pady=10)
         ttk.Entry(self.window, textvariable=self.likes_amount).grid(column=0, row=2)

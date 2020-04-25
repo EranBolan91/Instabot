@@ -4,7 +4,6 @@ from .tab_location import *
 from .tab_followers import *
 from .tab_hash_tag import *
 from .settings import *
-from .accounts_new import *
 
 
 class Layout:

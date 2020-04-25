@@ -67,8 +67,11 @@ class TabHashTag(ttk.Frame):
 
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
-        ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+        if len(user_name_list) > 0:
+            ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                        command=self._set_username_password).grid(column=1, row=2)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=1, row=2, padx=10, pady=10)
 
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=15, rowspan=6, pady=16)

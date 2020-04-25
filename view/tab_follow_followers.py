@@ -32,8 +32,12 @@ class TabFollowFollowers(ttk.Frame):
         ttk.Label(self, text='Enter the user URL', font=self.titleFont).grid(column=0, row=1, padx=10, pady=10)
         ttk.Entry(self, textvariable=self.user_url_following, width=50).grid(column=0, row=2)
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=0, row=3, padx=10, pady=10)
-        ttk.OptionMenu(self, self.menu_following, user_name_list[0], *user_name_list, command=self._set_username_password_following)\
+        if len(user_name_list) > 0:
+            ttk.OptionMenu(self, self.menu_following, user_name_list[0], *user_name_list, command=self._set_username_password_following)\
                                                                                                 .grid(column=0, row=4)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=0, row=4, padx=10,
+                                                                                       pady=10)
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont) \
             .grid(column=0, row=5, padx=10, pady=10)
@@ -50,8 +54,12 @@ class TabFollowFollowers(ttk.Frame):
         ttk.Label(self, text='Enter the user URL', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
         ttk.Entry(self, textvariable=self.user_url_followers, width=50).grid(column=1, row=2)
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=3, padx=10, pady=10)
-        ttk.OptionMenu(self, self.menu_followers, user_name_list[0], *user_name_list, command=self._set_username_password_followers)\
+        if len(user_name_list) > 0:
+            ttk.OptionMenu(self, self.menu_followers, user_name_list[0], *user_name_list, command=self._set_username_password_followers)\
                                                                                                 .grid(column=1, row=4)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=1, row=4, padx=10,
+                                                                                       pady=10)
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont) \
             .grid(column=1, row=5, padx=10, pady=10)

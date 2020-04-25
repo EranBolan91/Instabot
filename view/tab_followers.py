@@ -28,8 +28,11 @@ class TabFollowers(ttk.Frame):
                                                                         .grid(column=0, row=0, padx=10, pady=10)
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=0, row=1, padx=10, pady=10)
-        ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+        if len(user_name_list) > 0:
+            ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                        command=self._set_username_password).grid(column=0, row=2)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=0, row=2, padx=10, pady=10)
 
         # username and password form
         ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=3, padx=10, pady=10, sticky='w')

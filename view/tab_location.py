@@ -67,8 +67,11 @@ class TabLocation(ttk.Frame):
 
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10, columnspan=2)
-        ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+        if len(user_name_list) > 0:
+            ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                        command=self._set_username_password).grid(column=1, row=2, columnspan=2)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=1, row=2, padx=10, pady=10)
 
         ttk.Label(self, text='Please enter username and password', font=self.titleFont) \
             .grid(column=1, row=3, padx=10, pady=10, columnspan=2)

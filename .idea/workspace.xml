@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="" />
+    <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/users.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/accounts_new.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_follow_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_follow_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_location.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_location.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +26,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Instabot" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZXYgAxyt2kTf0w0YBlHa7pPOxN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -26,9 +37,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Hackthon - 2/HACKATHON2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../adults" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -173,10 +184,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="446" y="168" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1585482410525" />
-    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585821430570">
+    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587044120946">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1585821430570" />
+    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1587044120946" />
     <state width="490" height="438" key="DebuggerActiveHint" timestamp="1585653573523">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -185,26 +196,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="417" y="136" key="EnvironmentVariablesDialog/0.0.1366.728@0.0.1366.728" timestamp="1584987517788" />
-    <state x="463" y="106" key="FileChooserDialogImpl" timestamp="1585764707620">
+    <state x="463" y="106" key="FileChooserDialogImpl" timestamp="1587220932624">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585764707620" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1587043254449">
+    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587220932624" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1587560533081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587043254449" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1587043254449">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587560533081" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1587560533081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587043254449" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1587043254449">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587560533081" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1587560533080">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587043254449" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1587043254449">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587560533080" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1587560533081">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587043254449" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587560533081" />
     <state width="1345" height="242" key="GridCell.Tab.1.bottom" timestamp="1586183422599">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -221,14 +232,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="242" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586183422599" />
-    <state x="184" y="7" key="SettingsEditor" timestamp="1584987655119">
+    <state x="184" y="7" key="SettingsEditor" timestamp="1587043866714">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584987655119" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1587033000004">
+    <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587043866714" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1587220912638">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587033000004" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587220912638" />
     <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1586073900428">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

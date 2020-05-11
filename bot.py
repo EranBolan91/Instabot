@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
+import time, random
 from database import db
 
 
@@ -19,17 +19,16 @@ class InstagramBot:
         self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
         time.sleep(3)
-        self.driver.find_element_by_xpath("//button[contains(text(), 'Not Now')]").click()
+        try:
+            self.driver.find_element_by_xpath("//button[contains(text(), 'Not Now')]").click()
+        except:
+            print("Didn't find 'not now'")
 
     def nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
 
-    # def follow_user(self, user):
-    #     self.nav_user(user)
-    #     self.driver.find_element_by_class_name('_5f5mN').click()
-
     # search instagram page by the hash tag
-    def search_hash_tag(self, hash_tag, amount, like, comment, follow, entry_comment):
+    def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment):
         amount_likes = self.database.get_data_from_settings()
         i = 1
         time.sleep(2)
@@ -41,7 +40,7 @@ class InstagramBot:
                 if int(like) == 1:
                     self.like_post()
                 if int(comment) == 1:
-                    self.comment_post(entry_comment)
+                    self.comment_post(split_comment)
                 if int(follow) == 1:
                     self.follow_user()
                 # click on the right arrow
@@ -80,8 +79,10 @@ class InstagramBot:
             i += 1
 
     # comment on a post
-    def comment_post(self, comment):
-        time.sleep(2)
+    def comment_post(self, split_comment):
+        # returning random comment from a list of comments
+        comment = random.choice(split_comment)
+        time.sleep(3)
         # first need to click on the Entry ('add comment...')
         self.driver.find_element_by_class_name('Ypffh').click()
         # Then enter the comment and click post
@@ -124,7 +125,7 @@ class InstagramBot:
         return names
 
     # search for location posts by the URL that the user provides
-    def search_location_by_url(self, url, amount, like, follow, comment, entry_comment):
+    def search_location_by_url(self, url, amount, like, follow, comment, split_comment):
         i = 1
         time.sleep(2)
         self.driver.get(url)  # open web browser by the URL
@@ -133,7 +134,7 @@ class InstagramBot:
             if int(like) == 1:
                 self.like_post()
             if int(comment) == 1:
-                self.comment_post(entry_comment)
+                self.comment_post(split_comment)
             if int(follow) == 1:
                 self.follow_user()
             self.driver.find_element_by_class_name(
@@ -141,7 +142,7 @@ class InstagramBot:
             i += 1
 
     # search for location posts by the location name that the user provides
-    def search_location_by_name(self, location_name, amount, like, follow, comment, entry_comment):
+    def search_location_by_name(self, location_name, amount, like, follow, comment, split_comment):
         i = 1
         self._search_entry(location_name)
         time.sleep(2)
@@ -150,7 +151,7 @@ class InstagramBot:
             if int(like) == 1:
                 self.like_post()
             if int(comment) == 1:
-                self.comment_post(entry_comment)
+                self.comment_post(split_comment)
             if int(follow) == 1:
                 self.follow_user()
             self.driver.find_element_by_class_name(

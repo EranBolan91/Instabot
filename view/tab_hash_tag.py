@@ -64,7 +64,10 @@ class TabHashTag(ttk.Frame):
 
         self.comment_entry = ttk.Entry(self, state='disabled', width=50)
         self.comment_entry.grid(column=0, row=14)
-
+        ttk.Label(self, text="To comment on posts enter more then one word, use ' , ' to separate each word  ", font=self.titleFont)\
+                                                                               .grid(column=0, row=15, padx=10, pady=10)
+        ttk.Label(self, text="For example: Nice picture,Looking good,I like it  ", font=self.titleFont)\
+                                                                                    .grid(column=0, row=16)
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
         if len(user_name_list) > 0:
@@ -74,7 +77,7 @@ class TabHashTag(ttk.Frame):
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=1, row=2, padx=10, pady=10)
 
         # Run the script button
-        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=15, rowspan=6, pady=16)
+        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=17, rowspan=6, pady=16)
 
     def _run_script(self):
         username = self.username.get()
@@ -86,13 +89,17 @@ class TabHashTag(ttk.Frame):
         follow = self.check_box_follow.get()
         entry_comment = self.comment_entry.get()
 
+        # This split the comment for a list of comments
+        if entry_comment != "":
+            split_comment = self._split_comment(entry_comment)
+
         valid = self._check_form(username, password, hash_tag, amount)
 
         if valid:
             if like == 1 or comment == 1 or follow == 1:
                 self.bot = InstagramBot(username, password)
                 self.bot.login()
-                self.bot.search_hash_tag(hash_tag, amount, like, comment, follow, entry_comment)
+                self.bot.search_hash_tag(hash_tag, amount, like, comment, follow, split_comment)
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')
 
@@ -124,3 +131,6 @@ class TabHashTag(ttk.Frame):
                 self.username.set(account[2])
                 self.password.set(account[3])
 
+    def _split_comment(self, comment):
+        split_comment = comment.split(',')
+        return split_comment

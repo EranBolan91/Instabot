@@ -48,6 +48,16 @@ class TabFollowers(ttk.Frame):
 
         ttk.Button(self, text="SEARCH", command=self._search_user).grid(column=3, row=8, pady=(8, 8))
 
+        # right side - unfollow all users in list box
+        schedule_frame = ttk.LabelFrame(self, text='UNFOLLOW EVERYONE')
+        schedule_frame.grid(column=4, row=1, ipady=30, rowspan=2, padx=40)
+        title = Label(schedule_frame, text="By click this button, the program will go to your 'following' list "
+                                           "and will unfollow all of them",
+                      bg='gray23', font=self.bold, fg='gray67')
+        unfollow_btn = ttk.Button(schedule_frame, text="UNFOLLOW", command=self._unfollow_users_now)
+        title.pack(fill=X)
+        unfollow_btn.place(anchor=S, relx=0.5, rely=0.8)
+
     def _check_form(self):
         username = self.username.get()
         password = self.password.get()
@@ -102,3 +112,12 @@ class TabFollowers(ttk.Frame):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')
         if to_delete:
             self.bot.unfollow_users(user_list)
+
+    def _unfollow_users_now(self):
+        username = self.username.get()
+        password = self.password.get()
+        self.bot = InstagramBot(username, password)
+        self.bot.login()
+        # TODO: need to create new function instead get_unfollowers,
+        # Thats goes to the user following list and just click "unfollow" button
+        self.bot.unfollow_all_users()

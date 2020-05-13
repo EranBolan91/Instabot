@@ -105,8 +105,12 @@ class InstagramBot:
 
     def _get_names(self):
         time.sleep(2)
-        sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
-        self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
+        try:
+            sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
+            self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
+        except:
+            print("Didn't find Suggestions")
+
         time.sleep(3)
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
         last_height, height = 0, 1
@@ -240,6 +244,50 @@ class InstagramBot:
             if i == 3:
                 break
 
+    def unfollow_all_users(self):
+        time.sleep(2)
+        self.driver.get(self.base_url + "/" + self.username)
+        time.sleep(3)
+        # Open the following page
+        self.driver.find_element_by_xpath("//a[contains(@href,'/following')]") \
+            .click()
+        try:
+            time.sleep(2)
+            # sometimes when you scroll to fast, it display to you the suggestions
+            sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
+            self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
+        except:
+            print('error')
+        time.sleep(3)
+        # getting the box element
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
+        last_height, height = 0, 1
+        # this while scrolls all over the followers
+        while last_height != height:
+            last_height = height
+            time.sleep(3)
+            height = self.driver.execute_script("""
+                             arguments[0].scrollTo(0, arguments[0].scrollHeight); 
+                             return arguments[0].scrollHeight;
+                             """, scroll_box)
+        # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
+        buttons = scroll_box.find_elements_by_tag_name('button')
+        print(buttons)
+        i = 0
+        # This for runs all over the buttons list and click 'follow'
+        for button in buttons:
+            i += 1
+            time.sleep(1)
+            button.click()
+            time.sleep(1)
+            # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
+            # this class name is of the popup message and here i check if it exists
+            # if it is then click on the button "unfollow"
+            popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
+            if popup_unfollow:
+                self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
+                # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
+
     def _get_text(self):
         time.sleep(1.9)
         try:
@@ -256,7 +304,7 @@ class InstagramBot:
         return new_num
 
     # unfollow users - gets list of users
-    # Go to each user and unlike him
+    # Go to each user and unfollow him
     def unfollow_users(self, user_list):
         for user in user_list:
             self.driver.get('{}/{}'.format(self.base_url, user))

@@ -5,7 +5,7 @@ from database import db
 import schedule
 
 
-class Settings():
+class Settings:
     def __init__(self, window):
         self.window = window
         self.likes_amount = StringVar()

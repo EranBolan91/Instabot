@@ -28,11 +28,6 @@ class Database:
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 username TEXT)
                          """)
-        # List of comments that the user can save
-        # self.cur.execute(""" CREATE TABLE IF NOT EXISTS commentsList (
-        #                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-        #                                 username TEXT)
-        #                          """)
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db

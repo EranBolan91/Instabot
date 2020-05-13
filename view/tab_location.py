@@ -64,6 +64,10 @@ class TabLocation(ttk.Frame):
 
         self.comment_entry = ttk.Entry(self, state='disabled', width=50)
         self.comment_entry.grid(column=0, row=14)
+        ttk.Label(self, text="To comment on posts enter more then one word, use ' , ' to separate each word  ", font=self.titleFont)\
+                                                                               .grid(column=0, row=15, padx=10, pady=10)
+        ttk.Label(self, text="For example: Nice picture,Looking good,I like it  ", font=self.titleFont)\
+                                                                                    .grid(column=0, row=16)
 
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10, columnspan=2)
@@ -80,7 +84,7 @@ class TabLocation(ttk.Frame):
         ttk.Label(self, text='password:', font=self.bold).grid(column=1, row=5, padx=(60, 0), pady=10, sticky='w')
         ttk.Entry(self, textvariable=self.password, show='*', width=30).grid(column=2, row=5)
 
-        ttk.Button(self, text="SEARCH", command=self._run_script).grid(column=0, row=15, pady=8)
+        ttk.Button(self, text="SEARCH", command=self._run_script).grid(column=0, row=17, pady=8)
 
     def _run_script(self):
         location_url = self.location_url.get()
@@ -93,15 +97,19 @@ class TabLocation(ttk.Frame):
         username = self.username.get()
         password = self.password.get()
 
+        # This split the comment for a list of comments
+        if entry_comment != "":
+            split_comment = self._split_comment(entry_comment)
+
         valid = self._check_form(location_url, location, amount, username, password)
         if valid:
             bot = InstagramBot(username, password)
             if location_url != '':
                 bot.login()
-                bot.search_location_by_url(location_url, amount, like, follow, comment, entry_comment)
+                bot.search_location_by_url(location_url, amount, like, follow, comment, split_comment)
             elif location != '':
                 bot.login()
-                bot.search_location_by_name(location, amount, like, follow, comment, entry_comment)
+                bot.search_location_by_name(location, amount, like, follow, comment, split_comment)
 
     def _check_form(self, location_url, location, amount, username, password):
         if username == '' or password == '':
@@ -130,3 +138,7 @@ class TabLocation(ttk.Frame):
             if value == account[2]:
                 self.username.set(account[2])
                 self.password.set(account[3])
+
+    def _split_comment(self, comment):
+        split_comment = comment.split(',')
+        return split_comment

@@ -69,8 +69,8 @@ class AccountsNew:
     def _set_accounts(self, accounts):
         self.list_box.delete(0, END)
         for account in accounts:
-            str = """Name: {}     Phone: {}    Username: {}     Password: {}  """.format(account[0], account[1],
-                                                                                         account[2], account[3])
+            str = """Name: {}     Phone: {}    Username: {}     Password: {}  """.format(account[1], account[2],
+                                                                                         account[3], account[4])
             self.list_box.insert(END, str)
 
     def _save(self, update_or_save):
@@ -132,7 +132,7 @@ class AccountsNew:
         answer = messagebox.askyesno('Remove account!', 'Are you sure you want to remove?')
         if answer:
             db = Database()
-            is_deleted = db.delete_account(username[2])
+            is_deleted = db.delete_account(username[3])
             if is_deleted:
                 accounts = db.get_accounts()
                 self._set_accounts(accounts)
@@ -150,7 +150,7 @@ class AccountsNew:
         finally:
             if account:
                 self.update_button.config(state=NORMAL)
-                self.name.set(account[0])
-                self.phone.set(account[1])
-                self.username.set(account[2])
-                self.password.set(account[3])
+                self.name.set(account[1])
+                self.phone.set(account[2])
+                self.username.set(account[3])
+                self.password.set(account[4])

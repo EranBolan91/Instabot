@@ -11,6 +11,7 @@ class Settings:
         self.likes_amount = StringVar()
         self.check_schedule = IntVar()
         self.schedule_hour = IntVar()
+        self.list_name = StringVar()
         self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.bold = tkfont.Font(weight='bold', size=10)
@@ -48,6 +49,20 @@ class Settings:
         ttk.Button(self.window, text="SAVE CHANGES", command=self._save_changes, width=30)\
                                         .grid(column=0, columnspan=2, row=4, pady=15)
 
+        # Distribution list for DM
+        distribution_list = ttk.LabelFrame(self.window, text='Distribution list')
+        distribution_list.grid(column=2, row=1, ipady=100, ipadx=50, padx=20, rowspan=3)
+        title = Label(distribution_list, text="Create distribution lists to DM them ", bg='gray23', font=self.bold, fg='gray67')
+        listbox = Listbox(distribution_list, width=20, height=10)
+        list_name = Label(distribution_list, text="Enter list name ", bg='gray23', fg='gray67')
+        input_list_name = ttk.Entry(distribution_list, textvariable=self.list_name)
+
+        title.pack(fill=X)
+        listbox.place(relx=0.6, rely=0.2)
+        list_name.place(relx=0.0, rely=0.4)
+        input_list_name.place(relx=0.0, rely=0.5)
+
+
         # Init data
         self._settings_data()
 
@@ -77,7 +92,7 @@ class Settings:
             database.save_settings(likes_amount, schedule_hour, is_schedule)
             messagebox.showinfo('Settings', 'Changes has been saved')
             self.likes_amount.set("")
-            data = self.database.get_data_from_settings()
+            data = database.get_data_from_settings()
             self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes '.format(data[1])
             self.current_hours['text'] = "HOURS: {}".format(data[4])
         else:

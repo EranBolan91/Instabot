@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
-from bot import *
+from bot_folder.location.location_bot import LocationBot
 from database import db
 
 
@@ -30,7 +30,7 @@ class TabLocation(ttk.Frame):
         self.accounts = db.Database().get_accounts()
         user_name_list = []
         for account in self.accounts:
-            user_name_list.append(account[2])
+            user_name_list.append(account[3])
 
         ttk.Label(self, text='Find posts by Location', font=self.headerFont).grid(column=0, row=0, padx=10, pady=10)
         # Search location by URL
@@ -72,6 +72,7 @@ class TabLocation(ttk.Frame):
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10, columnspan=2)
         if len(user_name_list) > 0:
+            print(user_name_list)
             ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                        command=self._set_username_password).grid(column=1, row=2, columnspan=2)
         else:
@@ -96,6 +97,7 @@ class TabLocation(ttk.Frame):
         entry_comment = self.comment_entry.get()
         username = self.username.get()
         password = self.password.get()
+        split_comment = ""
 
         # This split the comment for a list of comments
         if entry_comment != "":
@@ -103,12 +105,11 @@ class TabLocation(ttk.Frame):
 
         valid = self._check_form(location_url, location, amount, username, password)
         if valid:
-            bot = InstagramBot(username, password)
             if location_url != '':
-                bot.login()
+                bot = LocationBot(username, password)
                 bot.search_location_by_url(location_url, amount, like, follow, comment, split_comment)
             elif location != '':
-                bot.login()
+                bot = LocationBot(username, password)
                 bot.search_location_by_name(location, amount, like, follow, comment, split_comment)
 
     def _check_form(self, location_url, location, amount, username, password):
@@ -135,9 +136,9 @@ class TabLocation(ttk.Frame):
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
         for account in self.accounts:
-            if value == account[2]:
-                self.username.set(account[2])
-                self.password.set(account[3])
+            if value == account[3]:
+                self.username.set(account[3])
+                self.password.set(account[4])
 
     def _split_comment(self, comment):
         split_comment = comment.split(',')

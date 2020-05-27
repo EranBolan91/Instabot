@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
-from bot import *
+from bot_folder.hash_tag.hash_tag_bot import HashTagBot
 from database import db
 
 
@@ -29,7 +29,7 @@ class TabHashTag(ttk.Frame):
         self.accounts = db.Database().get_accounts()
         user_name_list = []
         for account in self.accounts:
-            user_name_list.append(account[2])
+            user_name_list.append(account[3])
 
         ttk.Label(self, text='Search for posts by Hash tag key word', font=self.headerFont)\
             .grid(column=0, row=0,padx=10, pady=10)
@@ -88,6 +88,7 @@ class TabHashTag(ttk.Frame):
         comment = self.check_box_comment.get()
         follow = self.check_box_follow.get()
         entry_comment = self.comment_entry.get()
+        split_comment = ""
 
         # This split the comment for a list of comments
         if entry_comment != "":
@@ -97,9 +98,8 @@ class TabHashTag(ttk.Frame):
 
         if valid:
             if like == 1 or comment == 1 or follow == 1:
-                self.bot = InstagramBot(username, password)
-                self.bot.login()
-                self.bot.search_hash_tag(hash_tag, amount, like, comment, follow, split_comment)
+                bot = HashTagBot(username, password)
+                bot.search_hash_tag(hash_tag, amount, like, comment, follow, split_comment)
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')
 
@@ -127,9 +127,9 @@ class TabHashTag(ttk.Frame):
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
         for account in self.accounts:
-            if value == account[2]:
-                self.username.set(account[2])
-                self.password.set(account[3])
+            if value == account[3]:
+                self.username.set(account[3])
+                self.password.set(account[4])
 
     def _split_comment(self, comment):
         split_comment = comment.split(',')

@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
-from bot import *
+from bot_folder.followers.followers_bot import FollowersBot
 from database import db
 
 
@@ -22,7 +22,7 @@ class TabFollowers(ttk.Frame):
         self.accounts = db.Database().get_accounts()
         user_name_list = []
         for account in self.accounts:
-            user_name_list.append(account[2])
+            user_name_list.append(account[3])
 
         ttk.Label(self, text='Check which users you follow don\'t follow you back', font=self.headerFont)\
                                                                         .grid(column=0, row=0, padx=10, pady=10)
@@ -69,15 +69,16 @@ class TabFollowers(ttk.Frame):
             messagebox.showerror('Credentials', 'Please enter your username or password')
             return False
         else:
-            self.bot = InstagramBot(username, password)
-            self.bot.login()
             users_list = []
             self.amount_not_following = 0
+            self.bot = FollowersBot(username, password)
             users_list = self.bot.get_unfollowers()
 
             # This if check if in the settings, the user Activate the Schedule function ( Set time to unfollow users)
-            if is_schedule[3] == 1:
-                database.save_unfollow_users(users_list)
+            # TODO: I dont want to save the users who are not following me - its waste. I do want to save users that i follow them
+            # TODO: So later on i can unfollow them or DM them, depends on which list i save them
+            # if is_schedule[3] == 1:
+            #     database.save_unfollow_users(users_list, username)
 
             for user in users_list:
                 self.listbox.insert(END, user)
@@ -99,14 +100,14 @@ class TabFollowers(ttk.Frame):
     # open selected user instagram page
     def _search_user(self):
         name_selection = self.listbox.get(self.listbox.curselection())
-        self.bot.nav_user(name_selection)
+        self.bot._nav_user(name_selection)
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
         for account in self.accounts:
-            if value == account[2]:
-                self.username.set(account[2])
-                self.password.set(account[3])
+            if value == account[3]:
+                self.username.set(account[3])
+                self.password.set(account[4])
 
     def _unfollow_users(self, user_list):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')
@@ -116,8 +117,5 @@ class TabFollowers(ttk.Frame):
     def _unfollow_users_now(self):
         username = self.username.get()
         password = self.password.get()
-        self.bot = InstagramBot(username, password)
-        self.bot.login()
-        # TODO: need to create new function instead get_unfollowers,
-        # Thats goes to the user following list and just click "unfollow" button
-        self.bot.unfollow_all_users()
+        bot = FollowersBot(username, password)
+        bot.unfollow_all_users()

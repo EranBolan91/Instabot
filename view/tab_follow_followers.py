@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
-from bot import *
+from bot_folder.follow_followers.follow_followers_bot import FollowFollowersBot
 from database import db
 
 
@@ -20,7 +20,7 @@ class TabFollowFollowers(ttk.Frame):
         self.accounts = db.Database().get_accounts()
         user_name_list = []
         for account in self.accounts:
-            user_name_list.append(account[2])
+            user_name_list.append(account[3])
 
         self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
@@ -73,24 +73,23 @@ class TabFollowFollowers(ttk.Frame):
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_following(self, value):
         for account in self.accounts:
-            if value == account[2]:
-                self.username_following.set(account[2])
-                self.password_following.set(account[3])
+            if value == account[3]:
+                self.username_following.set(account[3])
+                self.password_following.set(account[4])
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_followers(self, value):
         for account in self.accounts:
-            if value == account[2]:
-                self.username_followers.set(account[2])
-                self.password_followers.set(account[3])
+            if value == account[3]:
+                self.username_followers.set(account[3])
+                self.password_followers.set(account[4])
 
     def _search_followers(self):
         user_url = self.user_url_followers.get()
         username = self.username_followers.get()
         password = self.password_followers.get()
         if user_url:
-            bot = InstagramBot(username, password)
-            bot.login()
+            bot = FollowFollowersBot(username, password)
             bot.follow_after_followers(user_url)
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
@@ -100,8 +99,7 @@ class TabFollowFollowers(ttk.Frame):
         username = self.username_following.get()
         password = self.password_following.get()
         if user_url:
-            bot = InstagramBot(username, password)
-            bot.login()
+            bot = FollowFollowersBot(username, password)
             bot.follow_after_following(user_url)
         else:
             messagebox.showerror('Missing data', 'Please enter URL')

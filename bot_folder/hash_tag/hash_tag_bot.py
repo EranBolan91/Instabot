@@ -4,7 +4,7 @@ import time
 
 class HashTagBot(main_bot.InstagramBot):
     # search instagram page by the hash tag
-    def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment):
+    def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment, to_distribution, group_name, group_id):
         amount_likes = self.database.get_data_from_settings()
         i = 1
         time.sleep(2)
@@ -18,7 +18,7 @@ class HashTagBot(main_bot.InstagramBot):
                 if int(comment) == 1:
                     self._comment_post(split_comment)
                 if int(follow) == 1:
-                    self._follow_user()
+                    self._follow_user(to_distribution, group_id)
                 # click on the right arrow
                 self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                 i += 1

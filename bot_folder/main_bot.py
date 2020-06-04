@@ -63,12 +63,13 @@ class InstagramBot:
         # Then enter the comment and click post
         self.driver.find_element_by_class_name('Ypffh').send_keys(comment + Keys.RETURN)
 
-    def _follow_user(self):
+    def _follow_user(self, to_distribution, group_id):
         time.sleep(1)
         # TODO: not the correct way of doing it. I need to change it to check if im following the user or not
         self.driver.find_element_by_xpath(
             "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button").click()
         is_schedule = self.database.get_data_from_settings()
+
         if is_schedule[2] == 1:
             # Get the username
             username = self.driver.find_element_by_xpath(
@@ -77,6 +78,12 @@ class InstagramBot:
             # Also it checks the size of the list. if it has more then 1 it will do other function
             users_list = [username]
             self.database.save_unfollow_users(users_list, self.username)
+
+        if to_distribution:
+            username = self.driver.find_element_by_xpath(
+                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/a').text
+            users_list = [username]
+            self.database.add_username_to_distribution_group(users_list, group_id)
 
 
     def _popup_unfollow(self):

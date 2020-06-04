@@ -11,11 +11,17 @@ class Settings:
         self.likes_amount = StringVar()
         self.check_schedule = IntVar()
         self.schedule_hour = IntVar()
-        self.list_name = StringVar()
+        self.username_option = StringVar()
+        self.distribution_list_name = StringVar()
         self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.bold = tkfont.Font(weight='bold', size=10)
         self.amount = 0
+
+        self.accounts = db.Database().get_accounts()
+        user_name_list = []
+        for account in self.accounts:
+            user_name_list.append(account[3])
 
         ttk.Label(self.window, text='SETTINGS ', font=self.headerFont) \
                     .grid(column=0, row=0, padx=10, pady=10)
@@ -47,20 +53,28 @@ class Settings:
         self.current_hours.place(relx=0, rely=0.8)
 
         ttk.Button(self.window, text="SAVE CHANGES", command=self._save_changes, width=30)\
-                                        .grid(column=0, columnspan=2, row=4, pady=15)
+                                        .grid(column=0, columnspan=4, row=4, pady=15)
 
         # Distribution list for DM
         distribution_list = ttk.LabelFrame(self.window, text='Distribution list')
-        distribution_list.grid(column=2, row=1, ipady=100, ipadx=50, padx=20, rowspan=3)
+        distribution_list.grid(column=2, row=1, ipady=120, ipadx=50, padx=20, rowspan=4)
         title = Label(distribution_list, text="Create distribution lists to DM them ", bg='gray23', font=self.bold, fg='gray67')
-        listbox = Listbox(distribution_list, width=20, height=10)
+        self.listbox = Listbox(distribution_list, width=20, height=10)
         list_name = Label(distribution_list, text="Enter list name ", bg='gray23', fg='gray67')
-        input_list_name = ttk.Entry(distribution_list, textvariable=self.list_name)
+        input_list_name = ttk.Entry(distribution_list, textvariable=self.distribution_list_name)
+        add_btn = ttk.Button(distribution_list, text="ADD", width=10, command=self._save_distribution_list)
+        remove_btn = ttk.Button(distribution_list, text="REMOVE", width=10, command=self._remove_group_from_distribution_list)
+        username_choose_title = Label(distribution_list, text="Please choose a username", bg='gray23', fg='gray67')
+        users_list_option = ttk.OptionMenu(distribution_list, self.username_option, user_name_list[0], *user_name_list, command=self._set_users_groups)
 
         title.pack(fill=X)
-        listbox.place(relx=0.6, rely=0.2)
-        list_name.place(relx=0.0, rely=0.4)
-        input_list_name.place(relx=0.0, rely=0.5)
+        list_name.place(relx=0.0, rely=0.2)
+        input_list_name.place(relx=0.0, rely=0.3)
+        username_choose_title.place(relx=0.0, rely=0.5)
+        users_list_option.place(relx=0.0, rely=0.6)
+        self.listbox.place(relx=0.6, rely=0.2)
+        add_btn.place(relx=0.6, rely=0.9)
+        remove_btn.place(relx=0.2, rely=0.9)
 
 
         # Init data
@@ -69,6 +83,13 @@ class Settings:
     def _settings_data(self):
         self.database = db.Database()
         data_settings = self.database.get_data_from_settings()
+        # Init the box list of distribution groups
+        username_menu = self.username_option.get()
+        if username_menu:
+            distribution_groups = self.database.get_distribution_lists_by_username(username_menu)
+            for group in distribution_groups:
+                self.listbox.insert(END, group[1])
+
         # This 'if' because when i run for the first time the program,
         # there is no 'data settings' - its empty. so i init it with 0
         if data_settings == '' or data_settings is None:
@@ -78,8 +99,8 @@ class Settings:
 
         # Set the CheckButton
         self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes '.format(data_settings[1])
-        self.check_schedule.set(data_settings[3])
-        self.current_hours['text'] = "HOURS: {}".format(data_settings[4])
+        self.check_schedule.set(data_settings[2])
+        self.current_hours['text'] = "HOURS: {}".format(data_settings[3])
         self._activate_check()
 
     def _save_changes(self):
@@ -94,7 +115,7 @@ class Settings:
             self.likes_amount.set("")
             data = database.get_data_from_settings()
             self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes '.format(data[1])
-            self.current_hours['text'] = "HOURS: {}".format(data[4])
+            self.current_hours['text'] = "HOURS: {}".format(data[3])
         else:
             messagebox.showerror('Only numbers', 'Please enter only numbers to amount entry')
 
@@ -103,3 +124,31 @@ class Settings:
             self.spin_hours.config(state=NORMAL)
         elif self.check_schedule.get() == 0:  # whenever unchecked
             self.spin_hours.config(state=DISABLED)
+
+    def _save_distribution_list(self):
+        list_name = self.distribution_list_name.get()
+        username_menu = self.username_option.get()
+        # If list name is not empty, than enter to this block (save the name list in db)
+        if list_name and username_menu:
+            database = db.Database()
+            is_saved = database.create_distribution_group(list_name, username_menu)
+            if is_saved:
+                self.listbox.insert(END, list_name)
+                self.distribution_list_name.set('')
+            else:
+                print('Did not saved')
+
+    def _remove_group_from_distribution_list(self):
+        group_selection = self.listbox.get(self.listbox.curselection())
+        if group_selection:
+            database = db.Database()
+            is_deleted = database.remove_group_from_distribution_list(group_selection)
+            if is_deleted:
+                self.listbox.delete(self.listbox.curselection())
+
+    def _set_users_groups(self, value):
+        self.listbox.delete(0, 'end')
+        distribution_groups = self.database.get_distribution_lists_by_username(value)
+        for group in distribution_groups:
+            self.listbox.insert(END, group[1])
+

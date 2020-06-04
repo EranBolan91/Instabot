@@ -76,6 +76,7 @@ class TabFollowFollowers(ttk.Frame):
             if value == account[3]:
                 self.username_following.set(account[3])
                 self.password_following.set(account[4])
+                self.account_username = account[3]
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_followers(self, value):
@@ -83,6 +84,7 @@ class TabFollowFollowers(ttk.Frame):
             if value == account[3]:
                 self.username_followers.set(account[3])
                 self.password_followers.set(account[4])
+                self.account_username = account[3]
 
     def _search_followers(self):
         user_url = self.user_url_followers.get()
@@ -90,7 +92,7 @@ class TabFollowFollowers(ttk.Frame):
         password = self.password_followers.get()
         if user_url:
             bot = FollowFollowersBot(username, password)
-            bot.follow_after_followers(user_url)
+            bot.follow_after_followers(user_url, self.account_username)
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
 
@@ -100,6 +102,6 @@ class TabFollowFollowers(ttk.Frame):
         password = self.password_following.get()
         if user_url:
             bot = FollowFollowersBot(username, password)
-            bot.follow_after_following(user_url)
+            bot.follow_after_following(user_url, self.account_username)
         else:
             messagebox.showerror('Missing data', 'Please enter URL')

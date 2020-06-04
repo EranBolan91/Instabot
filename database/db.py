@@ -26,13 +26,9 @@ class Database:
                         schedule_hour INT,
                         modify DATETIME )
                      """)
-        # Init settings for first time
-        # self.cur.execute(""" INSERT OR REPLACE INTO settings (amount_likes, is_schedule, schedule_hour)
-        #                 VALUES(0,0,0)
-        #                 """)
         # Table unfollow
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS unfollow (
-                         id INT PRIMARY KEY AUTOINCREMENT,
+                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                          user_id INT,
                          username TEXT,
                          FOREIGN KEY(user_id) REFERENCES accounts(id))
@@ -77,10 +73,10 @@ class Database:
                 cur.execute("""INSERT INTO settings
                             (amount_likes, is_schedule, schedule_hour, modify)
                             VALUES(?,?,?,?)""", (0, 0, 0, modify_time))
+                conn.commit()
         except Exception as e:
             print('_init_settings func: ', e)
         finally:
-            conn.commit()
             conn.close()
 
     def get_accounts(self):
@@ -154,24 +150,13 @@ class Database:
             conn.close()
             return data
 
-    def save_unfollow_users(self, users_list, username):
-        # TODO: Need to fix this method
-        # user_id is a tuple - thats why i code user_id[0]
-        user_id = self._get_user_id(username)
-        print(user_id[0])
+    def save_unfollow_users(self, user, account_username):
+        user_id = self._get_user_id(account_username)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            # Instead to write another function for 1 username
-            # Here i check if its a list of users or only one user to save to Database
-            if len(users_list) > 1:
-                for user in users_list:
-                    cur.execute('INSERT INTO unfollow(user_id, username) VALUES(?,?)', (user_id[0], [user]))
-                    conn.commit()
-                    print("{} User saved in the database".format(user))
-            else:
-                cur.execute('INSERT INTO unfollow(user_id, username) VALUES(?,?)', (user_id[0], users_list[0]))
-                conn.commit()
+            cur.execute('INSERT INTO unfollow(user_id, username) VALUES(?,?)', (user_id, user))
+            conn.commit()
         except Exception as e:
             print(e)
 
@@ -205,4 +190,104 @@ class Database:
         finally:
             conn.close()
             # It return Tuple user_id(id)
-            return user_id
+            return user_id[0]
+
+    def create_distribution_group(self, group_name, username):
+        is_saved = False
+        user_id = self._get_user_id(username)
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            cur.execute('INSERT INTO groups(group_name, user_id) VALUES(?,?)', (group_name, user_id))
+            conn.commit()
+            is_saved = True
+        except Exception as e:
+            print("Create distribution group func: ", e)
+        finally:
+            conn.close()
+            return is_saved
+
+    def get_distribution_lists_by_username(self, username):
+        user_id = self._get_user_id(username)
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            cur.execute("SELECT * FROM groups WHERE user_id={}".format(user_id))
+            groups = cur.fetchall()
+        except Exception as e:
+            print("get distribution lists by username ", e)
+        finally:
+            conn.close()
+            return groups
+
+    def remove_group_from_distribution_list(self, group_name):
+        is_deleted = False
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            cur.execute("DELETE FROM groups WHERE group_name='{}'".format(group_name))
+            conn.commit()
+            is_deleted = True
+        except Exception as e:
+            print("remove group from distribution list: ", e)
+        finally:
+            conn.close()
+            return is_deleted
+
+    def add_username_to_distribution_group(self, users_list, group_id):
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            if len(users_list) > 1:
+                for username in users_list:
+                    cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (username, group_id))
+                    conn.commit()
+            else:
+                cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (users_list[0], group_id))
+                conn.commit()
+        except Exception as e:
+            print("add username to distribution group: ", e)
+        finally:
+            conn.close()
+
+    def get_group_id_by_group_name(self, group_name):
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        group_id = -1
+        try:
+            cur.execute("SELECT id FROM groups WHERE group_name = '{}' ".format(group_name))
+            group_id = cur.fetchone()
+        except Exception as e:
+            print("get group id by group name: ", e)
+        finally:
+            conn.close()
+            return group_id[0]
+
+    # Getting all the users name from DM_users to a specific group
+    def get_users_from_dm_users(self, group_name):
+        group_id = self.get_group_id_by_group_name(group_name)
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        dm_users = []
+        try:
+            cur.execute("SELECT username FROM dm_users WHERE group_id={}".format(group_id))
+            dm_users = cur.fetchall()
+        except Exception as e:
+            print("get users from dm users ", e)
+        finally:
+            conn.close()
+            return dm_users
+
+    def get_unfollow_users(self, username):
+        user_id = self._get_user_id(username)
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        users = []
+        try:
+            cur.execute("SELECT * FROM unfollow WHERE user_id={}".format(user_id))
+            users = cur.fetchall()
+        except Exception as e:
+            print('get unfollow users: ', e)
+        finally:
+            conn.close()
+            return users

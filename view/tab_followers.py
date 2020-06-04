@@ -18,6 +18,7 @@ class TabFollowers(ttk.Frame):
         self.password = StringVar()
         self.menu = StringVar()
         self.amount_not_following = 0
+        self.amount_unfollow_users = 0
 
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -41,12 +42,18 @@ class TabFollowers(ttk.Frame):
         ttk.Entry(self, textvariable=self.password, width=30, show='*').grid(column=0, row=4)
         ttk.Button(self, text="RUN", command=self._check_form).grid(column=0, row=5)
 
+        # box list display all users that the account has followed them
+        self.unfollow_title = ttk.Label(self, text='You are following {}'.format(self.amount_not_following), font=self.bold)
+        self.unfollow_title.grid(column=0, row=6, pady=20)
+        self.unfollow_users_list_box = Listbox(self, width=25, height=16)
+        self.unfollow_users_list_box.grid(column=0, row=7)
+
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
-        self.listbox = Listbox(self, width=25, height=13)
-        self.listbox.grid(column=3, rowspan=4, row=2)
+        self.listbox = Listbox(self, width=30, height=13)
+        self.listbox.grid(column=3, rowspan=5, row=2)
 
-        ttk.Button(self, text="SEARCH", command=self._search_user).grid(column=3, row=8, pady=(8, 8))
+        ttk.Button(self, text="SEARCH", command=self._search_user).grid(column=3, row=8, rowspan=3, pady=(8, 8))
 
         # right side - unfollow all users in list box
         schedule_frame = ttk.LabelFrame(self, text='UNFOLLOW EVERYONE')
@@ -79,7 +86,7 @@ class TabFollowers(ttk.Frame):
             # TODO: So later on i can unfollow them or DM them, depends on which list i save them
             # if is_schedule[3] == 1:
             #     database.save_unfollow_users(users_list, username)
-
+            self.listbox.delete(0, 'end')
             for user in users_list:
                 self.listbox.insert(END, user)
                 self.amount_not_following += 1
@@ -100,7 +107,8 @@ class TabFollowers(ttk.Frame):
     # open selected user instagram page
     def _search_user(self):
         name_selection = self.listbox.get(self.listbox.curselection())
-        self.bot._nav_user(name_selection)
+        if name_selection:
+            self.bot._nav_user(name_selection)
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
@@ -108,6 +116,14 @@ class TabFollowers(ttk.Frame):
             if value == account[3]:
                 self.username.set(account[3])
                 self.password.set(account[4])
+
+                self.unfollow_users_list_box.delete(0, 'end')
+                self.amount_not_following = 0
+                unfollow_users = db.Database().get_unfollow_users(account[3])
+                for user in unfollow_users:
+                    self.unfollow_users_list_box.insert(END, user[2])
+                    self.amount_not_following += 1
+                self.unfollow_title.config(text='Yor are following {}'.format(self.amount_not_following))
 
     def _unfollow_users(self, user_list):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')

@@ -1,4 +1,7 @@
 from bot_folder import main_bot
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 
@@ -9,7 +12,9 @@ class HashTagBot(main_bot.InstagramBot):
         i = 1
         time.sleep(2)
         self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
-        self.driver.find_element_by_class_name('_9AhH0').click()  # click the post
+        wait = WebDriverWait(self.driver, 7)
+        post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+        post.click()
         while i <= int(amount):
             likes_from_insta = self._get_like_amount_text()
             if int(likes_from_insta) > int(amount_likes[1]):

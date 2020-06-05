@@ -29,22 +29,22 @@ class Database:
         # Table unfollow
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS unfollow (
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         user_id INT,
-                         username TEXT,
+                         user_id INT NOT NULL,
+                         username TEXT NOT NULL,
                          FOREIGN KEY(user_id) REFERENCES accounts(id))
                      """)
         # Table groups
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS groups (
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         group_name TEXT,
-                         user_id INT,
+                         group_name TEXT NOT NULL,
+                         user_id INT NOT NULL,
                          FOREIGN KEY(user_id) REFERENCES accounts(id))
                      """)
         # Table DM users
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS dm_users (
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         username TEXT,
-                         group_id INT,
+                         username TEXT NOT NULL,
+                         group_id INT NOT NULL,
                          FOREIGN KEY(group_id) REFERENCES groups(id))
                      """)
         # Commit changes
@@ -234,17 +234,12 @@ class Database:
             conn.close()
             return is_deleted
 
-    def add_username_to_distribution_group(self, users_list, group_id):
+    def add_username_to_distribution_group(self, user, group_id):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            if len(users_list) > 1:
-                for username in users_list:
-                    cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (username, group_id))
-                    conn.commit()
-            else:
-                cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (users_list[0], group_id))
-                conn.commit()
+            cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (user, group_id))
+            conn.commit()
         except Exception as e:
             print("add username to distribution group: ", e)
         finally:

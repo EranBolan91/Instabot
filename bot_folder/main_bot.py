@@ -1,5 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from database import db
 import time, random
 
@@ -66,25 +69,19 @@ class InstagramBot:
     def _follow_user(self, to_distribution, group_id):
         time.sleep(1)
         # TODO: not the correct way of doing it. I need to change it to check if im following the user or not
-        self.driver.find_element_by_xpath(
-            "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button").click()
-        is_schedule = self.database.get_data_from_settings()
-
-        if is_schedule[2] == 1:
+        follow_button = self.driver.find_element_by_xpath(
+            "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
+        if follow_button.text == 'Follow':
+            follow_button.click()
             # Get the username
             username = self.driver.find_element_by_xpath(
                 '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/a').text
-            # I must put it in a list because in db.py it gets only lists
-            # Also it checks the size of the list. if it has more then 1 it will do other function
-            users_list = [username]
-            self.database.save_unfollow_users(users_list, self.username)
+            self.database.save_unfollow_users(username, self.username)
 
         if to_distribution:
             username = self.driver.find_element_by_xpath(
                 '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/a').text
-            users_list = [username]
-            self.database.add_username_to_distribution_group(users_list, group_id)
-
+            self.database.add_username_to_distribution_group(username, group_id)
 
     def _popup_unfollow(self):
         # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow

@@ -16,6 +16,7 @@ class TabFollowFollowers(ttk.Frame):
         self.password_following = StringVar()
         self.username_followers = StringVar()
         self.password_followers = StringVar()
+        self.num_following = IntVar()
 
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -46,7 +47,11 @@ class TabFollowFollowers(ttk.Frame):
         ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=7, padx=10, pady=10, sticky='w')
         ttk.Entry(self, textvariable=self.password_following, show='*', width=25).grid(column=0, row=7)
 
-        ttk.Button(self, text="START FOLLOW", command=self._search_following).grid(column=0, row=8, pady=15)
+        ttk.Label(self, text='Enter the number of people to follow', font=self.titleFont).grid(column=0, columnspan=2, row=8, pady=10)
+        self.following_input = ttk.Entry(self, textvariable=self.num_following, width=20)
+        self.following_input.grid(column=0, columnspan=2, row=9, pady=10)
+
+        ttk.Button(self, text="START FOLLOW", command=self._search_following).grid(column=0, row=10, pady=15)
 
         # Right side Form
         ttk.Label(self, text='Follow after users that following user', font=self.headerFont)\
@@ -67,8 +72,7 @@ class TabFollowFollowers(ttk.Frame):
         ttk.Entry(self, textvariable=self.username_followers, show='*', width=25).grid(column=1, row=6)
         ttk.Label(self, text='password:', font=self.bold).grid(column=1, row=7, padx=10, pady=10, sticky='w')
         ttk.Entry(self, textvariable=self.password_followers, show='*', width=25).grid(column=1, row=7)
-
-        ttk.Button(self, text="START FOLLOW", command=self._search_followers).grid(column=1, row=8, pady=15)
+        ttk.Button(self, text="START FOLLOW", command=self._search_followers).grid(column=1, row=10, pady=15)
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_following(self, value):
@@ -90,9 +94,12 @@ class TabFollowFollowers(ttk.Frame):
         user_url = self.user_url_followers.get()
         username = self.username_followers.get()
         password = self.password_followers.get()
-        if user_url:
+        num_of_following = self.num_following.get()
+
+        valid = self._check_form(username, password, user_url, num_of_following)
+        if valid:
             bot = FollowFollowersBot(username, password)
-            bot.follow_after_followers(user_url, self.account_username)
+            bot.follow_after_followers(user_url, self.account_username, num_of_following)
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
 
@@ -100,8 +107,25 @@ class TabFollowFollowers(ttk.Frame):
         user_url = self.user_url_following.get()
         username = self.username_following.get()
         password = self.password_following.get()
-        if user_url:
+        num_of_following = self.num_following.get()
+
+        valid = self._check_form(username, password, user_url, num_of_following)
+        if valid:
             bot = FollowFollowersBot(username, password)
-            bot.follow_after_following(user_url, self.account_username)
+            bot.follow_after_following(user_url, self.account_username, num_of_following)
+
+    def _check_form(self, username, password, user_url, num_of_following):
+        if username == '' or password == '':
+            messagebox.showerror('Credentials', 'Please enter your username or password')
+            return False
+
+        if user_url == '':
+            messagebox.showerror('Search data', 'Please enter a user url')
+            return False
+
+        if num_of_following <= 0:
+            messagebox.showerror('Only numbers', 'Please enter only numbers to amount entry')
+            return False
+
         else:
-            messagebox.showerror('Missing data', 'Please enter URL')
+            return True

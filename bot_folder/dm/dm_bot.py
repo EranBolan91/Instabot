@@ -8,6 +8,8 @@ import time
 
 class DM(main_bot.InstagramBot):
     def send_message_to_distribution_group(self, message, dm_users):
+        self._login()
+        time.sleep(2)
         for user in dm_users:
             self._nav_user(user[0])
             wait = WebDriverWait(self.driver, 6)

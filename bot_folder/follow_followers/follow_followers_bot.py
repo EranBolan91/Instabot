@@ -4,12 +4,12 @@ import time
 
 class FollowFollowersBot(main_bot.InstagramBot):
     def follow_after_followers(self, user_url, account_username, num_of_following):
+        self._login()
         time.sleep(2)
         self.driver.get(user_url)
         time.sleep(2)
         # Open the followers page
-        self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]") \
-            .click()
+        self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]").click()
         try:
             time.sleep(2)
             # sometimes when you scroll to fast, it display to you the suggestions
@@ -24,7 +24,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(3)
+            time.sleep(2)
             height = self.driver.execute_script("""
                        arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                        return arguments[0].scrollHeight;
@@ -47,9 +47,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
                     # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
                     # this class name is of the popup message and here i check if it exists
                     # if it is then click on the button "unfollow"
-                    popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
-                    if popup_unfollow:
-                         self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
+                    self._popup_unfollow()
+                    #popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
+                    #if popup_unfollow:
+                         #self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
                          # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
                 except Exception as e:
                     print('follow after followers: ', e)
@@ -57,6 +58,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
                 break
 
     def follow_after_following(self, user_url, account_username, num_of_following):
+        self._login()
         time.sleep(2)
         self.driver.get(user_url)
         time.sleep(3)
@@ -77,7 +79,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(3)
+            time.sleep(2)
             height = self.driver.execute_script("""
                           arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                           return arguments[0].scrollHeight;
@@ -100,9 +102,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
                 # this class name is of the popup message and here i check if it exists
                 # if it is then click on the button "unfollow"
                 try:
-                    popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
-                    if popup_unfollow:
-                        self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
+                    self._popup_unfollow()
+                    # popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
+                    # if popup_unfollow:
+                    #     self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
                         # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
                 except Exception as e:
                     print('follow after following: ', e)

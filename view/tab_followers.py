@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from bot_folder.followers.followers_bot import FollowersBot
 from database import db
+import threading
 
 
 class TabFollowers(ttk.Frame):
@@ -46,7 +47,8 @@ class TabFollowers(ttk.Frame):
         self.unfollow_title = ttk.Label(self, text='You are following {}'.format(self.amount_not_following), font=self.bold)
         self.unfollow_title.grid(column=0, row=6, pady=20)
         self.unfollow_users_list_box = Listbox(self, width=25, height=16)
-        self.unfollow_users_list_box.grid(column=0, row=7)
+        self.unfollow_users_list_box.grid(column=0, row=7, rowspan=3)
+        ttk.Button(self, text="REMOVE", command=self._remove_from_unfollow_list).grid(column=0, row=11, rowspan=1, pady=(10, 0))
 
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
@@ -69,23 +71,17 @@ class TabFollowers(ttk.Frame):
         username = self.username.get()
         password = self.password.get()
 
-        database = db.Database()
-        is_schedule = database.get_data_from_settings()
-
         if username == '' or password == '':
             messagebox.showerror('Credentials', 'Please enter your username or password')
             return False
         else:
             users_list = []
             self.amount_not_following = 0
-            self.bot = FollowersBot(username, password)
-            users_list = self.bot.get_unfollowers()
+            bot = FollowersBot(username, password)
+            # t = threading.Thread(target=bot.get_unfollowers)
+            # t.start()
+            users_list = bot.get_unfollowers()
 
-            # This if check if in the settings, the user Activate the Schedule function ( Set time to unfollow users)
-            # TODO: I dont want to save the users who are not following me - its waste. I do want to save users that i follow them
-            # TODO: So later on i can unfollow them or DM them, depends on which list i save them
-            # if is_schedule[3] == 1:
-            #     database.save_unfollow_users(users_list, username)
             self.listbox.delete(0, 'end')
             for user in users_list:
                 self.listbox.insert(END, user)
@@ -93,14 +89,14 @@ class TabFollowers(ttk.Frame):
 
             if self.amount_not_following == 0:
                 ttk.Label(self, text='Everyone following you back!', font=self.results)\
-                                                    .grid(column=3, row=6, pady=(8, 8))
+                                                    .grid(column=3, row=6, rowspan=2, pady=(8, 8))
             else:
                 ttk.Label(self, text='{} Not following you!'.format(self.amount_not_following),
-                          font=self.results).grid(column=3, row=6, pady=(8, 8))
+                          font=self.results).grid(column=3, row=6, rowspan=2, pady=(8, 8))
                 ttk.Label(self, text='Do you want to UNFOLLOW them? ',
-                          font=self.results).grid(column=3, row=9, pady=(16, 16))
+                          font=self.results).grid(column=3, row=9, rowspan=2, pady=(16, 16))
                 ttk.Button(self, text="Click here", command=lambda: self._unfollow_users(users_list))\
-                                                    .grid(column=3, row=10, pady=(8, 8))
+                                                    .grid(column=3, row=10, rowspan=2, pady=(8, 8))
 
             return True
 
@@ -135,3 +131,10 @@ class TabFollowers(ttk.Frame):
         password = self.password.get()
         bot = FollowersBot(username, password)
         bot.unfollow_all_users()
+
+    def _remove_from_unfollow_list(self):
+        name_selection = self.unfollow_users_list_box.get(self.unfollow_users_list_box.curselection())
+        if name_selection:
+            index = self.unfollow_users_list_box.get(0, END).index(name_selection)
+            self.unfollow_users_list_box.delete(index)
+            db.Database().remove_username_from_unfollow_list(name_selection)

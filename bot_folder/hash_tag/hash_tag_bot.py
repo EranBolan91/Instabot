@@ -8,13 +8,14 @@ import time
 class HashTagBot(main_bot.InstagramBot):
     # search instagram page by the hash tag
     def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment, to_distribution, group_name, group_id):
+        self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
         time.sleep(2)
         self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
         wait = WebDriverWait(self.driver, 7)
-        post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
-        post.click()
+        username_title = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+        username_title.click()
         while i <= int(amount):
             likes_from_insta = self._get_like_amount_text()
             if int(likes_from_insta) > int(amount_likes[1]):

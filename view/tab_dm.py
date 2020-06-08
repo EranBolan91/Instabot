@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from database import db
 from bot_folder.dm.dm_bot import DM
+import threading
 
 
 class TabDM(ttk.Frame):
@@ -72,7 +73,8 @@ class TabDM(ttk.Frame):
         if valid:
             dm_users_list = db.Database().get_users_from_dm_users(group_name)
             bot = DM(username, password)
-            bot.send_message_to_distribution_group(message_text, dm_users_list)
+            t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list))
+            t.start()
 
     def _check_form(self, username, password, message, group_name):
         if username == '' or password == '':

@@ -14,7 +14,6 @@ class InstagramBot:
         self.base_url = 'https://www.instagram.com'
         self.driver = webdriver.Chrome('chromedriver.exe')
         self.database = db.Database()
-        self._login()
 
     def get_username(self):
         return self.username
@@ -29,7 +28,10 @@ class InstagramBot:
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
         time.sleep(3)
         try:
-            self.driver.find_element_by_xpath("//button[contains(text(), 'Not Now')]").click()
+            wait = WebDriverWait(self.driver, 7)
+            popup_not_now = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]")))
+            popup_not_now.click()
+            #self.driver.find_element_by_xpath("//button[contains(text(), 'Not Now')]").click()
         except:
             print("Didn't find 'not now'")
 
@@ -68,7 +70,6 @@ class InstagramBot:
 
     def _follow_user(self, to_distribution, group_id):
         time.sleep(1)
-        # TODO: not the correct way of doing it. I need to change it to check if im following the user or not
         follow_button = self.driver.find_element_by_xpath(
             "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
         if follow_button.text == 'Follow':

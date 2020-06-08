@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from bot_folder.location.location_bot import LocationBot
 from database import db
+import threading
 
 
 class TabLocation(ttk.Frame):
@@ -107,10 +108,12 @@ class TabLocation(ttk.Frame):
         if valid:
             if location_url != '':
                 bot = LocationBot(username, password)
-                bot.search_location_by_url(location_url, amount, like, follow, comment, split_comment)
+                t = threading.Thread(target=bot.search_location_by_url, args=(location_url, amount, like, follow, comment, split_comment))
+                t.start()
             elif location != '':
                 bot = LocationBot(username, password)
-                bot.search_location_by_name(location, amount, like, follow, comment, split_comment)
+                t = threading.Thread(target=bot.search_location_by_name, args=(location, amount, like, follow, comment, split_comment))
+                t.start()
 
     def _check_form(self, location_url, location, amount, username, password):
         if username == '' or password == '':

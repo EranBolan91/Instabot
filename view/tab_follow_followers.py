@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from bot_folder.follow_followers.follow_followers_bot import FollowFollowersBot
 from database import db
+import threading
 
 
 class TabFollowFollowers(ttk.Frame):
@@ -99,7 +100,8 @@ class TabFollowFollowers(ttk.Frame):
         valid = self._check_form(username, password, user_url, num_of_following)
         if valid:
             bot = FollowFollowersBot(username, password)
-            bot.follow_after_followers(user_url, self.account_username, num_of_following)
+            t = threading.Thread(target=bot.follow_after_followers, args=(user_url, self.account_username, num_of_following))
+            t.start()
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
 
@@ -112,7 +114,9 @@ class TabFollowFollowers(ttk.Frame):
         valid = self._check_form(username, password, user_url, num_of_following)
         if valid:
             bot = FollowFollowersBot(username, password)
-            bot.follow_after_following(user_url, self.account_username, num_of_following)
+            t = threading.Thread(target=bot.follow_after_following, args=(user_url, self.account_username, num_of_following))
+            t.start()
+            #bot.follow_after_following(user_url, self.account_username, num_of_following)
 
     def _check_form(self, username, password, user_url, num_of_following):
         if username == '' or password == '':

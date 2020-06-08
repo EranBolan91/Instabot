@@ -1,12 +1,15 @@
 from bot_folder import main_bot
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 
 class FollowersBot(main_bot.InstagramBot):
     def get_unfollowers(self):
-        time.sleep(2)
-        self.driver.find_element_by_xpath("//a[contains(@href,'/{}/')]".format(self.username)) \
-            .click()
+        self._login()
+        time.sleep(3)
+        self._nav_user(self.username)
         time.sleep(2)
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]") \
             .click()
@@ -55,8 +58,8 @@ class FollowersBot(main_bot.InstagramBot):
             # sometimes when you scroll to fast, it display to you the suggestions
             sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
-        except:
-            print('error')
+        except Exception as e:
+            print('unfollow all users: ', e)
         time.sleep(3)
         # getting the box element
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
@@ -83,9 +86,13 @@ class FollowersBot(main_bot.InstagramBot):
             # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
             # this class name is of the popup message and here i check if it exists
             # if it is then click on the button "unfollow"
-            popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
-            if popup_unfollow:
-                self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
+            try:
+                self._popup_unfollow()
+            except Exception as e:
+                print('unfollow all users: ', e)
+            #popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
+            #if popup_unfollow:
+             #   self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
                 # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
 
     # unfollow users - gets list of users
@@ -94,8 +101,11 @@ class FollowersBot(main_bot.InstagramBot):
         for user in user_list:
             self.driver.get('{}/{}'.format(self.base_url, user))
             time.sleep(2)
-            self.driver.find_element_by_xpath('//button[text()="Following"]').click()
-            time.sleep(2)
+            try:
+                self.driver.find_element_by_xpath('//button[text()="Following"]').click()
+                time.sleep(2)
+            except Exception as e:
+                print('unfollow users: ', e)
             self.driver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[1]').click()
 
     def _nav_user(self, user):

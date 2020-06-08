@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from bot_folder.hash_tag.hash_tag_bot import HashTagBot
+import threading
 from database import db
 
 
@@ -126,7 +127,8 @@ class TabHashTag(ttk.Frame):
         if valid:
             if like == 1 or comment == 1 or follow == 1:
                 bot = HashTagBot(username, password)
-                bot.search_hash_tag(hash_tag, amount, like, comment, follow, split_comment, distribution, group_name, group_id)
+                t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment, follow, split_comment, distribution, group_name, group_id))
+                t.start()
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')
 

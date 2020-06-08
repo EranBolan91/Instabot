@@ -6,6 +6,7 @@ import time
 class LocationBot(main_bot.InstagramBot):
     # search for location posts by the URL that the user provides
     def search_location_by_url(self, url, amount, like, follow, comment, split_comment):
+        self._login()
         i = 1
         time.sleep(2)
         self.driver.get(url)  # open web browser by the URL

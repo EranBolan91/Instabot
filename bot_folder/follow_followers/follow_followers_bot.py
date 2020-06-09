@@ -3,7 +3,7 @@ import time
 
 
 class FollowFollowersBot(main_bot.InstagramBot):
-    def follow_after_followers(self, user_url, account_username, num_of_following):
+    def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_id):
         self._login()
         time.sleep(2)
         self.driver.get(user_url)
@@ -19,7 +19,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
             print('follow_after_followers: ', e)
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
@@ -31,7 +31,6 @@ class FollowFollowersBot(main_bot.InstagramBot):
                        """, scroll_box)
         # Gets all the users name by the class name
         users_name = self.driver.find_elements_by_class_name('_0imsa')
-        print(len(users_name))
         # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
         buttons = scroll_box.find_elements_by_tag_name('button')
         i = 0
@@ -41,23 +40,20 @@ class FollowFollowersBot(main_bot.InstagramBot):
             if button.text == 'Follow':
                 button.click()
                 self.database.save_unfollow_users(users_name[i].text, account_username)
+                if to_distribution:
+                    self.database.add_username_to_distribution_group(users_name[i].text, group_id)
                 i += 1
                 try:
-                    # TODO: popup_unfollow should be a method in "main_bot"
                     # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
                     # this class name is of the popup message and here i check if it exists
                     # if it is then click on the button "unfollow"
                     self._popup_unfollow()
-                    #popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
-                    #if popup_unfollow:
-                         #self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
-                         # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
                 except Exception as e:
                     print('follow after followers: ', e)
             if i == num_of_following:
                 break
 
-    def follow_after_following(self, user_url, account_username, num_of_following):
+    def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_id):
         self._login()
         time.sleep(2)
         self.driver.get(user_url)
@@ -74,7 +70,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
             print('follow after following: ', e)
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
@@ -95,18 +91,14 @@ class FollowFollowersBot(main_bot.InstagramBot):
             if button.text == 'Follow':
                 button.click()
                 self.database.save_unfollow_users(users_name[i].text, account_username)
+                if to_distribution:
+                    self.database.add_username_to_distribution_group(users_name[i].text, group_id)
                 i += 1
-
-                # TODO: popup_unfollow should be a method in "main_bot"
                 # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
                 # this class name is of the popup message and here i check if it exists
                 # if it is then click on the button "unfollow"
                 try:
                     self._popup_unfollow()
-                    # popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
-                    # if popup_unfollow:
-                    #     self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
-                        # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
                 except Exception as e:
                     print('follow after following: ', e)
 

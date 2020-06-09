@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 from database import db
 import time, random
 
@@ -12,7 +13,10 @@ class InstagramBot:
         self.username = username
         self.password = password
         self.base_url = 'https://www.instagram.com'
-        self.driver = webdriver.Chrome('chromedriver.exe')
+        # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
+        options = Options()
+        options.page_load_strategy = 'eager'
+        self.driver = webdriver.Chrome('chromedriver.exe', options=options)
         self.database = db.Database()
 
     def get_username(self):

@@ -113,7 +113,7 @@ class TabHashTag(ttk.Frame):
             group_name = self.distribution_menu_var.get()
             for group in self.distribution_list:
                 if group_name == group[1]:
-                    group_id = group[2]
+                    group_id = group[0]
         else:
             group_name = ""
             group_id = ""

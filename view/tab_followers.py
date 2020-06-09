@@ -6,6 +6,7 @@ from database import db
 import threading
 
 
+
 class TabFollowers(ttk.Frame):
     def __init__(self, window):
         super().__init__(window)
@@ -49,6 +50,10 @@ class TabFollowers(ttk.Frame):
         self.unfollow_users_list_box = Listbox(self, width=25, height=16)
         self.unfollow_users_list_box.grid(column=0, row=7, rowspan=3)
         ttk.Button(self, text="REMOVE", command=self._remove_from_unfollow_list).grid(column=0, row=11, rowspan=1, pady=(10, 0))
+        ttk.Button(self, text="UNFOLLOW LIST", command=lambda: self._unfollow_users(self.unfollow_users))\
+            .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(0, 200))
+        ttk.Button(self, text="UNFOLLOW USER", command=self._unfollow_user)\
+            .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(200, 0))
 
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
@@ -63,7 +68,7 @@ class TabFollowers(ttk.Frame):
         title = Label(schedule_frame, text="By click this button, the program will go to your 'following' list "
                                            "and will unfollow all of them",
                       bg='gray23', font=self.bold, fg='gray67')
-        unfollow_btn = ttk.Button(schedule_frame, text="UNFOLLOW", command=self._unfollow_users_now)
+        unfollow_btn = ttk.Button(schedule_frame, text="UNFOLLOW", command=self._unfollow_all_users_account_follow_them)
         title.pack(fill=X)
         unfollow_btn.place(anchor=S, relx=0.5, rely=0.8)
 
@@ -77,10 +82,12 @@ class TabFollowers(ttk.Frame):
         else:
             users_list = []
             self.amount_not_following = 0
-            bot = FollowersBot(username, password)
-            # t = threading.Thread(target=bot.get_unfollowers)
+            self.bot = FollowersBot(username, password)
+            # TODO: write thread that return's data
+            # que = queue.Queue()
+            # t = threading.Thread(target=self.bot.get_unfollowers, args=(que))
             # t.start()
-            users_list = bot.get_unfollowers()
+            users_list = self.bot.get_unfollowers()
 
             self.listbox.delete(0, 'end')
             for user in users_list:
@@ -106,6 +113,15 @@ class TabFollowers(ttk.Frame):
         if name_selection:
             self.bot._nav_user(name_selection)
 
+    def _unfollow_user(self):
+        name_selection = self.unfollow_users_list_box.get(self.unfollow_users_list_box.curselection())
+        if name_selection:
+            username = self.username.get()
+            password = self.password.get()
+            bot = FollowersBot(username, password)
+            t = threading.Thread(target=bot.unfollow_all_users)
+            t.start()
+
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
         for account in self.accounts:
@@ -115,8 +131,8 @@ class TabFollowers(ttk.Frame):
 
                 self.unfollow_users_list_box.delete(0, 'end')
                 self.amount_not_following = 0
-                unfollow_users = db.Database().get_unfollow_users(account[3])
-                for user in unfollow_users:
+                self.unfollow_users = db.Database().get_unfollow_users(account[3])
+                for user in self.unfollow_users:
                     self.unfollow_users_list_box.insert(END, user[2])
                     self.amount_not_following += 1
                 self.unfollow_title.config(text='Yor are following {}'.format(self.amount_not_following))
@@ -124,13 +140,15 @@ class TabFollowers(ttk.Frame):
     def _unfollow_users(self, user_list):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')
         if to_delete:
-            self.bot.unfollow_users(user_list)
+            t = threading.Thread(target=self.bot.unfollow_users, args=user_list)
+            t.start()
 
-    def _unfollow_users_now(self):
+    def _unfollow_all_users_account_follow_them(self):
         username = self.username.get()
         password = self.password.get()
         bot = FollowersBot(username, password)
-        bot.unfollow_all_users()
+        t = threading.Thread(target=bot.unfollow_all_users)
+        t.start()
 
     def _remove_from_unfollow_list(self):
         name_selection = self.unfollow_users_list_box.get(self.unfollow_users_list_box.curselection())

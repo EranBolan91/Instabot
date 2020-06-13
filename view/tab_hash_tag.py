@@ -14,17 +14,24 @@ class TabHashTag(ttk.Frame):
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
         self.bold = tkfont.Font(weight='bold', size=10)
+        self.check_box_distribution_list = IntVar()
+        self.distribution_menu_var = StringVar()
+        self.check_box_comment = IntVar()
+        self.check_box_follow = IntVar()
+        self.check_box_like = IntVar()
+        self.minutes_entry_value = IntVar()
+        self.hours_entry_value = IntVar()
+        self.days_entry_value = IntVar()
         self.username = StringVar()
         self.password = StringVar()
         self.hashtag = StringVar()
         self.amount = StringVar()
-        self.check_box_like = IntVar()
-        self.check_box_follow = IntVar()
-        self.check_box_comment = IntVar()
-        self.check_box_distribution_list = IntVar()
         self.menu = StringVar()
-        self.distribution_menu_var = StringVar()
+        self.radio_var = IntVar()
         self.groups_list = []
+        self.MINUTES = 0
+        self.HOURS = 1
+        self.DAYS = 2
 
         self.check_box_comment.set(0)
         self.check_box_like.set(0)
@@ -66,15 +73,15 @@ class TabHashTag(ttk.Frame):
             .grid(column=0, row=12, padx=20, pady=20, sticky='w')
         self.distribution_check_box = ttk.Checkbutton(self, variable=self.check_box_distribution_list,
              text='Save users in distribution list?', state='disabled')
-        self.distribution_check_box.grid(column=0, columnspan=3, row=12, pady=20)
+        self.distribution_check_box.grid(column=0, columnspan=1, row=12, pady=20)
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
             self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0], *self.groups_list, state='DISABLED')
-            self.distribution_menu.grid(column=1, columnspan=3, row=12)
+            self.distribution_menu.grid(column=1, row=12)
         else:
             self.distribution_title = ttk.Label(self, text="Choose user to display distribution lists ", font=self.titleFont)
-            self.distribution_title.grid(column=1, columnspan=3, row=12)
+            self.distribution_title.grid(column=1, row=12)
 
         ttk.Checkbutton(self, text='Write you\'re COMMENT on post ', variable=self.check_box_comment,
             command=self._activate_check).grid(column=0, row=13, padx=20, pady=20, sticky='w')
@@ -93,6 +100,24 @@ class TabHashTag(ttk.Frame):
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
+
+        # Schedule Actions
+        schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
+        schedule_frame.grid(column=2, row=1, ipadx=35, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(schedule_frame)
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES, command=self._enable_entry)
+        radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS, command=self._enable_entry)
+        radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS, command=self._enable_entry)
+        self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
+        self.hours_entry = ttk.Entry(entry_frame, textvariable=self.hours_entry_value, state='disabled')
+        self.days_entry = ttk.Entry(entry_frame, textvariable=self.days_entry_value, state='disabled')
+        radio_min.place(relx=0.08, rely=0)
+        radio_hours.place(relx=0.34, rely=0)
+        radio_days.place(relx=0.6, rely=0)
+        self.minutes_entry.pack(side=LEFT)
+        self.hours_entry.pack(side=LEFT)
+        self.days_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
 
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=17, pady=16)
@@ -127,7 +152,8 @@ class TabHashTag(ttk.Frame):
         if valid:
             if like == 1 or comment == 1 or follow == 1:
                 bot = HashTagBot(username, password)
-                t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment, follow, split_comment, distribution, group_name, group_id))
+                t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment,
+                                                           follow, split_comment, distribution, group_name, group_id))
                 t.start()
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')
@@ -173,12 +199,29 @@ class TabHashTag(ttk.Frame):
                 if len(self.groups_list) > 0:
                     self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
                             *self.groups_list)
-                    self.distribution_menu.grid(column=1, columnspan=3, row=12)
+                    self.distribution_menu.grid(column=1, row=12)
                     self.distribution_title.grid_forget()
                 else:
-                    self.distribution_title.grid(column=1, columnspan=3, row=12)
+                    self.distribution_title.grid(column=1, row=12)
                     self.distribution_menu.grid_forget()
 
     def _split_comment(self, comment):
         split_comment = comment.split(',')
         return split_comment
+
+    # method to enable and disable entry by clicking the radio button
+    def _enable_entry(self):
+        radio_selected = self.radio_var.get()
+        if radio_selected == self.MINUTES:
+            self.minutes_entry.config(state=NORMAL)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.HOURS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=NORMAL)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.DAYS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=NORMAL)
+

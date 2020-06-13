@@ -14,14 +14,18 @@ class TabLocation(ttk.Frame):
         self.check_box_like = IntVar()
         self.check_box_follow = IntVar()
         self.check_box_comment = IntVar()
+        self.check_box_distribution_list = IntVar()
+        self.distribution_menu_var = StringVar()
         self.amount = StringVar()
         self.menu = StringVar()
         self.username = StringVar()
         self.password = StringVar()
+        self.groups_list = []
 
         self.check_box_comment.set(0)
         self.check_box_like.set(0)
         self.check_box_follow.set(0)
+        self.check_box_distribution_list.set(0)
 
         self.headerFont = tkfont.Font(family="Helvetica", size=14, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
@@ -57,8 +61,22 @@ class TabLocation(ttk.Frame):
         # Checkbox buttons
         ttk.Checkbutton(self, text='LIKE posts', variable=self.check_box_like) \
             .grid(column=0, row=11, padx=20, pady=20, sticky='w')
-        ttk.Checkbutton(self, variable=self.check_box_follow, text='FOLLOW users') \
+        ttk.Checkbutton(self, variable=self.check_box_follow, text='FOLLOW users', command=self._activate_distribution_check_box) \
             .grid(column=0, row=12, padx=20, pady=20, sticky='w')
+        self.distribution_check_box = ttk.Checkbutton(self, variable=self.check_box_distribution_list,
+                                                      text='Save users in distribution list?', state='disabled')
+        self.distribution_check_box.grid(column=0, row=12, pady=20)
+        # Groups distribution
+        # If there are groups, it will display them. Else it will display message
+        if len(self.groups_list) > 0:
+            self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
+                                                    *self.groups_list, state='DISABLED')
+            self.distribution_menu.grid(column=0, row=12)
+        else:
+            self.distribution_title = ttk.Label(self, text="Choose user to display distribution lists ",
+                                                font=self.titleFont)
+            self.distribution_title.grid(column=1, columnspan=1, row=12)
+
         ttk.Checkbutton(self, text='Write you\'re COMMENT on post ', variable=self.check_box_comment,
                         command=self._activate_check, ) \
             .grid(column=0, row=13, padx=20, pady=20, sticky='w')
@@ -98,7 +116,17 @@ class TabLocation(ttk.Frame):
         entry_comment = self.comment_entry.get()
         username = self.username.get()
         password = self.password.get()
+        distribution = self.check_box_distribution_list.get()
         split_comment = ""
+
+        if distribution:
+            group_name = self.distribution_menu_var.get()
+            for group in self.distribution_list:
+                if group_name == group[1]:
+                    group_id = group[0]
+        else:
+            group_name = ""
+            group_id = ""
 
         # This split the comment for a list of comments
         if entry_comment != "":
@@ -108,11 +136,13 @@ class TabLocation(ttk.Frame):
         if valid:
             if location_url != '':
                 bot = LocationBot(username, password)
-                t = threading.Thread(target=bot.search_location_by_url, args=(location_url, amount, like, follow, comment, split_comment))
+                t = threading.Thread(target=bot.search_location_by_url, args=(location_url, amount, like, follow,
+                                                            comment, split_comment, distribution, group_name, group_id))
                 t.start()
             elif location != '':
                 bot = LocationBot(username, password)
-                t = threading.Thread(target=bot.search_location_by_name, args=(location, amount, like, follow, comment, split_comment))
+                t = threading.Thread(target=bot.search_location_by_name, args=(location, amount, like, follow,
+                                                            comment, split_comment, distribution, group_name, group_id))
                 t.start()
 
     def _check_form(self, location_url, location, amount, username, password):
@@ -142,7 +172,25 @@ class TabLocation(ttk.Frame):
             if value == account[3]:
                 self.username.set(account[3])
                 self.password.set(account[4])
+                self.distribution_list = db.Database().get_distribution_lists_by_username(value)
+                for group in self.distribution_list:
+                    self.groups_list.append(group[1])
+                if len(self.groups_list) > 0:
+                    self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
+                                                            *self.groups_list)
+                    self.distribution_menu.grid(column=0, columnspan=3, row=12)
+                    self.distribution_title.grid_forget()
+                else:
+                    self.distribution_title.grid(column=1, columnspan=3, row=12)
+                    self.distribution_menu.grid_forget()
 
     def _split_comment(self, comment):
         split_comment = comment.split(',')
         return split_comment
+
+    # Active distribution check box
+    def _activate_distribution_check_box(self):
+        if self.check_box_follow.get() == 1:  # whenever checked
+            self.distribution_check_box.config(state=NORMAL)
+        elif self.check_box_follow.get() == 0:  # whenever unchecked
+            self.distribution_check_box.config(state=DISABLED)

@@ -35,7 +35,6 @@ class InstagramBot:
             wait = WebDriverWait(self.driver, 7)
             popup_not_now = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]")))
             popup_not_now.click()
-            #self.driver.find_element_by_xpath("//button[contains(text(), 'Not Now')]").click()
         except:
             print("Didn't find 'not now'")
 

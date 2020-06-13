@@ -15,6 +15,7 @@ class TabDM(ttk.Frame):
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
         self.bold = tkfont.Font(weight='bold', size=10)
         self.distribution_menu_var = StringVar()
+        self.num_distribution_users = 0
         self.users_menu = StringVar()
         self.username = StringVar()
         self.password = StringVar()
@@ -53,14 +54,21 @@ class TabDM(ttk.Frame):
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
-            self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0], *self.groups_list, state='DISABLED')
-            self.distribution_menu.grid(column=1, columnspan=3, row=3, rowspan=3)
+            self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
+                                *self.groups_list, command=self._display_users_to_boxlist)
+            self.distribution_menu.grid(column=1, row=3, rowspan=3)
         else:
             self.distribution_title = ttk.Label(self, text="Choose user to display distribution lists ", font=self.titleFont)
-            self.distribution_title.grid(column=1, columnspan=3, row=3, rowspan=3)
+            self.distribution_title.grid(column=1, row=3, rowspan=3)
 
         # Run the script button
         ttk.Button(self, text="SEND", command=self._run_script).grid(column=0, row=6, pady=16)
+
+        # Display distribution users box
+        self.listbox = Listbox(self, width=25, height=15)
+        self.listbox.grid(column=2, row=3, rowspan=4, padx=(10, 0))
+        self.title_amount_users_list = ttk.Label(self, text="{} Users".format(self.num_distribution_users), font=self.h3)
+        self.title_amount_users_list.grid(column=2, row=7, pady=(10, 0))
 
     def _run_script(self):
         username = self.username.get()
@@ -104,9 +112,19 @@ class TabDM(ttk.Frame):
                     self.groups_list.append(group[1])
                 if len(self.groups_list) > 0:
                     self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
-                            *self.groups_list)
-                    self.distribution_menu.grid(column=1, columnspan=3, row=3, rowspan=3)
+                            *self.groups_list, command=self._display_users_to_boxlist)
+                    self.distribution_menu.grid(column=1, row=3, rowspan=3)
                     self.distribution_title.grid_forget()
                 else:
-                    self.distribution_title.grid(column=1, columnspan=3, row=3, rowspan=3)
+                    self.distribution_title.grid(column=1, row=3, rowspan=3)
                     self.distribution_menu.grid_forget()
+
+    # Getting name of distribution from distribution menu list, to set all its users in boxlist
+    def _display_users_to_boxlist(self, value):
+        distribution_users = db.Database().get_users_from_dm_users(value)
+        self.listbox.delete(0, 'end')
+        self.num_distribution_users = 0
+        for user in distribution_users:
+            self.listbox.insert(END, user[0])
+            self.num_distribution_users += 1
+        self.title_amount_users_list.config(text="{} Users".format(self.num_distribution_users), font=self.h3)

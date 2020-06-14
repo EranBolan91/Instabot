@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from bot_folder.follow_followers.follow_followers_bot import FollowFollowersBot
+from utils.schedule import ScheduleCalc
 from database import db
 import threading
 
@@ -18,10 +19,19 @@ class TabFollowFollowers(ttk.Frame):
         self.username_followers = StringVar()
         self.password_followers = StringVar()
         self.num_following = IntVar()
+        self.groups_list = []
         self.check_box_distribution_list = IntVar()
         self.distribution_menu_var = StringVar()
-        self.groups_list = []
+        self.minutes_entry_value = IntVar()
+        self.hours_entry_value = IntVar()
+        self.days_entry_value = IntVar()
+        self.check_box_schedule = IntVar()
+        self.radio_var = IntVar()
+        self.MINUTES = 0
+        self.HOURS = 1
+        self.DAYS = 2
 
+        self.check_box_schedule.set(0)
         self.check_box_distribution_list.set(0)
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -53,13 +63,15 @@ class TabFollowFollowers(ttk.Frame):
         ttk.Entry(self, textvariable=self.password_following, show='*', width=25).grid(column=0, row=7)
         ttk.Button(self, text="START FOLLOW", command=self._search_following).grid(column=0, row=10, pady=15)
 
-        # middle area - number of users to follow and distribution list
+        # Middle area - number of users to follow and distribution list
         ttk.Label(self, text='Enter the number of people to follow', font=self.titleFont).grid(column=0, columnspan=2, row=8, pady=10)
         self.following_input = ttk.Entry(self, textvariable=self.num_following, width=20)
         self.following_input.grid(column=0, columnspan=2, row=9, pady=10)
         self.distribution_check_box = ttk.Checkbutton(self, variable=self.check_box_distribution_list,
                                                       text='Save users in distribution list?')
         self.distribution_check_box.grid(column=0, columnspan=2, row=10, pady=20)
+        ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
+            .grid(column=0, columnspan=2, row=12, pady=10, padx=20)
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
@@ -91,6 +103,27 @@ class TabFollowFollowers(ttk.Frame):
         ttk.Label(self, text='password:', font=self.bold).grid(column=1, row=7, padx=10, pady=10, sticky='w')
         ttk.Entry(self, textvariable=self.password_followers, show='*', width=25).grid(column=1, row=7)
         ttk.Button(self, text="START FOLLOW", command=self._search_followers).grid(column=1, row=10, pady=15)
+
+        # Schedule Actions
+        schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
+        schedule_frame.grid(column=2, row=2, rowspan=2, ipadx=25, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(schedule_frame)
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES,
+                                    command=self._enable_entry)
+        radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS,
+                                      command=self._enable_entry)
+        radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS,
+                                     command=self._enable_entry)
+        self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
+        self.hours_entry = ttk.Entry(entry_frame, textvariable=self.hours_entry_value, state='disabled')
+        self.days_entry = ttk.Entry(entry_frame, textvariable=self.days_entry_value, state='disabled')
+        radio_min.place(relx=0.08, rely=0)
+        radio_hours.place(relx=0.34, rely=0)
+        radio_days.place(relx=0.6, rely=0)
+        self.minutes_entry.pack(side=LEFT)
+        self.hours_entry.pack(side=LEFT)
+        self.days_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_following(self, value):
@@ -136,6 +169,11 @@ class TabFollowFollowers(ttk.Frame):
         password = self.password_followers.get()
         num_of_following = self.num_following.get()
         distribution = self.check_box_distribution_list.get()
+        action = self.radio_var.get()
+        schedule_action = self.check_box_schedule.get()
+        minutes_entry = self.minutes_entry_value.get()
+        hours_entry = self.hours_entry_value.get()
+        days_entry = self.days_entry_value.get()
         group_id = ""
 
         if distribution:
@@ -143,13 +181,20 @@ class TabFollowFollowers(ttk.Frame):
             for group in self.distribution_list:
                 if group_name == group[1]:
                     group_id = group[0]
-                    print(group_id)
 
         valid = self._check_form(username, password, user_url, num_of_following)
         if valid:
-            bot = FollowFollowersBot(username, password)
-            t = threading.Thread(target=bot.follow_after_followers, args=(user_url, self.account_username, num_of_following, distribution, group_id))
-            t.start()
+            if schedule_action:
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                bot = FollowFollowersBot(username, password)
+                timing_thread = threading.Timer(time_schedule, bot.follow_after_followers,
+                                            [user_url, self.account_username, num_of_following, distribution, group_id])
+                timing_thread.start()
+            else:
+                bot = FollowFollowersBot(username, password)
+                t = threading.Thread(target=bot.follow_after_followers,
+                                       args=(user_url, self.account_username, num_of_following, distribution, group_id))
+                t.start()
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
 
@@ -159,6 +204,11 @@ class TabFollowFollowers(ttk.Frame):
         password = self.password_following.get()
         num_of_following = self.num_following.get()
         distribution = self.check_box_distribution_list.get()
+        action = self.radio_var.get()
+        schedule_action = self.check_box_schedule.get()
+        minutes_entry = self.minutes_entry_value.get()
+        hours_entry = self.hours_entry_value.get()
+        days_entry = self.days_entry_value.get()
         group_id = ""
 
         if distribution:
@@ -170,9 +220,17 @@ class TabFollowFollowers(ttk.Frame):
 
         valid = self._check_form(username, password, user_url, num_of_following)
         if valid:
-            bot = FollowFollowersBot(username, password)
-            t = threading.Thread(target=bot.follow_after_following, args=(user_url, self.account_username, num_of_following, distribution, group_id))
-            t.start()
+            if schedule_action:
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                bot = FollowFollowersBot(username, password)
+                timing_thread = threading.Timer(time_schedule, bot.follow_after_following,
+                                            [user_url, self.account_username, num_of_following, distribution, group_id])
+                timing_thread.start()
+            else:
+                bot = FollowFollowersBot(username, password)
+                t = threading.Thread(target=bot.follow_after_following,
+                                       args=(user_url, self.account_username, num_of_following, distribution, group_id))
+                t.start()
 
     def _check_form(self, username, password, user_url, num_of_following):
         if username == '' or password == '':
@@ -189,3 +247,19 @@ class TabFollowFollowers(ttk.Frame):
 
         else:
             return True
+
+    # method to enable and disable entry by clicking the radio button
+    def _enable_entry(self):
+        radio_selected = self.radio_var.get()
+        if radio_selected == self.MINUTES:
+            self.minutes_entry.config(state=NORMAL)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.HOURS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=NORMAL)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.DAYS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=NORMAL)

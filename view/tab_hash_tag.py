@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from bot_folder.hash_tag.hash_tag_bot import HashTagBot
+from utils.schedule import ScheduleCalc
 import threading
 from database import db
 
@@ -17,6 +18,7 @@ class TabHashTag(ttk.Frame):
         self.check_box_distribution_list = IntVar()
         self.distribution_menu_var = StringVar()
         self.check_box_comment = IntVar()
+        self.check_box_schedule = IntVar()
         self.check_box_follow = IntVar()
         self.check_box_like = IntVar()
         self.minutes_entry_value = IntVar()
@@ -34,6 +36,7 @@ class TabHashTag(ttk.Frame):
         self.DAYS = 2
 
         self.check_box_comment.set(0)
+        self.check_box_schedule.set(0)
         self.check_box_like.set(0)
         self.check_box_follow.set(0)
         self.check_box_distribution_list.set(0)
@@ -44,13 +47,13 @@ class TabHashTag(ttk.Frame):
             user_name_list.append(account[3])
 
         ttk.Label(self, text='Search for posts by Hash tag key word', font=self.headerFont)\
-            .grid(column=0, row=0, padx=10, pady=10)
+            .grid(column=0, row=0, padx=10, pady=5)
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont)\
-            .grid(column=0, row=1, padx=10, pady=10)
-        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=2, padx=10, pady=10, sticky='w')
+            .grid(column=0, row=1, padx=10, pady=5)
+        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=2, padx=(50, 0), pady=10, sticky='w')
         ttk.Entry(self, textvariable=self.username, show='*').grid(column=0, row=2)
-        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=3, padx=10, pady=10, sticky='w')
+        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=3, padx=(50, 0), pady=10, sticky='w')
         ttk.Entry(self, textvariable=self.password, show='*').grid(column=0, row=3)
 
         # Hash tag form - for example 'travel'
@@ -68,12 +71,12 @@ class TabHashTag(ttk.Frame):
 
         # Checkbox buttons
         ttk.Checkbutton(self, text='LIKE posts', variable=self.check_box_like)\
-            .grid(column=0, row=11, padx=20, pady=20, sticky='w')
+            .grid(column=0, row=11, padx=20, pady=10, sticky='w')
         ttk.Checkbutton(self, variable=self.check_box_follow, text='FOLLOW users', command=self._activate_distribution_check_box) \
-            .grid(column=0, row=12, padx=20, pady=20, sticky='w')
+            .grid(column=0, row=12, padx=20, pady=10, sticky='w')
         self.distribution_check_box = ttk.Checkbutton(self, variable=self.check_box_distribution_list,
              text='Save users in distribution list?', state='disabled')
-        self.distribution_check_box.grid(column=0, columnspan=1, row=12, pady=20)
+        self.distribution_check_box.grid(column=0, columnspan=1, row=12, pady=10)
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
@@ -84,14 +87,17 @@ class TabHashTag(ttk.Frame):
             self.distribution_title.grid(column=1, row=12)
 
         ttk.Checkbutton(self, text='Write you\'re COMMENT on post ', variable=self.check_box_comment,
-            command=self._activate_check).grid(column=0, row=13, padx=20, pady=20, sticky='w')
+            command=self._activate_check).grid(column=0, row=13, padx=20, pady=10, sticky='w')
 
+        ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule)\
+                                                        .grid(column=0, row=14, pady=10, padx=20, sticky='w')
+        # Comment entry
         self.comment_entry = ttk.Entry(self, state='disabled', width=50)
-        self.comment_entry.grid(column=0, row=14)
+        self.comment_entry.grid(column=0, row=15)
         ttk.Label(self, text="To comment on posts enter more then one word, use ' , ' to separate each word  ",
-                  font=self.titleFont).grid(column=0, row=15, padx=10, pady=10)
+                  font=self.titleFont).grid(column=0, row=16, padx=10, pady=10)
         ttk.Label(self, text="For example: Nice picture,Looking good,I like it  ",
-                  font=self.titleFont).grid(column=0, row=16)
+                  font=self.titleFont).grid(column=0, row=17)
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
         if len(user_name_list) > 0:
@@ -120,7 +126,7 @@ class TabHashTag(ttk.Frame):
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
         # Run the script button
-        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=17, pady=16)
+        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=18, pady=16)
 
     def _run_script(self):
         username = self.username.get()
@@ -133,6 +139,11 @@ class TabHashTag(ttk.Frame):
         entry_comment = self.comment_entry.get()
         distribution = self.check_box_distribution_list.get()
         split_comment = ""
+        schedule_action = self.check_box_schedule.get()
+        action = self.radio_var.get()
+        minutes_entry = self.minutes_entry_value.get()
+        hours_entry = self.hours_entry_value.get()
+        days_entry = self.days_entry_value.get()
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -151,10 +162,17 @@ class TabHashTag(ttk.Frame):
 
         if valid:
             if like == 1 or comment == 1 or follow == 1:
-                bot = HashTagBot(username, password)
-                t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment,
-                                                           follow, split_comment, distribution, group_name, group_id))
-                t.start()
+                if schedule_action:
+                    time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                    bot = HashTagBot(username, password)
+                    timing_thread = threading.Timer(time_schedule, bot.search_hash_tag, [hash_tag, amount, like, comment,
+                                                follow, split_comment, distribution, group_name, group_id])
+                    timing_thread.start()
+                else:
+                    bot = HashTagBot(username, password)
+                    t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment,
+                                                follow, split_comment, distribution, group_name, group_id))
+                    t.start()
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')
 
@@ -224,4 +242,3 @@ class TabHashTag(ttk.Frame):
             self.minutes_entry.config(state=DISABLED)
             self.hours_entry.config(state=DISABLED)
             self.days_entry.config(state=NORMAL)
-

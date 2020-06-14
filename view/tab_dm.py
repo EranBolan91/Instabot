@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from database import db
 from bot_folder.dm.dm_bot import DM
+from utils.schedule import ScheduleCalc
 import threading
 
 
@@ -21,7 +22,18 @@ class TabDM(ttk.Frame):
         self.password = StringVar()
         self.direct_message = StringVar()
         self.groups_list = []
+        self.check_box_distribution_list = IntVar()
+        self.distribution_menu_var = StringVar()
+        self.minutes_entry_value = IntVar()
+        self.hours_entry_value = IntVar()
+        self.days_entry_value = IntVar()
+        self.check_box_schedule = IntVar()
+        self.radio_var = IntVar()
+        self.MINUTES = 0
+        self.HOURS = 1
+        self.DAYS = 2
 
+        self.check_box_schedule.set(0)
         self.accounts = db.Database().get_accounts()
         user_name_list = []
         for account in self.accounts:
@@ -70,19 +82,57 @@ class TabDM(ttk.Frame):
         self.title_amount_users_list = ttk.Label(self, text="{} Users".format(self.num_distribution_users), font=self.h3)
         self.title_amount_users_list.grid(column=2, row=7, pady=(10, 0))
 
+        # Schedule Actions
+        schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
+        schedule_frame.grid(column=3, row=2, rowspan=2, ipadx=25, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(schedule_frame)
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES,
+                                    command=self._enable_entry)
+        radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS,
+                                      command=self._enable_entry)
+        radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS,
+                                     command=self._enable_entry)
+        self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
+        self.hours_entry = ttk.Entry(entry_frame, textvariable=self.hours_entry_value, state='disabled')
+        self.days_entry = ttk.Entry(entry_frame, textvariable=self.days_entry_value, state='disabled')
+        radio_min.place(relx=0.08, rely=0)
+        radio_hours.place(relx=0.34, rely=0)
+        radio_days.place(relx=0.6, rely=0)
+        self.minutes_entry.pack(side=LEFT)
+        self.hours_entry.pack(side=LEFT)
+        self.days_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
+        ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
+            .grid(column=3, row=4, pady=10, padx=20)
+
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
         message_text = self.text_message.get("1.0", END)
         group_name = self.distribution_menu_var.get()
+        action = self.radio_var.get()
+        schedule_action = self.check_box_schedule.get()
+        minutes_entry = self.minutes_entry_value.get()
+        hours_entry = self.hours_entry_value.get()
+        days_entry = self.days_entry_value.get()
 
         valid = self._check_form(username, password, message_text, group_name)
 
         if valid:
-            dm_users_list = db.Database().get_users_from_dm_users(group_name)
-            bot = DM(username, password)
-            t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list))
-            t.start()
+            if schedule_action:
+                dm_users_list = db.Database().get_users_from_dm_users(group_name)
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                print(time_schedule)
+                bot = DM(username, password)
+                timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
+                                                                                          [message_text, dm_users_list])
+                timing_thread.start()
+            else:
+                dm_users_list = db.Database().get_users_from_dm_users(group_name)
+                bot = DM(username, password)
+                t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list))
+                t.start()
 
     def _check_form(self, username, password, message, group_name):
         if username == '' or password == '':
@@ -128,3 +178,19 @@ class TabDM(ttk.Frame):
             self.listbox.insert(END, user[0])
             self.num_distribution_users += 1
         self.title_amount_users_list.config(text="{} Users".format(self.num_distribution_users), font=self.h3)
+
+    # method to enable and disable entry by clicking the radio button
+    def _enable_entry(self):
+        radio_selected = self.radio_var.get()
+        if radio_selected == self.MINUTES:
+            self.minutes_entry.config(state=NORMAL)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.HOURS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=NORMAL)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.DAYS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=NORMAL)

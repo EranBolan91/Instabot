@@ -93,5 +93,7 @@ class InstagramBot:
         # if it is then click on the button "unfollow"
         popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
         if popup_unfollow:
-            self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
+            self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
+            #self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
+            #/ html / body / div[4] / div / div / div / div[3] / button[1]
             # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()

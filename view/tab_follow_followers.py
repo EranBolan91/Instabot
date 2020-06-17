@@ -138,10 +138,10 @@ class TabFollowFollowers(ttk.Frame):
                 if len(self.groups_list) > 0:
                     self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
                                                             *self.groups_list)
-                    self.distribution_menu.grid(column=0, columnspan=2, row=10, pady=20)
+                    self.distribution_menu.grid(column=0, columnspan=2, row=11, pady=20)
                     self.distribution_title.grid_forget()
                 else:
-                    self.distribution_title.grid(column=0, columnspan=2, row=10, pady=20)
+                    self.distribution_title.grid(column=0, columnspan=2, row=11, pady=20)
                     self.distribution_menu.grid_forget()
 
     # Getting the username from the menu option, look for it on the list and sets username and password

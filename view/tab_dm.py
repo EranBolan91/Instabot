@@ -123,7 +123,6 @@ class TabDM(ttk.Frame):
             if schedule_action:
                 dm_users_list = db.Database().get_users_from_dm_users(group_name)
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                print(time_schedule)
                 bot = DM(username, password)
                 timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
                                                                                           [message_text, dm_users_list])

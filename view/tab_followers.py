@@ -110,6 +110,7 @@ class TabFollowers(ttk.Frame):
     # open selected user instagram page
     def _search_user(self):
         name_selection = self.listbox.get(self.listbox.curselection())
+        print(name_selection)
         if name_selection:
             self.bot._nav_user(name_selection)
 
@@ -119,7 +120,7 @@ class TabFollowers(ttk.Frame):
             username = self.username.get()
             password = self.password.get()
             bot = FollowersBot(username, password)
-            t = threading.Thread(target=bot.unfollow_all_users)
+            t = threading.Thread(target=bot.unfollow_user, args=(name_selection,))
             t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password
@@ -135,7 +136,7 @@ class TabFollowers(ttk.Frame):
                 for user in self.unfollow_users:
                     self.unfollow_users_list_box.insert(END, user[2])
                     self.amount_not_following += 1
-                self.unfollow_title.config(text='Yor are following {}'.format(self.amount_not_following))
+                self.unfollow_title.config(text='You are following {}'.format(self.amount_not_following))
 
     def _unfollow_users(self, user_list):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')

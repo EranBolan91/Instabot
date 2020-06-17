@@ -19,7 +19,9 @@ class FollowFollowersBot(main_bot.InstagramBot):
             print('follow_after_followers: ', e)
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]")
+        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[4] / div / div / div[2]")
+        #/ html / body / div[4] / div / div
+        #/ html / body / div[4] / div / div / div[2]
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
@@ -67,10 +69,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
             sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
         except Exception as e:
-            print('follow after following: ', e)
+            print('follow after following: here ', e)
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]")
+        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[4] / div / div / div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:

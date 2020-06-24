@@ -2,15 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bot_folder/adult.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/dm/dm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/follow_followers/follow_followers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/hashtag/hashtag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/location/location.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/dm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/follow_followers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/hashtag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/location.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/followers/followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/followers/followers_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/main_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/main_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/schedule.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/schedule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_folder/location/location_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/location/location_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/tab_dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_dm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/tab_follow_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_follow_followers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_location.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_location.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +58,27 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="adult" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="insta-bot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bot_folder" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bot_folder/adult.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="bot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="insta-bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,27 +142,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="layout2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="insta-bot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/view" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/view/layout2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="insta-bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -154,10 +166,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.adult" />
         <item itemvalue="Python.check (1)" />
         <item itemvalue="Python.check" />
         <item itemvalue="Python.bot" />
-        <item itemvalue="Python.layout2" />
       </list>
     </recent_temporary>
   </component>
@@ -199,83 +211,83 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592160434090" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1592427371367">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1593034283561">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592427371367" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1592427371367">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593034283561" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1593034283561">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592427371367" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1592427371366">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593034283561" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1593034283560">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592427371366" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1592427371367">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593034283560" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1593034283561">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592427371367" />
-    <state width="1345" height="201" key="GridCell.Tab.1.bottom" timestamp="1592425259838">
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593034283561" />
+    <state width="1345" height="201" key="GridCell.Tab.1.bottom" timestamp="1593016169723">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592425259838" />
-    <state width="1345" height="201" key="GridCell.Tab.1.center" timestamp="1592425259838">
+    <state width="1345" height="201" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593016169723" />
+    <state width="1345" height="201" key="GridCell.Tab.1.center" timestamp="1593016169723">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1592425259838" />
-    <state width="1345" height="201" key="GridCell.Tab.1.left" timestamp="1592425259838">
+    <state width="1345" height="201" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1593016169723" />
+    <state width="1345" height="201" key="GridCell.Tab.1.left" timestamp="1593016169723">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1592425259838" />
-    <state width="1345" height="201" key="GridCell.Tab.1.right" timestamp="1592425259838">
+    <state width="1345" height="201" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1593016169723" />
+    <state width="1345" height="201" key="GridCell.Tab.1.right" timestamp="1593016169723">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1592425259838" />
+    <state width="1345" height="201" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1593016169723" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1590673035440">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1590673035440" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1592160421010">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1593006198896">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592160421010" />
-    <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1586073900428">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1593006198896" />
+    <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1593015931861">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1586073900428" />
+    <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1593015931861" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/view/settings.py</url>
           <line>128</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/view/tab_dm.py</url>
           <line>109</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py</url>
           <line>44</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/view/tab_dm.py</url>
-          <line>172</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/view/tab_hash_tag.py</url>
           <line>164</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/view/tab_followers.py</url>
           <line>117</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

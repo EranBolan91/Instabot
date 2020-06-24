@@ -126,7 +126,7 @@ class TabHashTag(ttk.Frame):
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
         # Run the script button
-        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=18, pady=16)
+        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=18, pady=(15, 0))
 
     def _run_script(self):
         username = self.username.get()
@@ -158,20 +158,23 @@ class TabHashTag(ttk.Frame):
         if entry_comment != "":
             split_comment = self._split_comment(entry_comment)
 
+
         valid = self._check_form(username, password, hash_tag, amount)
 
         if valid:
             if like == 1 or comment == 1 or follow == 1:
+                is_schedule = 0
                 if schedule_action:
+                    is_schedule = 1
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                     bot = HashTagBot(username, password)
                     timing_thread = threading.Timer(time_schedule, bot.search_hash_tag, [hash_tag, amount, like, comment,
-                                                follow, split_comment, distribution, group_name, group_id])
+                                                follow, split_comment, distribution, group_name, group_id, is_schedule])
                     timing_thread.start()
                 else:
                     bot = HashTagBot(username, password)
                     t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment,
-                                                follow, split_comment, distribution, group_name, group_id))
+                                                follow, split_comment, distribution, group_name, group_id, is_schedule))
                     t.start()
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')

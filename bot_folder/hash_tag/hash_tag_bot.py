@@ -2,20 +2,23 @@ from bot_folder import main_bot
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from database.hashtag.hashtag import HashtagDB
+from models.hashtag import Hashtag
 import time
 
 
 class HashTagBot(main_bot.InstagramBot):
     # search instagram page by the hash tag
-    def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment, to_distribution, group_name, group_id):
+    def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment, to_distribution, group_name,
+                        group_id, time_schedule):
         self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
         time.sleep(2)
         self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
         wait = WebDriverWait(self.driver, 7)
-        username_title = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
-        username_title.click()
+        first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+        first_post.click()
         while i <= int(amount):
             likes_from_insta = self._get_like_amount_text()
             if int(likes_from_insta) > int(amount_likes[1]):
@@ -30,3 +33,16 @@ class HashTagBot(main_bot.InstagramBot):
                 i += 1
             else:
                 self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+        # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
+        failed_posts_num = int(amount) - (i-1)
+        self._prepare_data_for_db(hash_tag, amount, like, comment, follow,
+                                  split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
+
+    # Saving Hash-tag data to display in the statistics
+    def _prepare_data_for_db(self, hash_tag, amount, like, comment, follow,
+                             split_comment, to_distribution, group_name, failed_posts_num, time_schedule):
+
+        join_comment = ','.join(split_comment)
+        hashtag = Hashtag(self.username, hash_tag, amount, like, follow, comment,
+                          to_distribution, group_name, join_comment, failed_posts_num, time_schedule)
+        HashtagDB().save_in_db(hashtag)

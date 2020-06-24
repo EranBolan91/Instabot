@@ -30,7 +30,7 @@ class FollowersBot(main_bot.InstagramBot):
             print("Didn't find Suggestions")
 
         wait = WebDriverWait(self.driver, 4)
-        scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]')))
+        scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/ html / body / div[4] / div / div / div[2]')))
         button_close = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div/div/div[1]/div/div[2]/button')))
         last_height, height = 0, 1
         while last_height != height:
@@ -69,7 +69,7 @@ class FollowersBot(main_bot.InstagramBot):
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(3)
+            time.sleep(2)
             height = self.driver.execute_script("""
                              arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                              return arguments[0].scrollHeight;

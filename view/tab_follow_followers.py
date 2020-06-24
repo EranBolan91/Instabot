@@ -184,16 +184,18 @@ class TabFollowFollowers(ttk.Frame):
 
         valid = self._check_form(username, password, user_url, num_of_following)
         if valid:
+            is_schedule = 0
             if schedule_action:
+                is_schedule = 1
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = FollowFollowersBot(username, password)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_followers,
-                                            [user_url, self.account_username, num_of_following, distribution, group_id])
+                      [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
                 timing_thread.start()
             else:
                 bot = FollowFollowersBot(username, password)
                 t = threading.Thread(target=bot.follow_after_followers,
-                                       args=(user_url, self.account_username, num_of_following, distribution, group_id))
+                      args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
                 t.start()
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
@@ -220,16 +222,18 @@ class TabFollowFollowers(ttk.Frame):
 
         valid = self._check_form(username, password, user_url, num_of_following)
         if valid:
+            is_schedule = 0
             if schedule_action:
+                is_schedule = 1
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = FollowFollowersBot(username, password)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_following,
-                                            [user_url, self.account_username, num_of_following, distribution, group_id])
+                      [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
                 timing_thread.start()
             else:
                 bot = FollowFollowersBot(username, password)
                 t = threading.Thread(target=bot.follow_after_following,
-                                       args=(user_url, self.account_username, num_of_following, distribution, group_id))
+                      args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
                 t.start()
 
     def _check_form(self, username, password, user_url, num_of_following):

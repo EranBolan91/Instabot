@@ -1,9 +1,11 @@
 from bot_folder import main_bot
+from database.follow_followers.follow_followers import FollowFollowersDB
+from models.follow_followers import FollowFollowers
 import time
 
 
 class FollowFollowersBot(main_bot.InstagramBot):
-    def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_id):
+    def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
         self._login()
         time.sleep(2)
         self.driver.get(user_url)
@@ -54,8 +56,12 @@ class FollowFollowersBot(main_bot.InstagramBot):
                     print('follow after followers: ', e)
             if i == num_of_following:
                 break
+        # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
+        failed_follow_num = int(num_of_following) - (i - 1)
+        # TODO: why group_name gives null in the database
+        self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
 
-    def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_id):
+    def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
         self._login()
         time.sleep(2)
         self.driver.get(user_url)
@@ -106,3 +112,11 @@ class FollowFollowersBot(main_bot.InstagramBot):
 
             if i == num_of_following:
                 break
+        # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
+        failed_follow_num = int(num_of_following) - (i - 1)
+        self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
+
+    # Saving Hash-tag data to display in the statistics
+    def _prepare_data_for_db(self, user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule):
+        follow_followers = FollowFollowers(self.username, user_url, num_of_following, failed_follow_num, to_distribution, group_name, is_schedule)
+        FollowFollowersDB().save_in_db(follow_followers)

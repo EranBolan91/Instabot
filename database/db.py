@@ -10,14 +10,14 @@ class Database:
         self.cur = self.conn.cursor()
         # Table accounts
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS accounts (
-                      id INTEGER PRIMARY KEY AUTOINCREMENT,  
-                      name TEXT,
-                      phone TEXT,
-                      username TEXT,
-                      password TEXT,
-                      creation_date DATETIME,
-                      last_login DATETIME)
-                    """)
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,  
+                        name TEXT,
+                        phone TEXT,
+                        username TEXT,
+                        password TEXT,
+                        creation_date DATETIME,
+                        last_login DATETIME)
+                        """)
         # Table settings
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS settings (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,28 +25,83 @@ class Database:
                         is_schedule BOOLEAN DEFAULT 0,
                         schedule_hour INT,
                         modify DATETIME )
-                     """)
+                        """)
         # Table unfollow
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS unfollow (
-                         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         user_id INT NOT NULL,
-                         username TEXT NOT NULL,
-                         FOREIGN KEY(user_id) REFERENCES accounts(id))
-                     """)
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        user_id INT NOT NULL,
+                        username TEXT NOT NULL,
+                        FOREIGN KEY(user_id) REFERENCES accounts(id))
+                        """)
         # Table groups
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS groups (
-                         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         group_name TEXT NOT NULL,
-                         user_id INT NOT NULL,
-                         FOREIGN KEY(user_id) REFERENCES accounts(id))
-                     """)
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        group_name TEXT NOT NULL,
+                        user_id INT NOT NULL,
+                        FOREIGN KEY(user_id) REFERENCES accounts(id))
+                        """)
         # Table DM users
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS dm_users (
-                         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         username TEXT NOT NULL,
-                         group_id INT NOT NULL,
-                         FOREIGN KEY(group_id) REFERENCES groups(id))
-                     """)
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        username TEXT NOT NULL,
+                        group_id INT NOT NULL,
+                        FOREIGN KEY(group_id) REFERENCES groups(id))
+                        """)
+        # Table Hashtag
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS hashtag (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        account TEXT,
+                        hashtag TEXT,
+                        num_posts INT,
+                        num_failed_posts INT,
+                        action_like BOOLEAN,
+                        action_follow BOOLEAN,
+                        action_comment BOOLEAN,
+                        distribution BOOLEAN,
+                        group_name TEXT,
+                        comment TEXT,
+                        schedule BOOLEAN,
+                        date DATETIME)
+                        """)
+        # Table Location
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS location (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        account TEXT,
+                        url TEXT,
+                        num_posts INT,
+                        num_failed_posts INT,
+                        action_like BOOLEAN,
+                        action_follow BOOLEAN,
+                        action_comment BOOLEAN,
+                        distribution BOOLEAN,
+                        group_name TEXT,
+                        comment TEXT,
+                        schedule BOOLEAN,
+                        date DATETIME)
+                        """)
+        # Table Follow followers
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS follow_followers (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        account TEXT,
+                        url TEXT,
+                        num_follow INT,
+                        num_failed_follow INT,
+                        distribution BOOLEAN,
+                        group_name TEXT,
+                        schedule BOOLEAN,
+                        date DATETIME)
+                        """)
+        # Table DM
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS dm (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        account TEXT,
+                        message TEXT,
+                        group_name TEXT,
+                        num_members INT,
+                        num_failed_members INT,
+                        schedule BOOLEAN,
+                        date DATETIME)
+                        """)
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db
@@ -57,7 +112,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         cur.execute("INSERT INTO accounts (name,phone,username,password,creation_date,last_login) VALUES(?,?,?,?,?,?)",
-                         (name, phone, username, password, dt.datetime.strftime(time_now, "%m/%d/%Y, %H:%M:%S"), ''))
+                         (name, phone, username, password, dt.datetime.strftime(time_now, "%d/%m/%Y, %H:%M:%S"), ''))
         conn.commit()
         conn.close()
         self._init_settings()
@@ -167,7 +222,7 @@ class Database:
         user_id = self._get_user_id(username)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
-        users = 0
+        users = []
         try:
             cur.execute("SELECT * FROM unfollow WHERE user_id='{}'".format(user_id))
             users = cur.fetchall()
@@ -284,16 +339,3 @@ class Database:
             conn.close()
             return dm_users
 
-    def get_unfollow_users(self, username):
-        user_id = self._get_user_id(username)
-        conn = sqlite3.connect(self.database_name)
-        cur = conn.cursor()
-        users = []
-        try:
-            cur.execute("SELECT * FROM unfollow WHERE user_id={}".format(user_id))
-            users = cur.fetchall()
-        except Exception as e:
-            print('get unfollow users: ', e)
-        finally:
-            conn.close()
-            return users

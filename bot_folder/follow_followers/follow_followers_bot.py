@@ -57,8 +57,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
             if i == num_of_following:
                 break
         # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
-        failed_follow_num = int(num_of_following) - (i - 1)
-        # TODO: why group_name gives null in the database
+        failed_follow_num = int(num_of_following) - i
         self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
 
     def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
@@ -113,7 +112,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
             if i == num_of_following:
                 break
         # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
-        failed_follow_num = int(num_of_following) - (i - 1)
+        failed_follow_num = int(num_of_following) - i
         self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
 
     # Saving Hash-tag data to display in the statistics

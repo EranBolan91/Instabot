@@ -19,9 +19,12 @@ class DMDB(db.Database):
 
     def get_dm_data(self):
         data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
         try:
-            data = self.cur.execute(" SELECT * FROM dm ").fetchall()
+            data = cur.execute(" SELECT * FROM dm ").fetchall()
         except Exception as e:
             print('get_dm_data: ', e)
         finally:
+            conn.close()
             return data

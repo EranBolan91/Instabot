@@ -23,9 +23,12 @@ class HashtagDB(db.Database):
 
     def get_hashtag_data(self):
         data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
         try:
-            data = self.cur.execute(" SELECT * FROM hashtag ").fetchall()
+            data = cur.execute(" SELECT * FROM hashtag ").fetchall()
         except Exception as e:
             print('get hashtag data: ', e)
         finally:
+            conn.close()
             return data

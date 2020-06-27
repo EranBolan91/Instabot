@@ -5,6 +5,7 @@ from .tab_followers import *
 from .tab_hash_tag import *
 from .settings import *
 from .tab_dm import *
+from .tab_statistics import *
 
 
 class Layout:
@@ -39,12 +40,14 @@ class Layout:
         location_tab = TabLocation(tab_control)
         follow_followers_tab = TabFollowFollowers(tab_control)
         dm_tab = TabDM(tab_control)
+        statistics_tab = StatisticsTab(tab_control)
 
         tab_control.add(hash_tag_tab, text='Hash Tag')
         tab_control.add(followers_tab, text='Followers')
         tab_control.add(location_tab, text='Location')
         tab_control.add(follow_followers_tab, text='Follow Followers')
         tab_control.add(dm_tab, text='DM')
+        tab_control.add(statistics_tab, text='Statistics')
 
         tab_control.pack(expand=1, fill="both")
 

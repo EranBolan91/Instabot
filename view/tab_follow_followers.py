@@ -175,6 +175,7 @@ class TabFollowFollowers(ttk.Frame):
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
         group_id = ""
+        group_name = ""
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -212,6 +213,7 @@ class TabFollowFollowers(ttk.Frame):
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
         group_id = ""
+        group_name = ""
 
         if distribution:
             group_name = self.distribution_menu_var.get()

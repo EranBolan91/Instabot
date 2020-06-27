@@ -9,7 +9,7 @@ import time
 
 
 class DM(main_bot.InstagramBot):
-    def send_message_to_distribution_group(self, message, dm_users, group_name,is_schedule):
+    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule):
         self._login()
         time.sleep(2)
         i = 0

@@ -72,6 +72,7 @@ class InstagramBot:
         self.driver.find_element_by_class_name('Ypffh').send_keys(comment + Keys.RETURN)
 
     def _follow_user(self, to_distribution, group_id):
+        username = ''
         time.sleep(1)
         follow_button = self.driver.find_element_by_xpath(
             "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
@@ -79,12 +80,10 @@ class InstagramBot:
             follow_button.click()
             # Get the username
             username = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/a').text
+                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/div/a').text
             self.database.save_unfollow_users(username, self.username)
 
         if to_distribution:
-            username = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/a').text
             self.database.add_username_to_distribution_group(username, group_id)
 
     def _popup_unfollow(self):

@@ -23,9 +23,12 @@ class LocationDB(db.Database):
 
     def get_location_data(self):
         data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
         try:
-            data = self.cur.execute(" SELECT * FROM location ").fetchall()
+            data = cur.execute(" SELECT * FROM location ").fetchall()
         except Exception as e:
             print('get location data: ', e)
         finally:
+            conn.close()
             return data

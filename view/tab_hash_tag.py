@@ -167,12 +167,12 @@ class TabHashTag(ttk.Frame):
                 if schedule_action:
                     is_schedule = 1
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                    bot = HashTagBot(username, password)
+                    bot = HashTagBot(username, password, False)
                     timing_thread = threading.Timer(time_schedule, bot.search_hash_tag, [hash_tag, amount, like, comment,
                                                 follow, split_comment, distribution, group_name, group_id, is_schedule])
                     timing_thread.start()
                 else:
-                    bot = HashTagBot(username, password)
+                    bot = HashTagBot(username, password, False)
                     t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment,
                                                 follow, split_comment, distribution, group_name, group_id, is_schedule))
                     t.start()

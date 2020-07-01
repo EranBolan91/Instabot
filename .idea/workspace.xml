@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/view/tab_statistics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/adult.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/adult.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/location/location_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/location/location_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/main_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/main_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/dm/dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/dm/dm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/follow_followers/follow_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/follow_followers/follow_followers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/hashtag/hashtag.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/hashtag/hashtag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/location/location.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/location/location.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_dm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/tab_follow_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_follow_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_location.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_location.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,10 +183,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="446" y="168" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1590619423266" />
-    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590622147135">
+    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593548386443">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590622147135" />
+    <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1593548386443" />
     <state width="1024" height="438" key="DebuggerActiveHint" timestamp="1593092462893">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -204,22 +199,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592160434090" />
-    <state width="1345" height="164" key="GridCell.Tab.0.bottom" timestamp="1593292607739">
+    <state width="1345" height="164" key="GridCell.Tab.0.bottom" timestamp="1593626395724">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="164" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593292607739" />
-    <state width="1345" height="164" key="GridCell.Tab.0.center" timestamp="1593292607739">
+    <state width="1345" height="164" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593626395724" />
+    <state width="1345" height="164" key="GridCell.Tab.0.center" timestamp="1593626395724">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="164" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593292607739" />
-    <state width="1345" height="164" key="GridCell.Tab.0.left" timestamp="1593292607739">
+    <state width="1345" height="164" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593626395724" />
+    <state width="1345" height="164" key="GridCell.Tab.0.left" timestamp="1593626395724">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="164" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593292607739" />
-    <state width="1345" height="164" key="GridCell.Tab.0.right" timestamp="1593292607739">
+    <state width="1345" height="164" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593626395724" />
+    <state width="1345" height="164" key="GridCell.Tab.0.right" timestamp="1593626395724">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="164" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593292607739" />
+    <state width="1345" height="164" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593626395724" />
     <state width="1345" height="201" key="GridCell.Tab.1.bottom" timestamp="1593093254277">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -240,10 +235,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1590673035440" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1593200189581">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1593606359957">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1593200189581" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1593606359957" />
     <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1593015931861">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

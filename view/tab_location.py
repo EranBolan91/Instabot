@@ -178,25 +178,25 @@ class TabLocation(ttk.Frame):
                 if schedule_action:
                     is_schedule = 1
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                    bot = LocationBot(username, password)
+                    bot = LocationBot(username, password, False)
                     timing_thread = threading.Timer(time_schedule, bot.search_location_by_url,
                                         [location_url, amount, like, follow, comment, split_comment,
                                         distribution, group_name, group_id, is_schedule])
                     timing_thread.start()
                 else:
-                    bot = LocationBot(username, password)
+                    bot = LocationBot(username, password, False)
                     t = threading.Thread(target=bot.search_location_by_url, args=(location_url, amount,
-                                like, follow,comment, split_comment, distribution, group_name, group_id, is_schedule))
+                                like, follow, comment, split_comment, distribution, group_name, group_id, is_schedule))
                     t.start()
             elif location != '':
                 if schedule_action:
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                    bot = LocationBot(username, password)
+                    bot = LocationBot(username, password, False)
                     timing_thread = threading.Timer(time_schedule, bot.search_location_by_name,
-                          [location, amount, like, follow,comment, split_comment,distribution, group_name,group_id])
+                          [location, amount, like, follow, comment, split_comment,distribution, group_name,group_id])
                     timing_thread.start()
                 else:
-                    bot = LocationBot(username, password)
+                    bot = LocationBot(username, password, False)
                     t = threading.Thread(target=bot.search_location_by_name, args=(location, amount,
                                               like, follow, comment, split_comment, distribution, group_name, group_id))
                     t.start()

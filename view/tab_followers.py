@@ -82,7 +82,7 @@ class TabFollowers(ttk.Frame):
         else:
             users_list = []
             self.amount_not_following = 0
-            self.bot = FollowersBot(username, password)
+            self.bot = FollowersBot(username, password, False)
             # TODO: write thread that return's data
             # que = queue.Queue()
             # t = threading.Thread(target=self.bot.get_unfollowers, args=(que))
@@ -119,7 +119,7 @@ class TabFollowers(ttk.Frame):
         if name_selection:
             username = self.username.get()
             password = self.password.get()
-            bot = FollowersBot(username, password)
+            bot = FollowersBot(username, password, False)
             t = threading.Thread(target=bot.unfollow_user, args=(name_selection,))
             t.start()
 
@@ -147,7 +147,7 @@ class TabFollowers(ttk.Frame):
     def _unfollow_all_users_account_follow_them(self):
         username = self.username.get()
         password = self.password.get()
-        bot = FollowersBot(username, password)
+        bot = FollowersBot(username, password, False)
         t = threading.Thread(target=bot.unfollow_all_users)
         t.start()
 

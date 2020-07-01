@@ -9,15 +9,22 @@ import time, random
 
 
 class InstagramBot:
-    def __init__(self, username, password):
+    def __init__(self, username, password, is_mobile):
+        self.database = db.Database()
         self.username = username
         self.password = password
         self.base_url = 'https://www.instagram.com'
         # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
         options.page_load_strategy = 'eager'
-        self.driver = webdriver.Chrome('chromedriver.exe', options=options)
-        self.database = db.Database()
+        if is_mobile:
+            mobile_emulation = {"deviceName": "Nexus 5"}
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+            self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
+        else:
+            self.driver = webdriver.Chrome('chromedriver.exe', options=options)
+
 
     def get_username(self):
         return self.username
@@ -72,7 +79,6 @@ class InstagramBot:
         self.driver.find_element_by_class_name('Ypffh').send_keys(comment + Keys.RETURN)
 
     def _follow_user(self, to_distribution, group_id):
-        username = ''
         time.sleep(1)
         follow_button = self.driver.find_element_by_xpath(
             "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
@@ -84,6 +90,9 @@ class InstagramBot:
             self.database.save_unfollow_users(username, self.username)
 
         if to_distribution:
+            # Get the username
+            username = self.driver.find_element_by_xpath(
+                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/div/a').text
             self.database.add_username_to_distribution_group(username, group_id)
 
     def _popup_unfollow(self):

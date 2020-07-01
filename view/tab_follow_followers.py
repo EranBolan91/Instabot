@@ -189,12 +189,12 @@ class TabFollowFollowers(ttk.Frame):
             if schedule_action:
                 is_schedule = 1
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                bot = FollowFollowersBot(username, password)
+                bot = FollowFollowersBot(username, password, False)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_followers,
                       [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
                 timing_thread.start()
             else:
-                bot = FollowFollowersBot(username, password)
+                bot = FollowFollowersBot(username, password, False)
                 t = threading.Thread(target=bot.follow_after_followers,
                       args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
                 t.start()
@@ -228,12 +228,12 @@ class TabFollowFollowers(ttk.Frame):
             if schedule_action:
                 is_schedule = 1
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                bot = FollowFollowersBot(username, password)
+                bot = FollowFollowersBot(username, password, False)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_following,
                       [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
                 timing_thread.start()
             else:
-                bot = FollowFollowersBot(username, password)
+                bot = FollowFollowersBot(username, password, False)
                 t = threading.Thread(target=bot.follow_after_following,
                       args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
                 t.start()

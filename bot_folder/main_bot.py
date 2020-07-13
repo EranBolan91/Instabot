@@ -17,14 +17,16 @@ class InstagramBot:
         # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
         options.page_load_strategy = 'eager'
+        chrome_options = webdriver.ChromeOptions()
+        # # This is how to set PRXY
+        # PROXY = "92.119.62.163"
+        # chrome_options.add_argument('--proxy-server=%s' % PROXY)
         if is_mobile:
             mobile_emulation = {"deviceName": "Nexus 5"}
-            chrome_options = webdriver.ChromeOptions()
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
             self.driver = webdriver.Chrome('chromedriver.exe', options=options)
-
 
     def get_username(self):
         return self.username
@@ -42,8 +44,8 @@ class InstagramBot:
             wait = WebDriverWait(self.driver, 7)
             popup_not_now = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]")))
             popup_not_now.click()
-        except:
-            print("Didn't find 'not now'")
+        except Exception as e:
+            print("Didn't find 'not now' :",e)
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
@@ -53,10 +55,19 @@ class InstagramBot:
         self.driver.find_element_by_class_name('fr66n').click()  # click the 'like' button
 
     def _get_like_amount_text(self):
-        time.sleep(1.9)
+        text = ""
+        time.sleep(1)
         try:
             text = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/div[2]/section[2]/div/div/button/span').text
+                '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/button/span').text
+        except Exception as e:
+            print('get like amount text ', e)
+        try:
+            text = self.driver.find_element_by_xpath(
+                   '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div[2]/button/span').text
+        except Exception as e:
+            print('get like amount text ', e)
+        finally:
             if text != '':
                 # these 3 lines, delete all ',' from the string
                 num = text.split(',')
@@ -64,8 +75,6 @@ class InstagramBot:
                 print(new_num)
             else:
                 new_num = 0
-        except:
-            new_num = 0
         return new_num
 
     # comment on a post
@@ -102,6 +111,4 @@ class InstagramBot:
         popup_unfollow = self.driver.find_element_by_class_name('mt3GC')
         if popup_unfollow:
             self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
-            #self.driver.find_element_by_xpath('/html/body/div[5]/div/div/div[3]/button[1]').click()
-            #/ html / body / div[4] / div / div / div / div[3] / button[1]
-            # can also use this self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
+

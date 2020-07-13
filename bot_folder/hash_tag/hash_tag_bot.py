@@ -41,6 +41,7 @@ class HashTagBot(main_bot.InstagramBot):
             failed_posts_num = int(amount) - (i - 1)
             self._prepare_data_for_db(hash_tag, amount, like, comment, follow,
                                       split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
+            self.driver.delete_all_cookies()
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, hash_tag, amount, like, comment, follow,

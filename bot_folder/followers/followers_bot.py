@@ -9,7 +9,7 @@ from database import db
 class FollowersBot(main_bot.InstagramBot):
     def get_unfollowers(self):
         self._login()
-        time.sleep(3)
+        time.sleep(2)
         self._nav_user(self.username)
         time.sleep(2)
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]") \
@@ -26,8 +26,8 @@ class FollowersBot(main_bot.InstagramBot):
         try:
             sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
-        except:
-            print("Didn't find Suggestions")
+        except Exception as e:
+            print(" get names: ", e)
 
         wait = WebDriverWait(self.driver, 4)
         scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/ html / body / div[4] / div / div / div[2]')))
@@ -82,7 +82,6 @@ class FollowersBot(main_bot.InstagramBot):
             i += 1
             time.sleep(1)
             button.click()
-            time.sleep(1)
             # TODO: Need to get the names of the users so i can remove them from DB
             # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
             # this class name is of the popup message and here i check if it exists
@@ -95,17 +94,24 @@ class FollowersBot(main_bot.InstagramBot):
     # unfollow users - gets list of users
     # Go to each user and unfollow him
     def unfollow_users(self, user_list):
+        self._login()
         for user in user_list:
-            self._nav_user(user)
-            time.sleep(2)
-            self.driver.find_element_by_xpath('//button[text()="Following"]').click()
             try:
-                self._popup_unfollow()
-                db.Database().remove_username_from_unfollow_list(user)
-                time.sleep(1)
+                self._nav_user(user)
+                wait = WebDriverWait(self.driver, 4)
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//button[text()="Following"]')))
+                following_btn.click()
+                try:
+                    self._popup_unfollow()
+                    db.Database().remove_username_from_unfollow_list(user)
+                    time.sleep(10)
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
             except Exception as e:
+                db.Database().remove_username_from_unfollow_list(user)
                 print('unfollow users: ', e)
-            self.driver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[1]').click()
+            # self.driver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[1]').click()
 
     # unfollow one user
     def unfollow_user(self, username):

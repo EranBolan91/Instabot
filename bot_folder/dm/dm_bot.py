@@ -14,6 +14,9 @@ class DM(main_bot.InstagramBot):
         time.sleep(2)
         i = 0
         for user in dm_users:
+            # Sleep after sending to 5 accounts message
+            if i % 5 == 0:
+                time.sleep(i)
             self._nav_user(user[0])
             wait = WebDriverWait(self.driver, 6)
             try:
@@ -26,6 +29,7 @@ class DM(main_bot.InstagramBot):
                 i += 1
             except Exception as e:
                 print('send message to distribution group: ', e)
+        self.driver.delete_all_cookies()
         group_len = len(dm_users)
         num_failed_members = group_len - i
         self._prepare_data_for_db(message, group_name, group_len, num_failed_members, is_schedule)

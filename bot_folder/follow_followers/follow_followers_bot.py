@@ -111,6 +111,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
 
             if i == num_of_following:
                 break
+        self.driver.delete_all_cookies()
         # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
         failed_follow_num = int(num_of_following) - i
         self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)

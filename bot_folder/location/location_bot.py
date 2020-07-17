@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from models.location import Location
 import time
+from utils.utils import Utils as utils
+import datetime as dt
 
 
 class LocationBot(main_bot.InstagramBot):
@@ -21,6 +23,10 @@ class LocationBot(main_bot.InstagramBot):
             first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
             while i <= int(amount):
+                if i % utils.TIME_SLEEP == 0:
+                    if int(amount) != int(i):
+                        print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                        time.sleep(i * utils.TIME_SLEEP)
                 likes_from_insta = self._get_like_amount_text()
                 if int(likes_from_insta) > int(amount_likes[1]):
                     if int(like) == 1:

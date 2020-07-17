@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from database.dm.dm import DMDB
 from models.dm import DM as dm_model
 import time
+from utils.utils import Utils as utils
+import datetime as dt
 
 
 class DM(main_bot.InstagramBot):
@@ -15,8 +17,9 @@ class DM(main_bot.InstagramBot):
         i = 0
         for user in dm_users:
             # Sleep after sending to 5 accounts message
-            if i % 5 == 0:
-                time.sleep(i)
+            if i % utils.TIME_SLEEP == 0:
+                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                time.sleep(i*utils.TIME_SLEEP)
             self._nav_user(user[0])
             wait = WebDriverWait(self.driver, 6)
             try:
@@ -33,6 +36,7 @@ class DM(main_bot.InstagramBot):
         group_len = len(dm_users)
         num_failed_members = group_len - i
         self._prepare_data_for_db(message, group_name, group_len, num_failed_members, is_schedule)
+        self.driver.close()
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, message, group, num_members, num_failed_members, is_schedule):

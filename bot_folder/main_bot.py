@@ -36,16 +36,16 @@ class InstagramBot:
 
     def _login(self):
         self.driver.get('{}/accounts/login/'.format(self.base_url))
-        time.sleep(2)
+        time.sleep(1.5)
         self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
-        time.sleep(3)
+        time.sleep(1.5)
         try:
             wait = WebDriverWait(self.driver, 7)
             popup_not_now = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]")))
             popup_not_now.click()
         except Exception as e:
-            print("Didn't find 'not now' :",e)
+            print("Didn't find 'not now' :", e)
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
@@ -81,7 +81,7 @@ class InstagramBot:
     def _comment_post(self, split_comment):
         # returning random comment from a list of comments
         comment = random.choice(split_comment)
-        time.sleep(3)
+        time.sleep(2)
         # first need to click on the Entry ('add comment...')
         self.driver.find_element_by_class_name('Ypffh').click()
         # Then enter the comment and click post
@@ -94,14 +94,16 @@ class InstagramBot:
         if follow_button.text == 'Follow':
             follow_button.click()
             # Get the username
-            username = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/div/a').text
-            self.database.save_unfollow_users(username, self.username)
-
+            try:
+                username = self.driver.find_element_by_xpath(
+                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
+                self.database.save_unfollow_users(username, self.username)
+            except Exception as e:
+                print('follow user: ', e)
         if to_distribution:
             # Get the username
             username = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/div/a').text
+                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
             self.database.add_username_to_distribution_group(username, group_id)
 
     def _popup_unfollow(self):

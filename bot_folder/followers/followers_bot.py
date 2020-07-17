@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 from database import db
+from utils.utils import Utils as utils
+import datetime as dt
 
 
 class FollowersBot(main_bot.InstagramBot):
@@ -19,6 +21,7 @@ class FollowersBot(main_bot.InstagramBot):
             .click()
         followers = self._get_names()
         not_following_back = [user for user in following if user not in followers]
+        self.driver.close()
         return not_following_back
 
     def _get_names(self):
@@ -49,6 +52,7 @@ class FollowersBot(main_bot.InstagramBot):
     # This unfollow, goes to the current account, click on the 'Following'
     # and go over all the users and then unfollow them one by one
     def unfollow_all_users(self):
+        self._login()
         time.sleep(2)
         self.driver.get(self.base_url + "/" + self.username)
         time.sleep(3)
@@ -80,7 +84,9 @@ class FollowersBot(main_bot.InstagramBot):
         # This for runs all over the buttons list and click 'follow'
         for button in buttons:
             i += 1
-            time.sleep(1)
+            if i % utils.TIME_SLEEP == 0:
+                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                time.sleep(i * utils.TIME_SLEEP)
             button.click()
             # TODO: Need to get the names of the users so i can remove them from DB
             # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
@@ -90,6 +96,8 @@ class FollowersBot(main_bot.InstagramBot):
                 self._popup_unfollow()
             except Exception as e:
                 print('unfollow all users: ', e)
+
+        self.driver.close()
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
@@ -104,14 +112,19 @@ class FollowersBot(main_bot.InstagramBot):
                 following_btn.click()
                 try:
                     self._popup_unfollow()
-                    db.Database().remove_username_from_unfollow_list(user)
                     time.sleep(10)
                 except Exception as e:
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
+                wait = WebDriverWait(self.driver, 4)
+                requested_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
+                requested_btn.click()
+                self._popup_unfollow()
+                print('unfollow users requested button: ', e)
+            finally:
                 db.Database().remove_username_from_unfollow_list(user)
-                print('unfollow users: ', e)
-            # self.driver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[1]').click()
+                self.driver.close()
 
     # unfollow one user
     def unfollow_user(self, username):
@@ -124,6 +137,8 @@ class FollowersBot(main_bot.InstagramBot):
             db.Database().remove_username_from_unfollow_list(username)
         except Exception as e:
             print('unfollow user: ', e)
+        finally:
+            self.driver.close()
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))

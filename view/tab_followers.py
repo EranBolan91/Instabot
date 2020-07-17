@@ -101,7 +101,7 @@ class TabFollowers(ttk.Frame):
                           font=self.results).grid(column=3, row=6, rowspan=2, pady=(8, 8))
                 ttk.Label(self, text='Do you want to UNFOLLOW them? ',
                           font=self.results).grid(column=3, row=9, rowspan=2, pady=(16, 16))
-                ttk.Button(self, text="Click here", command=lambda: self._unfollow_users(users_list))\
+                ttk.Button(self, text="Click here", command=lambda: self._unfollow_users_list(users_list))\
                                                     .grid(column=3, row=10, rowspan=2, pady=(8, 8))
 
             return True
@@ -150,11 +150,16 @@ class TabFollowers(ttk.Frame):
             t.start()
 
     def _unfollow_all_users_account_follow_them(self):
-        username = self.username.get()
-        password = self.password.get()
-        bot = FollowersBot(username, password, False)
-        t = threading.Thread(target=bot.unfollow_all_users)
-        t.start()
+        to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW all of them?')
+        if to_delete:
+            username = self.username.get()
+            password = self.password.get()
+            if not username and not password:
+                messagebox.showerror('Credentials', 'Please enter your username or password')
+            else:
+                bot = FollowersBot(username, password, False)
+                t = threading.Thread(target=bot.unfollow_all_users)
+                t.start()
 
     def _remove_from_unfollow_list(self):
         name_selection = self.unfollow_users_list_box.get(self.unfollow_users_list_box.curselection())

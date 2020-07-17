@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from database import db
+from database.dm import dm
 from bot_folder.dm.dm_bot import DM
 from utils.schedule import ScheduleCalc
 import threading
@@ -81,6 +82,9 @@ class TabDM(ttk.Frame):
         self.listbox.grid(column=2, row=3, rowspan=4, padx=(10, 0))
         self.title_amount_users_list = ttk.Label(self, text="{} Users".format(self.num_distribution_users), font=self.h3)
         self.title_amount_users_list.grid(column=2, row=7, pady=(10, 0))
+        ttk.Button(self, text="REMOVE ALL LIST", command=lambda: self._remove_all_dm_list(self.distribution_users))\
+            .grid(column=2, row=8, padx=(0, 100), pady=(10, 0))
+        ttk.Button(self, text="REMOVE USER", command=self._remove_user).grid(column=2, row=8, padx=(150, 0), pady=(10, 0))
 
         # Schedule Actions
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
@@ -172,10 +176,10 @@ class TabDM(ttk.Frame):
 
     # Getting name of distribution from distribution menu list, to set all its users in boxlist
     def _display_users_to_boxlist(self, value):
-        distribution_users = db.Database().get_users_from_dm_users(value)
+        self.distribution_users = db.Database().get_users_from_dm_users(value)
         self.listbox.delete(0, 'end')
         self.num_distribution_users = 0
-        for user in distribution_users:
+        for user in self.distribution_users:
             self.listbox.insert(END, user[0])
             self.num_distribution_users += 1
         self.title_amount_users_list.config(text="{} Users".format(self.num_distribution_users), font=self.h3)
@@ -195,3 +199,16 @@ class TabDM(ttk.Frame):
             self.minutes_entry.config(state=DISABLED)
             self.hours_entry.config(state=DISABLED)
             self.days_entry.config(state=NORMAL)
+
+    def _remove_all_dm_list(self, users_list):
+        to_delete = messagebox.askyesno('Remove', 'Are you sure you want to REMOVE all of them?')
+        if to_delete:
+            for user in users_list:
+                dm.DMDB().remove_dm_user_from_list(user[0])
+            self.listbox.delete(0, 'end')
+
+    def _remove_user(self):
+        name_selection = self.listbox.get(self.listbox.curselection())
+        index = self.listbox.get(0, END).index(name_selection)
+        self.listbox.delete(index)
+        dm.DMDB.remove_dm_user_from_list(name_selection)

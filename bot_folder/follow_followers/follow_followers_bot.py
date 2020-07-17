@@ -2,6 +2,8 @@ from bot_folder import main_bot
 from database.follow_followers.follow_followers import FollowFollowersDB
 from models.follow_followers import FollowFollowers
 import time
+from utils.utils import Utils as utils
+import datetime as dt
 
 
 class FollowFollowersBot(main_bot.InstagramBot):
@@ -21,14 +23,12 @@ class FollowFollowersBot(main_bot.InstagramBot):
             print('follow_after_followers: ', e)
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[4] / div / div / div[2]")
-        #/ html / body / div[4] / div / div
-        #/ html / body / div[4] / div / div / div[2]
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(2)
+            time.sleep(1.5)
             height = self.driver.execute_script("""
                        arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                        return arguments[0].scrollHeight;
@@ -40,7 +40,9 @@ class FollowFollowersBot(main_bot.InstagramBot):
         i = 0
         # This for runs all over the buttons list and click 'follow'
         for button in buttons:
-            time.sleep(1)
+            if i % 5 == 0:
+                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                time.sleep(i * utils.TIME_SLEEP)
             if button.text == 'Follow':
                 button.click()
                 self.database.save_unfollow_users(users_name[i].text, account_username)
@@ -56,9 +58,12 @@ class FollowFollowersBot(main_bot.InstagramBot):
                     print('follow after followers: ', e)
             if i == num_of_following:
                 break
+
+        self.driver.delete_all_cookies()
         # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
         failed_follow_num = int(num_of_following) - i
         self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
+        self.driver.close()
 
     def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
         self._login()
@@ -70,19 +75,19 @@ class FollowFollowersBot(main_bot.InstagramBot):
             .click()
         try:
             time.sleep(2)
-            # sometimes when you scroll to fast, it display to you the suggestions
+            # sometimes when you scroll too fast, it display to you the suggestions
             sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
         except Exception as e:
             print('follow after following: here ', e)
-        time.sleep(3)
+        time.sleep(1.5)
         # getting the box element
         scroll_box = self.driver.find_element_by_xpath("/ html / body / div[4] / div / div / div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(2)
+            time.sleep(1.3)
             height = self.driver.execute_script("""
                           arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                           return arguments[0].scrollHeight;
@@ -94,7 +99,9 @@ class FollowFollowersBot(main_bot.InstagramBot):
         i = 0
         # This for runs all over the buttons list and click 'follow'
         for button in buttons:
-            time.sleep(1)
+            if i % utils.TIME_SLEEP == 0:
+                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                time.sleep(i * utils.TIME_SLEEP)
             if button.text == 'Follow':
                 button.click()
                 self.database.save_unfollow_users(users_name[i].text, account_username)
@@ -115,6 +122,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
         failed_follow_num = int(num_of_following) - i
         self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
+        self.driver.close()
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule):

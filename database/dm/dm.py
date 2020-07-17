@@ -28,3 +28,14 @@ class DMDB(db.Database):
         finally:
             conn.close()
             return data
+
+    def remove_dm_user_from_list(self, username):
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            cur.execute("DELETE FROM dm_users WHERE username='{}'".format(username))
+            conn.commit()
+        except Exception as e:
+            print('remove dm user from list: ', e)
+        finally:
+            conn.close()

@@ -45,7 +45,8 @@ class Database:
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         username TEXT NOT NULL,
                         group_id INT NOT NULL,
-                        FOREIGN KEY(group_id) REFERENCES groups(id))
+                        FOREIGN KEY(group_id) REFERENCES groups(id),
+                        FOREIGN KEY(username) REFERENCES unfollow(username))
                         """)
         # Table Hashtag
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS hashtag (
@@ -200,7 +201,6 @@ class Database:
             conn.commit()
         except Exception as e:
             print(e)
-
         finally:
             conn.close()
             return data
@@ -214,7 +214,6 @@ class Database:
             conn.commit()
         except Exception as e:
             print(e)
-
         finally:
             conn.close()
 

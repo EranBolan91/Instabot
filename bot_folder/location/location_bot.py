@@ -47,6 +47,7 @@ class LocationBot(main_bot.InstagramBot):
             failed_posts_num = int(amount) - (i - 1)
             self._prepare_data_for_db(url, amount, like, comment, follow,
                                       split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
+            self.driver.close()
 
     # search for location posts by the location name that the user provides
     def search_location_by_name(self, location_name, amount, like, follow, comment, split_comment, to_distribution, group_name, group_id):

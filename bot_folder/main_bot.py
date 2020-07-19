@@ -61,12 +61,12 @@ class InstagramBot:
             text = self.driver.find_element_by_xpath(
                 '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/button/span').text
         except Exception as e:
-            print('get like amount text ', e)
+            pass
         try:
             text = self.driver.find_element_by_xpath(
                    '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div[2]/button/span').text
         except Exception as e:
-            print('get like amount text ', e)
+            pass
         finally:
             if text != '':
                 # these 3 lines, delete all ',' from the string

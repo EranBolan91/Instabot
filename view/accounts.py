@@ -41,7 +41,6 @@ class AccountsNew:
 
         # Displaying accounts (right - side)
         self.accounts = self._get_accounts()
-        print(self.accounts)
         ttk.Label(self.window, text='Your accounts', font=self.headerFont, width=30)\
                             .grid(column=3, columnspan=2, row=1, padx=30, pady=10, sticky=W)
         self.scroll_bar = Scrollbar(self.window, orient="vertical")
@@ -87,7 +86,10 @@ class AccountsNew:
                 accounts = self._get_accounts()
                 self._set_accounts(accounts)
             else:
-                database.update_account(name, phone, username, password)
+                index = list(self.list_box.curselection())
+                accounts = self._get_accounts()
+                account = accounts[index[0]]
+                database.update_account(account[0], name, phone, username, password)
                 messagebox.showinfo('INFO', 'Account update')
                 self._reset()
                 self.update_button.config(state='disabled')

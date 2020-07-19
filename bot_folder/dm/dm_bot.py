@@ -32,6 +32,15 @@ class DM(main_bot.InstagramBot):
                 i += 1
             except Exception as e:
                 print('send message to distribution group: ', e)
+
+            try:
+                # Requested
+                requested_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
+                requested_btn.click()
+                DMDB().remove_dm_user_from_list(user[0])
+                DMDB().remove_username_from_unfollow_list(user[0])
+            except Exception as e:
+                print('Requested user')
         self.driver.delete_all_cookies()
         group_len = len(dm_users)
         num_failed_members = group_len - i

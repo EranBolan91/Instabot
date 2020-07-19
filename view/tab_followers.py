@@ -109,7 +109,6 @@ class TabFollowers(ttk.Frame):
     # open selected user instagram page
     def _search_user(self):
         name_selection = self.listbox.get(self.listbox.curselection())
-        print(name_selection)
         if name_selection:
             self.bot._nav_user(name_selection)
 
@@ -142,7 +141,7 @@ class TabFollowers(ttk.Frame):
         if to_delete:
             users_name_list = []
             for username in user_list:
-                users_name_list.append(username[2])
+                users_name_list.append(username)
             username = self.username.get()
             password = self.password.get()
             bot = FollowersBot(username, password, False)

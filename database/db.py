@@ -159,13 +159,13 @@ class Database:
             conn.close()
             return is_deleted
 
-    def update_account(self, name, phone, username, password):
+    def update_account(self, account_id, name, phone, username, password):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         is_update = False
         try:
-            cur.execute("UPDATE accounts SET name='{}', phone='{}', username='{}', password='{}' WHERE username='{}' "
-                        .format(name, phone, username, password, username))
+            cur.execute("UPDATE accounts SET name='{}', phone='{}', username='{}', password='{}' WHERE id='{}' "
+                        .format(name, phone, username, password, account_id))
             conn.commit()
             is_update = True
         except Exception as e:

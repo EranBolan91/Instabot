@@ -55,7 +55,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
                     # if it is then click on the button "unfollow"
                     self._popup_unfollow()
                 except Exception as e:
-                    print('follow after followers: ', e)
+                    pass
             if i == num_of_following:
                 break
 

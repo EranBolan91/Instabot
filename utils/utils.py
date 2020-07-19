@@ -6,3 +6,13 @@ class Utils:
             return False
         else:
             return True
+
+    # Calculate how much time it will take to finish the action
+    def arithmetic_progression(self, time_wait, total, rows):
+        n = total/rows
+        time = 1 + (((n-1)/2) * time_wait) * n
+        print(time/60)
+
+
+Utils().arithmetic_progression(25, 100, 5)
+

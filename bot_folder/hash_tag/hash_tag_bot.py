@@ -16,7 +16,7 @@ class HashTagBot(main_bot.InstagramBot):
         self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
-        time.sleep(2)
+        time.sleep(1.5)
         try:
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
             wait = WebDriverWait(self.driver, 7)
@@ -40,6 +40,10 @@ class HashTagBot(main_bot.InstagramBot):
                     i += 1
                 else:
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+                    i += 1
+                if int(i * utils.TIME_SLEEP) == 600:
+                    i = 1
+                    print('reset to i')
         except Exception as e:
             print('search hash tag: ', e)
         finally:

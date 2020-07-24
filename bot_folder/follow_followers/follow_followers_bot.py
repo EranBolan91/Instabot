@@ -9,9 +9,9 @@ import datetime as dt
 class FollowFollowersBot(main_bot.InstagramBot):
     def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
         self._login()
-        time.sleep(2)
+        time.sleep(1.5)
         self.driver.get(user_url)
-        time.sleep(2)
+        time.sleep(1.5)
         # Open the followers page
         self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]").click()
         try:
@@ -21,7 +21,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
         except Exception as e:
             print('follow_after_followers: ', e)
-        time.sleep(3)
+        time.sleep(2.5)
         # getting the box element
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
         last_height, height = 0, 1
@@ -34,42 +34,58 @@ class FollowFollowersBot(main_bot.InstagramBot):
                        return arguments[0].scrollHeight;
                        """, scroll_box)
         # Gets all the users name by the class name
-        users_name = self.driver.find_elements_by_class_name('_0imsa')
+        users_name_list = self.driver.find_elements_by_class_name('_0imsa')
         # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
         buttons = scroll_box.find_elements_by_tag_name('button')
+        # i starts from 0 because the list of users_name, its the index
         i = 0
+        # follow_count is for sub from the i in the end of the loop.
+        # count how many clicks it did. how many actual users i followed
+        follow_count = 0
+        # reset the wait time after a specific time
+        loops = 0
         # This for runs all over the buttons list and click 'follow'
-        for button in buttons:
-            if i % 5 == 0:
-                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
-                time.sleep(i * utils.TIME_SLEEP)
-            if button.text == 'Follow':
-                button.click()
-                self.database.save_unfollow_users(users_name[i].text, account_username)
-                if to_distribution:
-                    self.database.add_username_to_distribution_group(users_name[i].text, group_id)
-                i += 1
-                try:
-                    # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
-                    # this class name is of the popup message and here i check if it exists
-                    # if it is then click on the button "unfollow"
-                    self._popup_unfollow()
-                except Exception as e:
-                    pass
-            if i == num_of_following:
-                break
-
-        self.driver.delete_all_cookies()
-        # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
-        failed_follow_num = int(num_of_following) - i
-        self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
-        self.driver.close()
+        try:
+            for button in buttons:
+                username = users_name_list[i].text
+                print(username)
+                if i % utils.TIME_SLEEP == 0:
+                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                    time.sleep(i * utils.TIME_SLEEP)
+                if button.text == 'Follow':
+                    followers_num = self._get_followers_number(username)
+                    if followers_num >= 100:
+                        print(followers_num)
+                        button.click()
+                        follow_count += 1
+                        self.database.save_unfollow_users(username, account_username)
+                        if to_distribution:
+                            self.database.add_username_to_distribution_group(username, group_id)
+                    i += 1
+                    loops += 1
+                else:
+                    i += 1
+                    loops += 1
+                if int(loops * utils.TIME_SLEEP) == 600:
+                    loops = 1
+                    print('reset to loops')
+                if i == num_of_following:
+                    break
+        except Exception as e:
+            print('follow after followers ', e)
+        finally:
+            self.driver.delete_all_cookies()
+            # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
+            failed_follow_num = int(num_of_following) - follow_count
+            self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num,
+                                      is_schedule)
+            self.driver.close()
 
     def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
         self._login()
         time.sleep(2)
         self.driver.get(user_url)
-        time.sleep(3)
+        time.sleep(2)
         # Open the followers page
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]") \
             .click()
@@ -93,36 +109,52 @@ class FollowFollowersBot(main_bot.InstagramBot):
                           return arguments[0].scrollHeight;
                           """, scroll_box)
         # Gets all the users name by the class name
-        users_name = self.driver.find_elements_by_class_name('_0imsa')
+        users_name_list = self.driver.find_elements_by_class_name('_0imsa')
         # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
         buttons = scroll_box.find_elements_by_tag_name('button')
+        # i starts from 0 because the list of users_name, its the index
         i = 0
-        # This for runs all over the buttons list and click 'follow'
-        for button in buttons:
-            if i % utils.TIME_SLEEP == 0:
-                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
-                time.sleep(i * utils.TIME_SLEEP)
-            if button.text == 'Follow':
-                button.click()
-                self.database.save_unfollow_users(users_name[i].text, account_username)
-                if to_distribution:
-                    self.database.add_username_to_distribution_group(users_name[i].text, group_id)
-                i += 1
-                # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
-                # this class name is of the popup message and here i check if it exists
-                # if it is then click on the button "unfollow"
-                try:
-                    self._popup_unfollow()
-                except Exception as e:
-                    print('follow after following: ', e)
+        # follow_count is for sub from the i in the end of the loop.
+        # count how many clicks it did. how many actual users i followed
+        follow_count = 0
+        # reset the wait time after a specific time
+        loops = 0
+        try:
+            # This for runs all over the buttons list and click 'follow'
+            for button in buttons:
+                username = users_name_list[i].text
+                if i % utils.TIME_SLEEP == 0:
+                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                    time.sleep(i * utils.TIME_SLEEP)
+                if button.text == 'Follow':
+                    followers_num = self._get_followers_number(username)
+                    if followers_num >= 100:
+                        button.click()
+                        follow_count += 1
+                        self.database.save_unfollow_users(username, account_username)
+                        if to_distribution:
+                            self.database.add_username_to_distribution_group(username, group_id)
+                    i += 1
+                    loops += 1
+                else:
+                    i += 1
+                    loops += 1
+                    
+                if int(loops * utils.TIME_SLEEP) == 600:
+                    loops = 1
+                    print('reset to loops')
 
-            if i == num_of_following:
-                break
-        self.driver.delete_all_cookies()
-        # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
-        failed_follow_num = int(num_of_following) - i
-        self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule)
-        self.driver.close()
+                if i == num_of_following:
+                    break
+        except Exception as e:
+            print('follow after following: ', e)
+        finally:
+            self.driver.delete_all_cookies()
+            # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
+            failed_follow_num = int(num_of_following) - follow_count
+            self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num,
+                                      is_schedule)
+            self.driver.close()
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule):

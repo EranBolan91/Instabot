@@ -158,7 +158,6 @@ class TabHashTag(ttk.Frame):
         if entry_comment != "":
             split_comment = self._split_comment(entry_comment)
 
-
         valid = self._check_form(username, password, hash_tag, amount)
 
         if valid:

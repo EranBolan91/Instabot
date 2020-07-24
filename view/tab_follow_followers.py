@@ -127,6 +127,7 @@ class TabFollowFollowers(ttk.Frame):
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_following(self, value):
+        self.groups_list = []
         for account in self.accounts:
             if value == account[3]:
                 self.username_following.set(account[3])
@@ -146,6 +147,7 @@ class TabFollowFollowers(ttk.Frame):
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_followers(self, value):
+        self.groups_list = []
         for account in self.accounts:
             if value == account[3]:
                 self.username_followers.set(account[3])

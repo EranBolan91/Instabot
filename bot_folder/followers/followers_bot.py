@@ -29,7 +29,7 @@ class FollowersBot(main_bot.InstagramBot):
             sugs = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
         except Exception as e:
-            print(" get names: ", e)
+            pass
 
         wait = WebDriverWait(self.driver, 4)
         scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/ html / body / div[4] / div / div / div[2]')))
@@ -67,7 +67,7 @@ class FollowersBot(main_bot.InstagramBot):
             print('unfollow all users: ', e)
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[4] / div / div / div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
@@ -96,16 +96,20 @@ class FollowersBot(main_bot.InstagramBot):
             except Exception as e:
                 print('unfollow all users: ', e)
 
+            if int(i * utils.TIME_SLEEP) == 600:
+                i = 1
+                print('reset to i')
+
         self.driver.close()
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
-    def unfollow_users(self, user_list):
+    def unfollow_users(self, user_list, to_remove_from_db):
         i = 1
         self._login()
         for user in user_list:
             self._nav_user(user)
-            if i % utils.TIME_SLEEP == 0:
+            if i % utils.ROUNDS == 0:
                 print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                 time.sleep(i*utils.TIME_SLEEP)
             # This try is for accounts that when they access to another user page, it display them Icon following
@@ -133,12 +137,35 @@ class FollowersBot(main_bot.InstagramBot):
                 except Exception as e:
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
-                # wait = WebDriverWait(self.driver, 4)
-                # requested_btn = wait.until(
-                #     EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
-                # requested_btn.click()
-                # self._popup_unfollow()
                 print('unfollow users requested button: ', e)
+            # If it finds Requested button
+            try:
+                wait = WebDriverWait(self.driver, 4)
+                requested_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
+                requested_btn.click()
+                i += 1
+                try:
+                    self._popup_unfollow()
+                except Exception as e:
+                    pass
+            except Exception as e:
+                pass
+            try:
+                is_blocked = self._check_if_blocked()
+                if is_blocked:
+                    self.driver.close()
+                    print('Blocked!')
+                    break
+            except Exception as e:
+                pass
+            # Remove username from unfollow list
+            if to_remove_from_db:
+                print(user, ' Removed from db')
+                db.Database().remove_username_from_unfollow_list(user)
+            if int(i * utils.TIME_SLEEP) == 600:
+                i = 1
+                print('reset to i')
 
     # unfollow one user
     def unfollow_user(self, username):

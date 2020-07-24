@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
+from utils.utils import Utils as utils
 from database import db
 import time, random
 
@@ -49,6 +50,9 @@ class InstagramBot:
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
+
+    def _nav_user_new_tab(self, username):
+        self.driver.execute_script("window.open('{}');".format(self.base_url + '/' + username))
 
     def _like_post(self):
         time.sleep(1)
@@ -114,3 +118,31 @@ class InstagramBot:
         if popup_unfollow:
             self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
 
+    def _check_if_blocked(self):
+        error_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/h2').text
+        para_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/p').text
+        if error_text == "Sorry, this page isn't available.":
+            return False
+        if error_text and para_text:
+            print(error_text)
+            print(para_text)
+            return True
+
+    def _get_followers_number(self, username):
+        followers_number = 0
+        self._nav_user_new_tab(username)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.driver.implicitly_wait(3)
+        try:
+            button_list = self.driver.find_elements_by_class_name('g47SY')
+            followers_number = button_list[1].text
+            self.driver.close()
+            self.driver.switch_to.window(self.driver.window_handles[0])
+            clean_number = utils().clean_number(followers_number)
+        except Exception as e:
+            print('get followers number: ', e)
+        return int(clean_number)
+
+
+if __name__ == '__main__':
+    insta = InstagramBot('eranbolandian', 'eranbolan91', False)

@@ -8,6 +8,7 @@ import datetime as dt
 
 class FollowFollowersBot(main_bot.InstagramBot):
     def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
+        settings_data_from_db = FollowFollowersDB().get_data_from_settings()
         self._login()
         time.sleep(1.5)
         self.driver.get(user_url)
@@ -28,7 +29,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(1.5)
+            time.sleep(2)
             height = self.driver.execute_script("""
                        arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                        return arguments[0].scrollHeight;
@@ -48,13 +49,12 @@ class FollowFollowersBot(main_bot.InstagramBot):
         try:
             for button in buttons:
                 username = users_name_list[i].text
-                print(username)
                 if i % utils.TIME_SLEEP == 0:
                     print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                     time.sleep(i * utils.TIME_SLEEP)
                 if button.text == 'Follow':
                     followers_num = self._get_followers_number(username)
-                    if followers_num >= 100:
+                    if int(followers_num) >= int(settings_data_from_db[2]):
                         print(followers_num)
                         button.click()
                         follow_count += 1
@@ -82,6 +82,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
             self.driver.close()
 
     def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
+        settings_data_from_db = FollowFollowersDB().get_data_from_settings()
         self._login()
         time.sleep(2)
         self.driver.get(user_url)
@@ -103,7 +104,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(1.3)
+            time.sleep(2)
             height = self.driver.execute_script("""
                           arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                           return arguments[0].scrollHeight;
@@ -128,7 +129,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
                     time.sleep(i * utils.TIME_SLEEP)
                 if button.text == 'Follow':
                     followers_num = self._get_followers_number(username)
-                    if followers_num >= 100:
+                    if int(followers_num) >= int(settings_data_from_db[2]):
                         button.click()
                         follow_count += 1
                         self.database.save_unfollow_users(username, account_username)

@@ -44,6 +44,14 @@ class HashTagBot(main_bot.InstagramBot):
                 if int(i * utils.TIME_SLEEP) == 600:
                     i = 1
                     print('reset to i')
+                try:
+                    is_blocked = self._check_if_blocked()
+                    if is_blocked:
+                        self.driver.close()
+                        print('Blocked!')
+                        break
+                except Exception as e:
+                    pass
         except Exception as e:
             print('search hash tag: ', e)
         finally:

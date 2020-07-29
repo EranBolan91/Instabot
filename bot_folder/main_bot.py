@@ -92,23 +92,26 @@ class InstagramBot:
         self.driver.find_element_by_class_name('Ypffh').send_keys(comment + Keys.RETURN)
 
     def _follow_user(self, to_distribution, group_id):
+        settings_data = self.database.get_data_from_settings()
         time.sleep(1)
         follow_button = self.driver.find_element_by_xpath(
             "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
         if follow_button.text == 'Follow':
-            follow_button.click()
-            # Get the username
             try:
+                # Get the username
                 username = self.driver.find_element_by_xpath(
                     '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
-                self.database.save_unfollow_users(username, self.username)
+                followers_num = self._get_followers_number(username)
+                if int(followers_num) >= int(settings_data[2]):
+                    follow_button.click()
+                    self.database.save_unfollow_users(username, self.username)
+                    if to_distribution:
+                        # Get the username
+                        username = self.driver.find_element_by_xpath(
+                            '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
+                        self.database.add_username_to_distribution_group(username, group_id)
             except Exception as e:
                 print('follow user: ', e)
-        if to_distribution:
-            # Get the username
-            username = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
-            self.database.add_username_to_distribution_group(username, group_id)
 
     def _popup_unfollow(self):
         # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
@@ -139,10 +142,9 @@ class InstagramBot:
             self.driver.close()
             self.driver.switch_to.window(self.driver.window_handles[0])
             clean_number = utils().clean_number(followers_number)
+            print(clean_number)
         except Exception as e:
             print('get followers number: ', e)
         return int(clean_number)
 
 
-if __name__ == '__main__':
-    insta = InstagramBot('eranbolandian', 'eranbolan91', False)

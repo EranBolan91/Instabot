@@ -82,7 +82,7 @@ class TabDM(ttk.Frame):
         self.listbox.grid(column=2, row=3, rowspan=4, padx=(10, 0))
         self.title_amount_users_list = ttk.Label(self, text="{} Users".format(self.num_distribution_users), font=self.h3)
         self.title_amount_users_list.grid(column=2, row=7, pady=(10, 0))
-        ttk.Button(self, text="REMOVE ALL LIST", command=lambda: self._remove_all_dm_list(self.distribution_users))\
+        ttk.Button(self, text="CLEAR LIST", command=lambda: self._remove_all_dm_list(self.distribution_users))\
             .grid(column=2, row=8, padx=(0, 100), pady=(10, 0))
         ttk.Button(self, text="REMOVE USER", command=self._remove_user).grid(column=2, row=8, padx=(150, 0), pady=(10, 0))
 

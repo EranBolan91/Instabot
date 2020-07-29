@@ -31,7 +31,7 @@ class Utils:
                 clean_num = int(num_no_dot.replace('k', ''))
                 return clean_num * 100
             else:
-                clean_num = number.replace('k', '')
+                clean_num = int(number.replace('k', ''))
                 return clean_num * 1000
         elif millions != -1:
             if number.find('.') != -1:
@@ -39,13 +39,11 @@ class Utils:
                 clean_num = int(num_no_dot.replace('m', ''))
                 return clean_num * 100000
             else:
-                clean_num = number.replace('m', '')
+                clean_num = int(number.replace('m', ''))
                 return clean_num * 100000
         else:
             return int(number)
 
-
-
 # Utils().arithmetic_progression(25, 100, 5)
-# Utils().clean_number('5m')
+# Utils().clean_number('29k')
 

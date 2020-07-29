@@ -22,9 +22,10 @@ class Database:
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS settings (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         amount_likes TEXT DEFAULT 0,
+                        amount_followers TEXT DEFAULT 0,
                         is_schedule BOOLEAN DEFAULT 0,
-                        schedule_hour INT,
-                        modify DATETIME )
+                        schedule_hour INT DEFAULT 0,
+                        modify DATETIME)
                         """)
         # Table unfollow
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS unfollow (
@@ -127,8 +128,8 @@ class Database:
             print("From _init_settings: {}".format(is_exists))
             if not is_exists:
                 cur.execute("""INSERT INTO settings
-                            (amount_likes, is_schedule, schedule_hour, modify)
-                            VALUES(?,?,?,?)""", (0, 0, 0, modify_time))
+                            (amount_likes, amount_followers, is_schedule, schedule_hour, modify)
+                            VALUES(?,?,?,?)""", (0, 0, 0, 0, modify_time))
                 conn.commit()
         except Exception as e:
             print('_init_settings func: ', e)
@@ -175,14 +176,15 @@ class Database:
             conn.close()
             return is_update
 
-    def save_settings(self, likes_amount, schedule_hours, is_active):
+    def save_settings(self, likes_amount, followers_amount, schedule_hours, is_active):
         modify_time = dt.datetime.now()
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         is_saved = False
         try:
-            cur.execute("UPDATE settings SET amount_likes='{}', is_schedule='{}', schedule_hour='{}', modify='{}' WHERE id='{}' "
-                        .format(likes_amount, is_active, schedule_hours, modify_time, 1))
+            cur.execute("UPDATE settings SET amount_likes='{}',"
+                        "amount_followers='{}', is_schedule='{}', schedule_hour='{}', modify='{}' WHERE id='{}' "
+                        .format(likes_amount, followers_amount, is_active, schedule_hours, modify_time, 1))
             conn.commit()
             is_saved = True
         except Exception as e:

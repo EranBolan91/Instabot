@@ -8,7 +8,8 @@ import schedule
 class Settings:
     def __init__(self, window):
         self.window = window
-        self.likes_amount = StringVar()
+        self.likes_amount = IntVar()
+        self.followers_amount_input = IntVar()
         self.check_schedule = IntVar()
         self.schedule_hour = IntVar()
         self.username_option = StringVar()
@@ -17,11 +18,14 @@ class Settings:
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.bold = tkfont.Font(weight='bold', size=10)
         self.amount = 0
+        self.followers_amount = 0
 
         self.accounts = db.Database().get_accounts()
         user_name_list = []
-        for account in self.accounts:
-            user_name_list.append(account[3])
+
+        if self.accounts:
+            for account in self.accounts:
+                user_name_list.append(account[3])
 
         ttk.Label(self.window, text='SETTINGS ', font=self.headerFont) \
                     .grid(column=0, row=0, padx=10, pady=10)
@@ -30,6 +34,11 @@ class Settings:
                                                                     .format(self.amount), font=self.titleFont)
         self.title_amount.grid(column=0, row=1, padx=10, pady=10)
         ttk.Entry(self.window, textvariable=self.likes_amount).grid(column=0, row=2)
+
+        self.title_followers_amount = ttk.Label(self.window, text='Follow after users that have more then {} followers'
+                                      .format(self.followers_amount), font=self.titleFont)
+        self.title_followers_amount.grid(column=0, row=3, padx=10, pady=10)
+        ttk.Entry(self.window, textvariable=self.followers_amount_input).grid(column=0, row=4)
 
         # Schedule Frame configuration
         schedule_frame = ttk.LabelFrame(self.window, text='SCHEDULE UNFOLLOW')
@@ -65,16 +74,21 @@ class Settings:
         add_btn = ttk.Button(distribution_list, text="ADD", width=10, command=self._save_distribution_list)
         remove_btn = ttk.Button(distribution_list, text="REMOVE", width=10, command=self._remove_group_from_distribution_list)
         username_choose_title = Label(distribution_list, text="Please choose a username", bg='gray23', fg='gray67')
-        users_list_option = ttk.OptionMenu(distribution_list, self.username_option, user_name_list[0], *user_name_list, command=self._set_users_groups)
 
         title.pack(fill=X)
         list_name.place(relx=0.0, rely=0.2)
         input_list_name.place(relx=0.0, rely=0.3)
         username_choose_title.place(relx=0.0, rely=0.5)
-        users_list_option.place(relx=0.0, rely=0.6)
         self.listbox.place(relx=0.6, rely=0.2)
         add_btn.place(relx=0.6, rely=0.9)
         remove_btn.place(relx=0.2, rely=0.9)
+
+        if user_name_list:
+            users_list_option = ttk.OptionMenu(distribution_list, self.username_option, user_name_list[0], *user_name_list, command=self._set_users_groups)
+            users_list_option.place(relx=0.0, rely=0.6)
+        else:
+            users_lists_label = ttk.Label(distribution_list, text='No Accounts')
+            users_lists_label.place(relx=0.0, rely=0.6)
 
 
         # Init data
@@ -94,30 +108,50 @@ class Settings:
         # there is no 'data settings' - its empty. so i init it with 0
         if data_settings == '' or data_settings is None:
             self.amount = 0
+            self.followers_amount = 0
+            self.check_schedule.set(0)
+            self.current_hours['text'] = "HOURS: {}".format(0)
+            self.database.save_settings(0, 0, 0, 0)
         else:
             self.amount = data_settings[1]
+            self.followers_amount = data_settings[2]
+            self.check_schedule.set(data_settings[3])
+            self.current_hours['text'] = "HOURS: {}".format(data_settings[4])
 
         # Set the CheckButton
-        self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes '.format(data_settings[1])
-        self.check_schedule.set(data_settings[2])
-        self.current_hours['text'] = "HOURS: {}".format(data_settings[3])
+        self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes'.format(self.amount)
+        self.title_followers_amount['text'] = 'Follow after users that have more then {} followers'.format(self.followers_amount)
         self._activate_check()
 
     def _save_changes(self):
         database = db.Database()
         likes_amount = self.likes_amount.get()
+        followers_amount = self.followers_amount_input.get()
         schedule_hour = self.schedule_hour.get()
         is_schedule = self.check_schedule.get()
+        data = database.get_data_from_settings()
+        update_likes_amount = data[1]
+        update_followers_amount = data[2]
+        update_is_schedule = data[3]
+        update_schedule_hour = data[4]
 
-        if likes_amount.isnumeric() and not int(likes_amount) < 0:
-            database.save_settings(likes_amount, schedule_hour, is_schedule)
-            messagebox.showinfo('Settings', 'Changes has been saved')
-            self.likes_amount.set("")
-            data = database.get_data_from_settings()
-            self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes '.format(data[1])
-            self.current_hours['text'] = "HOURS: {}".format(data[3])
-        else:
-            messagebox.showerror('Only numbers', 'Please enter only numbers to amount entry')
+        if likes_amount != 0 and likes_amount > 0:
+            update_likes_amount = likes_amount
+        if followers_amount != 0 and followers_amount > 0:
+            update_followers_amount = followers_amount
+        if schedule_hour != 0 and schedule_hour > 0:
+            update_schedule_hour = schedule_hour
+        if is_schedule != 0 and is_schedule > 0:
+            update_is_schedule = is_schedule
+
+        database.save_settings(update_likes_amount, update_followers_amount, update_is_schedule, update_schedule_hour)
+        messagebox.showinfo('Settings', 'Changes has been saved')
+        self.likes_amount.set(0)
+        self.followers_amount_input.set(0)
+        data = database.get_data_from_settings()
+        self.title_followers_amount['text'] = 'Follow after users that have more then {} followers'.format(data[2])
+        self.title_amount['text'] = 'LIKE/FOLLOW/COMMENT users who has more then {} likes '.format(data[1])
+        self.current_hours['text'] = "HOURS: {}".format(data[3])
 
     def _activate_check(self):
         if self.check_schedule.get() == 1:  # whenever checked

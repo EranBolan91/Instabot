@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Hashtag:
     def __init__(self, account, hashtag, num_posts, action_like, action_follow, action_comment,
-                                                        distribution, group_name,comment, num_failed_posts, schedule):
+                                                        distribution, group_name, comment, num_failed_posts, schedule):
         self.account = account
         self.hashtag = hashtag
         self.num_posts = num_posts

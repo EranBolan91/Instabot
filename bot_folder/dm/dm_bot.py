@@ -29,13 +29,10 @@ class DM(main_bot.InstagramBot):
                 self.driver.find_element_by_xpath('//*[@id="react-root"]/section/div[2]/div/div/div[2]/div/div/div[2]/button').click()
                 # after sending the message, delete the user from the list
                 DMDB().remove_dm_user_from_list(user[0])
-                DMDB().remove_username_from_unfollow_list(user[0])
-                i += 1
             except Exception as e:
-                print('send message to distribution group: ', e)
+                pass
             try:
                 # Requested
-                i += 1
                 requested_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
                 requested_btn.click()
                 try:
@@ -45,18 +42,22 @@ class DM(main_bot.InstagramBot):
                 except Exception as e:
                     pass
             except Exception as e:
-                print('Requested user')
+                pass
             try:
                 is_blocked = self._check_if_blocked()
                 if is_blocked:
                     print('Block')
                     break
+                else:
+                    # will remove the username if i'm not following the user and its not requested and its not blocked or
+                    # maybe the webpage is not available
+                    # in this situation i'm not following the user, so i should remove him from the list
+                    DMDB().remove_dm_user_from_list(user[0])
+                    DMDB().remove_username_from_unfollow_list(user[0])
             except Exception as e:
-                # will remove the username if i'm not following the user and its not requested and its not blocked or
-                # maybe the webpage is not available
-                # in this situation i'm not following the user, so i should remove him from the list
-                DMDB().remove_dm_user_from_list(user[0])
-                DMDB().remove_username_from_unfollow_list(user[0])
+                pass
+
+            i += 1
 
         self.driver.delete_all_cookies()
         group_len = len(dm_users)

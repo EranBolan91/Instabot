@@ -42,7 +42,7 @@ class FollowersBot(main_bot.InstagramBot):
                 arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                 return arguments[0].scrollHeight;
                 """, scroll_box)
-        links = scroll_box.find_elements_by_tag_name('a')
+        links = scroll_box.find_elements_by_class_name('d7ByH')
         names = [name.text for name in links if name.text != '']
         # close button
         button_close.click()
@@ -113,10 +113,16 @@ class FollowersBot(main_bot.InstagramBot):
                 print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                 time.sleep(i*utils.TIME_SLEEP)
             # This try is for accounts that when they access to another user page, it display them Icon following
+            # "btn = drive.find_element(By.XPATH, '//div[./span[@aria-label='Following']]')"
             try:
                 wait = WebDriverWait(self.driver, 4)
+                #btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[./span[@aria-label='Following']])")))
+                # btn_div = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button/div')))
+                # label = btn_div.find_element_by_css_selector('span').get_attribute("aria-label")
+                # print(label)
+                #print(btn)
                 following_btn = wait.until(
-                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/span/span[1]/button/div/span')))
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button')))
                 following_btn.click()
                 i += 1
                 try:

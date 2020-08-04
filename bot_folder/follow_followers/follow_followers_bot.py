@@ -55,7 +55,6 @@ class FollowFollowersBot(main_bot.InstagramBot):
                 if button.text == 'Follow':
                     followers_num = self._get_followers_number(username)
                     if int(followers_num) >= int(settings_data_from_db[2]):
-                        print(followers_num)
                         button.click()
                         follow_count += 1
                         self.database.save_unfollow_users(username, account_username)
@@ -140,7 +139,8 @@ class FollowFollowersBot(main_bot.InstagramBot):
                 else:
                     i += 1
                     loops += 1
-                    
+
+                print('index: ', i)
                 if int(loops * utils.TIME_SLEEP) == 600:
                     loops = 1
                     print('reset to loops')

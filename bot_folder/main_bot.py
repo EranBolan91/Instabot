@@ -63,12 +63,12 @@ class InstagramBot:
         time.sleep(1)
         try:
             text = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/button/span').text
+                '/html/body/div[4]/div[2]/div/article/div/div[3]/section[2]/div/div/button/span').text
         except Exception as e:
             pass
         try:
             text = self.driver.find_element_by_xpath(
-                   '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div[2]/button/span').text
+                '/html/body/div[4]/div[2]/div/article/div/div[3]/section[2]/div/div[2]/button/span').text
         except Exception as e:
             pass
         finally:
@@ -76,7 +76,6 @@ class InstagramBot:
                 # these 3 lines, delete all ',' from the string
                 num = text.split(',')
                 new_num = ''.join(num)
-                print(new_num)
             else:
                 new_num = 0
         return new_num
@@ -95,12 +94,12 @@ class InstagramBot:
         settings_data = self.database.get_data_from_settings()
         time.sleep(1)
         follow_button = self.driver.find_element_by_xpath(
-            "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
+            "/html/body/div[4]/div[2]/div/article/div/header/div[2]/div[1]/div[2]/button")
         if follow_button.text == 'Follow':
             try:
                 # Get the username
                 username = self.driver.find_element_by_xpath(
-                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
+                    '/html/body/div[4]/div[2]/div/article/div/header/div[2]/div[1]/div[1]/span/a').text
                 followers_num = self._get_followers_number(username)
                 if int(followers_num) >= int(settings_data[2]):
                     follow_button.click()
@@ -108,7 +107,7 @@ class InstagramBot:
                     if to_distribution:
                         # Get the username
                         username = self.driver.find_element_by_xpath(
-                            '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
+                            '/html/body/div[4]/div[2]/div/article/div/header/div[2]/div[1]/div[1]/span/a').text
                         self.database.add_username_to_distribution_group(username, group_id)
             except Exception as e:
                 print('follow user: ', e)
@@ -122,14 +121,18 @@ class InstagramBot:
             self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
 
     def _check_if_blocked(self):
-        error_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/h2').text
-        para_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/p').text
-        if error_text == "Sorry, this page isn't available.":
+        try:
+            error_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/h2').text
+            para_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/p').text
+            if error_text == "Sorry, this page isn't available.":
+                return False
+            if error_text and para_text:
+                print(error_text)
+                print(para_text)
+                return True
+        except Exception as e:
+            print('check if blocked: ', e)
             return False
-        if error_text and para_text:
-            print(error_text)
-            print(para_text)
-            return True
 
     def _get_followers_number(self, username):
         followers_number = 0

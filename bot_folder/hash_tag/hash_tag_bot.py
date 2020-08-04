@@ -16,6 +16,7 @@ class HashTagBot(main_bot.InstagramBot):
         self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
+        click_count = 0
         time.sleep(1.5)
         try:
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
@@ -29,6 +30,7 @@ class HashTagBot(main_bot.InstagramBot):
                         time.sleep(i*utils.TIME_SLEEP)
                 likes_from_insta = self._get_like_amount_text()
                 if int(likes_from_insta) > int(amount_likes[1]):
+                    click_count += 1
                     if int(like) == 1:
                         self._like_post()
                     if int(comment) == 1:
@@ -52,11 +54,12 @@ class HashTagBot(main_bot.InstagramBot):
                         break
                 except Exception as e:
                     pass
+                print('index: ', i)
         except Exception as e:
             print('search hash tag: ', e)
         finally:
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
-            failed_posts_num = int(amount) - (i - 1)
+            failed_posts_num = int(amount) - (int(click_count))
             self._prepare_data_for_db(hash_tag, amount, like, comment, follow,
                                       split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
             self.driver.delete_all_cookies()

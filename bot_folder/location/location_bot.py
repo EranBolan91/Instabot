@@ -16,6 +16,7 @@ class LocationBot(main_bot.InstagramBot):
         self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
+        click_count = 0
         time.sleep(2)
         try:
             self.driver.get(url)  # open web browser by the URL
@@ -29,6 +30,7 @@ class LocationBot(main_bot.InstagramBot):
                         time.sleep(i * utils.TIME_SLEEP)
                 likes_from_insta = self._get_like_amount_text()
                 if int(likes_from_insta) > int(amount_likes[1]):
+                    click_count += 1
                     if int(like) == 1:
                         self._like_post()
                     if int(comment) == 1:
@@ -39,12 +41,16 @@ class LocationBot(main_bot.InstagramBot):
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                     i += 1
                 else:
+                    # I still want to increase the 'i'
+                    # because if the next post will have less likes then again it will sleep
+                    i += 1
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+                print('index: ', i)
         except Exception as e:
             print('search location by url: ', e)
         finally:
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
-            failed_posts_num = int(amount) - (i - 1)
+            failed_posts_num = int(amount) - (int(click_count))
             self._prepare_data_for_db(url, amount, like, comment, follow,
                                       split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
             self.driver.close()

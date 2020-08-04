@@ -5,13 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_folder/followers/followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/followers/followers_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_folder/location/location_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/location/location_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/main_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/main_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/hashtag.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/hashtag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_dm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,46 +191,46 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592160434090" />
-    <state width="1345" height="195" key="GridCell.Tab.0.bottom" timestamp="1596042252779">
+    <state width="1345" height="201" key="GridCell.Tab.0.bottom" timestamp="1596533167263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="195" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1596042252779" />
-    <state width="1345" height="195" key="GridCell.Tab.0.center" timestamp="1596042252779">
+    <state width="1345" height="201" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1596533167263" />
+    <state width="1345" height="201" key="GridCell.Tab.0.center" timestamp="1596533167262">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="195" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1596042252779" />
-    <state width="1345" height="195" key="GridCell.Tab.0.left" timestamp="1596042252778">
+    <state width="1345" height="201" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1596533167262" />
+    <state width="1345" height="201" key="GridCell.Tab.0.left" timestamp="1596533167262">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="195" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1596042252778" />
-    <state width="1345" height="195" key="GridCell.Tab.0.right" timestamp="1596042252779">
+    <state width="1345" height="201" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1596533167262" />
+    <state width="1345" height="201" key="GridCell.Tab.0.right" timestamp="1596533167263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="195" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1596042252779" />
-    <state width="1345" height="201" key="GridCell.Tab.1.bottom" timestamp="1595798572750">
+    <state width="1345" height="201" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1596533167263" />
+    <state width="1345" height="201" key="GridCell.Tab.1.bottom" timestamp="1596533167263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595798572750" />
-    <state width="1345" height="201" key="GridCell.Tab.1.center" timestamp="1595798572750">
+    <state width="1345" height="201" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1596533167263" />
+    <state width="1345" height="201" key="GridCell.Tab.1.center" timestamp="1596533167263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1595798572750" />
-    <state width="1345" height="201" key="GridCell.Tab.1.left" timestamp="1595798572750">
+    <state width="1345" height="201" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1596533167263" />
+    <state width="1345" height="201" key="GridCell.Tab.1.left" timestamp="1596533167263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1595798572750" />
-    <state width="1345" height="201" key="GridCell.Tab.1.right" timestamp="1595798572750">
+    <state width="1345" height="201" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1596533167263" />
+    <state width="1345" height="201" key="GridCell.Tab.1.right" timestamp="1596533167263">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="201" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1595798572750" />
+    <state width="1345" height="201" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1596533167263" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1590673035440">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1590673035440" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1595926439684">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1596528487491">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1595926439684" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1596528487491" />
     <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1595013650551">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -258,22 +255,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py</url>
-          <line>54</line>
+          <line>57</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/location/location_bot.py</url>
-          <line>29</line>
+          <line>30</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/main_bot.py</url>
-          <line>98</line>
+          <line>97</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py</url>
-          <line>25</line>
+          <line>26</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -283,7 +280,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/followers/followers_bot.py</url>
-          <line>162</line>
+          <line>168</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -312,9 +309,19 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bot_folder/main_bot.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/followers/followers_bot.py</url>
-          <line>22</line>
-          <option name="timeStamp" value="51" />
+          <line>118</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bot_folder/dm/dm_bot.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

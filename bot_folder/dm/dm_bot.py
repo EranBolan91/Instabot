@@ -45,20 +45,28 @@ class DM(main_bot.InstagramBot):
                 except Exception as e:
                     pass
                 try:
+                    # Checks if the button is 'follow' - means, I'm not following the user
+                    follow_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
+                    try:
+                        if follow_btn.text == 'Follow':
+                            DMDB().remove_dm_user_from_list(user[0])
+                            DMDB().remove_username_from_unfollow_list(user[0])
+                    except Exception as e:
+                        pass
+                except Exception as e:
+                    pass
+                try:
                     is_blocked = self._check_if_blocked()
                     if is_blocked:
                         print('Block')
                         break
-                    else:
-                        # will remove the username if i'm not following the user and its not requested and its not blocked or
-                        # maybe the webpage is not available
-                        # in this situation i'm not following the user, so i should remove him from the list
-                        DMDB().remove_dm_user_from_list(user[0])
-                        DMDB().remove_username_from_unfollow_list(user[0])
                 except Exception as e:
                     pass
                 print('index: ', i)
                 i += 1
+                if int(i * utils.TIME_SLEEP) == 500:
+                    i = 1
+                    print('reset to i')
         except Exception as e:
             print('send message to distribution group: ', e)
         finally:

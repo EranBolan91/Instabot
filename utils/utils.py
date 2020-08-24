@@ -44,6 +44,6 @@ class Utils:
         else:
             return int(number)
 
-# Utils().arithmetic_progression(25, 100, 5)
+Utils().arithmetic_progression(25, 100, 10)
 # Utils().clean_number('29k')
 

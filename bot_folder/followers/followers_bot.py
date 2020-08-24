@@ -20,8 +20,16 @@ class FollowersBot(main_bot.InstagramBot):
         self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]") \
             .click()
         followers = self._get_names()
-        not_following_back = [user for user in following if user not in followers]
-        return not_following_back
+        followers_amount = self._get_followers_number(self.username)
+        if int(followers_amount) <= int((len(followers)+10)):
+            not_following_back = [user for user in following if user not in followers]
+            print(not_following_back)
+            print('Not following back: ', len(not_following_back))
+            return not_following_back
+        else:
+            print('Something fucked up with the followers,'
+                  'it counted {} followers and the current user has {} followers'.format(len(followers), len(followers_amount)))
+            return False
 
     def _get_names(self):
         time.sleep(2)
@@ -42,9 +50,11 @@ class FollowersBot(main_bot.InstagramBot):
                 arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                 return arguments[0].scrollHeight;
                 """, scroll_box)
-        links = scroll_box.find_elements_by_class_name('d7ByH')
+        links = scroll_box.find_elements_by_class_name('Jv7Aj')
+        print("{} links: {} ".format(len(links), links))
         names = [name.text for name in links if name.text != '']
         # close button
+        print("{} names: {}".format(len(names), names))
         button_close.click()
         return names
 
@@ -82,12 +92,14 @@ class FollowersBot(main_bot.InstagramBot):
         i = 0
         # This for runs all over the buttons list and click 'follow'
         for button in buttons:
+            if int(i * utils.TIME_SLEEP) == 500:
+                i = 1
+                print('reset to i')
             i += 1
             if i % utils.TIME_SLEEP == 0:
                 print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                 time.sleep(i * utils.TIME_SLEEP)
             button.click()
-            # TODO: Need to get the names of the users so i can remove them from DB
             # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
             # this class name is of the popup message and here i check if it exists
             # if it is then click on the button "unfollow"
@@ -96,15 +108,12 @@ class FollowersBot(main_bot.InstagramBot):
             except Exception as e:
                 print('unfollow all users: ', e)
 
-            if int(i * utils.TIME_SLEEP) == 600:
-                i = 1
-                print('reset to i')
-
         self.driver.close()
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
     def unfollow_users(self, user_list, to_remove_from_db):
+        wait = WebDriverWait(self.driver, 4)
         i = 1
         self._login()
         for user in user_list:
@@ -115,12 +124,6 @@ class FollowersBot(main_bot.InstagramBot):
             # This try is for accounts that when they access to another user page, it display them Icon following
             # "btn = drive.find_element(By.XPATH, '//div[./span[@aria-label='Following']]')"
             try:
-                wait = WebDriverWait(self.driver, 4)
-                #btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[./span[@aria-label='Following']])")))
-                # btn_div = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button/div')))
-                # label = btn_div.find_element_by_css_selector('span').get_attribute("aria-label")
-                # print(label)
-                #print(btn)
                 following_btn = wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button')))
                 following_btn.click()
@@ -133,26 +136,26 @@ class FollowersBot(main_bot.InstagramBot):
                 print('didnt not find the follow icon')
             # This try is for accounts that when they access to another user page, it display them "following"
             try:
-                wait = WebDriverWait(self.driver, 4)
                 following_btn = wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//button[text()="Following"]')))
                 following_btn.click()
                 i += 1
                 try:
                     self._popup_unfollow()
+                    self._check_if_follow_back()
                 except Exception as e:
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 print('unfollow users requested button: ', e)
             # If it finds Requested button
             try:
-                wait = WebDriverWait(self.driver, 4)
                 requested_btn = wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
                 requested_btn.click()
                 i += 1
                 try:
                     self._popup_unfollow()
+                    self._check_if_follow_back()
                 except Exception as e:
                     pass
             except Exception as e:

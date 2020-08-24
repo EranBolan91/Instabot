@@ -44,14 +44,15 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # count how many clicks it did. how many actual users i followed
         follow_count = 0
         # reset the wait time after a specific time
-        loops = 0
         # This for runs all over the buttons list and click 'follow'
+        # for looping
+        loops = 0
         try:
             for button in buttons:
                 username = users_name_list[i].text
-                if i % utils.TIME_SLEEP == 0:
-                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
-                    time.sleep(i * utils.TIME_SLEEP)
+                if loops % utils.TIME_SLEEP == 0:
+                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', loops * utils.TIME_SLEEP, 'seconds')
+                    time.sleep(loops * utils.TIME_SLEEP)
                 if button.text == 'Follow':
                     followers_num = self._get_followers_number(username)
                     if int(followers_num) >= int(settings_data_from_db[2]):
@@ -65,10 +66,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
                 else:
                     i += 1
                     loops += 1
-                if int(loops * utils.TIME_SLEEP) == 600:
+                if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
-                    print('reset to loops')
-                if i == num_of_following:
+                    print('reset loops')
+                if follow_count == num_of_following:
                     break
         except Exception as e:
             print('follow after followers ', e)
@@ -117,14 +118,14 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # follow_count is for sub from the i in the end of the loop.
         # count how many clicks it did. how many actual users i followed
         follow_count = 0
-        # reset the wait time after a specific time
+        # for looping
         loops = 0
         try:
             # This for runs all over the buttons list and click 'follow'
             for button in buttons:
                 username = users_name_list[i].text
-                if i % utils.TIME_SLEEP == 0:
-                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                if loops % utils.TIME_SLEEP == 0:
+                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', loops * utils.TIME_SLEEP, 'seconds')
                     time.sleep(i * utils.TIME_SLEEP)
                 if button.text == 'Follow':
                     followers_num = self._get_followers_number(username)
@@ -134,18 +135,18 @@ class FollowFollowersBot(main_bot.InstagramBot):
                         self.database.save_unfollow_users(username, account_username)
                         if to_distribution:
                             self.database.add_username_to_distribution_group(username, group_id)
-                    i += 1
                     loops += 1
+                    i += 1
                 else:
-                    i += 1
                     loops += 1
+                    i += 1
 
-                print('index: ', i)
-                if int(loops * utils.TIME_SLEEP) == 600:
+                print('index: ', loops)
+                if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset to loops')
 
-                if i == num_of_following:
+                if follow_count == num_of_following:
                     break
         except Exception as e:
             print('follow after following: ', e)

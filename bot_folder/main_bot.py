@@ -42,7 +42,7 @@ class InstagramBot:
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
         time.sleep(1.5)
         try:
-            wait = WebDriverWait(self.driver, 7)
+            wait = WebDriverWait(self.driver, 4)
             popup_not_now = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]")))
             popup_not_now.click()
         except Exception as e:
@@ -63,12 +63,12 @@ class InstagramBot:
         time.sleep(1)
         try:
             text = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/div/div[3]/section[2]/div/div/button/span').text
+                '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/button/span').text
         except Exception as e:
             pass
         try:
             text = self.driver.find_element_by_xpath(
-                '/html/body/div[4]/div[2]/div/article/div/div[3]/section[2]/div/div[2]/button/span').text
+                '/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div[2]/button/span').text
         except Exception as e:
             pass
         finally:
@@ -94,12 +94,12 @@ class InstagramBot:
         settings_data = self.database.get_data_from_settings()
         time.sleep(1)
         follow_button = self.driver.find_element_by_xpath(
-            "/html/body/div[4]/div[2]/div/article/div/header/div[2]/div[1]/div[2]/button")
+            "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
         if follow_button.text == 'Follow':
             try:
                 # Get the username
                 username = self.driver.find_element_by_xpath(
-                    '/html/body/div[4]/div[2]/div/article/div/header/div[2]/div[1]/div[1]/span/a').text
+                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
                 followers_num = self._get_followers_number(username)
                 if int(followers_num) >= int(settings_data[2]):
                     follow_button.click()
@@ -107,7 +107,7 @@ class InstagramBot:
                     if to_distribution:
                         # Get the username
                         username = self.driver.find_element_by_xpath(
-                            '/html/body/div[4]/div[2]/div/article/div/header/div[2]/div[1]/div[1]/span/a').text
+                            '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
                         self.database.add_username_to_distribution_group(username, group_id)
             except Exception as e:
                 print('follow user: ', e)
@@ -131,7 +131,6 @@ class InstagramBot:
                 print(para_text)
                 return True
         except Exception as e:
-            print('check if blocked: ', e)
             return False
 
     def _get_followers_number(self, username):
@@ -145,9 +144,17 @@ class InstagramBot:
             self.driver.close()
             self.driver.switch_to.window(self.driver.window_handles[0])
             clean_number = utils().clean_number(followers_number)
-            print(clean_number)
         except Exception as e:
             print('get followers number: ', e)
         return int(clean_number)
 
-
+    # this method is double check, when i unfollow user, check if the button display 'follow_back'
+    # means the user that i just unfollow is following me.
+    def _check_if_follow_back(self):
+        try:
+            wait = WebDriverWait(self.driver, 4)
+            follow_back_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Follow Back')]")))
+            follow_back_btn.click()
+            return True
+        except Exception as e:
+            return False

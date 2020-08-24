@@ -87,24 +87,27 @@ class TabFollowers(ttk.Frame):
             # t = threading.Thread(target=self.bot.get_unfollowers, args=(que))
             # t.start()
             users_list = self.bot.get_unfollowers()
+            if users_list:
+                self.listbox.delete(0, 'end')
+                for user in users_list:
+                    self.listbox.insert(END, user)
+                    self.amount_not_following += 1
 
-            self.listbox.delete(0, 'end')
-            for user in users_list:
-                self.listbox.insert(END, user)
-                self.amount_not_following += 1
-
-            if self.amount_not_following == 0:
-                ttk.Label(self, text='Everyone following you back!', font=self.results)\
+                if self.amount_not_following == 0:
+                    ttk.Label(self, text='Everyone following you back!', font=self.results)\
                                                     .grid(column=3, row=6, rowspan=2, pady=(8, 8))
-            else:
-                ttk.Label(self, text='{} Not following you!'.format(self.amount_not_following),
-                          font=self.results).grid(column=3, row=6, rowspan=2, pady=(8, 8))
-                ttk.Label(self, text='Do you want to UNFOLLOW them? ',
-                          font=self.results).grid(column=3, row=9, rowspan=2, pady=(16, 16))
-                ttk.Button(self, text="Click here", command=lambda: self._unfollow_users_list(users_list, 0))\
-                                                    .grid(column=3, row=10, rowspan=2, pady=(8, 8))
+                else:
+                    ttk.Label(self, text='{} Not following you!'.format(self.amount_not_following),
+                              font=self.results).grid(column=3, row=6, rowspan=2, pady=(8, 8))
+                    ttk.Label(self, text='Do you want to UNFOLLOW them? ',
+                              font=self.results).grid(column=3, row=9, rowspan=2, pady=(16, 16))
+                    ttk.Button(self, text="Click here", command=lambda: self._unfollow_users_list(users_list, 0))\
+                                                        .grid(column=3, row=10, rowspan=2, pady=(8, 8))
 
-            return True
+                return True
+            else:
+                ttk.Label(self, text='It did not worked, run it again', font=self.results) \
+                    .grid(column=3, row=6, rowspan=2, pady=(8, 8))
 
     # open selected user instagram page
     def _search_user(self):

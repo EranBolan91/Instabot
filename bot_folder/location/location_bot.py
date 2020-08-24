@@ -16,18 +16,19 @@ class LocationBot(main_bot.InstagramBot):
         self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
+        loops = 1
         click_count = 0
         time.sleep(2)
         try:
             self.driver.get(url)  # open web browser by the URL
-            wait = WebDriverWait(self.driver, 7)
+            wait = WebDriverWait(self.driver, 4)
             first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
             while i <= int(amount):
-                if i % utils.TIME_SLEEP == 0:
+                if loops % utils.TIME_SLEEP == 0:
                     if int(amount) != int(i):
-                        print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
-                        time.sleep(i * utils.TIME_SLEEP)
+                        print('Time start: ', dt.datetime.now(), ' Sleep time: ', loops * utils.TIME_SLEEP, 'seconds')
+                        time.sleep(loops * utils.TIME_SLEEP)
                 likes_from_insta = self._get_like_amount_text()
                 if int(likes_from_insta) > int(amount_likes[1]):
                     click_count += 1
@@ -40,12 +41,17 @@ class LocationBot(main_bot.InstagramBot):
                     # click on the right arrow
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                     i += 1
+                    loops += 1
                 else:
                     # I still want to increase the 'i'
                     # because if the next post will have less likes then again it will sleep
                     i += 1
+                    loops += 1
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                 print('index: ', i)
+                if int(loops * utils.TIME_SLEEP) == 500:
+                    loops = 1
+                    print('reset to loops')
         except Exception as e:
             print('search location by url: ', e)
         finally:

@@ -10,14 +10,16 @@ import datetime as dt
 
 
 class DM(main_bot.InstagramBot):
-    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule):
-        self._login()
+    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule, to_login):
+        if to_login:
+            self._login()
         i = 0
+        size_list = len(dm_users)
         try:
             for user in dm_users:
                 # Sleep after sending to 5 accounts message
                 if i % utils.TIME_SLEEP == 0:
-                    print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                    print('Account', self.username, 'Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                     time.sleep(i*utils.TIME_SLEEP)
                 self._nav_user(user[0])
                 wait = WebDriverWait(self.driver, 4)
@@ -62,7 +64,7 @@ class DM(main_bot.InstagramBot):
                         break
                 except Exception as e:
                     pass
-                print('index: ', i)
+                print('index: {}/{}'.format(str(size_list), i), 'Username: ', self.username)
                 i += 1
                 if int(i * utils.TIME_SLEEP) == 500:
                     i = 1
@@ -75,6 +77,17 @@ class DM(main_bot.InstagramBot):
             num_failed_members = group_len - i
             self._prepare_data_for_db(message, group_name, group_len, num_failed_members, is_schedule)
             self.driver.close()
+
+    def send_message_to_following_list(self, message, is_schedule):
+        self._login()
+        time.sleep(1)
+        self._nav_user(self.username)
+        wait = WebDriverWait(self.driver, 4)
+        following_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/followers')]")))
+        following_button.click()
+
+        users_name = self._get_usersname()
+        self.send_message_to_distribution_group(message, users_name, self.username, is_schedule, False)
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, message, group, num_members, num_failed_members, is_schedule):

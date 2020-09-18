@@ -173,10 +173,11 @@ class Settings:
                 print('Did not saved')
 
     def _remove_group_from_distribution_list(self):
+        username_menu = self.username_option.get()
         group_selection = self.listbox.get(self.listbox.curselection())
         if group_selection:
             database = db.Database()
-            is_deleted = database.remove_group_from_distribution_list(group_selection)
+            is_deleted = database.remove_group_from_distribution_list(group_selection, username_menu)
             if is_deleted:
                 self.listbox.delete(self.listbox.curselection())
 

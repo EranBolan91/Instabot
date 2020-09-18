@@ -1,6 +1,6 @@
 class Utils:
     TIME_SLEEP = 5
-    ROUNDS = 10
+    ROUNDS = 5
 
     @staticmethod
     def _check_username_password(username, password):
@@ -44,6 +44,6 @@ class Utils:
         else:
             return int(number)
 
-Utils().arithmetic_progression(25, 100, 10)
+# Utils().arithmetic_progression(25, 100, 5)
 # Utils().clean_number('29k')
 

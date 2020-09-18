@@ -276,12 +276,13 @@ class Database:
             conn.close()
             return groups
 
-    def remove_group_from_distribution_list(self, group_name):
+    def remove_group_from_distribution_list(self, group_name, owner_username):
+        owner_group_id = self._get_user_id(owner_username)
         is_deleted = False
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute("DELETE FROM groups WHERE group_name='{}'".format(group_name))
+            cur.execute("DELETE FROM groups WHERE group_name='{}' AND user_id='{}'".format(group_name, owner_group_id))
             conn.commit()
             is_deleted = True
         except Exception as e:
@@ -312,12 +313,13 @@ class Database:
         finally:
             conn.close()
 
-    def get_group_id_by_group_name(self, group_name):
+    def get_group_id_by_group_name_and_id(self, group_name, owner_group_name):
+        owner_group_id = self._get_user_id(owner_group_name)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         group_id = -1
         try:
-            cur.execute("SELECT id FROM groups WHERE group_name = '{}' ".format(group_name))
+            cur.execute("SELECT id FROM groups WHERE group_name = '{}' AND user_id='{}' ".format(group_name, owner_group_id))
             group_id = cur.fetchone()
         except Exception as e:
             print("get group id by group name: ", e)
@@ -326,8 +328,8 @@ class Database:
             return group_id[0]
 
     # Getting all the users name from DM_users to a specific group
-    def get_users_from_dm_users(self, group_name):
-        group_id = self.get_group_id_by_group_name(group_name)
+    def get_users_from_dm_users(self, group_name, owner_group_name):
+        group_id = self.get_group_id_by_group_name_and_id(group_name, owner_group_name)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         dm_users = []

@@ -2,10 +2,10 @@ from bot_folder import main_bot
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-import time
 from database import db
 from utils.utils import Utils as utils
 import datetime as dt
+import time
 
 
 class FollowersBot(main_bot.InstagramBot):
@@ -97,7 +97,7 @@ class FollowersBot(main_bot.InstagramBot):
                 print('reset to i')
             i += 1
             if i % utils.TIME_SLEEP == 0:
-                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                print('Account', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                 time.sleep(i * utils.TIME_SLEEP)
             button.click()
             # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
@@ -115,47 +115,58 @@ class FollowersBot(main_bot.InstagramBot):
     def unfollow_users(self, user_list, to_remove_from_db):
         wait = WebDriverWait(self.driver, 4)
         i = 1
+        remove_clicks = 0
         self._login()
+        time.sleep(1.5)
         for user in user_list:
             self._nav_user(user)
             if i % utils.ROUNDS == 0:
-                print('Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                print('Account', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                 time.sleep(i*utils.TIME_SLEEP)
             # This try is for accounts that when they access to another user page, it display them Icon following
-            # "btn = drive.find_element(By.XPATH, '//div[./span[@aria-label='Following']]')"
             try:
+                # '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button'
                 following_btn = wait.until(
-                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button')))
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button')))
                 following_btn.click()
                 i += 1
+                remove_clicks += 1
                 try:
                     self._popup_unfollow()
+                    if not to_remove_from_db:
+                        self._check_if_follow_back()
                 except Exception as e:
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
-                print('didnt not find the follow icon')
+                pass
+                # print('did not find the follow icon')
             # This try is for accounts that when they access to another user page, it display them "following"
             try:
                 following_btn = wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//button[text()="Following"]')))
                 following_btn.click()
                 i += 1
+                remove_clicks += 1
                 try:
                     self._popup_unfollow()
-                    self._check_if_follow_back()
+                    if not to_remove_from_db:
+                        self._check_if_follow_back()
                 except Exception as e:
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
-                print('unfollow users requested button: ', e)
+                pass
+                # print('did not find the Following button')
             # If it finds Requested button
             try:
                 requested_btn = wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
                 requested_btn.click()
                 i += 1
+                remove_clicks += 1
                 try:
                     self._popup_unfollow()
-                    self._check_if_follow_back()
+                    if not to_remove_from_db:
+                        self._check_if_follow_back()
                 except Exception as e:
                     pass
             except Exception as e:
@@ -163,28 +174,43 @@ class FollowersBot(main_bot.InstagramBot):
             try:
                 is_blocked = self._check_if_blocked()
                 if is_blocked:
+                    self._screen_shot(self.username)
+                    self._send_email(self.username, remove_clicks, dt.datetime.now().strftime('%H:%M:%S'), 'Followers')
                     self.driver.close()
                     print('Blocked!')
                     break
             except Exception as e:
                 pass
             # Remove username from unfollow list
+            # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
+            # into unfollow. In this situation, i prefer not to remove the username from database
             if to_remove_from_db:
-                print(user, ' Removed from db')
-                db.Database().remove_username_from_unfollow_list(user)
-            if int(i * utils.TIME_SLEEP) == 600:
+                try:
+                    follow_btn = wait.until(
+                        EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
+                    if follow_btn:
+                        print(user, 'Removed from db of', self.username)
+                        db.Database().remove_username_from_unfollow_list(user)
+                except Exception as e:
+                    pass
+                try:
+                    follow_btn = wait.until(
+                        EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
+                    if follow_btn:
+                        print(user, 'Removed from db', self.username)
+                        db.Database().remove_username_from_unfollow_list(user)
+                except Exception as e:
+                    pass
+            print('{} Removed from {} account'.format(remove_clicks, self.username))
+            time.sleep(1)
+            if int(i * utils.TIME_SLEEP) == 500:
                 i = 1
                 print('reset to i')
 
     # unfollow one user
     def unfollow_user(self, username):
-        self._login()
-        self._nav_user(username)
-        time.sleep(2)
-        self.driver.find_element_by_xpath('//button[text()="Following"]').click()
         try:
-            self._popup_unfollow()
-            db.Database().remove_username_from_unfollow_list(username)
+            self._unfollow_user(username)
         except Exception as e:
             print('unfollow user: ', e)
         finally:

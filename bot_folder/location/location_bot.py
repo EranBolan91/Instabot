@@ -27,7 +27,8 @@ class LocationBot(main_bot.InstagramBot):
             while i <= int(amount):
                 if loops % utils.TIME_SLEEP == 0:
                     if int(amount) != int(i):
-                        print('Time start: ', dt.datetime.now(), ' Sleep time: ', loops * utils.TIME_SLEEP, 'seconds')
+                        print('Username:', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'),
+                                                                  ' Sleep time: ', loops * utils.TIME_SLEEP, 'seconds')
                         time.sleep(loops * utils.TIME_SLEEP)
                 likes_from_insta = self._get_like_amount_text()
                 if int(likes_from_insta) > int(amount_likes[1]):
@@ -48,7 +49,7 @@ class LocationBot(main_bot.InstagramBot):
                     i += 1
                     loops += 1
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
-                print('index: ', i)
+                print('Loops: {}/{}'.format(amount, loops), 'Username: ', self.username)
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset to loops')

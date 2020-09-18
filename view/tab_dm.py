@@ -21,7 +21,6 @@ class TabDM(ttk.Frame):
         self.users_menu = StringVar()
         self.username = StringVar()
         self.password = StringVar()
-        self.direct_message = StringVar()
         self.groups_list = []
         self.check_box_distribution_list = IntVar()
         self.distribution_menu_var = StringVar()
@@ -110,6 +109,40 @@ class TabDM(ttk.Frame):
         ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
             .grid(column=3, row=4, pady=10, padx=20)
 
+        # Send messages to the current user's followers
+        message_frame = ttk.LabelFrame(self, text='Messages to current following account')
+        message_frame.grid(column=3, row=5, rowspan=4, ipady=120, ipadx=200, pady=(20, 0))
+        ttk.Label(message_frame, text='Write your message and send it to all your following list').place(relx=0.1, rely=0.1)
+        self.text_message_current_account = Text(message_frame, height=7, width=40)
+        self.text_message_current_account.place(relx=0.1, rely=0.2)
+        ttk.Button(message_frame, text="SEND", command=self._send_msgs_current_account_following).place(relx=0.4, rely=0.8)
+
+    def _send_msgs_current_account_following(self):
+        username = self.username.get()
+        password = self.password.get()
+        message_text = self.text_message_current_account.get("1.0", END)
+        action = self.radio_var.get()
+        schedule_action = self.check_box_schedule.get()
+        minutes_entry = self.minutes_entry_value.get()
+        hours_entry = self.hours_entry_value.get()
+        days_entry = self.days_entry_value.get()
+
+        valid = self._check_form(username, password, message_text)
+
+        if valid:
+            is_schedule = 0
+            if schedule_action:
+                is_schedule = 1
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                bot = DM(username, password, True)
+                timing_thread = threading.Timer(time_schedule, bot.send_message_to_following_list,
+                                                    [message_text, is_schedule])
+                timing_thread.start()
+            else:
+                bot = DM(username, password, True)
+                t = threading.Thread(target=bot.send_message_to_following_list, args=(message_text, is_schedule))
+                t.start()
+
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
@@ -121,7 +154,7 @@ class TabDM(ttk.Frame):
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
 
-        valid = self._check_form(username, password, message_text, group_name)
+        valid = self._check_form(username, password, message_text)
 
         if valid:
             is_schedule = 0
@@ -131,25 +164,21 @@ class TabDM(ttk.Frame):
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = DM(username, password, True)
                 timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
-                                                    [message_text, dm_users_list, group_name, is_schedule])
+                                                    [message_text, dm_users_list, group_name, is_schedule, True])
                 timing_thread.start()
             else:
                 dm_users_list = db.Database().get_users_from_dm_users(group_name)
                 bot = DM(username, password, True)
-                t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list, group_name, is_schedule))
+                t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list, group_name, is_schedule, True))
                 t.start()
 
-    def _check_form(self, username, password, message, group_name):
+    def _check_form(self, username, password, message):
         if username == '' or password == '':
             messagebox.showerror('Credentials', 'Please enter your username or password')
             return False
 
         if message == '':
             messagebox.showerror('Message box', 'Message box cannot be empty')
-            return False
-
-        if not group_name:
-            messagebox.showerror('Distribution list', 'Must choose distribution list')
             return False
 
         else:
@@ -170,13 +199,18 @@ class TabDM(ttk.Frame):
                             *self.groups_list, command=self._display_users_to_boxlist)
                     self.distribution_menu.grid(column=1, row=3, rowspan=3)
                     self.distribution_title.grid_forget()
+                    self.listbox.delete(0, 'end')
+                    self.num_distribution_users = 0
+                    self.title_amount_users_list.config(text="{} Users".format(self.num_distribution_users),
+                                                        font=self.h3)
                 else:
                     self.distribution_title.grid(column=1, row=3, rowspan=3)
                     self.distribution_menu.grid_forget()
 
     # Getting name of distribution from distribution menu list, to set all its users in boxlist
     def _display_users_to_boxlist(self, value):
-        self.distribution_users = db.Database().get_users_from_dm_users(value)
+        username = self.users_menu.get()
+        self.distribution_users = db.Database().get_users_from_dm_users(value, username)
         self.listbox.delete(0, 'end')
         self.num_distribution_users = 0
         for user in self.distribution_users:

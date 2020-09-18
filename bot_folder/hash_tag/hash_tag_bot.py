@@ -16,18 +16,20 @@ class HashTagBot(main_bot.InstagramBot):
         self._login()
         amount_likes = self.database.get_data_from_settings()
         i = 1
+        loops = 1
         click_count = 0
         time.sleep(1.5)
         try:
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
-            wait = WebDriverWait(self.driver, 7)
+            wait = WebDriverWait(self.driver, 4)
             first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
             while i <= int(amount):
-                if i % utils.TIME_SLEEP == 0:
+                if loops % utils.TIME_SLEEP == 0:
                     if int(amount) != int(i):
-                        print('Time start: ', dt.datetime.now(), ' Sleep time: ', i*utils.TIME_SLEEP, 'seconds')
-                        time.sleep(i*utils.TIME_SLEEP)
+                        print('Username:', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'),
+                              ' Sleep time: ', loops*utils.TIME_SLEEP, 'seconds')
+                        time.sleep(loops*utils.TIME_SLEEP)
                 likes_from_insta = self._get_like_amount_text()
                 if int(likes_from_insta) > int(amount_likes[1]):
                     click_count += 1
@@ -40,21 +42,25 @@ class HashTagBot(main_bot.InstagramBot):
                     # click on the right arrow
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                     i += 1
+                    loops += 1
                 else:
                     self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                     i += 1
-                if int(i * utils.TIME_SLEEP) == 600:
-                    i = 1
-                    print('reset to i')
+                    loops += 1
+                if int(i * utils.TIME_SLEEP) == 500:
+                    loops = 1
+                    print('reset to loops')
                 try:
                     is_blocked = self._check_if_blocked()
                     if is_blocked:
+                        self._screen_shot(self.username)
+                        self._send_email(self.username, click_count, dt.datetime.now().strftime('%H:%M:%S'), 'Hashtag')
                         self.driver.close()
                         print('Blocked!')
                         break
                 except Exception as e:
                     pass
-                print('index: ', i)
+                print('Loops: {}/{}'.format(amount, loops), 'Username: ', self.username)
         except Exception as e:
             print('search hash tag: ', e)
         finally:

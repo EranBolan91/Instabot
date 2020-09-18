@@ -5,8 +5,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from utils.utils import Utils as utils
+from datetime import datetime
 from database import db
-import time, random
+import time, random, requests
+import os
 
 
 class InstagramBot:
@@ -41,12 +43,6 @@ class InstagramBot:
         self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
         time.sleep(1.5)
-        try:
-            wait = WebDriverWait(self.driver, 4)
-            popup_not_now = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]")))
-            popup_not_now.click()
-        except Exception as e:
-            print("Didn't find 'not now' :", e)
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
@@ -112,6 +108,29 @@ class InstagramBot:
             except Exception as e:
                 print('follow user: ', e)
 
+    def _unfollow_user(self, username):
+        self._login()
+        self._nav_user(username)
+        time.sleep(2)
+        try:
+            self.driver.find_element_by_xpath('//button[text()="Following"]').click()
+            try:
+                self._popup_unfollow()
+                db.Database().remove_username_from_unfollow_list(username)
+            except Exception as e:
+                print('Following unfollow user: ', e)
+        except Exception as e:
+            pass
+        try:
+            self.driver.find_element_by_xpath('//button[text()="Requested"]').click()
+            try:
+                self._popup_unfollow()
+                db.Database().remove_username_from_unfollow_list(username)
+            except Exception as e:
+                print('Requested unfollow user: ', e)
+        except Exception as e:
+            pass
+
     def _popup_unfollow(self):
         # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
         # this class name is of the popup message and here i check if it exists
@@ -134,7 +153,6 @@ class InstagramBot:
             return False
 
     def _get_followers_number(self, username):
-        followers_number = 0
         self._nav_user_new_tab(username)
         self.driver.switch_to.window(self.driver.window_handles[1])
         self.driver.implicitly_wait(3)
@@ -153,8 +171,45 @@ class InstagramBot:
     def _check_if_follow_back(self):
         try:
             wait = WebDriverWait(self.driver, 4)
-            follow_back_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Follow Back')]")))
+            follow_back_btn = wait.until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Follow Back')]")))
             follow_back_btn.click()
             return True
         except Exception as e:
             return False
+
+    def _get_usersname(self):
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
+        last_height, height = 0, 1
+        # this while scrolls all over the followers
+        while last_height != height:
+            last_height = height
+            time.sleep(2)
+            height = self.driver.execute_script("""
+                                       arguments[0].scrollTo(0, arguments[0].scrollHeight); 
+                                       return arguments[0].scrollHeight;
+                                       """, scroll_box)
+        # Gets all the users name by the class name
+        users_name_list = self.driver.find_elements_by_class_name('_0imsa')
+        return users_name_list
+
+    def _screen_shot(self, username):
+        self.driver.save_screenshot("screen_shots/{}.png".format(username))
+
+    def _send_email(self, username, success_posts, time, section):
+        print('sending email')
+        mailgun_domain = os.environ.get('MAILGUN_DOMAIN')
+        mailgun_api = os.environ.get('MAILGUN_API')
+        image_name = username + '.png'
+        requests.post("https://api.mailgun.net/v3/{}/messages".format(mailgun_domain),
+                      auth=("api", "{}".format(mailgun_api)),
+                      files=[("attachment", (username,
+                                open("screen_shots/{}".format(image_name), "rb").read()))],
+                      data={"from": "Insta bot <eranbolan91@gmail.com>",
+                            "to": ["eranbolan91@gmail.com"],
+                            "subject": "InstaBot Error - {}".format(username),
+                            "text": """ 
+                            Username: {} 
+                            Section: {}
+                            Success: {} 
+                            Time: {}""".format(username, section, success_posts, time)})

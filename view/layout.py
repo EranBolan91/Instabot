@@ -51,7 +51,6 @@ class Layout:
 
         tab_control.pack(expand=1, fill="both")
 
-
         # status bar config
         status_bar = Label(window, text="status bar", bd=1, relief=SUNKEN, anchor=W)
         status_bar.pack(side=BOTTOM, fill=X)

@@ -108,7 +108,7 @@ class InstagramBot:
             except Exception as e:
                 print('follow user: ', e)
 
-    def _unfollow_user(self, username):
+    def _unfollow_user(self, username, user_id):
         self._login()
         self._nav_user(username)
         time.sleep(2)
@@ -116,7 +116,7 @@ class InstagramBot:
             self.driver.find_element_by_xpath('//button[text()="Following"]').click()
             try:
                 self._popup_unfollow()
-                db.Database().remove_username_from_unfollow_list(username)
+                db.Database().remove_username_from_unfollow_list(username, user_id)
             except Exception as e:
                 print('Following unfollow user: ', e)
         except Exception as e:
@@ -125,7 +125,7 @@ class InstagramBot:
             self.driver.find_element_by_xpath('//button[text()="Requested"]').click()
             try:
                 self._popup_unfollow()
-                db.Database().remove_username_from_unfollow_list(username)
+                db.Database().remove_username_from_unfollow_list(username, user_id)
             except Exception as e:
                 print('Requested unfollow user: ', e)
         except Exception as e:

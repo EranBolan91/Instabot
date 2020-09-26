@@ -30,25 +30,25 @@ class LocationBot(main_bot.InstagramBot):
                         print('Username:', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'),
                                                                   ' Sleep time: ', loops * utils.TIME_SLEEP, 'seconds')
                         time.sleep(loops * utils.TIME_SLEEP)
-                likes_from_insta = self._get_like_amount_text()
-                if int(likes_from_insta) > int(amount_likes[1]):
-                    click_count += 1
-                    if int(like) == 1:
-                        self._like_post()
-                    if int(comment) == 1:
-                        self._comment_post(split_comment)
-                    if int(follow) == 1:
-                        self._follow_user(to_distribution, group_id)
+                # likes_from_insta = self._get_like_amount_text()
+                # if int(likes_from_insta) > int(amount_likes[1]):
+                click_count += 1
+                if int(like) == 1:
+                    self._like_post()
+                if int(comment) == 1:
+                    self._comment_post(split_comment)
+                if int(follow) == 1:
+                    self._follow_user(to_distribution, group_id)
                     # click on the right arrow
-                    self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
-                    i += 1
-                    loops += 1
-                else:
+                self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+                i += 1
+                loops += 1
+                # else:
                     # I still want to increase the 'i'
                     # because if the next post will have less likes then again it will sleep
-                    i += 1
-                    loops += 1
-                    self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+                    # i += 1
+                    # loops += 1
+                    # self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
                 print('Loops: {}/{}'.format(amount, loops), 'Username: ', self.username)
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1

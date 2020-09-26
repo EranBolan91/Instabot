@@ -10,7 +10,7 @@ import datetime as dt
 
 
 class DM(main_bot.InstagramBot):
-    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule, to_login):
+    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule, to_login, account_id):
         if to_login:
             self._login()
         i = 0
@@ -41,7 +41,7 @@ class DM(main_bot.InstagramBot):
                     try:
                         self._popup_unfollow()
                         DMDB().remove_dm_user_from_list(user[0])
-                        DMDB().remove_username_from_unfollow_list(user[0])
+                        DMDB().remove_username_from_unfollow_list(user[0], account_id)
                     except Exception as e:
                         pass
                 except Exception as e:
@@ -52,7 +52,7 @@ class DM(main_bot.InstagramBot):
                     try:
                         if follow_btn.text == 'Follow':
                             DMDB().remove_dm_user_from_list(user[0])
-                            DMDB().remove_username_from_unfollow_list(user[0])
+                            DMDB().remove_username_from_unfollow_list(user[0], account_id)
                     except Exception as e:
                         pass
                 except Exception as e:

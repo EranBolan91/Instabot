@@ -154,6 +154,8 @@ class TabDM(ttk.Frame):
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
 
+        # check if the list is not empty and getting the account id
+        account_id = self._get_account_id()
         valid = self._check_form(username, password, message_text)
 
         if valid:
@@ -164,12 +166,13 @@ class TabDM(ttk.Frame):
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = DM(username, password, True)
                 timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
-                                                    [message_text, dm_users_list, group_name, is_schedule, True])
+                                               [message_text, dm_users_list, group_name, is_schedule, True, account_id])
                 timing_thread.start()
             else:
                 dm_users_list = db.Database().get_users_from_dm_users(group_name)
                 bot = DM(username, password, True)
-                t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list, group_name, is_schedule, True))
+                t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list,
+                                                                            group_name, is_schedule, True, account_id))
                 t.start()
 
     def _check_form(self, username, password, message):
@@ -246,3 +249,10 @@ class TabDM(ttk.Frame):
         index = self.listbox.get(0, END).index(name_selection)
         self.listbox.delete(index)
         dm.DMDB.remove_dm_user_from_list(name_selection)
+
+    def _get_account_id(self):
+        if self.accounts:
+            for account in self.accounts:
+                if account[3] == self.username.get():
+                    return account[0]
+        else: return -1

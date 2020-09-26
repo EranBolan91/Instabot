@@ -101,17 +101,25 @@ class TabHashTag(ttk.Frame):
         # Users menu
         ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
         if len(user_name_list) > 0:
-            ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
-                       command=self._set_username_password).grid(column=1, row=2)
+            self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+                       command=self._set_username_password)
+            self.accounts_option_menu.grid(column=1, row=2)
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
+
+        # TODO: check if it works - it should refresh and display new accounts that were added
+        # Refresh accounts button
+        # photo = PhotoImage(file="../images/refresh2.png")
+        # photo_image = photo.subsample(3, 3)
+        # ttk.Button(self, text='REFRESH LIST', compound=LEFT, command=self._get_accounts)\
+        #               .grid(column=1, row=2, padx=(220, 0))
 
         # Schedule Actions
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
         schedule_frame.grid(column=2, row=1, ipadx=35, ipady=10, padx=(30, 0))
         entry_frame = ttk.Frame(schedule_frame)
-        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES, command=self._enable_entry)
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minutes', variable=self.radio_var, value=self.MINUTES, command=self._enable_entry)
         radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS, command=self._enable_entry)
         radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS, command=self._enable_entry)
         self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
@@ -244,3 +252,13 @@ class TabHashTag(ttk.Frame):
             self.minutes_entry.config(state=DISABLED)
             self.hours_entry.config(state=DISABLED)
             self.days_entry.config(state=NORMAL)
+
+    def _get_accounts(self):
+        self.accounts = db.Database().get_accounts()
+        user_name_list = []
+        menu = self.accounts_option_menu['menu']
+        menu.delete(0, 'end')
+        for account in self.accounts:
+            user_name_list.append(account[3])
+        self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+                                                   command=self._set_username_password)

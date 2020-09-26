@@ -302,11 +302,11 @@ class Database:
         finally:
             conn.close()
 
-    def remove_username_from_unfollow_list(self, username):
+    def remove_username_from_unfollow_list(self, username, user_id):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute(" DELETE FROM unfollow WHERE username='{}' ".format(username))
+            cur.execute(" DELETE FROM unfollow WHERE username='{}' AND user_id={} ".format(username, user_id))
             conn.commit()
         except Exception as e:
             print('remove username from distribution group: ', e)

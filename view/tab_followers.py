@@ -120,8 +120,12 @@ class TabFollowers(ttk.Frame):
         if name_selection:
             username = self.username.get()
             password = self.password.get()
+            if self.accounts:
+                for account in self.accounts:
+                    if account[3] == username:
+                        account_id = account[0]
             bot = FollowersBot(username, password, False)
-            t = threading.Thread(target=bot.unfollow_user, args=(name_selection,))
+            t = threading.Thread(target=bot.unfollow_user, args=(name_selection, account_id))
             t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password
@@ -152,7 +156,13 @@ class TabFollowers(ttk.Frame):
             username = self.username.get()
             password = self.password.get()
             bot = FollowersBot(username, password, False)
-            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list))
+            account_id = -1
+            # check if the list is not empty and getting the account id
+            if self.accounts:
+                for account in self.accounts:
+                    if account[3] == username:
+                        account_id = account[0]
+            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id))
             t.start()
 
     def _unfollow_all_users_account_follow_them(self):
@@ -169,7 +179,17 @@ class TabFollowers(ttk.Frame):
 
     def _remove_from_unfollow_list(self):
         name_selection = self.unfollow_users_list_box.get(self.unfollow_users_list_box.curselection())
+        account_id = -1
+        # check if the list is not empty and getting the account id
+        account_id = self._get_account_id()
         if name_selection:
             index = self.unfollow_users_list_box.get(0, END).index(name_selection)
             self.unfollow_users_list_box.delete(index)
-            db.Database().remove_username_from_unfollow_list(name_selection)
+            db.Database().remove_username_from_unfollow_list(name_selection, account_id)
+
+    def _get_account_id(self):
+        if self.accounts:
+            for account in self.accounts:
+                if account[3] == self.username.get():
+                    return account[0]
+        else: return -1

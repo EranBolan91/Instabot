@@ -112,7 +112,7 @@ class FollowersBot(main_bot.InstagramBot):
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
-    def unfollow_users(self, user_list, to_remove_from_db):
+    def unfollow_users(self, user_list, to_remove_from_db, account_id):
         wait = WebDriverWait(self.driver, 4)
         i = 1
         remove_clicks = 0
@@ -190,7 +190,7 @@ class FollowersBot(main_bot.InstagramBot):
                         EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
                     if follow_btn:
                         print(user, 'Removed from db of', self.username)
-                        db.Database().remove_username_from_unfollow_list(user)
+                        db.Database().remove_username_from_unfollow_list(user, account_id)
                 except Exception as e:
                     pass
                 try:
@@ -198,7 +198,7 @@ class FollowersBot(main_bot.InstagramBot):
                         EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
                     if follow_btn:
                         print(user, 'Removed from db', self.username)
-                        db.Database().remove_username_from_unfollow_list(user)
+                        db.Database().remove_username_from_unfollow_list(user, account_id)
                 except Exception as e:
                     pass
             print('{} Removed from {} account'.format(remove_clicks, self.username))
@@ -208,9 +208,9 @@ class FollowersBot(main_bot.InstagramBot):
                 print('reset to i')
 
     # unfollow one user
-    def unfollow_user(self, username):
+    def unfollow_user(self, username, account_id):
         try:
-            self._unfollow_user(username)
+            self._unfollow_user(username, account_id)
         except Exception as e:
             print('unfollow user: ', e)
         finally:

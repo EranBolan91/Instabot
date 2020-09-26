@@ -2,20 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/checking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/refresh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/refresh2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/dm/dm_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/followers/followers_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/followers/followers_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/hash_tag/hash_tag_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/location/location_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/location/location_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_folder/main_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/main_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/chromedriver.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screen_shots/Insighttips.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screen_shots/barsharon_dm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screen_shots/lizyavinclinic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/layout.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/tab_dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_dm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +43,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../adults" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -50,6 +52,9 @@
       <recent name="C:\Users\123\Desktop\python2020\Insta-bot" />
       <recent name="C:\Users\123\Desktop\python2020\Insta-bot\bot_folder" />
       <recent name="C:\Users\123\Desktop\python2020\Insta-bot\bot_folder\dm" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\123\Desktop\python2020\Insta-bot\images" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -185,50 +190,46 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1593548386443" />
-    <state width="1024" height="438" key="DebuggerActiveHint" timestamp="1600440868868">
+    <state width="1024" height="438" key="DebuggerActiveHint" timestamp="1601157917543">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1024" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1600440868868" />
-    <state x="463" y="106" key="FileChooserDialogImpl" timestamp="1592160434090">
+    <state width="1024" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1601157917543" />
+    <state width="1345" height="162" key="GridCell.Tab.0.bottom" timestamp="1601158089614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592160434090" />
-    <state width="1345" height="162" key="GridCell.Tab.0.bottom" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601158089614" />
+    <state width="1345" height="162" key="GridCell.Tab.0.center" timestamp="1601158089614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.0.center" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601158089614" />
+    <state width="1345" height="162" key="GridCell.Tab.0.left" timestamp="1601158089614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.0.left" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601158089614" />
+    <state width="1345" height="162" key="GridCell.Tab.0.right" timestamp="1601158089614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.0.right" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601158089614" />
+    <state width="1345" height="162" key="GridCell.Tab.1.bottom" timestamp="1601158089615">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.1.bottom" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601158089615" />
+    <state width="1345" height="162" key="GridCell.Tab.1.center" timestamp="1601158089615">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.1.center" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1601158089615" />
+    <state width="1345" height="162" key="GridCell.Tab.1.left" timestamp="1601158089614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.1.left" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1601158089614" />
+    <state width="1345" height="162" key="GridCell.Tab.1.right" timestamp="1601158089615">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state width="1345" height="162" key="GridCell.Tab.1.right" timestamp="1600441473952">
+    <state width="1345" height="162" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1601158089615" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1601150127323">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="162" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1600441473952" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1600355945706">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1600355945706" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1601150127323" />
     <state x="254" y="101" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1600436102345">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -302,11 +303,6 @@
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bot_folder/location/location_bot.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/view/settings.py</url>
           <line>175</line>
           <option name="timeStamp" value="58" />
@@ -315,6 +311,21 @@
           <url>file://$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py</url>
           <line>44</line>
           <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/bot_folder/location/location_bot.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/view/tab_followers.py</url>
+          <line>180</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/view/tab_hash_tag.py</url>
+          <line>256</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

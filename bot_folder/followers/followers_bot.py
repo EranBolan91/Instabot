@@ -112,11 +112,12 @@ class FollowersBot(main_bot.InstagramBot):
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
-    def unfollow_users(self, user_list, to_remove_from_db, account_id):
+    def unfollow_users(self, user_list, to_remove_from_db, account_id, to_login):
         wait = WebDriverWait(self.driver, 4)
         i = 1
         remove_clicks = 0
-        self._login()
+        if to_login:
+            self._login()
         time.sleep(1.5)
         for user in user_list:
             self._nav_user(user)
@@ -218,3 +219,18 @@ class FollowersBot(main_bot.InstagramBot):
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
+
+    # Getting list of the account followers and compare it with the list of the followers of the account
+    # unfollow every user that the account following him and the user not following back
+    def unfollow_users_who_not_return_follow(self, unfollowers_list, account_id):
+        self._login()
+        time.sleep(2)
+        self._nav_user(self.username)
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]") \
+            .click()
+        followers = self._get_names()
+        not_following_back = [user for user in unfollowers_list if user not in followers]
+        time.sleep(1.3)
+        print(len(not_following_back))
+        self.unfollow_users(not_following_back, 1, account_id, 0)

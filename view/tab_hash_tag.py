@@ -259,6 +259,7 @@ class TabHashTag(ttk.Frame):
         menu = self.accounts_option_menu['menu']
         menu.delete(0, 'end')
         for account in self.accounts:
+            menu.add_command(label=account[3], command=self._set_username_password)
             user_name_list.append(account[3])
-        self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
-                                                   command=self._set_username_password)
+        # self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+        #                                            command=self._set_username_password)

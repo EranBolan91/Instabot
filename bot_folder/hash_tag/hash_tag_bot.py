@@ -60,7 +60,7 @@ class HashTagBot(main_bot.InstagramBot):
                         break
                 except Exception as e:
                     pass
-                print('Loops: {}/{}'.format(amount, loops), 'Username: ', self.username)
+                print('Index: {}/{}'.format(amount, i), 'Username: ', self.username)
         except Exception as e:
             print('search hash tag: ', e)
         finally:

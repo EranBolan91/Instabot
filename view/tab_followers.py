@@ -53,6 +53,8 @@ class TabFollowers(ttk.Frame):
             .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(0, 200))
         ttk.Button(self, text="UNFOLLOW USER", command=self._unfollow_user)\
             .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(200, 0))
+        ttk.Label(self, text='unfollow users that are not following back from the above list').grid(column=0, row=12, pady=(10, 5))
+        ttk.Button(self, text="REMOVE UNFOLLOWERS USERS", command=lambda: self._remove_users_who_not_follow_back(self.unfollow_users)).grid(column=0, row=13, padx=(15, 0), pady=(10, 0))
 
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
@@ -162,7 +164,7 @@ class TabFollowers(ttk.Frame):
                 for account in self.accounts:
                     if account[3] == username:
                         account_id = account[0]
-            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id))
+            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1))
             t.start()
 
     def _unfollow_all_users_account_follow_them(self):
@@ -193,3 +195,17 @@ class TabFollowers(ttk.Frame):
                 if account[3] == self.username.get():
                     return account[0]
         else: return -1
+
+
+    def _remove_users_who_not_follow_back(self, unfollow_list):
+        to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')
+        if to_delete:
+            users_name_list = []
+            for username in unfollow_list:
+                users_name_list.append(username[2])
+            account_id = self._get_account_id()
+            username = self.username.get()
+            password = self.password.get()
+            bot = FollowersBot(username, password, False)
+            t = threading.Thread(target=bot.unfollow_users_who_not_return_follow, args=(users_name_list, account_id))
+            t.start()

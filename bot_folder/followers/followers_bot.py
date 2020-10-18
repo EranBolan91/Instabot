@@ -113,7 +113,7 @@ class FollowersBot(main_bot.InstagramBot):
     # unfollow users - gets list of users
     # Go to each user and unfollow him
     def unfollow_users(self, user_list, to_remove_from_db, account_id, to_login):
-        wait = WebDriverWait(self.driver, 4)
+        wait = WebDriverWait(self.driver, 3)
         i = 1
         remove_clicks = 0
         if to_login:
@@ -126,9 +126,38 @@ class FollowersBot(main_bot.InstagramBot):
                 time.sleep(i*utils.TIME_SLEEP)
             # This try is for accounts that when they access to another user page, it display them Icon following
             try:
-                # '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/span/span[1]/button'
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/button ')))
+                following_btn.click()
+                i += 1
+                remove_clicks += 1
+                try:
+                    self._popup_unfollow()
+                    if not to_remove_from_db:
+                        self._check_if_follow_back()
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
+            except Exception as e:
+                pass
+                # print('did not find the follow icon')
+            try:
                 following_btn = wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button')))
+                following_btn.click()
+                i += 1
+                remove_clicks += 1
+                try:
+                    self._popup_unfollow()
+                    if not to_remove_from_db:
+                        self._check_if_follow_back()
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
+            except Exception as e:
+                pass
+                # print('did not find the follow icon')
+            try:
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/div[2]/div/span/span[1]/button')))
                 following_btn.click()
                 i += 1
                 remove_clicks += 1
@@ -182,6 +211,18 @@ class FollowersBot(main_bot.InstagramBot):
                     break
             except Exception as e:
                 pass
+
+            try:
+                is_action_blocked = self._blocked_action_popup()
+                if is_action_blocked:
+                    self._screen_shot(self.username)
+                    self._send_email(self.username, remove_clicks, dt.datetime.now().strftime('%H:%M:%S'), 'Followers')
+                    self.driver.close()
+                    print('Action Blocked!')
+                    break
+            except Exception as e:
+                pass
+
             # Remove username from unfollow list
             # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
             # into unfollow. In this situation, i prefer not to remove the username from database

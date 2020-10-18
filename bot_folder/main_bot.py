@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from utils.utils import Utils as utils
-from datetime import datetime
 from database import db
 import time, random, requests
 import os
@@ -97,14 +96,15 @@ class InstagramBot:
                 username = self.driver.find_element_by_xpath(
                     '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
                 followers_num = self._get_followers_number(username)
-                if int(followers_num) >= int(settings_data[2]):
-                    follow_button.click()
-                    self.database.save_unfollow_users(username, self.username)
-                    if to_distribution:
-                        # Get the username
-                        username = self.driver.find_element_by_xpath(
-                            '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
-                        self.database.add_username_to_distribution_group(username, group_id)
+                if followers_num != -1:
+                    if int(followers_num) >= int(settings_data[2]):
+                        follow_button.click()
+                        self.database.save_unfollow_users(username, self.username)
+                        if to_distribution:
+                            # Get the username
+                            username = self.driver.find_element_by_xpath(
+                                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
+                            self.database.add_username_to_distribution_group(username, group_id)
             except Exception as e:
                 print('follow user: ', e)
 
@@ -156,15 +156,18 @@ class InstagramBot:
         self._nav_user_new_tab(username)
         self.driver.switch_to.window(self.driver.window_handles[1])
         self.driver.implicitly_wait(3)
-        try:
-            button_list = self.driver.find_elements_by_class_name('g47SY')
-            followers_number = button_list[1].text
-            self.driver.close()
-            self.driver.switch_to.window(self.driver.window_handles[0])
-            clean_number = utils().clean_number(followers_number)
-        except Exception as e:
-            print('get followers number: ', e)
-        return int(clean_number)
+        has_profile_image = self._has_profile_image()
+        if has_profile_image == -1:
+            try:
+                button_list = self.driver.find_elements_by_class_name('g47SY')
+                followers_number = button_list[1].text
+                self.driver.close()
+                self.driver.switch_to.window(self.driver.window_handles[0])
+                clean_number = utils().clean_number(followers_number)
+            except Exception as e:
+                print('get followers number: ', e)
+            return int(clean_number)
+        return has_profile_image
 
     # this method is double check, when i unfollow user, check if the button display 'follow_back'
     # means the user that i just unfollow is following me.
@@ -213,3 +216,40 @@ class InstagramBot:
                             Section: {}
                             Success: {} 
                             Time: {}""".format(username, section, success_posts, time)})
+
+    def _blocked_action_popup(self):
+        # When instagram block an action, for example: Follow, like or comment
+        # They popup a dialog that says my action is block.
+        # Then I want to stop the whole process
+        wait = WebDriverWait(self.driver, 4)
+        popup_blocked = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
+        if popup_blocked:
+            # self.driver.find_element_by_xpath('//button[text()="Report a Problem"]').click()
+            popup_blocked.click()
+            return True
+        else:
+            return False
+
+    def _has_profile_image(self):
+        # if this method returns -1, means the user has profile image.
+        # if it returns a number bigger then -1 means the user has no profile image
+        wait = WebDriverWait(self.driver, 4)
+        try:
+            # this is for private accounts
+            image = wait.until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "be6sR")))
+            src_text = image.get_attribute("src")
+            has_text = src_text.find('44884218_345707102882519_2446069589734326272_n.jpg')
+            return has_text
+        except:
+            pass
+        try:
+            # this is for none private accounts
+            image = wait.until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "_6q-tv")))
+            src_text = image.get_attribute("src")
+            has_text = src_text.find('44884218_345707102882519_2446069589734326272_n.jpg')
+            return has_text
+        except:
+            pass

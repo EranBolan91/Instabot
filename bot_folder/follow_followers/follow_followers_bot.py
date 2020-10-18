@@ -57,17 +57,29 @@ class FollowFollowersBot(main_bot.InstagramBot):
                               loops * utils.TIME_SLEEP, 'seconds')
                         time.sleep(loops * utils.TIME_SLEEP)
                     followers_num = self._get_followers_number(username)
-                    if int(followers_num) >= int(settings_data_from_db[2]):
-                        button.click()
-                        follow_count += 1
-                        print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ', account_username)
-                        self.database.save_unfollow_users(username, account_username)
-                        if to_distribution:
-                            self.database.add_username_to_distribution_group(username, group_id)
+                    if followers_num != -1:
+                        if int(followers_num) >= int(settings_data_from_db[2]):
+                            button.click()
+                            follow_count += 1
+                            print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ', account_username)
+                            self.database.save_unfollow_users(username, account_username)
+                            if to_distribution:
+                                self.database.add_username_to_distribution_group(username, group_id)
                     i += 1
                     loops += 1
                 else:
                     i += 1
+                try:
+                    is_action_blocked = self._blocked_action_popup()
+                    if is_action_blocked:
+                        self._screen_shot(self.username)
+                        self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
+                                         'Follow Followers')
+                        self.driver.close()
+                        print('Action Blocked!')
+                        break
+                except Exception as e:
+                    pass
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset loops')
@@ -126,17 +138,29 @@ class FollowFollowersBot(main_bot.InstagramBot):
                               loops * utils.TIME_SLEEP, 'seconds')
                         time.sleep(i * utils.TIME_SLEEP)
                     followers_num = self._get_followers_number(username)
-                    if int(followers_num) >= int(settings_data_from_db[2]):
-                        button.click()
-                        follow_count += 1
-                        print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ', account_username)
-                        self.database.save_unfollow_users(username, account_username)
-                        if to_distribution:
-                            self.database.add_username_to_distribution_group(username, group_id)
+                    if followers_num != -1:
+                        if int(followers_num) >= int(settings_data_from_db[2]):
+                            button.click()
+                            follow_count += 1
+                            print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ', account_username)
+                            self.database.save_unfollow_users(username, account_username)
+                            if to_distribution:
+                                self.database.add_username_to_distribution_group(username, group_id)
                     loops += 1
                     i += 1
                 else:
                     i += 1
+                try:
+                    is_action_blocked = self._blocked_action_popup()
+                    if is_action_blocked:
+                        self._screen_shot(self.username)
+                        self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
+                                         'Follow Followers')
+                        self.driver.close()
+                        print('Action Blocked!')
+                        break
+                except Exception as e:
+                    pass
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset to loops')

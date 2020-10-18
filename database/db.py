@@ -129,7 +129,7 @@ class Database:
             if not is_exists:
                 cur.execute("""INSERT INTO settings
                             (amount_likes, amount_followers, is_schedule, schedule_hour, modify)
-                            VALUES(?,?,?,?)""", (0, 0, 0, 0, modify_time))
+                            VALUES(?,?,?,?,?)""", (0, 0, 0, 0, modify_time))
                 conn.commit()
         except Exception as e:
             print('_init_settings func: ', e)

@@ -1,6 +1,7 @@
 class Utils:
     TIME_SLEEP = 5
     ROUNDS = 5
+    PROFILE_IMAGE = '44884218_345707102882519_2446069589734326272_n.jpg'
 
     @staticmethod
     def _check_username_password(username, password):
@@ -44,6 +45,5 @@ class Utils:
         else:
             return int(number)
 
-# Utils().arithmetic_progression(25, 100, 5)
+Utils().arithmetic_progression(25, 100, 5)
 # Utils().clean_number('29k')
-

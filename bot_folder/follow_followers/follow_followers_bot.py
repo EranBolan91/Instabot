@@ -56,12 +56,13 @@ class FollowFollowersBot(main_bot.InstagramBot):
                         print('Username:', account_username, 'Time start:', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time:',
                               loops * utils.TIME_SLEEP, 'seconds')
                         time.sleep(loops * utils.TIME_SLEEP)
-                    followers_num = self._get_followers_number(username)
-                    if followers_num != -1:
+                    followers_num, has_image_profile = self._get_followers_number(username)
+                    if has_image_profile == -1:
                         if int(followers_num) >= int(settings_data_from_db[2]):
                             button.click()
                             follow_count += 1
-                            print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ', account_username)
+                            print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ',
+                                  account_username)
                             self.database.save_unfollow_users(username, account_username)
                             if to_distribution:
                                 self.database.add_username_to_distribution_group(username, group_id)
@@ -137,12 +138,13 @@ class FollowFollowersBot(main_bot.InstagramBot):
                         print('Username:', account_username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time: ',
                               loops * utils.TIME_SLEEP, 'seconds')
                         time.sleep(i * utils.TIME_SLEEP)
-                    followers_num = self._get_followers_number(username)
-                    if followers_num != -1:
+                    followers_num, has_image_profile = self._get_followers_number(username)
+                    if has_image_profile == -1:
                         if int(followers_num) >= int(settings_data_from_db[2]):
                             button.click()
                             follow_count += 1
-                            print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ', account_username)
+                            print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ',
+                                  account_username)
                             self.database.save_unfollow_users(username, account_username)
                             if to_distribution:
                                 self.database.add_username_to_distribution_group(username, group_id)

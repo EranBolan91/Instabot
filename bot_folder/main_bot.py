@@ -95,7 +95,7 @@ class InstagramBot:
                 # Get the username
                 username = self.driver.find_element_by_xpath(
                     '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
-                followers_num = self._get_followers_number(username)
+                followers_num, no_use_data = self._get_followers_number(username)
                 if followers_num != -1:
                     if int(followers_num) >= int(settings_data[2]):
                         follow_button.click()
@@ -157,6 +157,7 @@ class InstagramBot:
         self.driver.switch_to.window(self.driver.window_handles[1])
         self.driver.implicitly_wait(3)
         has_profile_image = self._has_profile_image()
+        clean_number = -1
         if has_profile_image == -1:
             try:
                 button_list = self.driver.find_elements_by_class_name('g47SY')
@@ -166,8 +167,11 @@ class InstagramBot:
                 clean_number = utils().clean_number(followers_number)
             except Exception as e:
                 print('get followers number: ', e)
-            return int(clean_number)
-        return has_profile_image
+            return clean_number, has_profile_image
+        else:
+            self.driver.close()
+            self.driver.switch_to.window(self.driver.window_handles[0])
+        return clean_number, has_profile_image
 
     # this method is double check, when i unfollow user, check if the button display 'follow_back'
     # means the user that i just unfollow is following me.

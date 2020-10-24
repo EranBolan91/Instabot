@@ -21,7 +21,7 @@ class HashTagBot(main_bot.InstagramBot):
         time.sleep(1.5)
         try:
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
-            wait = WebDriverWait(self.driver, 4)
+            wait = WebDriverWait(self.driver, 7)
             first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
             while i <= int(amount):

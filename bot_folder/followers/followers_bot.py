@@ -20,7 +20,7 @@ class FollowersBot(main_bot.InstagramBot):
         self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]") \
             .click()
         followers = self._get_names()
-        followers_amount = self._get_followers_number(self.username)
+        followers_amount, no_use_data = self._get_followers_number(self.username)
         if int(followers_amount) <= int((len(followers)+10)):
             not_following_back = [user for user in following if user not in followers]
             print(not_following_back)

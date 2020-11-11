@@ -17,7 +17,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]").click()
         time.sleep(2.5)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:
@@ -108,7 +108,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]").click()
         time.sleep(1.5)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[4] / div / div / div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[5] / div / div / div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:

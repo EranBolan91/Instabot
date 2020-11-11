@@ -116,6 +116,9 @@ class FollowersBot(main_bot.InstagramBot):
         wait = WebDriverWait(self.driver, 3)
         i = 1
         remove_clicks = 0
+        #TODO: need to delete row 120 and 121
+        #to_remove_from_db = 0
+        #user_list.reverse()
         if to_login:
             self._login()
         time.sleep(1.5)
@@ -226,7 +229,9 @@ class FollowersBot(main_bot.InstagramBot):
             # Remove username from unfollow list
             # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
             # into unfollow. In this situation, i prefer not to remove the username from database
+            # TODO: need to remove '1' and change to 'to_remove_from_db'
             if to_remove_from_db:
+            #if 1:
                 try:
                     follow_btn = wait.until(
                         EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
@@ -244,7 +249,6 @@ class FollowersBot(main_bot.InstagramBot):
                 except Exception as e:
                     pass
             print('{} Removed from {} account'.format(remove_clicks, self.username))
-            time.sleep(1)
             if int(i * utils.TIME_SLEEP) == 500:
                 i = 1
                 print('reset to i')
@@ -274,4 +278,6 @@ class FollowersBot(main_bot.InstagramBot):
         not_following_back = [user for user in unfollowers_list if user not in followers]
         time.sleep(1.3)
         print(len(not_following_back))
+        self.driver.get(self.base_url)
+        time.sleep(1)
         self.unfollow_users(not_following_back, 1, account_id, 0)

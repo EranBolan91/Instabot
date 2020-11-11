@@ -30,8 +30,10 @@ class HashTagBot(main_bot.InstagramBot):
                         print('Username:', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'),
                               ' Sleep time: ', loops*utils.TIME_SLEEP, 'seconds')
                         time.sleep(loops*utils.TIME_SLEEP)
-                likes_from_insta = self._get_like_amount_text()
-                if int(likes_from_insta) > int(amount_likes[1]):
+                # TODO: need to remove line 36 and uncomment line 34 and 35
+                # likes_from_insta = self._get_like_amount_text()
+                #if int(likes_from_insta) > int(amount_likes[1]):
+                if int(20) > int(0):
                     click_count += 1
                     if int(like) == 1:
                         self._like_post()

@@ -50,8 +50,9 @@ class InstagramBot:
         self.driver.execute_script("window.open('{}');".format(self.base_url + '/' + username))
 
     def _like_post(self):
-        time.sleep(1)
-        self.driver.find_element_by_class_name('fr66n').click()  # click the 'like' button
+        wait = WebDriverWait(self.driver, 5)
+        wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "fr66n"))).click() # click the 'like' button
+        # self.driver.find_element_by_class_name('fr66n').click()  # click the 'like' button
 
     def _get_like_amount_text(self):
         text = ""
@@ -186,7 +187,7 @@ class InstagramBot:
             return False
 
     def _get_usersname(self):
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:

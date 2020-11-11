@@ -104,6 +104,21 @@ class Database:
                         schedule BOOLEAN,
                         date DATETIME)
                         """)
+        # Table Combination
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS combination (
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               account TEXT,
+                               url TEXT,
+                               hashtag TEXT,
+                               num_likes INT,
+                               num_failed_likes INT,
+                               num_followers INT,
+                               num_failed_followers INT,
+                               schedule BOOLEAN,
+                               distribution BOOLEAN,
+                               group_name TEXT,
+                               date DATETIME)
+                               """)
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db

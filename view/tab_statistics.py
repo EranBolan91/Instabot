@@ -16,6 +16,10 @@ class StatisticsTab(ttk.Frame):
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
         self.bold = tkfont.Font(weight='bold', size=10)
 
+        canvas = ttk.Canvas(self)
+        scrollbar = ttk.Scrollbar(self, orient="vertical", command=canvas.yview)
+        scrollable_frame = ttk.Frame(canvas)
+
         # Frames
         hashtag_frame = ttk.Frame(self)
         location_frame = ttk.Frame(self)

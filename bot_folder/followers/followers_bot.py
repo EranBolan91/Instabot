@@ -117,8 +117,8 @@ class FollowersBot(main_bot.InstagramBot):
         i = 1
         remove_clicks = 0
         #TODO: need to delete row 120 and 121
-        #to_remove_from_db = 0
-        #user_list.reverse()
+        to_remove_from_db = 0
+        user_list.reverse()
         if to_login:
             self._login()
         time.sleep(1.5)
@@ -230,8 +230,8 @@ class FollowersBot(main_bot.InstagramBot):
             # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
             # into unfollow. In this situation, i prefer not to remove the username from database
             # TODO: need to remove '1' and change to 'to_remove_from_db'
-            if to_remove_from_db:
-            #if 1:
+            #if to_remove_from_db:
+            if 1:
                 try:
                     follow_btn = wait.until(
                         EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))

@@ -197,6 +197,7 @@ class InstagramBot:
                                        arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                                        return arguments[0].scrollHeight;
                                        """, scroll_box)
+
         # Gets all the users name by the class name
         users_name_list = self.driver.find_elements_by_class_name('_0imsa')
         return users_name_list

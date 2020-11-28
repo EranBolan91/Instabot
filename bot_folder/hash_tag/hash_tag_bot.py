@@ -15,8 +15,8 @@ class HashTagBot(main_bot.InstagramBot):
                         group_id, time_schedule):
         self._login()
         amount_likes = self.database.get_data_from_settings()
-        i = 1
-        loops = 1
+        i = 0
+        loops = 0
         click_count = 0
         time.sleep(1.5)
         try:

@@ -162,14 +162,14 @@ class TabDM(ttk.Frame):
             is_schedule = 0
             if schedule_action:
                 is_schedule = 1
-                dm_users_list = db.Database().get_users_from_dm_users(group_name)
+                dm_users_list = db.Database().get_users_from_dm_users(group_name, username)
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = DM(username, password, True)
                 timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
                                                [message_text, dm_users_list, group_name, is_schedule, True, account_id])
                 timing_thread.start()
             else:
-                dm_users_list = db.Database().get_users_from_dm_users(group_name)
+                dm_users_list = db.Database().get_users_from_dm_users(group_name, username)
                 bot = DM(username, password, True)
                 t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list,
                                                                             group_name, is_schedule, True, account_id))

@@ -38,7 +38,7 @@ class CombinationBot(main_bot.InstagramBot):
         try:
             while like_count < likes:
                 # like the post
-                self._like_post()
+                # self._like_post()
                 like_count += 1
                 print("Post count: {}/{} account: {} ".format(likes, like_count, self.username))
                 # some users cant see the amount of likes. Its display them only others - so click on others
@@ -49,21 +49,26 @@ class CombinationBot(main_bot.InstagramBot):
                     # print('did not find others')
                 try:
                     wait.until(EC.element_to_be_clickable(
+                        (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div[2]/button"))).click()
+                except Exception as e:
+                    pass
+                try:
+                    wait.until(EC.element_to_be_clickable(
                         (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/button"))).click()
                 except Exception as e:
                     # if the post is video, skip the post
-                    wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-                    continue
-                    # pass
-                    # print('did not find likes')
+                    try:
+                        wait.until(
+                            EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+                        continue
+                    except Exception as e:
+                        pass
                 try:
                     scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]')))
-                    # scroll_box = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[3]")
                     # print('did not reach to scroll first')
                 except Exception as e:
                     scroll_box = wait.until(
                         EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[2]/div')))
-                    # scroll_box = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div[2]/div")
                     # print('did not reach to scroll')
                 time.sleep(1.1)
                 last_height, height = 0, 1
@@ -81,42 +86,47 @@ class CombinationBot(main_bot.InstagramBot):
                     buttons = scroll_box.find_elements_by_tag_name('button')
 
                     for button in buttons[:11]:
-                        username = users_name_list[i].text
-                        if username == self.username:
-                            i += 1
+                        try:
                             username = users_name_list[i].text
-                        if button.text == 'Follow':
-                            if loops % utils.TIME_SLEEP == 0:
-                                print('Username:', self.username, 'Time start:', dt.datetime.now().strftime('%H:%M:%S'),
-                                      ' Sleep time:',
-                                      loops * utils.TIME_SLEEP, 'seconds')
-                                time.sleep(loops * utils.TIME_SLEEP)
-                            followers_num, has_image_profile = self._get_followers_number(username)
-                            if has_image_profile == -1:
-                                if int(followers_num) >= int(settings_data_from_db[2]):
-                                    button.click()
-                                    follow_count += 1
-                                    print('Follow count {}/{}'.format(followers, follow_count), 'Username: ',
-                                          self.username)
-                                    self.database.save_unfollow_users(username, self.username)
-                                    if to_distribution:
-                                        self.database.add_username_to_distribution_group(username, group_id)
-                            i += 1
-                            loops += 1
-                        else:
+                            if username == self.username:
+                                i += 1
+                                username = users_name_list[i].text
+                            if button.text == 'Follow':
+                                if loops % utils.TIME_SLEEP == 0:
+                                    print('Username:', self.username, 'Time start:',
+                                          dt.datetime.now().strftime('%H:%M:%S'),
+                                          ' Sleep time:',
+                                          loops * utils.TIME_SLEEP, 'seconds')
+                                    time.sleep(loops * utils.TIME_SLEEP)
+                                followers_num, has_image_profile = self._get_followers_number(username)
+                                if has_image_profile == -1:
+                                    if int(followers_num) >= int(settings_data_from_db[2]):
+                                        button.click()
+                                        follow_count += 1
+                                        print('Combination count {}/{}'.format(followers, follow_count), 'Username: ',
+                                              self.username)
+                                        self.database.save_unfollow_users(username, self.username)
+                                        if to_distribution:
+                                            self.database.add_username_to_distribution_group(username, group_id)
+                                i += 1
+                                loops += 1
+                                try:
+                                    is_action_blocked = self._blocked_action_popup()
+                                    if is_action_blocked:
+                                        self._screen_shot(self.username)
+                                        self._send_email(self.username, follow_count,
+                                                         dt.datetime.now().strftime('%H:%M:%S'),
+                                                         'Combination')
+                                        self.driver.close()
+                                        print('Action Blocked!')
+                                        break
+                                except Exception as e:
+                                    pass
+                            else:
+                                i += 1
+                        except Exception as e:
                             i += 1
 
-                        try:
-                            is_action_blocked = self._blocked_action_popup()
-                            if is_action_blocked:
-                                self._screen_shot(self.username)
-                                self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
-                                                 'Combination')
-                                self.driver.close()
-                                print('Action Blocked!')
-                                break
-                        except Exception as e:
-                            pass
                         if int(loops * utils.TIME_SLEEP) == 500:
                             loops = 1
                             print('reset loops')

@@ -120,6 +120,7 @@ class TabCombination(ttk.Frame):
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
+        self.groups_list = []
         for account in self.accounts:
             if value == account[3]:
                 self.username.set(account[3])

@@ -19,6 +19,7 @@ class InstagramBot:
         # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
         options.page_load_strategy = 'eager'
+        #options.add_argument("--headless")
         chrome_options = webdriver.ChromeOptions()
         # # This is how to set PRXY
         # PROXY = "92.119.62.163"
@@ -41,7 +42,7 @@ class InstagramBot:
         time.sleep(1.5)
         self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
-        time.sleep(1.5)
+        time.sleep(2.2)
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
@@ -214,9 +215,9 @@ class InstagramBot:
                       auth=("api", "{}".format(mailgun_api)),
                       files=[("attachment", (username,
                                 open("screen_shots/{}".format(image_name), "rb").read()))],
-                      data={"from": "Insta bot <eranbolan91@gmail.com>",
+                      data={"from": "RocketBot <eranbolan91@gmail.com>",
                             "to": ["eranbolan91@gmail.com"],
-                            "subject": "InstaBot Error - {}".format(username),
+                            "subject": "RocketBot Error - {}".format(username),
                             "text": """ 
                             Username: {} 
                             Section: {}
@@ -227,16 +228,24 @@ class InstagramBot:
         # When instagram block an action, for example: Follow, like or comment
         # They popup a dialog that says my action is block.
         # Then I want to stop the whole process
-        wait = WebDriverWait(self.driver, 4)
-        popup_blocked = wait.until(
-            EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
-        if popup_blocked:
-            # self.driver.find_element_by_xpath('//button[text()="Report a Problem"]').click()
-            popup_blocked.click()
-            return True
-        else:
-            return False
+        try:
+            wait = WebDriverWait(self.driver, 4)
+            popup_blocked = wait.until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
+            error_title = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "qyrsm"))).text()
+            error_para = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "xLCgt"))).text()
+            print("""@@@ User: @@@
+                    {}
+                    {}""".format(error_title, error_para))
+            if popup_blocked:
+                # self.driver.find_element_by_xpath('//button[text()="Report a Problem"]').click()
+                popup_blocked.click()
+                return True
+            else:
+                return False
 
+        except Exception as e:
+            return True
     def _has_profile_image(self):
         # if this method returns -1, means the user has profile image.
         # if it returns a number bigger then -1 means the user has no profile image

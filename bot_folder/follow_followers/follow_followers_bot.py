@@ -19,7 +19,6 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # Open the followers page
         wait = WebDriverWait(self.driver, 7)
         wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/followers')]"))).click()
-        # self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]").click()
         time.sleep(2.5)
         # getting the box element
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]")
@@ -33,20 +32,6 @@ class FollowFollowersBot(main_bot.InstagramBot):
                        arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                        return arguments[0].scrollHeight;
                        """, scroll_box)
-            # users = self.driver.execute_script("""var buttons = document.querySelectorAll('button');
-            #                                                 return buttons;""")
-            # users = self.driver.execute_script(""" var users = document.getElementsByClassName("Igw0E rBNOH eGOV_ ybXk5 _4EzTm XfCBB HVWg4");
-            #                                         return users;""")
-            # users = self.driver.execute_script(""" var users = document.getElementsByClassName("FPmhX notranslate  _0imsa ");
-            #                                                     return users;""")
-            # but = self.driver.execute_script(""" var users = document.getElementsByClassName("sqdOP L3NKy y3zKF");
-            #                                                                 return users;""")
-            time.sleep(1.3)
-            #users = scroll_box.find_element_by_class_name("Igw0E rBNOH eGOV_ ybXk5 _4EzTm XfCBB HVWg4")
-            #users = scroll_box.find_elements_by_class_name("wo9IH")
-            #print("Users: ", users)
-            # print("But: ", but)
-            # print("Index: ", i)
             i = i + 1
         # Gets all the users name by the class name
         users_name_list = self.driver.find_elements_by_class_name('_0imsa')
@@ -127,7 +112,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         time.sleep(2)
         # Open the followers page
         wait = WebDriverWait(self.driver, 7)
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/followers')]"))).click()
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/following')]"))).click()
         # self.driver.find_element_by_xpath("//a[contains(@href,'/following')]").click()
         time.sleep(1.5)
         # getting the box element

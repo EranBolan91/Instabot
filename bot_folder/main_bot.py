@@ -228,24 +228,32 @@ class InstagramBot:
         # When instagram block an action, for example: Follow, like or comment
         # They popup a dialog that says my action is block.
         # Then I want to stop the whole process
-        try:
-            wait = WebDriverWait(self.driver, 4)
-            popup_blocked = wait.until(
-                EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
-            error_title = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "qyrsm"))).text()
-            error_para = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "xLCgt"))).text()
-            print("""@@@ User: @@@
-                    {}
-                    {}""".format(error_title, error_para))
-            if popup_blocked:
-                # self.driver.find_element_by_xpath('//button[text()="Report a Problem"]').click()
-                popup_blocked.click()
-                return True
-            else:
-                return False
-
-        except Exception as e:
+        # try:
+        #     wait = WebDriverWait(self.driver, 4)
+        #     popup_blocked = wait.until(
+        #         EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
+        #     error_title = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "qyrsm"))).text()
+        #     error_para = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "xLCgt"))).text()
+        #     print("""@@@ User: @@@
+        #             {}
+        #             {}""".format(error_title, error_para))
+        #     if popup_blocked:
+        #         # self.driver.find_element_by_xpath('//button[text()="Report a Problem"]').click()
+        #         popup_blocked.click()
+        #         return True
+        #     else:
+        #         return False
+        #
+        # except Exception as e:
+        #     return True
+        wait = WebDriverWait(self.driver,4)
+        popup_blocked = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
+        if popup_blocked:
+            popup_blocked.click()
             return True
+        else:
+            return False
+
     def _has_profile_image(self):
         # if this method returns -1, means the user has profile image.
         # if it returns a number bigger then -1 means the user has no profile image

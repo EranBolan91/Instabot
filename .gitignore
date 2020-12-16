@@ -2,3 +2,5 @@ instabot.db
 checking.py
 screen_shots
 images
+debug.log
+chromedriver.exe

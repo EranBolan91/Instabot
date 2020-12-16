@@ -12,6 +12,7 @@ class FollowersBot(main_bot.InstagramBot):
     def __init__(self, username, password, is_mobile):
         super().__init__(username, password, is_mobile)
         self.wait = WebDriverWait(self.driver, 4)
+        self.scroll_box_xpath = '/html/body/div[5]/div/div/div[2]'
 
     def get_unfollowers(self):
         self._login()
@@ -43,7 +44,7 @@ class FollowersBot(main_bot.InstagramBot):
         except Exception as e:
             pass
 
-        scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[2]')))
+        scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
         button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[1]/div/div[2]/button')))
         last_height, height = 0, 1
         while last_height != height:
@@ -67,10 +68,10 @@ class FollowersBot(main_bot.InstagramBot):
         self.driver.get(self.base_url + "/" + self.username)
         time.sleep(3)
         # Open the following page
-        self.driver.find_element_by_xpath("//a[contains(@href,'/following')]").click()
+        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/following')]"))).click()
         time.sleep(3)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
+        scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:

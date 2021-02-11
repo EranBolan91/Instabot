@@ -29,6 +29,8 @@ class TabDM(ttk.Frame):
         self.days_entry_value = IntVar()
         self.check_box_schedule = IntVar()
         self.radio_var = IntVar()
+        self.proxy = StringVar()
+        self.port = StringVar()
         self.MINUTES = 0
         self.HOURS = 1
         self.DAYS = 2
@@ -117,6 +119,16 @@ class TabDM(ttk.Frame):
         self.text_message_current_account.place(relx=0.1, rely=0.2)
         ttk.Button(message_frame, text="SEND", command=self._send_msgs_current_account_following).place(relx=0.4, rely=0.8)
 
+        # Proxy section
+        proxy_frame = ttk.LabelFrame(self, text='Proxy')
+        proxy_frame.grid(column=1, row=9, columnspan=2, ipadx=40, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(proxy_frame)
+        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
+        self.proxy_entry.pack(side=LEFT)
+        self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
     def _send_msgs_current_account_following(self):
         username = self.username.get()
         password = self.password.get()
@@ -153,11 +165,14 @@ class TabDM(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
 
         # check if the list is not empty and getting the account id
         account_id = self._get_account_id()
         group_id = self._get_group_id(group_name)
         valid = self._check_form(username, password, message_text)
+        proxy_dict = {"proxy": proxy, "port": port}
 
         if valid:
             is_schedule = 0
@@ -165,13 +180,13 @@ class TabDM(ttk.Frame):
                 is_schedule = 1
                 dm_users_list = db.Database().get_users_from_dm_users(group_name, username)
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                bot = DM(username, password, True)
+                bot = DM(username, password, True, proxy_dict)
                 timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
                                                [message_text, dm_users_list, group_name, is_schedule, True, account_id, group_id])
                 timing_thread.start()
             else:
                 dm_users_list = db.Database().get_users_from_dm_users(group_name, username)
-                bot = DM(username, password, True)
+                bot = DM(username, password, True, proxy_dict)
                 t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list,
                                                                             group_name, is_schedule, True, account_id, group_id))
                 t.start()

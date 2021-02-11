@@ -2,6 +2,7 @@ from bot_folder import main_bot
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
 from database import db
 from utils.utils import Utils as utils
 import datetime as dt
@@ -9,10 +10,10 @@ import time
 
 
 class FollowersBot(main_bot.InstagramBot):
-    def __init__(self, username, password, is_mobile):
-        super().__init__(username, password, is_mobile)
+    def __init__(self, username, password, is_mobile, proxy_dict):
+        super().__init__(username, password, is_mobile, proxy_dict)
         self.wait = WebDriverWait(self.driver, 4)
-        self.scroll_box_xpath = '/html/body/div[5]/div/div/div[2]'
+        self.scroll_box_xpath = '/html/body/div[4]/div/div/div[2]'
 
     def get_unfollowers(self):
         self._login()
@@ -73,35 +74,46 @@ class FollowersBot(main_bot.InstagramBot):
         # getting the box element
         scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
         last_height, height = 0, 1
-        # this while scrolls all over the followers
-        while last_height != height:
-            last_height = height
-            time.sleep(2)
-            height = self.driver.execute_script("""
-                             arguments[0].scrollTo(0, arguments[0].scrollHeight); 
-                             return arguments[0].scrollHeight;
-                             """, scroll_box)
-        # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
-        buttons = scroll_box.find_elements_by_tag_name('button')
         i = 0
-        # This for runs all over the buttons list and click 'follow'
-        for button in buttons:
-            if int(i * utils.TIME_SLEEP) == 500:
-                i = 1
-                print('reset to i')
-            i += 1
-            if i % utils.TIME_SLEEP == 0:
-                print('Account', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
-                time.sleep(i * utils.TIME_SLEEP)
-            button.click()
-            # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
-            # this class name is of the popup message and here i check if it exists
-            # if it is then click on the button "unfollow"
-            try:
-                self._popup_unfollow()
-            except Exception as e:
-                print('unfollow all users: ', e)
-
+        # this while scrolls all over the followers
+        try:
+            while i <= 250:
+                #last_height != height
+                #last_height = height
+                time.sleep(2)
+                height = self.driver.execute_script("""
+                                 arguments[0].scrollTo(0, arguments[0].scrollHeight); 
+                                 return arguments[0].scrollHeight;
+                                 """, scroll_box)
+                # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
+                # buttons = scroll_box.find_elements_by_tag_name('button')
+                buttons = scroll_box.find_elements_by_class_name('_8A5w5')
+                # This for runs all over the buttons list and click 'follow'
+                for button in buttons[:11]:
+                    if int(i * utils.TIME_SLEEP) == 500:
+                        i = 1
+                        print('reset to i')
+                    if i % utils.TIME_SLEEP == 0:
+                        print('Account', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
+                        time.sleep(i * utils.TIME_SLEEP)
+                    try:
+                        if button.text == 'Following':
+                            #ActionChains(self.driver).move_to_element(button).click(button).perform()
+                            button.click()
+                            i += 1
+                    except Exception as e:
+                        pass
+                    # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
+                    # this class name is of the popup message and here i check if it exists
+                    # if it is then click on the button "unfollow"
+                    try:
+                        self._popup_unfollow()
+                    except Exception as e:
+                        pass
+                        #print('unfollow all users: ', e)
+                buttons = []
+        except Exception as e:
+            print("Error in the end: ",e)
         self.driver.close()
 
     # unfollow users - gets list of users

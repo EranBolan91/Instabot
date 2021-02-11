@@ -30,6 +30,8 @@ class TabHashTag(ttk.Frame):
         self.amount = StringVar()
         self.menu = StringVar()
         self.radio_var = IntVar()
+        self.proxy = StringVar()
+        self.port = StringVar()
         self.groups_list = []
         self.MINUTES = 0
         self.HOURS = 1
@@ -133,6 +135,16 @@ class TabHashTag(ttk.Frame):
         self.days_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
+        # Proxy section
+        proxy_frame = ttk.LabelFrame(self, text='Proxy')
+        proxy_frame.grid(column=2, row=3, rowspan=4, ipadx=40, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(proxy_frame)
+        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
+        self.proxy_entry.pack(side=LEFT)
+        self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, row=18, pady=(15, 0))
 
@@ -152,6 +164,8 @@ class TabHashTag(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -166,7 +180,8 @@ class TabHashTag(ttk.Frame):
         if entry_comment != "":
             split_comment = self._split_comment(entry_comment)
 
-        valid = self._check_form(username, password, hash_tag, amount)
+        valid = self._check_form(username, password, hash_tag, amount, proxy, port)
+        proxy_dict = {"proxy": proxy, "port": port}
 
         if valid:
             if like == 1 or comment == 1 or follow == 1:
@@ -174,25 +189,33 @@ class TabHashTag(ttk.Frame):
                 if schedule_action:
                     is_schedule = 1
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                    bot = HashTagBot(username, password, False)
+                    bot = HashTagBot(username, password, False, proxy_dict)
                     timing_thread = threading.Timer(time_schedule, bot.search_hash_tag, [hash_tag, amount, like, comment,
                                                 follow, split_comment, distribution, group_name, group_id, is_schedule])
                     timing_thread.start()
                 else:
-                    bot = HashTagBot(username, password, False)
+                    bot = HashTagBot(username, password, False, proxy_dict)
                     t = threading.Thread(target=bot.search_hash_tag, args=(hash_tag, amount, like, comment,
                                                 follow, split_comment, distribution, group_name, group_id, is_schedule))
                     t.start()
             else:
                 messagebox.showwarning('Action', 'You must choose an action - like/comment/follow')
 
-    def _check_form(self, username, password, hash_tag, amount):
+    def _check_form(self, username, password, hash_tag, amount, proxy, port):
         if username == '' or password == '':
             messagebox.showerror('Credentials', 'Please enter your username or password')
             return False
 
         if hash_tag == '':
             messagebox.showerror('Search data', 'Hash tag entry cannot be empty')
+            return False
+
+        if proxy and not port:
+            messagebox.showerror('PROXY', 'Please enter port number for the proxy')
+            return False
+
+        if not proxy and port:
+            messagebox.showerror('PROXY', 'Please enter proxy address')
             return False
 
         if amount.isnumeric() and not int(amount) <= 0:

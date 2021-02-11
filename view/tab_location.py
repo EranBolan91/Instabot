@@ -27,6 +27,8 @@ class TabLocation(ttk.Frame):
         self.password = StringVar()
         self.groups_list = []
         self.radio_var = IntVar()
+        self.proxy = StringVar()
+        self.port = StringVar()
         self.MINUTES = 0
         self.HOURS = 1
         self.DAYS = 2
@@ -138,6 +140,16 @@ class TabLocation(ttk.Frame):
         self.days_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
+        # Proxy section
+        proxy_frame = ttk.LabelFrame(self, text='Proxy')
+        proxy_frame.grid(column=3, row=4, rowspan=2, ipadx=40, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(proxy_frame)
+        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
+        self.proxy_entry.pack(side=LEFT)
+        self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
         ttk.Button(self, text="SEARCH", command=self._run_script).grid(column=0, row=18, pady=8)
 
     def _run_script(self):
@@ -157,6 +169,8 @@ class TabLocation(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -171,43 +185,52 @@ class TabLocation(ttk.Frame):
         if entry_comment != "":
             split_comment = self._split_comment(entry_comment)
 
-        valid = self._check_form(location_url, location, amount, username, password)
+        valid = self._check_form(location_url, location, amount, username, password, proxy, port)
+        proxy_dict = {"proxy": proxy, "port": port}
         if valid:
             if location_url != '':
                 is_schedule = 0
                 if schedule_action:
                     is_schedule = 1
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                    bot = LocationBot(username, password, False)
+                    bot = LocationBot(username, password, False, proxy_dict)
                     timing_thread = threading.Timer(time_schedule, bot.search_location_by_url,
                                         [location_url, amount, like, follow, comment, split_comment,
                                         distribution, group_name, group_id, is_schedule])
                     timing_thread.start()
                 else:
-                    bot = LocationBot(username, password, False)
+                    bot = LocationBot(username, password, False, proxy_dict)
                     t = threading.Thread(target=bot.search_location_by_url, args=(location_url, amount,
                                 like, follow, comment, split_comment, distribution, group_name, group_id, is_schedule))
                     t.start()
             elif location != '':
                 if schedule_action:
                     time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                    bot = LocationBot(username, password, False)
+                    bot = LocationBot(username, password, False, proxy_dict)
                     timing_thread = threading.Timer(time_schedule, bot.search_location_by_name,
                           [location, amount, like, follow, comment, split_comment,distribution, group_name,group_id])
                     timing_thread.start()
                 else:
-                    bot = LocationBot(username, password, False)
+                    bot = LocationBot(username, password, False, proxy_dict)
                     t = threading.Thread(target=bot.search_location_by_name, args=(location, amount,
                                               like, follow, comment, split_comment, distribution, group_name, group_id))
                     t.start()
 
-    def _check_form(self, location_url, location, amount, username, password):
+    def _check_form(self, location_url, location, amount, username, password, proxy, port):
         if username == '' or password == '':
             messagebox.showerror('Credentials', 'Please enter your username or password')
             return False
 
         if location_url == '' and location == '':
             messagebox.showerror('Search data', 'Please provide URL or location name')
+            return False
+
+        if proxy and not port:
+            messagebox.showerror('PROXY', 'Please enter port number for the proxy')
+            return False
+
+        if not proxy and port:
+            messagebox.showerror('PROXY', 'Please enter proxy address')
             return False
 
         if amount.isnumeric() and not int(amount) <= 0:

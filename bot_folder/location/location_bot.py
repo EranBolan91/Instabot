@@ -49,7 +49,7 @@ class LocationBot(main_bot.InstagramBot):
                     # i += 1
                     # loops += 1
                     # self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
-                print('Loops: {}/{}'.format(amount, loops), 'Username: ', self.username)
+                print('Loops: {}/{}'.format(amount, click_count), 'Username: ', self.username)
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset to loops')

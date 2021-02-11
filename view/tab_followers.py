@@ -20,6 +20,8 @@ class TabFollowers(ttk.Frame):
         self.menu = StringVar()
         self.amount_not_following = 0
         self.amount_unfollow_users = 0
+        self.proxy = StringVar()
+        self.port = StringVar()
 
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -73,6 +75,16 @@ class TabFollowers(ttk.Frame):
         title.pack(fill=X)
         unfollow_btn.place(anchor=S, relx=0.5, rely=0.8)
 
+        # Proxy section
+        proxy_frame = ttk.LabelFrame(self, text='Proxy')
+        proxy_frame.grid(column=4, row=3, rowspan=2, ipadx=40, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(proxy_frame)
+        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
+        self.proxy_entry.pack(side=LEFT)
+        self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
     def _check_form(self):
         username = self.username.get()
         password = self.password.get()
@@ -122,11 +134,14 @@ class TabFollowers(ttk.Frame):
         if name_selection:
             username = self.username.get()
             password = self.password.get()
+            proxy = self.proxy.get()
+            port = self.port.get()
+            proxy_dict = {"proxy": proxy, "port": port}
             if self.accounts:
                 for account in self.accounts:
                     if account[3] == username:
                         account_id = account[0]
-            bot = FollowersBot(username, password, False)
+            bot = FollowersBot(username, password, False, proxy_dict)
             t = threading.Thread(target=bot.unfollow_user, args=(name_selection, account_id))
             t.start()
 
@@ -157,7 +172,10 @@ class TabFollowers(ttk.Frame):
                     users_name_list.append(username)
             username = self.username.get()
             password = self.password.get()
-            bot = FollowersBot(username, password, False)
+            proxy = self.proxy.get()
+            port = self.port.get()
+            proxy_dict = {"proxy": proxy, "port": port}
+            bot = FollowersBot(username, password, False, proxy_dict)
             account_id = -1
             # check if the list is not empty and getting the account id
             if self.accounts:
@@ -172,10 +190,13 @@ class TabFollowers(ttk.Frame):
         if to_delete:
             username = self.username.get()
             password = self.password.get()
+            proxy = self.proxy.get()
+            port = self.port.get()
+            proxy_dict = {"proxy": proxy, "port": port}
             if not username and not password:
                 messagebox.showerror('Credentials', 'Please enter your username or password')
             else:
-                bot = FollowersBot(username, password, False)
+                bot = FollowersBot(username, password, False, proxy_dict)
                 t = threading.Thread(target=bot.unfollow_all_users)
                 t.start()
 
@@ -196,7 +217,6 @@ class TabFollowers(ttk.Frame):
                     return account[0]
         else: return -1
 
-
     def _remove_users_who_not_follow_back(self, unfollow_list):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW them?')
         if to_delete:
@@ -206,6 +226,9 @@ class TabFollowers(ttk.Frame):
             account_id = self._get_account_id()
             username = self.username.get()
             password = self.password.get()
-            bot = FollowersBot(username, password, False)
+            proxy = self.proxy.get()
+            port = self.port.get()
+            proxy_dict = {"proxy": proxy, "port": port}
+            bot = FollowersBot(username, password, False, proxy_dict)
             t = threading.Thread(target=bot.unfollow_users_who_not_return_follow, args=(users_name_list, account_id))
             t.start()

@@ -25,9 +25,12 @@ class TabCombination(ttk.Frame):
         self.username = StringVar()
         self.password = StringVar()
         self.hashtag = StringVar()
+        self.proxy = StringVar()
+        self.port = StringVar()
         self.menu = StringVar()
         self.url = StringVar()
         self.groups_list = []
+
 
         self.check_box_distribution_list.set(0)
 
@@ -93,6 +96,16 @@ class TabCombination(ttk.Frame):
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, columnspan=2, row=10, pady=(40, 0), padx=(20, 0))
 
+        # Proxy section
+        proxy_frame = ttk.LabelFrame(self, text='Proxy')
+        proxy_frame.grid(column=3, row=2, rowspan=2, ipadx=40, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(proxy_frame)
+        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
+        self.proxy_entry.pack(side=LEFT)
+        self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
@@ -100,6 +113,8 @@ class TabCombination(ttk.Frame):
         follow = self.amount_follows.get()
         like = self.amount_likes.get()
         hash_tag = self.hashtag.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
         url = self.url.get()
 
         if distribution:
@@ -111,10 +126,11 @@ class TabCombination(ttk.Frame):
             group_name = ""
             group_id = ""
 
-        valid = self._check_form(username, password, hash_tag, url, follow, like)
+        valid = self._check_form(username, password, hash_tag, url, follow, like, proxy, port)
+        proxy_dict = {"proxy": proxy, "port": port}
 
         if valid:
-            bot = CombinationBot(username, password, False)
+            bot = CombinationBot(username, password, False, proxy_dict)
             t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id))
             t.start()
 
@@ -137,7 +153,7 @@ class TabCombination(ttk.Frame):
                     self.distribution_title.grid(column=1, row=3)
                     self.distribution_menu.grid_forget()
 
-    def _check_form(self, username, password, hash_tag, url, follows, likes):
+    def _check_form(self, username, password, hash_tag, url, follows, likes, proxy, port):
         if username == '' or password == '':
             messagebox.showerror('Credentials', 'Please enter your username or password')
             return False
@@ -156,6 +172,14 @@ class TabCombination(ttk.Frame):
 
         if url and hash_tag:
             messagebox.showerror('Too many arguments', 'You can choose only one action! HASHTAG or URL')
+            return False
+
+        if proxy and not port:
+            messagebox.showerror('PROXY', 'Please enter port number for the proxy')
+            return False
+
+        if not proxy and port:
+            messagebox.showerror('PROXY', 'Please enter proxy address')
             return False
 
         return True

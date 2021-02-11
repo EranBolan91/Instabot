@@ -11,7 +11,7 @@ import os
 
 
 class InstagramBot:
-    def __init__(self, username, password, is_mobile):
+    def __init__(self, username, password, is_mobile, proxy_dict):
         self.database = db.Database()
         self.username = username
         self.password = password
@@ -19,12 +19,19 @@ class InstagramBot:
         # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
         options.page_load_strategy = 'eager'
-        #options.add_argument("--headless")
-        chrome_options = webdriver.ChromeOptions()
-        # # This is how to set PRXY
-        # PROXY = "92.119.62.163"
-        # chrome_options.add_argument('--proxy-server=%s' % PROXY)
+        # options.add_argument("--headless")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-extensions')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument("--disable-notifications")
+
+        if proxy_dict["proxy"]:
+            PROXY = "{}:{}".format(proxy_dict["proxy"], proxy_dict["port"])
+            options.add_argument('--proxy-server=%s' % PROXY)
+
         if is_mobile:
+            chrome_options = webdriver.ChromeOptions()
             mobile_emulation = {"deviceName": "Nexus 5"}
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
@@ -51,9 +58,11 @@ class InstagramBot:
         self.driver.execute_script("window.open('{}');".format(self.base_url + '/' + username))
 
     def _like_post(self):
-        wait = WebDriverWait(self.driver, 5)
-        wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "fr66n"))).click() # click the 'like' button
-        # self.driver.find_element_by_class_name('fr66n').click()  # click the 'like' button
+        try:
+            wait = WebDriverWait(self.driver, 5)
+            wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "fr66n"))).click() # click the 'like' button
+        except Exception as e:
+            print("_like_post on main: ", e)
 
     def _get_like_amount_text(self):
         text = ""

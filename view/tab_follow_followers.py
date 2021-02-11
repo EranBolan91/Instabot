@@ -27,6 +27,8 @@ class TabFollowFollowers(ttk.Frame):
         self.days_entry_value = IntVar()
         self.check_box_schedule = IntVar()
         self.radio_var = IntVar()
+        self.proxy = StringVar()
+        self.port = StringVar()
         self.MINUTES = 0
         self.HOURS = 1
         self.DAYS = 2
@@ -125,6 +127,16 @@ class TabFollowFollowers(ttk.Frame):
         self.days_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
+        # Proxy section
+        proxy_frame = ttk.LabelFrame(self, text='Proxy')
+        proxy_frame.grid(column=2, row=4, rowspan=2, ipadx=40, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(proxy_frame)
+        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
+        self.proxy_entry.pack(side=LEFT)
+        self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_following(self, value):
         self.groups_list = []
@@ -176,6 +188,8 @@ class TabFollowFollowers(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
         group_id = ""
         group_name = ""
 
@@ -186,17 +200,18 @@ class TabFollowFollowers(ttk.Frame):
                     group_id = group[0]
 
         valid = self._check_form(username, password, user_url, num_of_following)
+        proxy_dict = {"proxy": proxy, "port": port}
         if valid:
             is_schedule = 0
             if schedule_action:
                 is_schedule = 1
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                bot = FollowFollowersBot(username, password, False)
+                bot = FollowFollowersBot(username, password, False, proxy_dict)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_followers,
                       [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
                 timing_thread.start()
             else:
-                bot = FollowFollowersBot(username, password, False)
+                bot = FollowFollowersBot(username, password, False, proxy_dict)
                 t = threading.Thread(target=bot.follow_after_followers,
                       args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
                 t.start()
@@ -214,6 +229,8 @@ class TabFollowFollowers(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
         group_id = ""
         group_name = ""
 
@@ -225,17 +242,18 @@ class TabFollowFollowers(ttk.Frame):
                     print(group_id)
 
         valid = self._check_form(username, password, user_url, num_of_following)
+        proxy_dict = {"proxy": proxy, "port": port}
         if valid:
             is_schedule = 0
             if schedule_action:
                 is_schedule = 1
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                bot = FollowFollowersBot(username, password, False)
+                bot = FollowFollowersBot(username, password, False, proxy_dict)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_following,
                       [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
                 timing_thread.start()
             else:
-                bot = FollowFollowersBot(username, password, False)
+                bot = FollowFollowersBot(username, password, False, proxy_dict)
                 t = threading.Thread(target=bot.follow_after_following,
                       args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
                 t.start()

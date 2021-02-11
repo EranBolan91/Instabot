@@ -10,8 +10,8 @@ import datetime as dt
 
 
 class HashTagBot(main_bot.InstagramBot):
-    def __init__(self, username, password, is_mobile):
-        super().__init__(username, password, is_mobile)
+    def __init__(self, username, password, is_mobile, proxy_dict):
+        super().__init__(username, password, is_mobile, proxy_dict)
         self.wait = WebDriverWait(self.driver, 7)
 
     # search instagram page by the hash tag
@@ -66,7 +66,7 @@ class HashTagBot(main_bot.InstagramBot):
                         break
                 except Exception as e:
                     pass
-                print('Index: {}/{}'.format(amount, i), 'Username: ', self.username)
+                print('Hashtag: {}/{}'.format(amount, i), 'Username: ', self.username)
         except Exception as e:
             print('search hash tag: ', e)
         finally:

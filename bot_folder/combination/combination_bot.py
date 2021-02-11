@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from database.combination.combination import CombinationDM
+from selenium.webdriver.common.action_chains import ActionChains
 from utils.utils import Utils as utils
 from models.combination import Combination
 import time
@@ -18,6 +19,7 @@ class CombinationBot(main_bot.InstagramBot):
         loops = 0
         follow_count = 0
         like_count = 0
+        is_blocked = 0
         wait = WebDriverWait(self.driver, 5)
         settings_data_from_db = CombinationDM().get_data_from_settings()
 
@@ -42,19 +44,35 @@ class CombinationBot(main_bot.InstagramBot):
                 like_count += 1
                 print("Post count: {}/{} account: {} ".format(likes, like_count, self.username))
                 # some users cant see the amount of likes. Its display them only others - so click on others
-                try:
-                    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'others')]"))).click()
-                except Exception as e:
-                    pass
-                    # print('did not find others')
+                # try:
+                #     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'others')]"))).click()
+                # except Exception as e:
+                #     print('did not find others button')
+                # try:
+                #     wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'others')]"))).click()
+                # except Exception as e:
+                #     print('did not find others a tag')
+                # try:
+                #     wait.until(EC.element_to_be_clickable((By.XPATH, "*[@id='react-root']/section/main/div/div[1]/article/div[3]/section[2]/div/div/a/text()"))).click()
+                # except Exception as e:
+                #     print('did not find long string')
+                # try:
+                #     wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'likes')]"))).click()
+                # except Exception as e:
+                #     print('did not find others likes text')
                 try:
                     wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div[2]/button"))).click()
+                        (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
                 except Exception as e:
-                    pass
+                    print('did not find others a tag regular')
+                # try:
+                #     wait.until(EC.element_to_be_clickable(
+                #         (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div[2]/button"))).click()
+                # except Exception as e:
+                #     print('did not find the button')
                 try:
                     wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/button"))).click()
+                        (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/button"))).click()
                 except Exception as e:
                     # if the post is video, skip the post
                     try:
@@ -64,11 +82,11 @@ class CombinationBot(main_bot.InstagramBot):
                     except Exception as e:
                         pass
                 try:
-                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]')))
+                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[3]')))
                     # print('did not reach to scroll first')
                 except Exception as e:
                     scroll_box = wait.until(
-                        EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[2]/div')))
+                        EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[2]/div')))
                     # print('did not reach to scroll')
                 time.sleep(1.1)
                 last_height, height = 0, 1
@@ -101,6 +119,7 @@ class CombinationBot(main_bot.InstagramBot):
                                 followers_num, has_image_profile = self._get_followers_number(username)
                                 if has_image_profile == -1:
                                     if int(followers_num) >= int(settings_data_from_db[2]):
+                                        # ActionsChains(self.driver).move_to_element(button).click(button).perform()
                                         button.click()
                                         follow_count += 1
                                         print('Combination count {}/{}'.format(followers, follow_count), 'Username: ',
@@ -108,29 +127,33 @@ class CombinationBot(main_bot.InstagramBot):
                                         self.database.save_unfollow_users(username, self.username)
                                         if to_distribution:
                                             self.database.add_username_to_distribution_group(username, group_id)
+                                        try:
+                                            is_action_blocked = self._blocked_action_popup()
+                                            if is_action_blocked:
+                                                self._screen_shot(self.username)
+                                                self._send_email(self.username, follow_count,
+                                                                 dt.datetime.now().strftime('%H:%M:%S'),
+                                                                 'Combination')
+                                                print('Action Blocked! User: ', self.username)
+                                                is_blocked = 1
+                                                break
+                                        except Exception as e:
+                                            pass
                                 i += 1
                                 loops += 1
-                                try:
-                                    is_action_blocked = self._blocked_action_popup()
-                                    if is_action_blocked:
-                                        self._screen_shot(self.username)
-                                        self._send_email(self.username, follow_count,
-                                                         dt.datetime.now().strftime('%H:%M:%S'),
-                                                         'Combination')
-                                        self.driver.close()
-                                        print('Action Blocked!')
-                                        break
-                                except Exception as e:
-                                    pass
                             else:
                                 i += 1
                         except Exception as e:
                             i += 1
+                            print("Combination inside while: ", e)
 
                         if int(loops * utils.TIME_SLEEP) == 500:
                             loops = 1
                             print('reset loops')
                         if follow_count >= followers:
+                            break
+                        # TODO: i need to find a way to break the while loop when i get block. now its only breaking the for loop
+                        if is_blocked:
                             break
                     # reset the lists after every one scroll down
                     buttons = []
@@ -138,12 +161,15 @@ class CombinationBot(main_bot.InstagramBot):
                     i = 0
                     if follow_count >= followers:
                         break
+                    # TODO: i need to find a way to break the while loop when i get block. now its only breaking the for loop
+                    if is_blocked:
+                        break
                 # Close the scrolling box and move to the next post
                 # I added try and catch for posts that are videos and have no likes or others, so when it try to close
                 # the scroll box it wont find it and skip to the next post
                 try:
                     wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, '/html/body/div[6]/div/div/div[1]/div/div[2]/button'))).click()
+                        (By.XPATH, '/html/body/div[5]/div/div/div[1]/div/div[2]/button'))).click()
                     wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
                     # reset i
                     i = 0

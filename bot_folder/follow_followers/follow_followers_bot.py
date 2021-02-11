@@ -82,7 +82,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
                         self._screen_shot(self.username)
                         self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
                                          'Follow Followers')
-                        self.driver.close()
+                        # self.driver.close()
                         print('Action Blocked!')
                         break
                 except Exception as e:
@@ -166,7 +166,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
                         self._screen_shot(self.username)
                         self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
                                          'Follow Followers')
-                        self.driver.close()
+                        # self.driver.close()
                         print('Action Blocked!')
                         break
                 except Exception as e:

@@ -119,6 +119,16 @@ class Database:
                                group_name TEXT,
                                date DATETIME)
                                """)
+
+        # Table Follow back
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS follow_back (
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               user_id INT,
+                               account TEXT,
+                               follow_back INT,
+                               date DATETIME)
+                               """)
+
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db

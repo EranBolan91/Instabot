@@ -7,6 +7,7 @@ from .settings import *
 from .tab_dm import *
 from .tab_statistics import *
 from .tab_combination import *
+import tkinter as tkr
 
 
 class Layout:
@@ -23,6 +24,9 @@ class Layout:
         # x_coordinate = (screen_width/2) - (width_of_window/2)
         # y_coordinate = (screen_height / 2) - (height_of_window / 2)
         # window.geometry("%dx%d+%d+%d" % (width_of_window, height_of_window, x_coordinate, y_coordinate))
+
+        scroll_bar = tkr.Scrollbar(window)
+        scroll_bar.pack(side=tkr.RIGHT, fill="y")
 
         # menu config
         menu = Menu(window)
@@ -51,7 +55,7 @@ class Layout:
         tab_control.add(dm_tab, text='DM')
         tab_control.add(combination_tab, text='Combination')
         tab_control.add(statistics_tab, text='Statistics')
-
+        
         tab_control.pack(expand=1, fill="both")
 
         # status bar config

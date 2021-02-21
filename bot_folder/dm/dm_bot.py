@@ -10,7 +10,7 @@ import datetime as dt
 
 
 class DM(main_bot.InstagramBot):
-    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule, to_login, account_id, group_id):
+    def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule, to_login, account_id, group_id, limit_msg):
         if to_login:
             self._login()
         i = 0
@@ -19,7 +19,8 @@ class DM(main_bot.InstagramBot):
         dm_users.reverse()
         try:
             for user in dm_users:
-                # Sleep after sending to 5 accounts message
+                if sent == limit_msg:
+                    break
                 if i % utils.TIME_SLEEP == 0:
                     print('Account', self.username, 'Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                     time.sleep(i*utils.TIME_SLEEP)
@@ -66,11 +67,11 @@ class DM(main_bot.InstagramBot):
                 try:
                     is_blocked = self._check_if_blocked()
                     if is_blocked:
-                        print('{} @@ Blocked @@'.format(self.username))
+                        self.global_block_message(self.username, "DM")
                         break
                 except Exception as e:
                     pass
-                print('index: {}/{}'.format(str(size_list), sent), 'Username: ', self.username)
+                print('DM: sent message to {} {}/{}'.format(user[0], str(size_list), sent), '- Username:', self.username)
                 i += 1
                 if int(i * utils.TIME_SLEEP) == 500:
                     i = 1

@@ -46,7 +46,10 @@ class HashTagBot(main_bot.InstagramBot):
                     if int(follow) == 1:
                         self._follow_user(to_distribution, group_id)
                     # click on the right arrow
-                    self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+                    try:
+                        self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+                    except Exception:
+                        print('error on finding the right arrow: ', e)
                     i += 1
                     loops += 1
                 else:
@@ -62,13 +65,13 @@ class HashTagBot(main_bot.InstagramBot):
                         self._screen_shot(self.username)
                         self._send_email(self.username, click_count, dt.datetime.now().strftime('%H:%M:%S'), 'Hashtag')
                         self.driver.close()
-                        print('Blocked!')
+                        self.global_block_message(self.username, "Hashtag")
                         break
                 except Exception as e:
                     pass
                 print('Hashtag: {}/{}'.format(amount, i), 'Username: ', self.username)
         except Exception as e:
-            print('search hash tag: ', e)
+            print('Error - Username: {} \nsearch hash tag: {}'.format(self.username, e))
         finally:
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
             failed_posts_num = int(amount) - (int(click_count))

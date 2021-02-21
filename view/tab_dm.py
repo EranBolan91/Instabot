@@ -28,6 +28,7 @@ class TabDM(ttk.Frame):
         self.hours_entry_value = IntVar()
         self.days_entry_value = IntVar()
         self.check_box_schedule = IntVar()
+        self.limit_msg = IntVar()
         self.radio_var = IntVar()
         self.proxy = StringVar()
         self.port = StringVar()
@@ -75,8 +76,11 @@ class TabDM(ttk.Frame):
             self.distribution_title = ttk.Label(self, text="Choose user to display distribution lists ", font=self.titleFont)
             self.distribution_title.grid(column=1, row=3, rowspan=3)
 
+        ttk.Label(self, text='Limit messages', font=self.bold).grid(column=0, row=6, pady=16)
+        ttk.Entry(self, textvariable=self.limit_msg).grid(column=0, row=7, pady=8)
+
         # Run the script button
-        ttk.Button(self, text="SEND", command=self._run_script).grid(column=0, row=6, pady=16)
+        ttk.Button(self, text="SEND", command=self._run_script).grid(column=0, row=8, pady=16)
 
         # Display distribution users box
         self.listbox = Listbox(self, width=25, height=15)
@@ -165,6 +169,7 @@ class TabDM(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        limit_msg = self.limit_msg.get()
         proxy = self.proxy.get()
         port = self.port.get()
 
@@ -182,13 +187,13 @@ class TabDM(ttk.Frame):
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = DM(username, password, True, proxy_dict)
                 timing_thread = threading.Timer(time_schedule, bot.send_message_to_distribution_group,
-                                               [message_text, dm_users_list, group_name, is_schedule, True, account_id, group_id])
+                                               [message_text, dm_users_list, group_name, is_schedule, True, account_id, group_id, limit_msg])
                 timing_thread.start()
             else:
                 dm_users_list = db.Database().get_users_from_dm_users(group_name, username)
                 bot = DM(username, password, True, proxy_dict)
                 t = threading.Thread(target=bot.send_message_to_distribution_group, args=(message_text, dm_users_list,
-                                                                            group_name, is_schedule, True, account_id, group_id))
+                                                                            group_name, is_schedule, True, account_id, group_id, limit_msg))
                 t.start()
 
     def _check_form(self, username, password, message):
@@ -256,15 +261,17 @@ class TabDM(ttk.Frame):
     def _remove_all_dm_list(self, users_list):
         to_delete = messagebox.askyesno('Remove', 'Are you sure you want to REMOVE all of them?')
         if to_delete:
+            group_id = self._get_group_id(self.distribution_menu_var.get())
             for user in users_list:
-                dm.DMDB().remove_dm_user_from_list(user[0])
+                dm.DMDB().remove_dm_user_from_list(user[0], group_id)
             self.listbox.delete(0, 'end')
 
     def _remove_user(self):
         name_selection = self.listbox.get(self.listbox.curselection())
         index = self.listbox.get(0, END).index(name_selection)
+        group_id = self._get_group_id(self.distribution_menu_var.get())
         self.listbox.delete(index)
-        dm.DMDB.remove_dm_user_from_list(name_selection)
+        dm.DMDB.remove_dm_user_from_list(name_selection, group_id)
 
     def _get_account_id(self):
         if self.accounts:

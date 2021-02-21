@@ -62,6 +62,7 @@ class InstagramBot:
             wait = WebDriverWait(self.driver, 5)
             wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "fr66n"))).click() # click the 'like' button
         except Exception as e:
+            self._screen_shot(self.username)
             print("_like_post on main: ", e)
 
     def _get_like_amount_text(self):
@@ -234,30 +235,10 @@ class InstagramBot:
                             Time: {}""".format(username, section, success_posts, time)})
 
     def _blocked_action_popup(self):
-        # When instagram block an action, for example: Follow, like or comment
-        # They popup a dialog that says my action is block.
-        # Then I want to stop the whole process
-        # try:
-        #     wait = WebDriverWait(self.driver, 4)
-        #     popup_blocked = wait.until(
-        #         EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
-        #     error_title = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "qyrsm"))).text()
-        #     error_para = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "xLCgt"))).text()
-        #     print("""@@@ User: @@@
-        #             {}
-        #             {}""".format(error_title, error_para))
-        #     if popup_blocked:
-        #         # self.driver.find_element_by_xpath('//button[text()="Report a Problem"]').click()
-        #         popup_blocked.click()
-        #         return True
-        #     else:
-        #         return False
-        #
-        # except Exception as e:
-        #     return True
         wait = WebDriverWait(self.driver,4)
         popup_blocked = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
         if popup_blocked:
+            self._screen_shot(self.username)
             popup_blocked.click()
             return True
         else:
@@ -285,3 +266,9 @@ class InstagramBot:
             return has_text
         except:
             pass
+
+    def global_block_message(self, username, seaction):
+        print("""User: {} has been blocked.\nSection: {}""".format(username, seaction))
+
+    def global_complate_task(self, username, section, results):
+        print(("""Complate tast: {},\nResults: {}\nUsername: {} """.format(section, results, username)))

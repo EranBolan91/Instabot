@@ -43,38 +43,10 @@ class CombinationBot(main_bot.InstagramBot):
                 # self._like_post()
                 like_count += 1
                 print("Post count: {}/{} account: {} ".format(likes, like_count, self.username))
-                # some users cant see the amount of likes. Its display them only others - so click on others
-                # try:
-                #     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'others')]"))).click()
-                # except Exception as e:
-                #     print('did not find others button')
-                # try:
-                #     wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'others')]"))).click()
-                # except Exception as e:
-                #     print('did not find others a tag')
-                # try:
-                #     wait.until(EC.element_to_be_clickable((By.XPATH, "*[@id='react-root']/section/main/div/div[1]/article/div[3]/section[2]/div/div/a/text()"))).click()
-                # except Exception as e:
-                #     print('did not find long string')
-                # try:
-                #     wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'likes')]"))).click()
-                # except Exception as e:
-                #     print('did not find others likes text')
                 try:
                     wait.until(EC.element_to_be_clickable(
                         (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
                 except Exception as e:
-                    print('did not find others a tag regular')
-                # try:
-                #     wait.until(EC.element_to_be_clickable(
-                #         (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div[2]/button"))).click()
-                # except Exception as e:
-                #     print('did not find the button')
-                try:
-                    wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/button"))).click()
-                except Exception as e:
-                    # if the post is video, skip the post
                     try:
                         wait.until(
                             EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
@@ -130,11 +102,10 @@ class CombinationBot(main_bot.InstagramBot):
                                         try:
                                             is_action_blocked = self._blocked_action_popup()
                                             if is_action_blocked:
-                                                self._screen_shot(self.username)
                                                 self._send_email(self.username, follow_count,
                                                                  dt.datetime.now().strftime('%H:%M:%S'),
                                                                  'Combination')
-                                                print('Action Blocked! User: ', self.username)
+                                                self.global_block_message(self.username, "Combination")
                                                 is_blocked = 1
                                                 break
                                         except Exception as e:

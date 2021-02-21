@@ -3,7 +3,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
+from database.followers.followers import FollowersDB
 from database import db
+from models.followers import Followers
 from utils.utils import Utils as utils
 import datetime as dt
 import time
@@ -13,7 +15,7 @@ class FollowersBot(main_bot.InstagramBot):
     def __init__(self, username, password, is_mobile, proxy_dict):
         super().__init__(username, password, is_mobile, proxy_dict)
         self.wait = WebDriverWait(self.driver, 4)
-        self.scroll_box_xpath = '/html/body/div[4]/div/div/div[2]'
+        self.scroll_box_xpath = '/html/body/div[5]/div/div/div[2]'
 
     def get_unfollowers(self):
         self._login()
@@ -46,7 +48,7 @@ class FollowersBot(main_bot.InstagramBot):
             pass
 
         scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
-        button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[1]/div/div[2]/button')))
+        button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div/div/div[1]/div/div[2]/button')))
         last_height, height = 0, 1
         while last_height != height:
             last_height = height
@@ -63,25 +65,26 @@ class FollowersBot(main_bot.InstagramBot):
 
     # This unfollow, goes to the current account, click on the 'Following'
     # and go over all the users and then unfollow them one by one
-    def unfollow_all_users(self):
+    def unfollow_all_users(self, limit_unfollowers):
         self._login()
         time.sleep(2)
         self.driver.get(self.base_url + "/" + self.username)
-        time.sleep(3)
+        time.sleep(2)
         # Open the following page
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/following')]"))).click()
-        time.sleep(3)
+        time.sleep(2)
         # getting the box element
         scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
-        last_height, height = 0, 1
+        is_action_blocked = 0
+        unfollow_click = 0
         i = 0
         # this while scrolls all over the followers
         try:
-            while i <= 250:
-                #last_height != height
-                #last_height = height
+            while unfollow_click < limit_unfollowers:
                 time.sleep(2)
-                height = self.driver.execute_script("""
+                if is_action_blocked:
+                    break
+                self.driver.execute_script("""
                                  arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                                  return arguments[0].scrollHeight;
                                  """, scroll_box)
@@ -90,6 +93,8 @@ class FollowersBot(main_bot.InstagramBot):
                 buttons = scroll_box.find_elements_by_class_name('_8A5w5')
                 # This for runs all over the buttons list and click 'follow'
                 for button in buttons[:11]:
+                    if unfollow_click >= limit_unfollowers:
+                        break
                     if int(i * utils.TIME_SLEEP) == 500:
                         i = 1
                         print('reset to i')
@@ -101,6 +106,7 @@ class FollowersBot(main_bot.InstagramBot):
                             #ActionChains(self.driver).move_to_element(button).click(button).perform()
                             button.click()
                             i += 1
+                            unfollow_click += 1
                     except Exception as e:
                         pass
                     # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
@@ -111,19 +117,32 @@ class FollowersBot(main_bot.InstagramBot):
                     except Exception as e:
                         pass
                         #print('unfollow all users: ', e)
+                    try:
+                        is_action_blocked = self._blocked_action_popup()
+                        if is_action_blocked:
+                            self._send_email(self.username, i, dt.datetime.now().strftime('%H:%M:%S'), 'Unfollow all')
+                            self.global_block_message(self.username, "Unfollow everyone")
+                            break
+                    except Exception as e:
+                        pass
+
                 buttons = []
+                print("Unfollow everyone: removed {}/{} account: {}".format(limit_unfollowers, unfollow_click, self.username))
         except Exception as e:
-            print("Error in the end: ",e)
+            print("Error in the end: ", e)
         self.driver.close()
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
-    def unfollow_users(self, user_list, to_remove_from_db, account_id, to_login):
+    def unfollow_users(self, user_list, to_remove_from_db, account_id, to_login, to_reverse, limit_unfollow_list):
         i = 1
         remove_clicks = 0
+        follow_back = 0
         if to_login:
             self._login()
-        time.sleep(2.5)
+        time.sleep(1.5)
+        if to_reverse:
+            user_list.reverse()
         for user in user_list:
             self._nav_user(user)
             if i % utils.ROUNDS == 0:
@@ -144,6 +163,7 @@ class FollowersBot(main_bot.InstagramBot):
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 pass
+                #print('did not find the follow - FIRST')
                 # print('did not find the follow icon')
             try:
                 following_btn = self.wait.until(
@@ -159,6 +179,7 @@ class FollowersBot(main_bot.InstagramBot):
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 pass
+                #print('did not find the follow - SECOND')
                 # print('did not find the follow icon')
             try:
                 following_btn = self.wait.until(
@@ -174,6 +195,7 @@ class FollowersBot(main_bot.InstagramBot):
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 pass
+                #print('did not find the follow - THIRED')
                 # print('did not find the follow icon')
             # This try is for accounts that when they access to another user page, it display them "following"
             try:
@@ -206,25 +228,20 @@ class FollowersBot(main_bot.InstagramBot):
                     pass
             except Exception as e:
                 pass
-            try:
-                is_blocked = self._check_if_blocked()
-                if is_blocked:
-                    self._screen_shot(self.username)
-                    self._send_email(self.username, remove_clicks, dt.datetime.now().strftime('%H:%M:%S'), 'Followers')
-                    self.driver.close()
-                    print('Blocked!')
-                    break
-            except Exception as e:
-                pass
 
             try:
                 is_action_blocked = self._blocked_action_popup()
                 if is_action_blocked:
-                    self._screen_shot(self.username)
                     self._send_email(self.username, remove_clicks, dt.datetime.now().strftime('%H:%M:%S'), 'Followers')
                     self.driver.close()
-                    print('Action Blocked!')
+                    self.global_block_message(self.username, "Followers")
                     break
+            except Exception as e:
+                pass
+            # count how many users follow back
+            try:
+                self.wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
+                follow_back += 1
             except Exception as e:
                 pass
 
@@ -252,6 +269,12 @@ class FollowersBot(main_bot.InstagramBot):
             if int(i * utils.TIME_SLEEP) == 500:
                 i = 1
                 print('reset to i')
+            if remove_clicks == limit_unfollow_list:
+                break
+        # save the amount of followers back
+        followers_obj = Followers(account_id, self.username, follow_back)
+        FollowersDB().save_in_db(followers_obj)
+        self.driver.close()
 
     # unfollow one user
     def unfollow_user(self, username, account_id):
@@ -267,7 +290,7 @@ class FollowersBot(main_bot.InstagramBot):
 
     # Getting list of the account followers and compare it with the list of the followers of the account
     # unfollow every user that the account following him and the user not following back
-    def unfollow_users_who_not_return_follow(self, unfollowers_list, account_id):
+    def unfollow_users_who_not_return_follow(self, unfollowers_list, account_id, to_reverse):
         self._login()
         time.sleep(2)
         self._nav_user(self.username)
@@ -276,6 +299,5 @@ class FollowersBot(main_bot.InstagramBot):
         followers = self._get_names()
         not_following_back = [user for user in unfollowers_list if user not in followers]
         time.sleep(1.3)
-        self.driver.get(self.base_url)
-        time.sleep(1)
-        self.unfollow_users(not_following_back, 1, account_id, 0)
+        self.driver.close()
+        return not_following_back

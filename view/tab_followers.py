@@ -4,6 +4,7 @@ import tkinter.font as tkfont
 from bot_folder.followers.followers_bot import FollowersBot
 from database import db
 import threading
+import concurrent.futures
 
 
 class TabFollowers(ttk.Frame):
@@ -15,6 +16,9 @@ class TabFollowers(ttk.Frame):
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
         self.bold = tkfont.Font(weight='bold', size=10)
         self.results = tkfont.Font(size=11, weight='bold')
+        self.check_box_reverse = IntVar()
+        self.limit_unfollow_everyone = IntVar()
+        self.limit_unfollow_list = IntVar()
         self.username = StringVar()
         self.password = StringVar()
         self.menu = StringVar()
@@ -23,15 +27,16 @@ class TabFollowers(ttk.Frame):
         self.proxy = StringVar()
         self.port = StringVar()
 
+        self.check_box_reverse.set(0)
         self.accounts = db.Database().get_accounts()
         user_name_list = []
         for account in self.accounts:
             user_name_list.append(account[3])
 
         ttk.Label(self, text='Check which users you follow don\'t follow you back', font=self.headerFont)\
-                                                                        .grid(column=0, row=0, padx=10, pady=10)
+                                                                        .grid(column=0, row=0, padx=10, pady=(5, 0))
         # Users menu
-        ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=0, row=1, padx=10, pady=10)
+        ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=0, row=1, padx=10)
         if len(user_name_list) > 0:
             ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                        command=self._set_username_password).grid(column=0, row=2)
@@ -39,10 +44,10 @@ class TabFollowers(ttk.Frame):
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont).grid(column=0, row=2, padx=10, pady=10)
 
         # username and password form
-        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=3, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.username, width=30, show='*').grid(column=0, row=3)
-        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=4, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.password, width=30, show='*').grid(column=0, row=4)
+        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=3, rowspan=1, padx=10, pady=0, sticky='w')
+        ttk.Entry(self, textvariable=self.username, width=30, show='*').grid(column=0, row=3, rowspan=1)
+        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=4, rowspan=1, padx=10, pady=0, sticky='w')
+        ttk.Entry(self, textvariable=self.password, width=30, show='*').grid(column=0, row=4, rowspan=1)
         ttk.Button(self, text="RUN", command=self._check_form).grid(column=0, row=5)
 
         # box list display all users that the account has followed them
@@ -52,28 +57,35 @@ class TabFollowers(ttk.Frame):
         self.unfollow_users_list_box.grid(column=0, row=7, rowspan=3)
         ttk.Button(self, text="REMOVE", command=self._remove_from_unfollow_list).grid(column=0, row=11, rowspan=1, pady=(10, 0))
         ttk.Button(self, text="UNFOLLOW LIST", command=lambda: self._unfollow_users_list(self.unfollow_users, 1))\
-            .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(0, 200))
+            .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(0, 270))
         ttk.Button(self, text="UNFOLLOW USER", command=self._unfollow_user)\
-            .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(200, 0))
+            .grid(column=0, columnspan=2, row=11, pady=(10, 0), padx=(160, 0))
+        ttk.Label(self, text="Limit unfollowers").grid(column=1, columnspan=2, row=11, pady=(10, 0), padx=(0, 0))
+        ttk.Entry(self, textvariable=self.limit_unfollow_list).grid(column=1, columnspan=2, row=12, pady=(10, 0), padx=(0, 0))
         ttk.Label(self, text='unfollow users that are not following back from the above list').grid(column=0, row=12, pady=(10, 5))
         ttk.Button(self, text="REMOVE UNFOLLOWERS USERS", command=lambda: self._remove_users_who_not_follow_back(self.unfollow_users)).grid(column=0, row=13, padx=(15, 0), pady=(10, 0))
+        ttk.Checkbutton(self, text='To reverse?', variable=self.check_box_reverse).grid(column=2, columnspan=2, row=9, padx=(0, 160))
 
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
         self.listbox = Listbox(self, width=30, height=13)
         self.listbox.grid(column=3, rowspan=5, row=2)
 
-        ttk.Button(self, text="SEARCH", command=self._search_user).grid(column=3, row=8, rowspan=3, pady=(8, 8))
+        ttk.Button(self, text="SEARCH", command=self._search_user).grid(column=3, row=5, rowspan=3, pady=(8, 8))
 
         # right side - unfollow all users in list box
         schedule_frame = ttk.LabelFrame(self, text='UNFOLLOW EVERYONE')
-        schedule_frame.grid(column=4, row=1, ipady=30, rowspan=2, padx=40)
+        schedule_frame.grid(column=4, row=1, ipady=50, rowspan=2, padx=40)
         title = Label(schedule_frame, text="By click this button, the program will go to your 'following' list "
                                            "and will unfollow all of them",
                       bg='gray23', font=self.bold, fg='gray67')
+        limit_title = Label(schedule_frame, text="limit unfollowers", bg='gray23', font=self.bold, fg='gray67')
+        limit_entry_box = ttk.Entry(schedule_frame, textvariable=self.limit_unfollow_everyone)
         unfollow_btn = ttk.Button(schedule_frame, text="UNFOLLOW", command=self._unfollow_all_users_account_follow_them)
         title.pack(fill=X)
-        unfollow_btn.place(anchor=S, relx=0.5, rely=0.8)
+        limit_title.place(relx=0.2, rely=0.45)
+        limit_entry_box.place(relx=0.4, rely=0.45)
+        unfollow_btn.place(relx=0.35, rely=0.7)
 
         # Proxy section
         proxy_frame = ttk.LabelFrame(self, text='Proxy')
@@ -88,6 +100,9 @@ class TabFollowers(ttk.Frame):
     def _check_form(self):
         username = self.username.get()
         password = self.password.get()
+        proxy = self.proxy.get()
+        port = self.port.get()
+        proxy_dict = {"proxy": proxy, "port": port}
 
         if username == '' or password == '':
             messagebox.showerror('Credentials', 'Please enter your username or password')
@@ -95,7 +110,7 @@ class TabFollowers(ttk.Frame):
         else:
             users_list = []
             self.amount_not_following = 0
-            self.bot = FollowersBot(username, password, False)
+            self.bot = FollowersBot(username, password, False, proxy_dict)
             # TODO: write thread that return's data
             # que = queue.Queue()
             # t = threading.Thread(target=self.bot.get_unfollowers, args=(que))
@@ -170,6 +185,9 @@ class TabFollowers(ttk.Frame):
             else:
                 for username in user_list:
                     users_name_list.append(username)
+
+            limit_unfollow_list = self.limit_unfollow_list.get()
+            to_reverse = self.check_box_reverse.get()
             username = self.username.get()
             password = self.password.get()
             proxy = self.proxy.get()
@@ -182,7 +200,7 @@ class TabFollowers(ttk.Frame):
                 for account in self.accounts:
                     if account[3] == username:
                         account_id = account[0]
-            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1))
+            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list))
             t.start()
 
     def _unfollow_all_users_account_follow_them(self):
@@ -190,6 +208,7 @@ class TabFollowers(ttk.Frame):
         if to_delete:
             username = self.username.get()
             password = self.password.get()
+            limit_unfollowers = self.limit_unfollow_everyone.get()
             proxy = self.proxy.get()
             port = self.port.get()
             proxy_dict = {"proxy": proxy, "port": port}
@@ -197,7 +216,7 @@ class TabFollowers(ttk.Frame):
                 messagebox.showerror('Credentials', 'Please enter your username or password')
             else:
                 bot = FollowersBot(username, password, False, proxy_dict)
-                t = threading.Thread(target=bot.unfollow_all_users)
+                t = threading.Thread(target=bot.unfollow_all_users, args=[limit_unfollowers])
                 t.start()
 
     def _remove_from_unfollow_list(self):
@@ -223,6 +242,8 @@ class TabFollowers(ttk.Frame):
             users_name_list = []
             for username in unfollow_list:
                 users_name_list.append(username[2])
+            limit_unfollow_list = self.limit_unfollow_list.get()
+            to_reverse = self.check_box_reverse.get()
             account_id = self._get_account_id()
             username = self.username.get()
             password = self.password.get()
@@ -230,5 +251,11 @@ class TabFollowers(ttk.Frame):
             port = self.port.get()
             proxy_dict = {"proxy": proxy, "port": port}
             bot = FollowersBot(username, password, False, proxy_dict)
-            t = threading.Thread(target=bot.unfollow_users_who_not_return_follow, args=(users_name_list, account_id))
+
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(bot.unfollow_users_who_not_return_follow, users_name_list, account_id, to_reverse)
+                unfollow_users_list = future.result()
+
+            bot = FollowersBot(username, password, False, proxy_dict)
+            t = threading.Thread(target=bot.unfollow_users, args=(unfollow_users_list, 1, account_id, 1, to_reverse, limit_unfollow_list))
             t.start()

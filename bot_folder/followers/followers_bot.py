@@ -48,7 +48,7 @@ class FollowersBot(main_bot.InstagramBot):
             pass
 
         scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
-        button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div/div/div[1]/div/div[2]/button')))
+        button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[1]/div/div[2]/button')))
         last_height, height = 0, 1
         while last_height != height:
             last_height = height
@@ -120,7 +120,7 @@ class FollowersBot(main_bot.InstagramBot):
                     try:
                         is_action_blocked = self._blocked_action_popup()
                         if is_action_blocked:
-                            self._send_email(self.username, i, dt.datetime.now().strftime('%H:%M:%S'), 'Unfollow all')
+                            self._send_email(self.username, unfollow_click, dt.datetime.now().strftime('%H:%M:%S'), 'Unfollow all')
                             self.global_block_message(self.username, "Unfollow everyone")
                             break
                     except Exception as e:
@@ -301,3 +301,16 @@ class FollowersBot(main_bot.InstagramBot):
         time.sleep(1.3)
         self.driver.close()
         return not_following_back
+
+    # Saving Hash-tag data to display in the statistics
+    # def _prepare_data_for_db(self, hash_tag, amount, like, comment, follow,
+    #                          split_comment, to_distribution, group_name, failed_posts_num, time_schedule):
+    #
+    #     join_comment = ','.join(split_comment)
+    #     hashtag = Hashtag(self.username, hash_tag, amount, like, follow, comment,
+    #                       to_distribution, group_name, join_comment, failed_posts_num, time_schedule)
+    #     HashtagDB().save_in_db(hashtag)
+    #     account_id = CombinationDM().get_user_id(self.username)
+    #     account_action = AccountActions(account_id, self.username, "HashTag", amount,
+    #                                     amount - failed_posts_num)
+    #     FollowersDB().save_data_account_action(account_action)

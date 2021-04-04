@@ -3,15 +3,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from database.combination.combination import CombinationDM
+from database.followers.followers import FollowersDB
 from selenium.webdriver.common.action_chains import ActionChains
 from utils.utils import Utils as utils
 from models.combination import Combination
+from models.account_actions import AccountActions
 import time
 import datetime as dt
 
 
 class CombinationBot(main_bot.InstagramBot):
-    def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id):
+    def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts):
         users_name_list = []
         buttons = []
         # i starts from 0 because the list of users_name, its the index
@@ -33,7 +35,7 @@ class CombinationBot(main_bot.InstagramBot):
             # click on the first post
             first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
-
+            self.skip_posts(skip_posts)
         except Exception as e:
             print('Combination: ', e)
 
@@ -43,9 +45,10 @@ class CombinationBot(main_bot.InstagramBot):
                 # self._like_post()
                 like_count += 1
                 print("Post count: {}/{} account: {} ".format(likes, like_count, self.username))
+                self.is_post_liked()
                 try:
                     wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
+                        (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
                 except Exception as e:
                     try:
                         wait.until(
@@ -54,12 +57,17 @@ class CombinationBot(main_bot.InstagramBot):
                     except Exception as e:
                         pass
                 try:
-                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[3]')))
+                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[2]/div')))
                     # print('did not reach to scroll first')
                 except Exception as e:
                     scroll_box = wait.until(
-                        EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[2]/div')))
+                        EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
                     # print('did not reach to scroll')
+                try:
+                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
+                    # print('did not reach to scroll first')
+                except Exception as e:
+                    pass
                 time.sleep(1.1)
                 last_height, height = 0, 1
                 # this while scrolls all over the followers
@@ -140,7 +148,7 @@ class CombinationBot(main_bot.InstagramBot):
                 # the scroll box it wont find it and skip to the next post
                 try:
                     wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, '/html/body/div[5]/div/div/div[1]/div/div[2]/button'))).click()
+                        (By.XPATH, '/html/body/div[6]/div/div/div[1]/div/div[2]/button'))).click()
                     wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
                     # reset i
                     i = 0
@@ -165,3 +173,6 @@ class CombinationBot(main_bot.InstagramBot):
                 num_failed_followers, schedule, distribution, group_name):
         follow_followers = Combination(self.username, url, hashtag, num_likes, num_failed_likes, num_followers, num_failed_followers, schedule, distribution, group_name)
         CombinationDM().save_in_db(follow_followers)
+        account_id = CombinationDM().get_user_id(self.username)
+        account_action = AccountActions(account_id, self.username, "Combination", num_followers, num_followers - num_failed_followers)
+        FollowersDB().save_data_account_action(account_action)

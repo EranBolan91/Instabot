@@ -2,7 +2,11 @@ from bot_folder import main_bot
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+
+from database.combination.combination import CombinationDM
+from database.followers.followers import FollowersDB
 from database.hashtag.hashtag import HashtagDB
+from models.account_actions import AccountActions
 from models.hashtag import Hashtag
 import time
 from utils.utils import Utils as utils
@@ -25,7 +29,6 @@ class HashTagBot(main_bot.InstagramBot):
         time.sleep(1.5)
         try:
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
-            wait = WebDriverWait(self.driver, 7)
             first_post = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
             while i <= int(amount):
@@ -88,3 +91,6 @@ class HashTagBot(main_bot.InstagramBot):
         hashtag = Hashtag(self.username, hash_tag, amount, like, follow, comment,
                           to_distribution, group_name, join_comment, failed_posts_num, time_schedule)
         HashtagDB().save_in_db(hashtag)
+        account_id = CombinationDM().get_user_id(self.username)
+        account_action = AccountActions(account_id, self.username, "HashTag", amount, int(amount - failed_posts_num))
+        FollowersDB().save_data_account_action(account_action)

@@ -59,7 +59,7 @@ class InstagramBot:
 
     def _like_post(self):
         try:
-            wait = WebDriverWait(self.driver, 5)
+            wait = WebDriverWait(self.driver, 7)
             wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "fr66n"))).click() # click the 'like' button
         except Exception as e:
             self._screen_shot(self.username)
@@ -247,7 +247,7 @@ class InstagramBot:
     def _has_profile_image(self):
         # if this method returns -1, means the user has profile image.
         # if it returns a number bigger then -1 means the user has no profile image
-        wait = WebDriverWait(self.driver, 4)
+        wait = WebDriverWait(self.driver, 7)
         try:
             # this is for private accounts
             image = wait.until(
@@ -272,3 +272,21 @@ class InstagramBot:
 
     def global_complate_task(self, username, section, results):
         print(("""Complate tast: {},\nResults: {}\nUsername: {} """.format(section, results, username)))
+
+    # this method checks if the post 'liked'. if it is then it 'unlike' it
+    # used for combination
+    def is_post_liked(self):
+        try:
+            self.driver.find_element_by_xpath('//div[@class="_8-yf5"]/*[name()="svg"][@aria-label="Unlike"]').click()
+            time.sleep(1.3)
+        except Exception as e:
+            pass
+
+    def skip_posts(self, num_of_skips):
+        wait = WebDriverWait(self.driver, 7)
+        for post in range(num_of_skips):
+            wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+            time.sleep(1.5)
+
+    def save_account_action(self, account_action):
+        db.Database().save_data_account_action(account_action)

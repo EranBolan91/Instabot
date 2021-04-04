@@ -63,14 +63,14 @@ class Layout:
         status_bar.pack(side=BOTTOM, fill=X)
 
     def _accounts(self):
-         win = Toplevel(self.window)
-         win.iconbitmap('insta_bot.ico')
-         AccountsNew(win)
+        win = Toplevel(self.window)
+        win.iconbitmap('insta_bot.ico')
+        AccountsNew(win)
 
     def _settings(self):
-         win = Toplevel(self.window)
-         win.iconbitmap('insta_bot.ico')
-         Settings(win)
+        win = Toplevel(self.window)
+        win.iconbitmap('insta_bot.ico')
+        Settings(win)
 
     def _exit(self):
         self.window.destroy()

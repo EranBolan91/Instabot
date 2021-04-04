@@ -129,6 +129,18 @@ class Database:
                                date DATETIME)
                                """)
 
+        # Table Account actions
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS account_actions (
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               user_id INT,
+                               account TEXT,
+                               action TEXT,
+                               amount INT,
+                               amount_success INT,
+                               date DATETIME,
+                               FOREIGN KEY(user_id) REFERENCES accounts(id))
+                               """)
+
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db
@@ -139,7 +151,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         cur.execute("INSERT INTO accounts (name,phone,username,password,creation_date,last_login) VALUES(?,?,?,?,?,?)",
-                         (name, phone, username, password, dt.datetime.strftime(time_now, "%d/%m/%Y, %H:%M:%S"), ''))
+                    (name, phone, username, password, dt.datetime.strftime(time_now, "%d/%m/%Y, %H:%M:%S"), ''))
         conn.commit()
         conn.close()
         self._init_settings()
@@ -233,7 +245,7 @@ class Database:
             return data
 
     def save_unfollow_users(self, user, account_username):
-        user_id = self._get_user_id(account_username)
+        user_id = self.get_user_id(account_username)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
@@ -245,7 +257,7 @@ class Database:
             conn.close()
 
     def get_unfollow_users(self, username):
-        user_id = self._get_user_id(username)
+        user_id = self.get_user_id(username)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         users = []
@@ -258,7 +270,7 @@ class Database:
             conn.close()
             return users
 
-    def _get_user_id(self, username):
+    def get_user_id(self, username):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         user_id = -1
@@ -275,7 +287,7 @@ class Database:
 
     def create_distribution_group(self, group_name, username):
         is_saved = False
-        user_id = self._get_user_id(username)
+        user_id = self.get_user_id(username)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
@@ -289,7 +301,7 @@ class Database:
             return is_saved
 
     def get_distribution_lists_by_username(self, username):
-        user_id = self._get_user_id(username)
+        user_id = self.get_user_id(username)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
@@ -302,7 +314,7 @@ class Database:
             return groups
 
     def remove_group_from_distribution_list(self, group_name, owner_username):
-        owner_group_id = self._get_user_id(owner_username)
+        owner_group_id = self.get_user_id(owner_username)
         is_deleted = False
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
@@ -339,12 +351,13 @@ class Database:
             conn.close()
 
     def get_group_id_by_group_name_and_id(self, group_name, owner_group_name):
-        owner_group_id = self._get_user_id(owner_group_name)
+        owner_group_id = self.get_user_id(owner_group_name)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         group_id = -1
         try:
-            cur.execute("SELECT id FROM groups WHERE group_name = '{}' AND user_id='{}' ".format(group_name, owner_group_id))
+            cur.execute(
+                "SELECT id FROM groups WHERE group_name = '{}' AND user_id='{}' ".format(group_name, owner_group_id))
             group_id = cur.fetchone()
         except Exception as e:
             print("get group id by group name: ", e)
@@ -366,4 +379,18 @@ class Database:
         finally:
             conn.close()
             return dm_users
+
+    def save_data_account_action(self, data_action):
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            cur.execute(
+                'INSERT INTO account_actions(user_id, account, action, amount,amount_success, date) VALUES(?,?,?,?,?,?)',
+                (data_action.user_id, data_action.username, data_action.action, data_action.amount,
+                 data_action.amount_success, data_action.date))
+            conn.commit()
+        except Exception as e:
+            print("Database Error: save data account action: ", e)
+        finally:
+            conn.close()
 

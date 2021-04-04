@@ -24,6 +24,7 @@ class TabCombination(ttk.Frame):
         self.amount_likes = IntVar()
         self.username = StringVar()
         self.password = StringVar()
+        self.skip_posts = IntVar()
         self.hashtag = StringVar()
         self.proxy = StringVar()
         self.port = StringVar()
@@ -93,6 +94,9 @@ class TabCombination(ttk.Frame):
         ttk.Label(self, text='Enter the number of users to follow').grid(column=1, row=7, pady=(50, 0))
         ttk.Entry(self, textvariable=self.amount_follows).grid(column=1, row=8, pady=(25, 0))
 
+        ttk.Label(self, text='Skip posts').grid(column=2, row=7, pady=(50, 0))
+        ttk.Entry(self, textvariable=self.skip_posts).grid(column=2, row=8, pady=(25, 0))
+
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, columnspan=2, row=10, pady=(40, 0), padx=(20, 0))
 
@@ -116,6 +120,7 @@ class TabCombination(ttk.Frame):
         proxy = self.proxy.get()
         port = self.port.get()
         url = self.url.get()
+        skip_posts = self.skip_posts.get()
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -131,7 +136,7 @@ class TabCombination(ttk.Frame):
 
         if valid:
             bot = CombinationBot(username, password, False, proxy_dict)
-            t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id))
+            t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts))
             t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password

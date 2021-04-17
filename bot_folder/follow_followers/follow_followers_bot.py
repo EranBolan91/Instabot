@@ -10,7 +10,7 @@ import datetime as dt
 
 
 class FollowFollowersBot(main_bot.InstagramBot):
-    def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
+    def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule, num_skip):
         settings_data_from_db = FollowFollowersDB().get_data_from_settings()
         self._login()
         time.sleep(1.5)
@@ -20,7 +20,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         wait = WebDriverWait(self.driver, 7)
         wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/followers')]"))).click()
         # getting the box element
-        scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[4]/div/div/div[2]")))
+        scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[5]/div/div/div[2]")))
         # follow_count is for sub from the i in the end of the loop.
         # count how many clicks it did. how many actual users i followed
         follow_count = 0
@@ -105,10 +105,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
             failed_follow_num = int(num_of_following) - follow_count
             self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num,
-                                      is_schedule)
+                                      is_schedule, num_skip)
             self.driver.close()
 
-    def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule):
+    def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule, num_skip):
         settings_data_from_db = FollowFollowersDB().get_data_from_settings()
         self._login()
         time.sleep(2)
@@ -117,7 +117,6 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # Open the followers page
         wait = WebDriverWait(self.driver, 7)
         wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/following')]"))).click()
-        # self.driver.find_element_by_xpath("//a[contains(@href,'/following')]").click()
         time.sleep(1.5)
         # getting the box element
         scroll_box = self.driver.find_element_by_xpath("/ html / body / div[5] / div / div / div[2]")
@@ -125,7 +124,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # this while scrolls all over the followers
         while last_height != height:
             last_height = height
-            time.sleep(2)
+            time.sleep(0.7)
             height = self.driver.execute_script("""
                           arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                           return arguments[0].scrollHeight;
@@ -135,7 +134,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
         buttons = scroll_box.find_elements_by_tag_name('button')
         # i starts from 0 because the list of users_name, its the index
-        i = 0
+        i = num_skip
         # follow_count is for sub from the i in the end of the loop.
         # count how many clicks it did. how many actual users i followed
         follow_count = 0
@@ -143,17 +142,18 @@ class FollowFollowersBot(main_bot.InstagramBot):
         loops = 0
         try:
             # This for runs all over the buttons list and click 'follow'
-            for button in buttons:
+            for btn_index in range(i, len(buttons)):
+            #for button in buttons:
                 username = users_name_list[i].text
-                if button.text == 'Follow':
+                if buttons[btn_index].text == 'Follow':
                     if loops % utils.TIME_SLEEP == 0:
                         print('Username:', account_username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'), ' Sleep time: ',
                               loops * utils.TIME_SLEEP, 'seconds')
-                        time.sleep(i * utils.TIME_SLEEP)
+                        time.sleep(loops * utils.TIME_SLEEP)
                     followers_num, has_image_profile = self._get_followers_number(username)
                     if has_image_profile == -1:
                         if int(followers_num) >= int(settings_data_from_db[2]):
-                            button.click()
+                            buttons[btn_index].click()
                             follow_count += 1
                             print('Follow count {}/{}'.format(num_of_following, follow_count), 'Username: ',
                                   account_username)
@@ -187,10 +187,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
             failed_follow_num = int(num_of_following) - follow_count
             self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num,
-                                      is_schedule)
+                                      is_schedule, num_skip)
             self.driver.close()
 
     # Saving Hash-tag data to display in the statistics
-    def _prepare_data_for_db(self, user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule):
-        follow_followers = FollowFollowers(self.username, user_url, num_of_following, failed_follow_num, to_distribution, group_name, is_schedule)
+    def _prepare_data_for_db(self, user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule, num_skip):
+        follow_followers = FollowFollowers(self.username, user_url, num_of_following, failed_follow_num, to_distribution, group_name, is_schedule, num_skip)
         FollowFollowersDB().save_in_db(follow_followers)

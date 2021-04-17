@@ -52,10 +52,10 @@ class CombinationBot(main_bot.InstagramBot):
                 except Exception as e:
                     try:
                         wait.until(
-                            EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-                        continue
+                            EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/article/div[2]/div[2]/div/section[1]/div/div/a'))).click()
                     except Exception as e:
-                        pass
+                        wait.until(
+                            EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
                 try:
                     scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[2]/div')))
                     # print('did not reach to scroll first')
@@ -63,11 +63,6 @@ class CombinationBot(main_bot.InstagramBot):
                     scroll_box = wait.until(
                         EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
                     # print('did not reach to scroll')
-                try:
-                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
-                    # print('did not reach to scroll first')
-                except Exception as e:
-                    pass
                 time.sleep(1.1)
                 last_height, height = 0, 1
                 # this while scrolls all over the followers

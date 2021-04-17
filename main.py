@@ -12,9 +12,8 @@ from view.layout import Layout
 # TODO: write error message function on 'main_bot' to use on all other classes - ** added **
 # TODO: add limit box on unfollowers that limits how many users to unfollow - *** added - just need to run few tests **
 # TODO: on the statistic page, create box details for every account that display his all actions
-# TODO: add reverse in unfollow - done
 # TODO: add on the statistic a drop list with box that display actions of every account
-# TODO: add table to unfollow that counts how many users follow back when i unfollow them
+# TODO: add table to unfollow that counts how many users follow back when i unfollow them **created table, just need to display **
 window = ThemedTk(theme='equilux')
 window.iconbitmap('insta_bot.ico')
 window.attributes('-fullscreen', True)

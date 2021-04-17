@@ -91,7 +91,8 @@ class Database:
                         distribution BOOLEAN,
                         group_name TEXT,
                         schedule BOOLEAN,
-                        date DATETIME)
+                        date DATETIME,
+                        skip INT)
                         """)
         # Table DM
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS dm (

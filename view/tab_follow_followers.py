@@ -4,6 +4,7 @@ import tkinter.font as tkfont
 from bot_folder.follow_followers.follow_followers_bot import FollowFollowersBot
 from utils.schedule import ScheduleCalc
 from database import db
+from database.follow_followers.follow_followers import FollowFollowersDB
 import threading
 
 
@@ -25,6 +26,7 @@ class TabFollowFollowers(ttk.Frame):
         self.minutes_entry_value = IntVar()
         self.hours_entry_value = IntVar()
         self.days_entry_value = IntVar()
+        self.num_skip = IntVar()
         self.check_box_schedule = IntVar()
         self.radio_var = IntVar()
         self.proxy = StringVar()
@@ -59,31 +61,35 @@ class TabFollowFollowers(ttk.Frame):
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont) \
             .grid(column=0, row=5, padx=10, pady=10)
-        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=6, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.username_following, show='*', width=25).grid(column=0, row=6)
-        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=7, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.password_following, show='*', width=25).grid(column=0, row=7)
-        ttk.Button(self, text="START FOLLOW", command=self._search_following).grid(column=0, row=10, pady=15)
+        ttk.Label(self, text='username:', font=self.bold).grid(column=0, rowspan=3, row=4, padx=10, pady=(25, 0), sticky='w')
+        ttk.Entry(self, textvariable=self.username_following, show='*', width=25).grid(column=0, rowspan=3, row=4, pady=(25, 0))
+        ttk.Label(self, text='password:', font=self.bold).grid(column=0, rowspan=3, row=5, padx=10, pady=(10, 5), sticky='w')
+        ttk.Entry(self, textvariable=self.password_following, show='*', width=25).grid(column=0, rowspan=3, row=5, pady=(10, 5))
+        ttk.Button(self, text="START FOLLOW", command=self._search_following).grid(column=0, rowspan=3, row=6, pady=15)
 
         # Middle area - number of users to follow and distribution list
-        ttk.Label(self, text='Enter the number of people to follow', font=self.titleFont).grid(column=0, columnspan=2, row=8, pady=10)
+        ttk.Label(self, text='Enter the number of people to follow', font=self.titleFont).grid(column=0, columnspan=2, rowspan=4, row=6, pady=1)
         self.following_input = ttk.Entry(self, textvariable=self.num_following, width=20)
-        self.following_input.grid(column=0, columnspan=2, row=9, pady=10)
+        self.following_input.grid(column=0, columnspan=2, rowspan=4, row=7, pady=(5, 0))
+
+        ttk.Label(self, text='Enter the number to skip', font=self.titleFont).grid(column=0, columnspan=2, rowspan=4, row=8)
+        self.skip_input = ttk.Entry(self, textvariable=self.num_skip, width=20).grid(column=0, columnspan=2, rowspan=4, row=9)
+
         self.distribution_check_box = ttk.Checkbutton(self, variable=self.check_box_distribution_list,
                                                       text='Save users in distribution list?')
-        self.distribution_check_box.grid(column=0, columnspan=2, row=10, pady=20)
+        self.distribution_check_box.grid(column=0, columnspan=2, rowspan=4, row=11, pady=(70, 0), padx=(0, 5))
         ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
-            .grid(column=0, columnspan=2, row=12, pady=10, padx=20)
+            .grid(column=0, columnspan=2, rowspan=4, row=12, pady=(100, 0), padx=(1, 1))
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
             self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
                                                     *self.groups_list, state='DISABLED')
-            self.distribution_menu.grid(column=0, columnspan=2, row=11)
+            self.distribution_menu.grid(column=0, columnspan=2, rowspan=4, row=10, pady=(20, 0))
         else:
             self.distribution_title = ttk.Label(self, text="Choose user to display distribution lists ",
                                                 font=self.titleFont)
-            self.distribution_title.grid(column=0, columnspan=2, row=11)
+            self.distribution_title.grid(column=0, columnspan=2, rowspan=4, row=10, pady=(20, 0))
 
         # Right side Form
         ttk.Label(self, text='Follow after users that following user', font=self.headerFont)\
@@ -100,11 +106,11 @@ class TabFollowFollowers(ttk.Frame):
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont) \
             .grid(column=1, row=5, padx=10, pady=10)
-        ttk.Label(self, text='username:', font=self.bold).grid(column=1, row=6, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.username_followers, show='*', width=25).grid(column=1, row=6)
-        ttk.Label(self, text='password:', font=self.bold).grid(column=1, row=7, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.password_followers, show='*', width=25).grid(column=1, row=7)
-        ttk.Button(self, text="START FOLLOW", command=self._search_followers).grid(column=1, row=10, pady=15)
+        ttk.Label(self, text='username:', font=self.bold).grid(column=1, row=4, rowspan=3,  padx=10, pady=(25, 0), sticky='w')
+        ttk.Entry(self, textvariable=self.username_followers, show='*', width=25).grid(column=1, row=4, rowspan=3, pady=(25, 0))
+        ttk.Label(self, text='password:', font=self.bold).grid(column=1, row=5, rowspan=3, padx=10, pady=(10, 5), sticky='w')
+        ttk.Entry(self, textvariable=self.password_followers, show='*', width=25).grid(column=1, row=5, rowspan=3, pady=(10, 5))
+        ttk.Button(self, text="START FOLLOW", command=self._search_followers).grid(column=1, rowspan=3, row=6, pady=15)
 
         # Schedule Actions
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
@@ -137,6 +143,18 @@ class TabFollowFollowers(ttk.Frame):
         self.port_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
+        # Users data box - right side
+        ttk.Label(self, text='User data', font=self.headerFont).grid(column=2, row=5, rowspan=3, padx=(0, 50), pady=(0, 20))
+        data_frame = ttk.Frame(self)
+        data_frame.grid(column=2, row=6, rowspan=3, padx=0, pady=(70, 0))
+        scrollbary = ttk.Scrollbar(data_frame)
+        scrollbarx = ttk.Scrollbar(data_frame, orient=HORIZONTAL)
+        scrollbary.pack(side=RIGHT, fill=Y)
+        scrollbarx.pack(side=BOTTOM, fill=X)
+        self.data_frame_box = Listbox(data_frame, width=70, height=10,
+                                        yscrollcommand=scrollbary.set, xscrollcommand=scrollbarx.set)
+        self.data_frame_box.pack()
+
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_following(self, value):
         self.groups_list = []
@@ -151,11 +169,12 @@ class TabFollowFollowers(ttk.Frame):
                 if len(self.groups_list) > 0:
                     self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
                                                             *self.groups_list)
-                    self.distribution_menu.grid(column=0, columnspan=2, row=11, pady=20)
+                    self.distribution_menu.grid(column=0, columnspan=2, row=11, rowspan=4, pady=5)
                     self.distribution_title.grid_forget()
                 else:
-                    self.distribution_title.grid(column=0, columnspan=2, row=11, pady=20)
+                    self.distribution_title.grid(column=0, columnspan=2, row=11, rowspan=4, pady=5)
                     self.distribution_menu.grid_forget()
+                self._get_account_data_for_data_box(account[3])
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password_followers(self, value):
@@ -171,11 +190,21 @@ class TabFollowFollowers(ttk.Frame):
                 if len(self.groups_list) > 0:
                     self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
                                                             *self.groups_list)
-                    self.distribution_menu.grid(column=0, columnspan=2, row=11, pady=20)
+                    self.distribution_menu.grid(column=0, columnspan=2, row=11, rowspan=4, pady=5)
                     self.distribution_title.grid_forget()
                 else:
-                    self.distribution_title.grid(column=0, columnspan=2, row=11, pady=20)
+                    self.distribution_title.grid(column=0, columnspan=2, row=11, rowspan=4, pady=5)
                     self.distribution_menu.grid_forget()
+                self._get_account_data_for_data_box(account[3])
+
+    def _get_account_data_for_data_box(self, account_name):
+        account_data = FollowFollowersDB().get_account_data(account_name)
+        self.data_frame_box.delete(0, 'end')
+        for data in account_data:
+            box = """ Date: {} | Follow: {} | Failed Follow: {} | Skip: {} | URL: {} """.format(
+                data[8], data[3], data[4], data[9], data[2],)
+            self.data_frame_box.insert(END, box)
+
 
     def _search_followers(self):
         user_url = self.user_url_followers.get()
@@ -188,6 +217,7 @@ class TabFollowFollowers(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        num_skip = self.num_skip.get()
         proxy = self.proxy.get()
         port = self.port.get()
         group_id = ""
@@ -208,12 +238,12 @@ class TabFollowFollowers(ttk.Frame):
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = FollowFollowersBot(username, password, False, proxy_dict)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_followers,
-                      [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
+                      [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule, num_skip])
                 timing_thread.start()
             else:
                 bot = FollowFollowersBot(username, password, False, proxy_dict)
                 t = threading.Thread(target=bot.follow_after_followers,
-                      args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
+                      args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule, num_skip))
                 t.start()
         else:
             messagebox.showerror('Missing data', 'Please enter URL')
@@ -229,6 +259,7 @@ class TabFollowFollowers(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
+        num_skip = self.num_skip.get()
         proxy = self.proxy.get()
         port = self.port.get()
         group_id = ""
@@ -250,12 +281,12 @@ class TabFollowFollowers(ttk.Frame):
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
                 bot = FollowFollowersBot(username, password, False, proxy_dict)
                 timing_thread = threading.Timer(time_schedule, bot.follow_after_following,
-                      [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule])
+                      [user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule, num_skip])
                 timing_thread.start()
             else:
                 bot = FollowFollowersBot(username, password, False, proxy_dict)
                 t = threading.Thread(target=bot.follow_after_following,
-                      args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule))
+                      args=(user_url, self.account_username, num_of_following, distribution, group_name, group_id, is_schedule, num_skip))
                 t.start()
 
     def _check_form(self, username, password, user_url, num_of_following):

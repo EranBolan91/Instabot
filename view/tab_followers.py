@@ -6,6 +6,8 @@ from database import db
 import threading
 import concurrent.futures
 
+from utils.schedule import ScheduleCalc
+
 
 class TabFollowers(ttk.Frame):
     def __init__(self, window):
@@ -19,6 +21,11 @@ class TabFollowers(ttk.Frame):
         self.check_box_reverse = IntVar()
         self.limit_unfollow_everyone = IntVar()
         self.limit_unfollow_list = IntVar()
+        self.minutes_entry_value = IntVar()
+        self.hours_entry_value = IntVar()
+        self.days_entry_value = IntVar()
+        self.check_box_schedule = IntVar()
+        self.radio_var = IntVar()
         self.username = StringVar()
         self.password = StringVar()
         self.menu = StringVar()
@@ -26,6 +33,9 @@ class TabFollowers(ttk.Frame):
         self.amount_unfollow_users = 0
         self.proxy = StringVar()
         self.port = StringVar()
+        self.MINUTES = 0
+        self.HOURS = 1
+        self.DAYS = 2
 
         self.check_box_reverse.set(0)
         self.accounts = db.Database().get_accounts()
@@ -65,6 +75,9 @@ class TabFollowers(ttk.Frame):
         ttk.Label(self, text='unfollow users that are not following back from the above list').grid(column=0, row=12, pady=(10, 5))
         ttk.Button(self, text="REMOVE UNFOLLOWERS USERS", command=lambda: self._remove_users_who_not_follow_back(self.unfollow_users)).grid(column=0, row=13, padx=(15, 0), pady=(10, 0))
         ttk.Checkbutton(self, text='To reverse?', variable=self.check_box_reverse).grid(column=2, columnspan=2, row=9, padx=(0, 160))
+        # Schedule Button
+        ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
+            .grid(column=2, columnspan=2, rowspan=2, row=9, pady=(75, 0), padx=(1, 140))
 
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
@@ -95,6 +108,27 @@ class TabFollowers(ttk.Frame):
         self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
         self.proxy_entry.pack(side=LEFT)
         self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
+        # Schedule Actions
+        schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
+        schedule_frame.grid(column=4, row=6, rowspan=2, ipadx=25, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(schedule_frame)
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES,
+                                    command=self._enable_entry)
+        radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS,
+                                      command=self._enable_entry)
+        radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS,
+                                     command=self._enable_entry)
+        self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
+        self.hours_entry = ttk.Entry(entry_frame, textvariable=self.hours_entry_value, state='disabled')
+        self.days_entry = ttk.Entry(entry_frame, textvariable=self.days_entry_value, state='disabled')
+        radio_min.place(relx=0.08, rely=0)
+        radio_hours.place(relx=0.34, rely=0)
+        radio_days.place(relx=0.6, rely=0)
+        self.minutes_entry.pack(side=LEFT)
+        self.hours_entry.pack(side=LEFT)
+        self.days_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
     def _check_form(self):
@@ -188,6 +222,11 @@ class TabFollowers(ttk.Frame):
 
             limit_unfollow_list = self.limit_unfollow_list.get()
             to_reverse = self.check_box_reverse.get()
+            action = self.radio_var.get()
+            schedule_action = self.check_box_schedule.get()
+            minutes_entry = self.minutes_entry_value.get()
+            hours_entry = self.hours_entry_value.get()
+            days_entry = self.days_entry_value.get()
             username = self.username.get()
             password = self.password.get()
             proxy = self.proxy.get()
@@ -200,8 +239,13 @@ class TabFollowers(ttk.Frame):
                 for account in self.accounts:
                     if account[3] == username:
                         account_id = account[0]
-            t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list))
-            t.start()
+            if schedule_action:
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                timing_thread = threading.Timer(time_schedule, bot.unfollow_users, [users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list])
+                timing_thread.start()
+            else:
+                t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list))
+                t.start()
 
     def _unfollow_all_users_account_follow_them(self):
         to_delete = messagebox.askyesno('UNFOLLOW', 'Are you sure you want to UNFOLLOW all of them?')
@@ -209,6 +253,11 @@ class TabFollowers(ttk.Frame):
             username = self.username.get()
             password = self.password.get()
             limit_unfollowers = self.limit_unfollow_everyone.get()
+            action = self.radio_var.get()
+            schedule_action = self.check_box_schedule.get()
+            minutes_entry = self.minutes_entry_value.get()
+            hours_entry = self.hours_entry_value.get()
+            days_entry = self.days_entry_value.get()
             proxy = self.proxy.get()
             port = self.port.get()
             proxy_dict = {"proxy": proxy, "port": port}
@@ -216,8 +265,13 @@ class TabFollowers(ttk.Frame):
                 messagebox.showerror('Credentials', 'Please enter your username or password')
             else:
                 bot = FollowersBot(username, password, False, proxy_dict)
-                t = threading.Thread(target=bot.unfollow_all_users, args=[limit_unfollowers])
-                t.start()
+                if schedule_action:
+                    time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                    timing_thread = threading.Timer(time_schedule, bot.unfollow_all_users, [limit_unfollowers])
+                    timing_thread.start()
+                else:
+                    t = threading.Thread(target=bot.unfollow_all_users, args=[limit_unfollowers])
+                    t.start()
 
     def _remove_from_unfollow_list(self):
         name_selection = self.unfollow_users_list_box.get(self.unfollow_users_list_box.curselection())
@@ -244,6 +298,11 @@ class TabFollowers(ttk.Frame):
                 users_name_list.append(username[2])
             limit_unfollow_list = self.limit_unfollow_list.get()
             to_reverse = self.check_box_reverse.get()
+            action = self.radio_var.get()
+            schedule_action = self.check_box_schedule.get()
+            minutes_entry = self.minutes_entry_value.get()
+            hours_entry = self.hours_entry_value.get()
+            days_entry = self.days_entry_value.get()
             account_id = self._get_account_id()
             username = self.username.get()
             password = self.password.get()
@@ -257,5 +316,26 @@ class TabFollowers(ttk.Frame):
                 unfollow_users_list = future.result()
 
             bot = FollowersBot(username, password, False, proxy_dict)
-            t = threading.Thread(target=bot.unfollow_users, args=(unfollow_users_list, 1, account_id, 1, to_reverse, limit_unfollow_list))
-            t.start()
+            if schedule_action:
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                timing_thread = threading.Timer(time_schedule, bot.unfollow_users, [unfollow_users_list, 1, account_id, 1, to_reverse, limit_unfollow_list])
+                timing_thread.start()
+            else:
+                t = threading.Thread(target=bot.unfollow_users, args=(unfollow_users_list, 1, account_id, 1, to_reverse, limit_unfollow_list))
+                t.start()
+
+    # method to enable and disable entry by clicking the radio button
+    def _enable_entry(self):
+        radio_selected = self.radio_var.get()
+        if radio_selected == self.MINUTES:
+            self.minutes_entry.config(state=NORMAL)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.HOURS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=NORMAL)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.DAYS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=NORMAL)

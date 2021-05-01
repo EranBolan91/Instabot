@@ -20,17 +20,25 @@ class TabCombination(ttk.Frame):
 
         self.check_box_distribution_list = IntVar()
         self.distribution_menu_var = StringVar()
+        self.check_box_schedule = IntVar()
+        self.minutes_entry_value = IntVar()
+        self.hours_entry_value = IntVar()
+        self.days_entry_value = IntVar()
         self.amount_follows = IntVar()
         self.amount_likes = IntVar()
         self.username = StringVar()
         self.password = StringVar()
         self.skip_posts = IntVar()
         self.hashtag = StringVar()
+        self.radio_var = IntVar()
         self.proxy = StringVar()
         self.port = StringVar()
         self.menu = StringVar()
         self.url = StringVar()
         self.groups_list = []
+        self.MINUTES = 0
+        self.HOURS = 1
+        self.DAYS = 2
 
 
         self.check_box_distribution_list.set(0)
@@ -99,6 +107,9 @@ class TabCombination(ttk.Frame):
 
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, columnspan=2, row=10, pady=(40, 0), padx=(20, 0))
+        # Schedule Button
+        ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
+            .grid(column=0, columnspan=2, rowspan=2, row=11, pady=(20, 0), padx=(1, 1))
 
         # Proxy section
         proxy_frame = ttk.LabelFrame(self, text='Proxy')
@@ -108,6 +119,27 @@ class TabCombination(ttk.Frame):
         self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
         self.proxy_entry.pack(side=LEFT)
         self.port_entry.pack(side=LEFT)
+        entry_frame.pack(side=LEFT, pady=(50, 0))
+
+        # Schedule Actions
+        schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
+        schedule_frame.grid(column=3, row=4, rowspan=2, ipadx=25, ipady=10, padx=(30, 0))
+        entry_frame = ttk.Frame(schedule_frame)
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES,
+                                    command=self._enable_entry)
+        radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS,
+                                      command=self._enable_entry)
+        radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS,
+                                     command=self._enable_entry)
+        self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
+        self.hours_entry = ttk.Entry(entry_frame, textvariable=self.hours_entry_value, state='disabled')
+        self.days_entry = ttk.Entry(entry_frame, textvariable=self.days_entry_value, state='disabled')
+        radio_min.place(relx=0.08, rely=0)
+        radio_hours.place(relx=0.34, rely=0)
+        radio_days.place(relx=0.6, rely=0)
+        self.minutes_entry.pack(side=LEFT)
+        self.hours_entry.pack(side=LEFT)
+        self.days_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
     def _run_script(self):
@@ -121,6 +153,11 @@ class TabCombination(ttk.Frame):
         port = self.port.get()
         url = self.url.get()
         skip_posts = self.skip_posts.get()
+        action = self.radio_var.get()
+        schedule_action = self.check_box_schedule.get()
+        minutes_entry = self.minutes_entry_value.get()
+        hours_entry = self.hours_entry_value.get()
+        days_entry = self.days_entry_value.get()
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -136,8 +173,13 @@ class TabCombination(ttk.Frame):
 
         if valid:
             bot = CombinationBot(username, password, False, proxy_dict)
-            t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts))
-            t.start()
+            if schedule_action:
+                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
+                timing_thread = threading.Timer(time_schedule, bot.combination, [hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts])
+                timing_thread.start()
+            else:
+                t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts))
+                t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
@@ -188,3 +230,19 @@ class TabCombination(ttk.Frame):
             return False
 
         return True
+
+    # method to enable and disable entry by clicking the radio button
+    def _enable_entry(self):
+        radio_selected = self.radio_var.get()
+        if radio_selected == self.MINUTES:
+            self.minutes_entry.config(state=NORMAL)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.HOURS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=NORMAL)
+            self.days_entry.config(state=DISABLED)
+        elif radio_selected == self.DAYS:
+            self.minutes_entry.config(state=DISABLED)
+            self.hours_entry.config(state=DISABLED)
+            self.days_entry.config(state=NORMAL)

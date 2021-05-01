@@ -46,8 +46,9 @@ class InstagramBot:
 
     def _login(self):
         self.driver.get('{}/accounts/login/'.format(self.base_url))
-        time.sleep(1.5)
-        self.driver.find_element_by_name('username').send_keys(self.username)
+        WebDriverWait(self.driver, 7).until(
+            EC.element_to_be_clickable((By.NAME, 'username'))).send_keys(self.username)
+        #self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
         time.sleep(2.2)
 

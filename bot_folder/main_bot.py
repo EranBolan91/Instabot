@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from utils.utils import Utils as utils
 from database import db
+from bot_folder import proxy
 import time, random, requests
 import os
 
@@ -21,10 +22,11 @@ class InstagramBot:
         options.page_load_strategy = 'eager'
         # options.add_argument("--headless")
         options.add_argument('--no-sandbox')
-        options.add_argument('--disable-extensions')
+        #options.add_argument('--disable-extensions')
         options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--disable-notifications")
+        options.add_extension(proxy.get_proxy_plugin())
 
         if proxy_dict["proxy"]:
             PROXY = "{}:{}".format(proxy_dict["proxy"], proxy_dict["port"])

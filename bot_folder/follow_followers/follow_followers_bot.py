@@ -119,7 +119,7 @@ class FollowFollowersBot(main_bot.InstagramBot):
         wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/following')]"))).click()
         time.sleep(1.5)
         # getting the box element
-        scroll_box = self.driver.find_element_by_xpath("/ html / body / div[5] / div / div / div[2]")
+        scroll_box = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]")
         last_height, height = 0, 1
         # this while scrolls all over the followers
         while last_height != height:

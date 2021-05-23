@@ -4,6 +4,7 @@ import tkinter.font as tkfont
 from database import db
 from database.dm import dm
 from bot_folder.combination.combination_bot import CombinationBot
+from database.combination.combination import CombinationDM
 from utils.schedule import ScheduleCalc
 import threading
 
@@ -29,6 +30,7 @@ class TabCombination(ttk.Frame):
         self.username = StringVar()
         self.password = StringVar()
         self.skip_posts = IntVar()
+        self.skip_users = IntVar()
         self.hashtag = StringVar()
         self.radio_var = IntVar()
         self.proxy = StringVar()
@@ -105,6 +107,9 @@ class TabCombination(ttk.Frame):
         ttk.Label(self, text='Skip posts').grid(column=2, row=7, pady=(50, 0))
         ttk.Entry(self, textvariable=self.skip_posts).grid(column=2, row=8, pady=(25, 0))
 
+        ttk.Label(self, text='Skip users').grid(column=2, row=8, pady=(90, 0))
+        ttk.Entry(self, textvariable=self.skip_users).grid(column=2, row=9, pady=(20, 0))
+
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, columnspan=2, row=10, pady=(40, 0), padx=(20, 0))
         # Schedule Button
@@ -142,6 +147,18 @@ class TabCombination(ttk.Frame):
         self.days_entry.pack(side=LEFT)
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
+        # Users data box - right side
+        ttk.Label(self, text='User data', font=self.headerFont).grid(column=3, row=5, rowspan=3, padx=(0, 50), pady=(50, 0))
+        data_frame = ttk.Frame(self)
+        data_frame.grid(column=3, row=6, rowspan=4, padx=0, pady=(70, 0))
+        scrollbary = ttk.Scrollbar(data_frame)
+        scrollbarx = ttk.Scrollbar(data_frame, orient=HORIZONTAL)
+        scrollbary.pack(side=RIGHT, fill=Y)
+        scrollbarx.pack(side=BOTTOM, fill=X)
+        self.data_frame_box = Listbox(data_frame, width=70, height=10,
+                                        yscrollcommand=scrollbary.set, xscrollcommand=scrollbarx.set)
+        self.data_frame_box.pack()
+
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
@@ -153,6 +170,7 @@ class TabCombination(ttk.Frame):
         port = self.port.get()
         url = self.url.get()
         skip_posts = self.skip_posts.get()
+        skip_users = self.skip_users.get()
         action = self.radio_var.get()
         schedule_action = self.check_box_schedule.get()
         minutes_entry = self.minutes_entry_value.get()
@@ -175,10 +193,10 @@ class TabCombination(ttk.Frame):
             bot = CombinationBot(username, password, False, proxy_dict)
             if schedule_action:
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                timing_thread = threading.Timer(time_schedule, bot.combination, [hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts])
+                timing_thread = threading.Timer(time_schedule, bot.combination, [hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users])
                 timing_thread.start()
             else:
-                t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts))
+                t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users))
                 t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password
@@ -199,6 +217,7 @@ class TabCombination(ttk.Frame):
                 else:
                     self.distribution_title.grid(column=1, row=3)
                     self.distribution_menu.grid_forget()
+                self._get_account_data_for_data_box(account[3])
 
     def _check_form(self, username, password, hash_tag, url, follows, likes, proxy, port):
         if username == '' or password == '':
@@ -246,3 +265,11 @@ class TabCombination(ttk.Frame):
             self.minutes_entry.config(state=DISABLED)
             self.hours_entry.config(state=DISABLED)
             self.days_entry.config(state=NORMAL)
+
+    def _get_account_data_for_data_box(self, account_name):
+        account_data = CombinationDM().get_account_data(account_name)
+        self.data_frame_box.delete(0, 'end')
+        for data in account_data:
+            box = """ Date: {} | Follow: {} | Failed Follow: {} | Skip: {} | URL: {} """.format(
+                data[11], data[6], data[5], data[12], data[2],)
+            self.data_frame_box.insert(END, box)

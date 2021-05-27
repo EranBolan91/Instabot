@@ -164,8 +164,7 @@ class CombinationBot(main_bot.InstagramBot):
             print('Combination: ', e)
 
     def _like_post(self, wait):
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, '/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span/svg'))).click()
+        pass  # TODO: like post
 
     def _open_likes(self, wait, last_place):
         try:

@@ -13,6 +13,7 @@ import datetime as dt
 from random import randint
 from database import db
 from models.followers import Followers
+from bs4 import BeautifulSoup as bs
 
 
 PROCESS_TIME = 60 * 60 / 8
@@ -72,7 +73,7 @@ class CombinationBot(main_bot.InstagramBot):
 
                     try:
                         if follow_buttons[0][1].text == 'Follow':
-                            if self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter):
+                            if self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter, wait):
                                 follow_counter += 1
                                 max_followers -= 1
                     except Exception as e:
@@ -164,7 +165,12 @@ class CombinationBot(main_bot.InstagramBot):
             print('Combination: ', e)
 
     def _like_post(self, wait):
-        pass  # TODO: like post
+        time.sleep(2)
+        like = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, 'fr66n')))
+        soup = bs(like.get_attribute('innerHTML'), 'html.parser')
+        if(soup.find('svg')['aria-label'] == 'Like'):
+            like.click()
 
     def _open_likes(self, wait, last_place):
         try:
@@ -186,13 +192,14 @@ class CombinationBot(main_bot.InstagramBot):
             return wait.until(
                 EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
 
-    def _follow(self, button, username, settings_data_from_db, follow_count):
+    def _follow(self, button, username, settings_data_from_db, follow_count, wait):
         followed = False
 
         followers_num, has_image_profile = self._get_followers_number(username)
         if has_image_profile == -1:
             if int(followers_num) >= int(settings_data_from_db[2]):
                 button.click()
+                self._like_two_posts(wait, [0, 0, 0])
                 followed = True
                 print("followed {}".format(username))
 
@@ -212,6 +219,15 @@ class CombinationBot(main_bot.InstagramBot):
             pass
 
         return followed
+
+    def _like_two_posts(self, wait, last_place):
+        first_post = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+        first_post.click()
+
+        self._like_post()
+        self._go_to_next_post()
+        self._like_post()
 
     def _print_username_and_time(self, loops):
         if loops % utils.TIME_SLEEP == 0:
@@ -350,7 +366,7 @@ class CombinationBot(main_bot.InstagramBot):
             pass
         # count how many users follow back
         try:
-            self.wait.until(EC.element_to_be_clickable(
+            wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '//button[text()="Follow Back"]')))
             follow_back = True
         except Exception as e:

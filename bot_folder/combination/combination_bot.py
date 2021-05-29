@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup as bs
 
 
 PROCESS_TIME = 60 * 60 / 8
-MAX_FOLLOWERS_EACH_PROCESS = 100
+MAX_FOLLOWERS_EACH_PROCESS = 2
 WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 
 POST = 0
@@ -27,39 +27,29 @@ BUTTON = 2
 
 class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts):
-        self.automation(followers, hashtag, url, skip_posts, likes)
+        self.automation(followers, hashtag, url, skip_posts)
 
-    def automation(self, max_followers, hashtag, url, skip_posts, likes):
+    def automation(self, max_followers, hashtag, url, skip_posts):
         wait = WebDriverWait(self.driver, 5)
         settings_data_from_db = CombinationDM().get_data_from_settings()
         follow_buttons = []
         curr_height = 0
-        curr_like = 0
-        last_place = [0, 0, 0]
+        i = 0
 
         self._login()
+        self._get_wanted_post(
+            hashtag, url, skip_posts, wait)
+
+        self._open_likes(wait)
+        scroll_box = self._get_scroll_box(wait)
 
         while max_followers > 0:
             follow_counter = 0
 
-            self._get_wanted_post(
-                hashtag, url, skip_posts + last_place[POST], wait)
-
-            if curr_like < likes:
-                self.is_post_liked()
-                self._like_post(wait)
-                curr_like += 1
-
-            self._open_likes(wait, last_place)
-            scroll_box = self._get_scroll_box(wait)
-
-            follow_buttons, curr_height, scroll_box = self._go_to_last_place(
-                last_place, scroll_box, wait)
-
-            while follow_counter < MAX_FOLLOWERS_EACH_PROCESS:
+            while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0:
                 curr_follow_add = randint(1, 4)
 
-                for i in range(curr_follow_add):
+                while i < curr_follow_add:
                     print("combination follow: {} people left to follow".format(
                         max_followers))
 
@@ -69,23 +59,23 @@ class CombinationBot(main_bot.InstagramBot):
                     # checking for buttons if not, reload them
                     if not follow_buttons:
                         follow_buttons, curr_height, scroll_box = self._get_buttons(
-                            scroll_box, curr_height, last_place, wait)
+                            scroll_box, curr_height, wait)
 
                     try:
                         if follow_buttons[0][1].text == 'Follow':
                             if self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter, wait):
                                 follow_counter += 1
                                 max_followers -= 1
+                                i += 1
                     except Exception as e:
                         print(e)
 
                     # remove the first button
                     follow_buttons.pop(0)
-                    last_place[BUTTON] += 1
 
                 print("waiting {} secodns".format(
                     WAIT_FOR_EACH_FOLLOW * curr_follow_add))
-                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
+                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add * 0)
 
             unfollow_users = self.database.get_unfollow_users(self.username)
             self._unfollow_users(
@@ -94,17 +84,7 @@ class CombinationBot(main_bot.InstagramBot):
         self.driver.delete_all_cookies()
         self.driver.close()
 
-    def _go_to_last_place(self, last_place, scroll_box, wait):
-        height = 0
-
-        for i in range(last_place[HEIGHT]):
-            height = self._scroll_down(scroll_box, last_place)
-
-        buttons, height, scroll_box = self._get_buttons(scroll_box, height, last_place, wait)[
-            last_place[BUTTON]:]
-        return buttons, height, scroll_box
-
-    def _scroll_down(self, scroll_box, last_place):
+    def _scroll_down(self, scroll_box):
         height = self.driver.execute_script("""
                                         arguments[0].scrollTo(
                                             0, arguments[0].scrollHeight);
@@ -114,18 +94,16 @@ class CombinationBot(main_bot.InstagramBot):
         time.sleep(2)
         return height
 
-    def _get_buttons(self, scroll_box, last_height, last_place, wait):
-        last_place[BUTTON] = 0
-        last_place[HEIGHT] += 1
-        height = self._scroll_down(scroll_box, last_place)
+    def _get_buttons(self, scroll_box, last_height, wait):
+        height = self._scroll_down(scroll_box)
 
         # checking if we made it to the end of the post
         if height == last_height:
-            self._go_to_next_post(wait, last_place)
-            self._open_likes(wait, last_place)
+            self._go_to_next_post(wait)
+
+            self._open_likes(wait)
             scroll_box = self._get_scroll_box(wait)
-            height = self._scroll_down(scroll_box, last_place)
-            last_place[HEIGHT] = 1
+            height = self._scroll_down(scroll_box)
 
         users_name_list = self.driver.find_elements_by_class_name(
             'MBL3Z')
@@ -172,7 +150,7 @@ class CombinationBot(main_bot.InstagramBot):
         if(soup.find('svg')['aria-label'] == 'Like'):
             like.click()
 
-    def _open_likes(self, wait, last_place):
+    def _open_likes(self, wait):
         try:
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
@@ -181,8 +159,8 @@ class CombinationBot(main_bot.InstagramBot):
                 wait.until(
                     EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/article/div[2]/div[2]/div/section[1]/div/div/a'))).click()
             except Exception as e:
-                self._go_to_next_post(wait, last_place)
-                self._open_likes(wait, last_place)
+                self._go_to_next_post(wait)
+                self._open_likes(wait)
 
     def _get_scroll_box(self, wait):
         try:
@@ -201,11 +179,10 @@ class CombinationBot(main_bot.InstagramBot):
                 button.click()
 
                 try:
-                    self._like_two_posts(wait, [0, 0, 0], username)
+                    self._like_two_posts(wait, username)
                 except Exception as e:
                     self.driver.close()
                     self.driver.switch_to.window(self.driver.window_handles[0])
-                    print(e)
 
                 followed = True
                 print("followed {}".format(username))
@@ -227,7 +204,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         return followed
 
-    def _like_two_posts(self, wait, last_place, username):
+    def _like_two_posts(self, wait, username):
         self._nav_user_new_tab(username)
         self.driver.switch_to.window(self.driver.window_handles[1])
 
@@ -236,7 +213,7 @@ class CombinationBot(main_bot.InstagramBot):
         first_post.click()
 
         self._like_post(wait)
-        self._go_to_next_post(wait, last_place)
+        self._go_to_next_post(wait)
         self._like_post(wait)
 
         self.driver.close()
@@ -250,7 +227,7 @@ class CombinationBot(main_bot.InstagramBot):
                   loops * utils.TIME_SLEEP, 'seconds')
             time.sleep(loops * utils.TIME_SLEEP)
 
-    def _go_to_next_post(self, wait, last_place):
+    def _go_to_next_post(self, wait):
         try:
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '/html/body/div[6]/div/div/div[1]/div/div[2]/button'))).click()
@@ -260,11 +237,12 @@ class CombinationBot(main_bot.InstagramBot):
             wait.until(EC.element_to_be_clickable(
                 (By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
 
-        last_place[POST] += 1
         time.sleep(1)
 
     def _unfollow_users(self, user_list, account_id, wait):
         curr_user = 0
+        self._nav_user_new_tab("")
+        self.driver.switch_to.window(self.driver.window_handles[1])
 
         while curr_user < len(user_list):
             follow_sub = randint(1, 4)
@@ -286,7 +264,10 @@ class CombinationBot(main_bot.InstagramBot):
 
             print("waiting {} secodns".format(
                 WAIT_FOR_EACH_FOLLOW * follow_sub))
-            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub)
+            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub * 0)
+
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
 
     def _unfollow(self, user, account_id, wait):
         follow_back = False

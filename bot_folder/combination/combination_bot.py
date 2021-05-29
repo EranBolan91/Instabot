@@ -199,7 +199,14 @@ class CombinationBot(main_bot.InstagramBot):
         if has_image_profile == -1:
             if int(followers_num) >= int(settings_data_from_db[2]):
                 button.click()
-                self._like_two_posts(wait, [0, 0, 0])
+
+                try:
+                    self._like_two_posts(wait, [0, 0, 0], username)
+                except Exception as e:
+                    self.driver.close()
+                    self.driver.switch_to.window(self.driver.window_handles[0])
+                    print(e)
+
                 followed = True
                 print("followed {}".format(username))
 
@@ -220,14 +227,20 @@ class CombinationBot(main_bot.InstagramBot):
 
         return followed
 
-    def _like_two_posts(self, wait, last_place):
+    def _like_two_posts(self, wait, last_place, username):
+        self._nav_user_new_tab(username)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
         first_post = wait.until(
             EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
         first_post.click()
 
-        self._like_post()
-        self._go_to_next_post()
-        self._like_post()
+        self._like_post(wait)
+        self._go_to_next_post(wait, last_place)
+        self._like_post(wait)
+
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
 
     def _print_username_and_time(self, loops):
         if loops % utils.TIME_SLEEP == 0:

@@ -118,7 +118,8 @@ class Database:
                                schedule BOOLEAN,
                                distribution BOOLEAN,
                                group_name TEXT,
-                               date DATETIME)
+                               date DATETIME,
+                               skip_users INT)
                                """)
 
         # Table Follow back

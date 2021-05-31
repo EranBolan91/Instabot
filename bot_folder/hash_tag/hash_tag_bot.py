@@ -31,7 +31,7 @@ class HashTagBot(main_bot.InstagramBot):
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
             first_post = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
-            while i <= int(amount):
+            while i < int(amount):
                 if loops % utils.TIME_SLEEP == 0:
                     if int(amount) != int(i):
                         print('Username:', self.username, 'Time start: ', dt.datetime.now().strftime('%H:%M:%S'),
@@ -92,5 +92,5 @@ class HashTagBot(main_bot.InstagramBot):
                           to_distribution, group_name, join_comment, failed_posts_num, time_schedule)
         HashtagDB().save_in_db(hashtag)
         account_id = CombinationDM().get_user_id(self.username)
-        account_action = AccountActions(account_id, self.username, "HashTag", amount, int(amount - failed_posts_num))
+        account_action = AccountActions(account_id, self.username, "HashTag", amount, int(amount) - int(failed_posts_num))
         FollowersDB().save_data_account_action(account_action)

@@ -8,11 +8,11 @@ class CombinationDM(db.Database):
             conn = sqlite3.connect(self.database_name)
             cur = conn.cursor()
             cur.execute("""INSERT INTO combination (account, url, hashtag, num_likes, num_failed_likes, num_followers, 
-                num_failed_followers, schedule, distribution, group_name, date) VALUES(?,?,?,?,?,?,?,
+                num_failed_followers, schedule, distribution, group_name, date, skip_users) VALUES(?,?,?,?,?,?,?,?,
                 ?,?,?,?)""",
                         (combo_obj.account, combo_obj.url, combo_obj.hashtag, combo_obj.num_likes,
                          combo_obj.num_failed_likes, combo_obj.num_followers, combo_obj.num_failed_followers,
-                         combo_obj.schedule, combo_obj.distribution, combo_obj.group_name, combo_obj.date))
+                         combo_obj.schedule, combo_obj.distribution, combo_obj.group_name, combo_obj.date, combo_obj.skip_users,))
             conn.commit()
         except Exception as e:
             print('save_in_db_combination: ', e)
@@ -27,6 +27,18 @@ class CombinationDM(db.Database):
             data = cur.execute(" SELECT * FROM combination ").fetchall()
         except Exception as e:
             print('get combination data: ', e)
+        finally:
+            conn.close()
+            return data
+
+    def get_account_data(self, account_name):
+        data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            data = cur.execute(" SELECT * FROM combination WHERE account= '{}' ".format(account_name)).fetchall()
+        except Exception as e:
+            print('combination: get account data: ', e)
         finally:
             conn.close()
             return data

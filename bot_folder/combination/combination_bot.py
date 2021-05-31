@@ -16,13 +16,9 @@ from models.followers import Followers
 from bs4 import BeautifulSoup as bs
 
 
-PROCESS_TIME = 60 * 60 / 8
-MAX_FOLLOWERS_EACH_PROCESS = 2
+PROCESS_TIME = 60 * 60 * 12
+MAX_FOLLOWERS_EACH_PROCESS = 100
 WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
-
-POST = 0
-HEIGHT = 1
-BUTTON = 2
 
 
 class CombinationBot(main_bot.InstagramBot):
@@ -34,7 +30,6 @@ class CombinationBot(main_bot.InstagramBot):
         settings_data_from_db = CombinationDM().get_data_from_settings()
         follow_buttons = []
         curr_height = 0
-        i = 0
 
         self._login()
         self._get_wanted_post(
@@ -48,10 +43,11 @@ class CombinationBot(main_bot.InstagramBot):
 
             while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0:
                 curr_follow_add = randint(1, 4)
+                i = 0
 
                 while i < curr_follow_add:
-                    print("combination follow: {} people left to follow".format(
-                        max_followers))
+                    print("{} -- combination follow: {} people left to follow".format(
+                        self.username, max_followers))
 
                     if max_followers <= 0:
                         break
@@ -73,9 +69,9 @@ class CombinationBot(main_bot.InstagramBot):
                     # remove the first button
                     follow_buttons.pop(0)
 
-                print("waiting {} secodns".format(
-                    WAIT_FOR_EACH_FOLLOW * curr_follow_add))
-                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add * 0)
+                print("{} -- waiting {} seconds".format(
+                    self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
+                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
 
             unfollow_users = self.database.get_unfollow_users(self.username)
             self._unfollow_users(
@@ -185,7 +181,7 @@ class CombinationBot(main_bot.InstagramBot):
                     self.driver.switch_to.window(self.driver.window_handles[0])
 
                 followed = True
-                print("followed {}".format(username))
+                print("{} -- followed {}".format(self.username, username))
 
         self.database.save_unfollow_users(
             username, self.username)
@@ -251,8 +247,8 @@ class CombinationBot(main_bot.InstagramBot):
                 if curr_user >= len(user_list):
                     break
 
-                print("combination unfollow: {} people left to unfollow".format(
-                    len(user_list) - curr_user))
+                print("{} -- combination unfollow: {} people left to unfollow".format(
+                    self.username, len(user_list) - curr_user))
 
                 if self._unfollow(user_list[curr_user][2], account_id, wait) == -1:
                     self._send_email(self.username, curr_user, dt.datetime.now().strftime(
@@ -262,9 +258,9 @@ class CombinationBot(main_bot.InstagramBot):
 
                 curr_user += 1
 
-            print("waiting {} secodns".format(
-                WAIT_FOR_EACH_FOLLOW * follow_sub))
-            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub * 0)
+            print("{} -- waiting {} secodns".format(
+                self.username, WAIT_FOR_EACH_FOLLOW * follow_sub))
+            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub)
 
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])

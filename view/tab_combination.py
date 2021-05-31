@@ -14,7 +14,8 @@ class TabCombination(ttk.Frame):
         super().__init__(window)
 
         self.dividerFont = tkfont.Font(family="Helvetica", size=25)
-        self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
+        self.headerFont = tkfont.Font(
+            family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
         self.bold = tkfont.Font(weight='bold', size=10)
@@ -42,7 +43,6 @@ class TabCombination(ttk.Frame):
         self.HOURS = 1
         self.DAYS = 2
 
-
         self.check_box_distribution_list.set(0)
 
         self.accounts = db.Database().get_accounts()
@@ -56,24 +56,32 @@ class TabCombination(ttk.Frame):
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont) \
             .grid(column=0, row=1, padx=10, pady=5)
-        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=2, padx=(50, 0), pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.username, show='*').grid(column=0, row=2)
-        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=3, padx=(50, 0), pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.password, show='*').grid(column=0, row=3)
+        ttk.Label(self, text='username:', font=self.bold).grid(
+            column=0, row=2, padx=(50, 0), pady=10, sticky='w')
+        ttk.Entry(self, textvariable=self.username,
+                  show='*').grid(column=0, row=2)
+        ttk.Label(self, text='password:', font=self.bold).grid(
+            column=0, row=3, padx=(50, 0), pady=10, sticky='w')
+        ttk.Entry(self, textvariable=self.password,
+                  show='*').grid(column=0, row=3)
 
         # Hash tag form - for example 'travel'
-        ttk.Label(self, text='Enter the hash tag keyword ', font=self.h3).grid(column=0, row=5, padx=10, pady=10)
+        ttk.Label(self, text='Enter the hash tag keyword ',
+                  font=self.h3).grid(column=0, row=5, padx=10, pady=10)
         ttk.Entry(self, textvariable=self.hashtag).grid(column=0, row=6)
 
         # OR
-        ttk.Label(self, text='<-- OR -->', font=self.dividerFont).grid(column=1, row=5, rowspan=2, padx=(0, 70), pady=(40, 0))
+        ttk.Label(self, text='<-- OR -->', font=self.dividerFont).grid(column=1,
+                                                                       row=5, rowspan=2, padx=(0, 70), pady=(40, 0))
 
         # URL input
-        ttk.Label(self, text='Enter the URL', font=self.h3).grid(column=2, row=5)
+        ttk.Label(self, text='Enter the URL',
+                  font=self.h3).grid(column=2, row=5)
         ttk.Entry(self, textvariable=self.url, width=50).grid(column=2, row=6)
 
         # Users menu
-        ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=(25, 0))
+        ttk.Label(self, text='Choose user', font=self.titleFont).grid(
+            column=1, row=1, padx=10, pady=(25, 0))
         if len(user_name_list) > 0:
             self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                                                        command=self._set_username_password)
@@ -98,29 +106,38 @@ class TabCombination(ttk.Frame):
         self.distribution_check_box.grid(column=2, row=3, pady=10)
 
         # Input of amount for likes and follow
-        ttk.Label(self, text='Enter the number of posts to like').grid(column=0, row=7, pady=(50, 0))
-        ttk.Entry(self, textvariable=self.amount_likes).grid(column=0, row=8, pady=(25, 0))
+        ttk.Label(self, text='Enter the number of posts to like').grid(
+            column=0, row=7, pady=(50, 0))
+        ttk.Entry(self, textvariable=self.amount_likes).grid(
+            column=0, row=8, pady=(25, 0))
 
-        ttk.Label(self, text='Enter the number of users to follow').grid(column=1, row=7, pady=(50, 0))
-        ttk.Entry(self, textvariable=self.amount_follows).grid(column=1, row=8, pady=(25, 0))
+        ttk.Label(self, text='Enter the number of users to follow').grid(
+            column=1, row=7, pady=(50, 0))
+        ttk.Entry(self, textvariable=self.amount_follows).grid(
+            column=1, row=8, pady=(25, 0))
 
         ttk.Label(self, text='Skip posts').grid(column=2, row=7, pady=(50, 0))
-        ttk.Entry(self, textvariable=self.skip_posts).grid(column=2, row=8, pady=(25, 0))
+        ttk.Entry(self, textvariable=self.skip_posts).grid(
+            column=2, row=8, pady=(25, 0))
 
         ttk.Label(self, text='Skip users').grid(column=2, row=8, pady=(90, 0))
-        ttk.Entry(self, textvariable=self.skip_users).grid(column=2, row=9, pady=(20, 0))
+        ttk.Entry(self, textvariable=self.skip_users).grid(
+            column=2, row=9, pady=(20, 0))
 
         # Run the script button
-        ttk.Button(self, text="RUN", command=self._run_script).grid(column=0, columnspan=2, row=10, pady=(40, 0), padx=(20, 0))
+        ttk.Button(self, text="RUN", command=self._run_script).grid(
+            column=0, columnspan=2, row=10, pady=(40, 0), padx=(20, 0))
         # Schedule Button
         ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
             .grid(column=0, columnspan=2, rowspan=2, row=11, pady=(20, 0), padx=(1, 1))
 
         # Proxy section
         proxy_frame = ttk.LabelFrame(self, text='Proxy')
-        proxy_frame.grid(column=3, row=2, rowspan=2, ipadx=40, ipady=10, padx=(30, 0))
+        proxy_frame.grid(column=3, row=2, rowspan=2,
+                         ipadx=40, ipady=10, padx=(30, 0))
         entry_frame = ttk.Frame(proxy_frame)
-        self.proxy_entry = ttk.Entry(entry_frame, textvariable=self.proxy, width=20)
+        self.proxy_entry = ttk.Entry(
+            entry_frame, textvariable=self.proxy, width=20)
         self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
         self.proxy_entry.pack(side=LEFT)
         self.port_entry.pack(side=LEFT)
@@ -128,7 +145,8 @@ class TabCombination(ttk.Frame):
 
         # Schedule Actions
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
-        schedule_frame.grid(column=3, row=4, rowspan=2, ipadx=25, ipady=10, padx=(30, 0))
+        schedule_frame.grid(column=3, row=4, rowspan=2,
+                            ipadx=25, ipady=10, padx=(30, 0))
         entry_frame = ttk.Frame(schedule_frame)
         radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES,
                                     command=self._enable_entry)
@@ -136,9 +154,12 @@ class TabCombination(ttk.Frame):
                                       command=self._enable_entry)
         radio_days = ttk.Radiobutton(schedule_frame, text='Days', variable=self.radio_var, value=self.DAYS,
                                      command=self._enable_entry)
-        self.minutes_entry = ttk.Entry(entry_frame, textvariable=self.minutes_entry_value)
-        self.hours_entry = ttk.Entry(entry_frame, textvariable=self.hours_entry_value, state='disabled')
-        self.days_entry = ttk.Entry(entry_frame, textvariable=self.days_entry_value, state='disabled')
+        self.minutes_entry = ttk.Entry(
+            entry_frame, textvariable=self.minutes_entry_value)
+        self.hours_entry = ttk.Entry(
+            entry_frame, textvariable=self.hours_entry_value, state='disabled')
+        self.days_entry = ttk.Entry(
+            entry_frame, textvariable=self.days_entry_value, state='disabled')
         radio_min.place(relx=0.08, rely=0)
         radio_hours.place(relx=0.34, rely=0)
         radio_days.place(relx=0.6, rely=0)
@@ -148,7 +169,8 @@ class TabCombination(ttk.Frame):
         entry_frame.pack(side=LEFT, pady=(50, 0))
 
         # Users data box - right side
-        ttk.Label(self, text='User data', font=self.headerFont).grid(column=3, row=5, rowspan=3, padx=(0, 50), pady=(50, 0))
+        ttk.Label(self, text='User data', font=self.headerFont).grid(
+            column=3, row=5, rowspan=3, padx=(0, 50), pady=(50, 0))
         data_frame = ttk.Frame(self)
         data_frame.grid(column=3, row=6, rowspan=4, padx=0, pady=(70, 0))
         scrollbary = ttk.Scrollbar(data_frame)
@@ -156,7 +178,7 @@ class TabCombination(ttk.Frame):
         scrollbary.pack(side=RIGHT, fill=Y)
         scrollbarx.pack(side=BOTTOM, fill=X)
         self.data_frame_box = Listbox(data_frame, width=70, height=10,
-                                        yscrollcommand=scrollbary.set, xscrollcommand=scrollbarx.set)
+                                      yscrollcommand=scrollbary.set, xscrollcommand=scrollbarx.set)
         self.data_frame_box.pack()
 
     def _run_script(self):
@@ -186,17 +208,21 @@ class TabCombination(ttk.Frame):
             group_name = ""
             group_id = ""
 
-        valid = self._check_form(username, password, hash_tag, url, follow, like, proxy, port)
+        valid = self._check_form(
+            username, password, hash_tag, url, follow, like, proxy, port)
         proxy_dict = {"proxy": proxy, "port": port}
 
         if valid:
             bot = CombinationBot(username, password, False, proxy_dict)
             if schedule_action:
-                time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                timing_thread = threading.Timer(time_schedule, bot.combination, [hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users])
+                time_schedule = ScheduleCalc().calc_schedule_time(
+                    action, minutes_entry, hours_entry, days_entry)
+                timing_thread = threading.Timer(time_schedule, bot.combination, [
+                                                hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users])
                 timing_thread.start()
             else:
-                t = threading.Thread(target=bot.combination, args=(hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users))
+                t = threading.Thread(target=bot.combination, args=(
+                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users))
                 t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password
@@ -221,11 +247,13 @@ class TabCombination(ttk.Frame):
 
     def _check_form(self, username, password, hash_tag, url, follows, likes, proxy, port):
         if username == '' or password == '':
-            messagebox.showerror('Credentials', 'Please enter your username or password')
+            messagebox.showerror(
+                'Credentials', 'Please enter your username or password')
             return False
 
         if not hash_tag and not url:
-            messagebox.showerror('Search data', 'Hash tag and url entry cannot be empty')
+            messagebox.showerror(
+                'Search data', 'Hash tag and url entry cannot be empty')
             return False
 
         if follows == 0:
@@ -237,11 +265,13 @@ class TabCombination(ttk.Frame):
             return False
 
         if url and hash_tag:
-            messagebox.showerror('Too many arguments', 'You can choose only one action! HASHTAG or URL')
+            messagebox.showerror(
+                'Too many arguments', 'You can choose only one action! HASHTAG or URL')
             return False
 
         if proxy and not port:
-            messagebox.showerror('PROXY', 'Please enter port number for the proxy')
+            messagebox.showerror(
+                'PROXY', 'Please enter port number for the proxy')
             return False
 
         if not proxy and port:

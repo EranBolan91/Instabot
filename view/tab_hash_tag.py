@@ -114,8 +114,8 @@ class TabHashTag(ttk.Frame):
         # Refresh accounts button
         # photo = PhotoImage(file="../images/refresh2.png")
         # photo_image = photo.subsample(3, 3)
-        # ttk.Button(self, text='REFRESH LIST', compound=LEFT, command=self._get_accounts)\
-        #               .grid(column=1, row=2, padx=(220, 0))
+        # TODO: This is the refresh button. it needs to refresh the list of the accounts
+        ttk.Button(self, text='REFRESH LIST', compound=LEFT, command=self._get_accounts).grid(column=1, row=2, padx=(220, 0))
 
         # Schedule Actions
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
@@ -286,3 +286,4 @@ class TabHashTag(ttk.Frame):
             user_name_list.append(account[3])
         # self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
         #                                            command=self._set_username_password)
+        

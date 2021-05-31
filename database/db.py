@@ -143,6 +143,15 @@ class Database:
                                FOREIGN KEY(user_id) REFERENCES accounts(id))
                                """)
 
+        # Table Proxy
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS proxy (
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               host TEXT,
+                               username TEXT,
+                               password TEXT,
+                               port INT)
+                               """)
+
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db

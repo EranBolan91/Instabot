@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/database/proxy/proxy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/combination/combination.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/combination/combination.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/combination.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/combination.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proxy_auth_plugin.zip" beforeDir="false" afterPath="$PROJECT_DIR$/proxy_auth_plugin.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_combination.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_combination.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,42 +185,42 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="849" height="465" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1621371600863" />
-    <state width="1345" height="182" key="GridCell.Tab.0.bottom" timestamp="1621808996340">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom" timestamp="1622494982267">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1621808996340" />
-    <state width="1345" height="182" key="GridCell.Tab.0.center" timestamp="1621808996340">
+    <state width="1345" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1622494982267" />
+    <state width="1345" height="180" key="GridCell.Tab.0.center" timestamp="1622494982267">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1621808996340" />
-    <state width="1345" height="182" key="GridCell.Tab.0.left" timestamp="1621808996340">
+    <state width="1345" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1622494982267" />
+    <state width="1345" height="180" key="GridCell.Tab.0.left" timestamp="1622494982267">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1621808996340" />
-    <state width="1345" height="182" key="GridCell.Tab.0.right" timestamp="1621808996340">
+    <state width="1345" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1622494982267" />
+    <state width="1345" height="180" key="GridCell.Tab.0.right" timestamp="1622494982267">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1621808996340" />
-    <state width="1345" height="199" key="GridCell.Tab.1.bottom" timestamp="1621807081488">
+    <state width="1345" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1622494982267" />
+    <state width="1345" height="199" key="GridCell.Tab.1.bottom" timestamp="1621875682294">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="199" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1621807081488" />
-    <state width="1345" height="199" key="GridCell.Tab.1.center" timestamp="1621807081488">
+    <state width="1345" height="199" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1621875682294" />
+    <state width="1345" height="199" key="GridCell.Tab.1.center" timestamp="1621875682293">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="199" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1621807081488" />
-    <state width="1345" height="199" key="GridCell.Tab.1.left" timestamp="1621807081488">
+    <state width="1345" height="199" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1621875682293" />
+    <state width="1345" height="199" key="GridCell.Tab.1.left" timestamp="1621875682293">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="199" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1621807081488" />
-    <state width="1345" height="199" key="GridCell.Tab.1.right" timestamp="1621807081488">
+    <state width="1345" height="199" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1621875682293" />
+    <state width="1345" height="199" key="GridCell.Tab.1.right" timestamp="1621875682294">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="199" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1621807081488" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1621775561981">
+    <state width="1345" height="199" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1621875682294" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1622493002826">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1621775561981" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1622493002826" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614761106479">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -230,11 +229,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/view/settings.py</url>
-          <line>162</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/view/accounts.py</url>
           <line>87</line>
@@ -246,11 +240,6 @@
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/view/settings.py</url>
-          <line>175</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bot_folder/location/location_bot.py</url>
           <line>26</line>
           <option name="timeStamp" value="62" />
@@ -259,11 +248,6 @@
           <url>file://$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py</url>
           <line>47</line>
           <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bot_folder/combination/combination_bot.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

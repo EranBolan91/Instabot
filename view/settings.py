@@ -2,7 +2,8 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from database import db
-import schedule
+from database.proxy.proxy import Proxy
+from models.proxy import Proxy
 
 
 class Settings:
@@ -13,6 +14,10 @@ class Settings:
         self.check_schedule = IntVar()
         self.schedule_hour = IntVar()
         self.username_option = StringVar()
+        self.host_entry = StringVar()
+        self.proxy_username_entry = StringVar()
+        self.proxy_password_entry = StringVar()
+        self.proxy_port_entry = IntVar()
         self.distribution_list_name = StringVar()
         self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
@@ -39,6 +44,34 @@ class Settings:
                                       .format(self.followers_amount), font=self.titleFont)
         self.title_followers_amount.grid(column=0, row=3, padx=10, pady=10)
         ttk.Entry(self.window, textvariable=self.followers_amount_input).grid(column=0, row=4)
+
+        # Proxy
+        proxy_frame = ttk.LabelFrame(self.window, text='Proxy')
+        proxy_frame.grid(column=0, row=5, ipady=120, ipadx=400, padx=10, pady=(0, 20), rowspan=2, columnspan=2)
+        proxy_host_title = Label(proxy_frame, text="Host", bg='gray23', font=self.titleFont, fg='gray67')
+        proxy_host_entry = ttk.Entry(proxy_frame, textvariable=self.host_entry, width=35)
+        proxy_username_title = Label(proxy_frame, text="Username", bg='gray23', font=self.titleFont, fg='gray67')
+        proxy_username_entry = ttk.Entry(proxy_frame, textvariable=self.proxy_username_entry, width=35)
+        proxy_password_title = Label(proxy_frame, text="Password", bg='gray23', font=self.titleFont, fg='gray67')
+        proxy_password_entry = ttk.Entry(proxy_frame, textvariable=self.proxy_password_entry, width=35)
+        proxy_port_title = Label(proxy_frame, text="Port", bg='gray23', font=self.titleFont, fg='gray67')
+        proxy_port_entry = ttk.Entry(proxy_frame, textvariable=self.proxy_port_entry)
+        proxy_save_button = ttk.Button(proxy_frame, text="SAVE", width=10, command=self.save_proxy)
+        proxy_remove_button = ttk.Button(proxy_frame, text="REMOVE", width=10, command=self.remove_proxy)
+        self.proxy_listbox = Listbox(proxy_frame, width=30, height=13)
+
+        proxy_host_title.place(relx=0.08, rely=0.1)
+        proxy_host_entry.place(relx=0.25, rely=0.1)
+        proxy_username_title.place(relx=0.08, rely=0.3)
+        proxy_username_entry.place(relx=0.25, rely=0.3)
+        proxy_password_title.place(relx=0.08, rely=0.5)
+        proxy_password_entry.place(relx=0.25, rely=0.5)
+        proxy_port_title.place(relx=0.08, rely=0.7)
+        proxy_port_entry.place(relx=0.25, rely=0.7)
+        proxy_save_button.place(relx=0.2, rely=0.85)
+        proxy_remove_button.place(relx=0.5, rely=0.85)
+        self.proxy_listbox.place(relx=0.7, rely=0.09)
+
 
         # Schedule Frame configuration
         schedule_frame = ttk.LabelFrame(self.window, text='SCHEDULE UNFOLLOW')
@@ -187,3 +220,14 @@ class Settings:
         for group in distribution_groups:
             self.listbox.insert(END, group[1])
 
+    def save_proxy(self):
+        host = self.host_entry.get()
+        username = self.proxy_username_entry.get()
+        password = self.proxy_password_entry.get()
+        port = self.proxy_port_entry.get()
+        proxy_obj = Proxy(host, username, password, port)
+        Proxy().save_in_db(proxy_obj)
+        print("proxy saved")
+
+    def remove_proxy(self):
+        pass

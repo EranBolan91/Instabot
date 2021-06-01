@@ -23,9 +23,9 @@ WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 
 class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users):
-        self.automation(followers, hashtag, url, skip_posts)
+        self.automation(followers, hashtag, url, skip_posts, likes)
 
-    def automation(self, max_followers, hashtag, url, skip_posts):
+    def automation(self, max_followers, hashtag, url, skip_posts, likes):
         wait = WebDriverWait(self.driver, 5)
         settings_data_from_db = CombinationDM().get_data_from_settings()
         follow_buttons = []
@@ -59,7 +59,7 @@ class CombinationBot(main_bot.InstagramBot):
 
                     try:
                         if follow_buttons[0][1].text == 'Follow':
-                            if self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter, wait):
+                            if self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter, wait, likes):
                                 follow_counter += 1
                                 max_followers -= 1
                                 i += 1
@@ -71,7 +71,7 @@ class CombinationBot(main_bot.InstagramBot):
 
                 print("{} -- waiting {} seconds".format(
                     self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
-                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
+                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add * 0)
 
             unfollow_users = self.database.get_unfollow_users(self.username)
             self._unfollow_users(
@@ -166,7 +166,7 @@ class CombinationBot(main_bot.InstagramBot):
             return wait.until(
                 EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
 
-    def _follow(self, button, username, settings_data_from_db, follow_count, wait):
+    def _follow(self, button, username, settings_data_from_db, follow_count, wait, likes):
         followed = False
 
         followers_num, has_image_profile = self._get_followers_number(username)
@@ -175,7 +175,7 @@ class CombinationBot(main_bot.InstagramBot):
                 button.click()
 
                 try:
-                    self._like_two_posts(wait, username)
+                    self._like_posts(wait, username, likes)
                 except Exception as e:
                     self.driver.close()
                     self.driver.switch_to.window(self.driver.window_handles[0])
@@ -200,7 +200,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         return followed
 
-    def _like_two_posts(self, wait, username):
+    def _like_posts(self, wait, username, likes):
         self._nav_user_new_tab(username)
         self.driver.switch_to.window(self.driver.window_handles[1])
 
@@ -209,8 +209,11 @@ class CombinationBot(main_bot.InstagramBot):
         first_post.click()
 
         self._like_post(wait)
-        self._go_to_next_post(wait)
-        self._like_post(wait)
+        likes -= 1
+
+        for i in range(likes):
+            self._go_to_next_post(wait)
+            self._like_post(wait)
 
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
@@ -260,13 +263,14 @@ class CombinationBot(main_bot.InstagramBot):
 
             print("{} -- waiting {} secodns".format(
                 self.username, WAIT_FOR_EACH_FOLLOW * follow_sub))
-            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub)
+            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub * 0)
 
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
     def _unfollow(self, user, account_id, wait):
         follow_back = False
+
 
         self._nav_user(user)
 

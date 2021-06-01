@@ -242,7 +242,7 @@ class TabCombination(ttk.Frame):
                     self.distribution_title.grid_forget()
                 else:
                     self.distribution_title.grid(column=1, row=3)
-                    self.distribution_menu.grid_forget()
+                    #self.distribution_menu.grid_forget()
                 self._get_account_data_for_data_box(account[3])
 
     def _check_form(self, username, password, hash_tag, url, follows, likes, proxy, port):

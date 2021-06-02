@@ -254,7 +254,7 @@ class TabHashTag(ttk.Frame):
                     self.distribution_title.grid_forget()
                 else:
                     self.distribution_title.grid(column=1, row=12)
-                    self.distribution_menu.grid_forget()
+                    #self.distribution_menu.grid_forget()
 
     def _split_comment(self, comment):
         split_comment = comment.split(',')
@@ -284,6 +284,11 @@ class TabHashTag(ttk.Frame):
         for account in self.accounts:
             menu.add_command(label=account[3], command=self._set_username_password)
             user_name_list.append(account[3])
-        # self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
-        #                                            command=self._set_username_password)
-        
+        ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
+        if len(user_name_list) > 0:
+            self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+                       command=self._set_username_password)
+            self.accounts_option_menu.grid(column=1, row=2)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
+                .grid(column=1, row=2, padx=10, pady=10)

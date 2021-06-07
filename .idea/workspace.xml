@@ -2,17 +2,107 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/proxy/proxy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_folder/main_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/main_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/chromedriver.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proxy_auth_plugin.zip" beforeDir="false" afterPath="$PROJECT_DIR$/proxy_auth_plugin.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_combination.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_combination.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_dm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_follow_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_follow_followers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/tab_location.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_location.py" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-385622771">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="log" value="1" />
+          <entry key="py" value="14" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="14" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="826" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="826" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bot_folder/main_bot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-102">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bot_folder/combination/combination_bot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -21,11 +111,78 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>TODO</find>
+      <find>db.Database().get_accounts()</find>
+      <find>_set_username_password</find>
+      <find>account</find>
+      <find>window</find>
+      <find>choose user</find>
+      <find>username</find>
+      <find>accounts</find>
+      <find>menu</find>
+      <find>accounts_option_menu</find>
+      <find>user_name_list</find>
+      <find>get_ac</find>
+      <find>refresh</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/view/tab_combination.py" />
+        <option value="$PROJECT_DIR$/view/tab_hash_tag.py" />
+        <option value="$PROJECT_DIR$/view/tab_follow_followers.py" />
+        <option value="$PROJECT_DIR$/view/tab_dm.py" />
+        <option value="$PROJECT_DIR$/view/tab_followers.py" />
+        <option value="$PROJECT_DIR$/view/tab_location.py" />
+        <option value="$PROJECT_DIR$/bot_folder/main_bot.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
   <component name="ProjectId" id="1ZXYgAxyt2kTf0w0YBlHa7pPOxN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Instabot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Instabot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Instabot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Instabot" type="462c0819:PsiDirectoryNode" />
+              <item name="bot_folder" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Instabot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Instabot" type="462c0819:PsiDirectoryNode" />
+              <item name="bot_folder" type="462c0819:PsiDirectoryNode" />
+              <item name="follow_followers" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Course" />
+    </panes>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -46,6 +203,18 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\123\Desktop\python2020\Insta-bot\images" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="checking (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -153,6 +322,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.checking (1)" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.main_bot" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.utils" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
@@ -175,6 +351,29 @@
       <updated>1584987014448</updated>
     </task>
     <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24597365" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3291536" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.3291536" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1613948855650">
@@ -244,11 +443,6 @@
           <line>26</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py</url>
-          <line>47</line>
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -258,5 +452,128 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/view/layout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot_folder/combination/combination_bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/geckodriver.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot_folder/proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="5" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python37/Lib/tkinter/ttk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="733" column="24" lean-forward="true" selection-start-line="733" selection-start-column="24" selection-end-line="733" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/tab_hash_tag.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2757">
+          <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="125" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/tab_combination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="315" column="26" selection-start-line="315" selection-start-column="26" selection-end-line="315" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/tab_follow_followers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="155" column="34" selection-start-line="155" selection-start-column="34" selection-end-line="155" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/tab_dm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/tab_followers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="53" column="121" selection-start-line="53" selection-start-column="121" selection-end-line="53" selection-end-column="121" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/tab_location.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-764">
+          <caret line="112" column="121" selection-start-line="112" selection-start-column="121" selection-end-line="112" selection-end-column="121" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot_folder/main_bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot_folder/follow_followers/follow_followers_bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

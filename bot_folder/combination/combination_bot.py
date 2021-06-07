@@ -71,7 +71,7 @@ class CombinationBot(main_bot.InstagramBot):
 
                 print("{} -- waiting {} seconds".format(
                     self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
-                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add * 0)
+                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
 
             unfollow_users = self.database.get_unfollow_users(self.username)
             self._unfollow_users(
@@ -263,7 +263,7 @@ class CombinationBot(main_bot.InstagramBot):
 
             print("{} -- waiting {} secodns".format(
                 self.username, WAIT_FOR_EACH_FOLLOW * follow_sub))
-            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub * 0)
+            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub)
 
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])

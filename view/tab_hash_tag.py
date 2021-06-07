@@ -11,6 +11,7 @@ class TabHashTag(ttk.Frame):
     def __init__(self, window):
         super().__init__(window)
 
+        self.window = window
         self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
@@ -110,11 +111,6 @@ class TabHashTag(ttk.Frame):
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
 
-        # TODO: check if it works - it should refresh and display new accounts that were added
-        # Refresh accounts button
-        # photo = PhotoImage(file="../images/refresh2.png")
-        # photo_image = photo.subsample(3, 3)
-        # TODO: This is the refresh button. it needs to refresh the list of the accounts
         ttk.Button(self, text='REFRESH LIST', compound=LEFT, command=self._get_accounts).grid(column=1, row=2, padx=(220, 0))
 
         # Schedule Actions
@@ -284,7 +280,7 @@ class TabHashTag(ttk.Frame):
         for account in self.accounts:
             menu.add_command(label=account[3], command=self._set_username_password)
             user_name_list.append(account[3])
-        ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
+
         if len(user_name_list) > 0:
             self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
                        command=self._set_username_password)
@@ -292,3 +288,5 @@ class TabHashTag(ttk.Frame):
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
+
+

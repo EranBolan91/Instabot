@@ -90,6 +90,8 @@ class TabCombination(ttk.Frame):
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont) \
                 .grid(column=1, row=2, padx=10, pady=10)
 
+        ttk.Button(self, text='REFRESH LIST', compound=LEFT, command=self._get_accounts).grid(column=1, row=2, padx=(220, 0))
+
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
@@ -260,8 +262,8 @@ class TabCombination(ttk.Frame):
             messagebox.showerror('No number', 'Please enter number for follow')
             return False
 
-        if likes == 0:
-            messagebox.showerror('No number', 'Please enter number for likes')
+        if likes < 0:
+            messagebox.showerror('Invalid number', 'Please enter number for likes')
             return False
 
         if url and hash_tag:
@@ -303,3 +305,20 @@ class TabCombination(ttk.Frame):
             box = """ Date: {} | Follow: {} | Failed Follow: {} | Skip: {} | URL: {} """.format(
                 data[11], data[6], data[5], data[12], data[2],)
             self.data_frame_box.insert(END, box)
+
+    def _get_accounts(self):
+        self.accounts = db.Database().get_accounts()
+        user_name_list = []
+        menu = self.accounts_option_menu['menu']
+        menu.delete(0, 'end')
+        for account in self.accounts:
+            menu.add_command(label=account[3], command=self._set_username_password)
+            user_name_list.append(account[3])
+
+        if len(user_name_list) > 0:
+            self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
+                       command=self._set_username_password)
+            self.accounts_option_menu.grid(column=1, row=2)
+        else:
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
+                .grid(column=1, row=2, padx=10, pady=10)

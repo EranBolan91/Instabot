@@ -405,3 +405,14 @@ class Database:
         finally:
             conn.close()
 
+    def get_proxy_data(self):
+        data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            data = cur.execute(" SELECT * FROM proxy ").fetchall()
+        except Exception as e:
+            print('get proxy data: ', e)
+        finally:
+            conn.close()
+            return data

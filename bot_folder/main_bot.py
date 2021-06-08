@@ -3,13 +3,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from utils.utils import Utils as utils
 from database import db
 from bot_folder import proxy
 import time, random, requests
 import os
+from base64 import b64encode
+import json
 
+proxy = {'host': 'highspeed1.thesocialproxy.com', 'port': 10000, 'user': '4y3xkj012elb568z', 'password': 'qk3m2z94tofyw7su'}
 
 class InstagramBot:
     def __init__(self, username, password, is_mobile, proxy_dict):
@@ -20,25 +23,42 @@ class InstagramBot:
         # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
         options.page_load_strategy = 'eager'
-        # options.add_argument("--headless")
         options.add_argument('--no-sandbox')
-        #options.add_argument('--disable-extensions')
         options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--disable-notifications")
-        options.add_extension(proxy.get_proxy_plugin())
+        #options.add_extension(proxy.get_proxy_plugin())
+        options.add_argument("--headless")
+        options.add_argument('--disable-extensions')
+        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
+
+        """
+        firefox proxy
+        """
+        fp = webdriver.FirefoxProfile()
+        fp.add_extension('closeproxy.xpi')
+        fp.set_preference('network.proxy.type', 1)
+        fp.set_preference('network.proxy.http', proxy['host'])
+        fp.set_preference('network.proxy.http_port', int(proxy['port']))
+        fp.set_preference('network.proxy.no_proxies_on', 'localhost, 127.0.0.1')
+        credentials = '{user}:{password}'.format(**proxy)
+        credentials = b64encode(credentials.encode('ascii')).decode('utf-8')
+        fp.set_preference('extensions.closeproxyauth.authtoken', credentials)
 
         if proxy_dict["proxy"]:
             PROXY = "{}:{}".format(proxy_dict["proxy"], proxy_dict["port"])
             options.add_argument('--proxy-server=%s' % PROXY)
 
         if is_mobile:
+            #firefox_options = webdriver.FirefoxOptions()
             chrome_options = webdriver.ChromeOptions()
             mobile_emulation = {"deviceName": "Nexus 5"}
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
-            self.driver = webdriver.Chrome('chromedriver.exe', options=options)
+            self.driver = webdriver.Firefox(fp, options=options)
+            #self.driver = webdriver.Chrome('chromedriver.exe', options=options)
+
 
     def get_username(self):
         return self.username

@@ -10,168 +10,385 @@ from models.combination import Combination
 from models.account_actions import AccountActions
 import time
 import datetime as dt
+from random import randint
+from database import db
+from models.followers import Followers
+from bs4 import BeautifulSoup as bs
+
+
+PROCESS_TIME = 60 * 60 * 12
+MAX_FOLLOWERS_EACH_PROCESS = 100
+WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 
 
 class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users):
-        users_name_list = []
-        buttons = []
-        # i starts from 0 because the list of users_name, its the index
-        i = 0
-        loops = 0
-        skip_counter = 0
-        follow_count = 0
-        like_count = 0
-        is_blocked = 0
+        self.automation(followers, hashtag, url, skip_posts, likes)
+
+    def automation(self, max_followers, hashtag, url, skip_posts, likes):
         wait = WebDriverWait(self.driver, 5)
         settings_data_from_db = CombinationDM().get_data_from_settings()
+        follow_buttons = []
+        curr_height = 0
 
         self._login()
+        self._get_wanted_post(
+            hashtag, url, skip_posts, wait)
+
+        self._open_likes(wait)
+        scroll_box = self._get_scroll_box(wait)
+
+        while max_followers > 0:
+            follow_counter = 0
+
+            while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0:
+                curr_follow_add = randint(1, 4)
+                i = 0
+
+                while i < curr_follow_add:
+                    print("{} -- combination follow: {} people left to follow".format(
+                        self.username, max_followers))
+
+                    if max_followers <= 0:
+                        break
+
+                    # checking for buttons if not, reload them
+                    if not follow_buttons:
+                        follow_buttons, curr_height, scroll_box = self._get_buttons(
+                            scroll_box, curr_height, wait)
+
+                    try:
+                        if follow_buttons[0][1].text == 'Follow':
+                            if self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter, wait, likes):
+                                follow_counter += 1
+                                max_followers -= 1
+                                i += 1
+                    except Exception as e:
+                        print(e)
+
+                    # remove the first button
+                    follow_buttons.pop(0)
+
+                print("{} -- waiting {} seconds".format(
+                    self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
+                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
+
+            unfollow_users = self.database.get_unfollow_users(self.username)
+            self._unfollow_users(
+                unfollow_users, self.database.get_user_id(self.username), wait)
+
+        self.driver.delete_all_cookies()
+        self.driver.close()
+
+    def _scroll_down(self, scroll_box):
+        height = self.driver.execute_script("""
+                                        arguments[0].scrollTo(
+                                            0, arguments[0].scrollHeight);
+                                        return arguments[0].scrollHeight;
+                                        """, scroll_box)
+
         time.sleep(2)
+        return height
+
+    def _get_buttons(self, scroll_box, last_height, wait):
+        height = self._scroll_down(scroll_box)
+
+        # checking if we made it to the end of the post
+        if height == last_height:
+            self._go_to_next_post(wait)
+
+            self._open_likes(wait)
+            scroll_box = self._get_scroll_box(wait)
+            height = self._scroll_down(scroll_box)
+
+        users_name_list = self.driver.find_elements_by_class_name(
+            'MBL3Z')
+        buttons = scroll_box.find_elements_by_tag_name('button')[:11]
+
+        # convert the 2 lists to 1 list of tuples
+        return list(zip(users_name_list, buttons)), height, scroll_box
+
+    # Saving Hash-tag data to display in the statistics
+
+    def _prepare_data_for_db(self, url, hashtag, num_likes, num_failed_likes, num_followers,
+                             num_failed_followers, schedule, distribution, group_name):
+        follow_followers = Combination(self.username, url, hashtag, num_likes, num_failed_likes,
+                                       num_followers, num_failed_followers, schedule, distribution, group_name)
+        CombinationDM().save_in_db(follow_followers)
+        account_id = CombinationDM().get_user_id(self.username)
+        account_action = AccountActions(
+            account_id, self.username, "Combination", num_followers, num_followers - num_failed_followers)
+        FollowersDB().save_data_account_action(account_action)
+
+    def _get_wanted_post(self, hashtag, url, skip_posts, wait):
+        time.sleep(3)
         try:
             if hashtag:
-                self.driver.get('{}/explore/tags/{}'.format(self.base_url, hashtag))
+                self.driver.get(
+                    '{}/explore/tags/{}'.format(self.base_url, hashtag))
             elif url:
                 self.driver.get(url)
+            time.sleep(3)
             # click on the first post
-            first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+            first_post = wait.until(
+                EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
             first_post.click()
             self.skip_posts(skip_posts)
+            time.sleep(2)
         except Exception as e:
             print('Combination: ', e)
 
+    def _like_post(self, wait):
+        time.sleep(2)
+        like = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, 'fr66n')))
+        soup = bs(like.get_attribute('innerHTML'), 'html.parser')
+        if(soup.find('svg')['aria-label'] == 'Like'):
+            like.click()
+
+    def _open_likes(self, wait):
         try:
-            while like_count < likes:
-                # like the post
-                # self._like_post()
-                like_count += 1
-                print("Post count: {}/{} account: {} ".format(likes, like_count, self.username))
-                self.is_post_liked()
-                try:
-                    wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
-                except Exception as e:
-                    try:
-                        wait.until(
-                            EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/article/div[2]/div[2]/div/section[1]/div/div/a'))).click()
-                    except Exception as e:
-                        wait.until(
-                            EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-                try:
-                    scroll_box = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[2]/div')))
-                    # print('did not reach to scroll first')
-                except Exception as e:
-                    scroll_box = wait.until(
-                        EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
-                    # print('did not reach to scroll')
-                time.sleep(1.1)
-                last_height, height = 0, 1
-                # this while scrolls all over the followers
-                while last_height != height:
-                    last_height = height
-                    time.sleep(1.0)
-                    height = self.driver.execute_script("""
-                                                arguments[0].scrollTo(0, arguments[0].scrollHeight); 
-                                                return arguments[0].scrollHeight;
-                                                """, scroll_box)
-                    time.sleep(1)
-                    users_name_list = self.driver.find_elements_by_class_name('MBL3Z')
-                    # After it scrolled all down the scroll box, this line of code, gets all the buttons into a list
-                    buttons = scroll_box.find_elements_by_tag_name('button')
-
-                    for button in buttons[:11]:
-                        if skip_users >= skip_counter:
-                            skip_counter += 1
-                        else:
-                            try:
-                                username = users_name_list[i].text
-                                if username == self.username:
-                                    i += 1
-                                    username = users_name_list[i].text
-                                if button.text == 'Follow':
-                                    if loops % utils.TIME_SLEEP == 0:
-                                        print('Username:', self.username, 'Time start:',
-                                              dt.datetime.now().strftime('%H:%M:%S'),
-                                              ' Sleep time:',
-                                              loops * utils.TIME_SLEEP, 'seconds')
-                                        time.sleep(loops * utils.TIME_SLEEP)
-                                    followers_num, has_image_profile = self._get_followers_number(username)
-                                    if has_image_profile == -1:
-                                        if int(followers_num) >= int(settings_data_from_db[2]):
-                                            # ActionsChains(self.driver).move_to_element(button).click(button).perform()
-                                            button.click()
-                                            follow_count += 1
-                                            print('Combination count {}/{}'.format(followers, follow_count), 'Username: ',
-                                                  self.username)
-                                            self.database.save_unfollow_users(username, self.username)
-                                            if to_distribution:
-                                                self.database.add_username_to_distribution_group(username, group_id)
-                                            try:
-                                                is_action_blocked = self._blocked_action_popup()
-                                                if is_action_blocked:
-                                                    self._send_email(self.username, follow_count,
-                                                                     dt.datetime.now().strftime('%H:%M:%S'),
-                                                                     'Combination')
-                                                    self.global_block_message(self.username, "Combination")
-                                                    is_blocked = 1
-                                                    break
-                                            except Exception as e:
-                                                pass
-                                    i += 1
-                                    loops += 1
-                                else:
-                                    i += 1
-                            except Exception as e:
-                                i += 1
-                                print("Combination inside while: ", e)
-
-                        if int(loops * utils.TIME_SLEEP) == 500:
-                            loops = 1
-                            print('reset loops')
-                        if follow_count >= followers:
-                            break
-                        # TODO: i need to find a way to break the while loop when i get block. now its only breaking the for loop
-                        if is_blocked:
-                            break
-                    # reset the lists after every one scroll down
-                    buttons = []
-                    users_name_list = []
-                    i = 0
-                    if follow_count >= followers:
-                        break
-                    # TODO: i need to find a way to break the while loop when i get block. now its only breaking the for loop
-                    if is_blocked:
-                        break
-                # Close the scrolling box and move to the next post
-                # I added try and catch for posts that are videos and have no likes or others, so when it try to close
-                # the scroll box it wont find it and skip to the next post
-                try:
-                    wait.until(EC.element_to_be_clickable(
-                        (By.XPATH, '/html/body/div[6]/div/div/div[1]/div/div[2]/button'))).click()
-                    wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-                    # reset i
-                    i = 0
-                except Exception as e:
-                    wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-                    # reset i
-                    i = 0
+            wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/a"))).click()
         except Exception as e:
-            print('Combination follow: ', e)
-            self._screen_shot(self.username)
-            self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'), 'Combination')
-        finally:
-            num_likes_failed = int(likes) - int(like_count)
-            num_followers_failed = int(followers) - int(follow_count)
-            self._prepare_data_for_db(url, hashtag, likes, num_likes_failed, followers, num_followers_failed, schedule,
-                                      to_distribution, group_name, skip_users)
-            self.driver.delete_all_cookies()
-            self.driver.close()
+            try:
+                wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/article/div[2]/div[2]/div/section[1]/div/div/a'))).click()
+            except Exception as e:
+                self._go_to_next_post(wait)
+                self._open_likes(wait)
 
-    # Saving combination data to display in the statistics
-    def _prepare_data_for_db(self, url, hashtag, num_likes, num_failed_likes, num_followers,
-                num_failed_followers, schedule, distribution, group_name, skip_users):
-        combination = Combination(self.username, url, hashtag, num_likes, num_failed_likes, num_followers, num_failed_followers, schedule, distribution, group_name, skip_users)
-        CombinationDM().save_in_db(combination)
-        account_id = CombinationDM().get_user_id(self.username)
-        account_action = AccountActions(account_id, self.username, "Combination", num_followers, num_followers - num_failed_followers)
-        FollowersDB().save_data_account_action(account_action)
+    def _get_scroll_box(self, wait):
+        try:
+            return wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div[6]/div/div/div[2]/div')))
+        except Exception as e:
+            return wait.until(
+                EC.element_to_be_clickable((By.XPATH, '/html/body/div[6]/div/div/div[3]/div')))
+
+    def _follow(self, button, username, settings_data_from_db, follow_count, wait, likes):
+        followed = False
+
+        followers_num, has_image_profile = self._get_followers_number(username)
+        if has_image_profile == -1:
+            if int(followers_num) >= int(settings_data_from_db[2]):
+                button.click()
+
+                try:
+                    self._like_posts(wait, username, likes)
+                except Exception as e:
+                    self.driver.close()
+                    self.driver.switch_to.window(self.driver.window_handles[0])
+
+                followed = True
+                print("{} -- followed {}".format(self.username, username))
+
+        self.database.save_unfollow_users(
+            username, self.username)
+
+        try:
+            is_action_blocked = self._blocked_action_popup()
+            if is_action_blocked:
+                self._send_email(self.username, follow_count,
+                                 dt.datetime.now().strftime('%H:%M:%S'),
+                                 'Combination')
+                self.global_block_message(
+                    self.username, "Combination")
+
+        except Exception as e:
+            pass
+
+        return followed
+
+    def _like_posts(self, wait, username, likes):
+        self._nav_user_new_tab(username)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
+        first_post = wait.until(
+            EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+        first_post.click()
+
+        self._like_post(wait)
+        likes -= 1
+
+        for i in range(likes):
+            self._go_to_next_post(wait)
+            self._like_post(wait)
+
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
+
+    def _print_username_and_time(self, loops):
+        if loops % utils.TIME_SLEEP == 0:
+            print('Username:', self.username, 'Time start:',
+                  dt.datetime.now().strftime('%H:%M:%S'),
+                  ' Sleep time:',
+                  loops * utils.TIME_SLEEP, 'seconds')
+            time.sleep(loops * utils.TIME_SLEEP)
+
+    def _go_to_next_post(self, wait):
+        try:
+            wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '/html/body/div[6]/div/div/div[1]/div/div[2]/button'))).click()
+            wait.until(EC.element_to_be_clickable(
+                (By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+        except Exception as e:
+            wait.until(EC.element_to_be_clickable(
+                (By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+
+        time.sleep(1)
+
+    def _unfollow_users(self, user_list, account_id, wait):
+        curr_user = 0
+        self._nav_user_new_tab("")
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
+        while curr_user < len(user_list):
+            follow_sub = randint(1, 4)
+
+            for i in range(follow_sub):
+                if curr_user >= len(user_list):
+                    break
+
+                print("{} -- combination unfollow: {} people left to unfollow".format(
+                    self.username, len(user_list) - curr_user))
+
+                if self._unfollow(user_list[curr_user][2], account_id, wait) == -1:
+                    self._send_email(self.username, curr_user, dt.datetime.now().strftime(
+                        '%H:%M:%S'), 'Followers')
+                    self.driver.close()
+                    self.global_block_message(self.username, "Followers")
+
+                curr_user += 1
+
+            print("{} -- waiting {} secodns".format(
+                self.username, WAIT_FOR_EACH_FOLLOW * follow_sub))
+            time.sleep(WAIT_FOR_EACH_FOLLOW * follow_sub)
+
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
+
+    def _unfollow(self, user, account_id, wait):
+        follow_back = False
+
+
+        self._nav_user(user)
+
+        def _find_and_click_unfollow():
+            try:
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//button[text()="Following"]')))
+                following_btn.click()
+
+                try:
+                    self._popup_unfollow()
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
+
+                return
+
+            except Exception as e:
+                pass
+
+            try:
+                requested_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
+                requested_btn.click()
+
+                try:
+                    self._popup_unfollow()
+                except Exception as e:
+                    pass
+
+                return
+
+            except Exception as e:
+                pass
+
+            # This try is for accounts that when they access to another user page, it display them Icon following
+            try:
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/button ')))
+                following_btn.click()
+
+                try:
+                    self._popup_unfollow()
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
+
+                return
+
+            except Exception as e:
+                pass
+
+            try:
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button')))
+                following_btn.click()
+
+                try:
+                    self._popup_unfollow()
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
+
+                return
+
+            except Exception as e:
+                pass
+
+            try:
+                following_btn = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/div[2]/div/span/span[1]/button')))
+                following_btn.click()
+
+                try:
+                    self._popup_unfollow()
+                except Exception as e:
+                    print('unfollow users pop up exception: ', e)
+
+                return
+
+            except Exception as e:
+                pass
+
+        _find_and_click_unfollow()
+        try:
+            is_action_blocked = self._blocked_action_popup()
+            if is_action_blocked:
+                return -1
+        except Exception as e:
+            pass
+        # count how many users follow back
+        try:
+            wait.until(EC.element_to_be_clickable(
+                (By.XPATH, '//button[text()="Follow Back"]')))
+            follow_back = True
+        except Exception as e:
+            pass
+
+        # Remove username from unfollow list
+        # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
+        # into unfollow. In this situation, i prefer not to remove the username from database
+
+        try:
+            follow_btn = wait.until(
+                EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
+            if follow_btn:
+                print(user, 'Removed from db of', self.username)
+                db.Database().remove_username_from_unfollow_list(user, account_id)
+
+        except Exception as e:
+            pass
+        try:
+            follow_btn = wait.until(
+                EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
+            if follow_btn:
+                print(user, 'Removed from db', self.username)
+                db.Database().remove_username_from_unfollow_list(user, account_id)
+
+        except Exception as e:
+            pass
+
+        # save the amount of followers back
+        followers_obj = Followers(account_id, self.username, follow_back)
+        FollowersDB().save_in_db(followers_obj)

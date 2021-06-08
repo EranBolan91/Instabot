@@ -4,3 +4,4 @@ screen_shots
 images
 debug.log
 chromedriver.exe
+*.pyc

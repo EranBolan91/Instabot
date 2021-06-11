@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/combination/combination_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_folder/main_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_folder/main_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/chromedriver.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proxy_auth_plugin.zip" beforeDir="false" afterPath="$PROJECT_DIR$/proxy_auth_plugin.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_combination.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_combination.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_dm.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_dm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_follow_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_follow_followers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_hash_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_hash_tag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/tab_location.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/tab_location.py" afterDir="false" />
-    </list>
+    <list default="true" id="f787bed1-1737-4c9b-af63-64e10a80a3b7" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

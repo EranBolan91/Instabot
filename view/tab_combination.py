@@ -34,9 +34,8 @@ class TabCombination(ttk.Frame):
         self.skip_users = IntVar()
         self.hashtag = StringVar()
         self.radio_var = IntVar()
-        self.proxy = StringVar()
-        self.port = StringVar()
         self.menu = StringVar()
+        self.proxy_menu = StringVar()
         self.url = StringVar()
         self.groups_list = []
         self.MINUTES = 0
@@ -49,6 +48,11 @@ class TabCombination(ttk.Frame):
         user_name_list = []
         for account in self.accounts:
             user_name_list.append(account[3])
+
+        self.proxies = db.Database().get_proxy_data()
+        proxies_list = []
+        for proxy in self.proxies:
+            proxies_list.append(proxy[2])
 
         ttk.Label(self, text='Combination - Follow after user who liked post', font=self.headerFont) \
             .grid(column=0, row=0, padx=10, pady=5)
@@ -92,6 +96,18 @@ class TabCombination(ttk.Frame):
 
         ttk.Button(self, text='REFRESH LIST', compound=LEFT, command=self._get_accounts).grid(column=1, row=2, padx=(220, 0))
 
+        # Proxy section
+        ttk.Label(self, text='Choose proxy', font=self.titleFont).grid(column=2, row=1, padx=10, pady=(25, 0))
+        if len(proxies_list) > 0:
+            self.proxy_option_menu = ttk.OptionMenu(self, self.proxy_menu, proxies_list[0], *proxies_list)
+            self.proxy_option_menu.grid(column=2, row=2)
+        else:
+            ttk.Label(self, text='No proxies, go to Settings', font=self.titleFont) \
+                .grid(column=2, row=2, padx=10, pady=10)
+
+        ttk.Button(self, text='REFRESH PROXY', compound=LEFT, command=self._get_proxies).grid(column=2, columnspan=3,
+                                                                                                row=2, padx=(0, 0))
+
         # Groups distribution
         # If there are groups, it will display them. Else it will display message
         if len(self.groups_list) > 0:
@@ -133,17 +149,6 @@ class TabCombination(ttk.Frame):
         ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
             .grid(column=0, columnspan=2, rowspan=2, row=11, pady=(20, 0), padx=(1, 1))
 
-        # Proxy section
-        proxy_frame = ttk.LabelFrame(self, text='Proxy')
-        proxy_frame.grid(column=3, row=2, rowspan=2,
-                         ipadx=40, ipady=10, padx=(30, 0))
-        entry_frame = ttk.Frame(proxy_frame)
-        self.proxy_entry = ttk.Entry(
-            entry_frame, textvariable=self.proxy, width=20)
-        self.port_entry = ttk.Entry(entry_frame, textvariable=self.port)
-        self.proxy_entry.pack(side=LEFT)
-        self.port_entry.pack(side=LEFT)
-        entry_frame.pack(side=LEFT, pady=(50, 0))
 
         # Schedule Actions
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
@@ -190,8 +195,6 @@ class TabCombination(ttk.Frame):
         follow = self.amount_follows.get()
         like = self.amount_likes.get()
         hash_tag = self.hashtag.get()
-        proxy = self.proxy.get()
-        port = self.port.get()
         url = self.url.get()
         skip_posts = self.skip_posts.get()
         skip_users = self.skip_users.get()
@@ -322,3 +325,20 @@ class TabCombination(ttk.Frame):
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
+
+    def _get_proxies(self):
+        self.proxies = db.Database().get_proxy_data()
+        proxy_list = []
+        menu = self.proxy_option_menu['menu']
+        menu.delete(0, 'end')
+        for proxy in self.proxies:
+            menu.add_command(label=proxy[2], command="")
+            proxy_list.append(proxy[2])
+
+        if len(proxy_list) > 0:
+            self.proxy_option_menu = ttk.OptionMenu(self, self.proxy_menu, proxy_list[0], *proxy_list,
+                       command="")
+            self.proxy_option_menu.grid(column=2, row=2)
+        else:
+            ttk.Label(self, text='No proxies, go to Settings', font=self.titleFont)\
+                .grid(column=2, row=2, padx=10, pady=10)

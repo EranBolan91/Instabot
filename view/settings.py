@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox
 import tkinter.font as tkfont
 from database import db
 from database.proxy.proxy import Proxy
-from models.proxy import Proxy
+from models.proxy import Proxy as ProxyModel
 
 
 class Settings:
@@ -130,12 +130,16 @@ class Settings:
     def _settings_data(self):
         self.database = db.Database()
         data_settings = self.database.get_data_from_settings()
+        proxies = self.database.get_proxy_data()
         # Init the box list of distribution groups
         username_menu = self.username_option.get()
         if username_menu:
             distribution_groups = self.database.get_distribution_lists_by_username(username_menu)
             for group in distribution_groups:
                 self.listbox.insert(END, group[1])
+
+        for proxy in proxies:
+            self.proxy_listbox.insert(END, proxy[2])
 
         # This 'if' because when i run for the first time the program,
         # there is no 'data settings' - its empty. so i init it with 0
@@ -225,9 +229,18 @@ class Settings:
         username = self.proxy_username_entry.get()
         password = self.proxy_password_entry.get()
         port = self.proxy_port_entry.get()
-        proxy_obj = Proxy(host, username, password, port)
-        Proxy().save_in_db(proxy_obj)
-        print("proxy saved")
+        proxy_obj = ProxyModel(host, username, password, port)
+        is_saved = Proxy().save_in_db(proxy_obj)
+        if is_saved:
+            self.proxy_listbox.insert(END, username)
 
     def remove_proxy(self):
-        pass
+        proxy_to_remove_id = -1
+        proxy_to_remove = self.proxy_listbox.get(self.proxy_listbox.curselection())
+        proxies = self.database.get_proxy_data()
+        for proxy in proxies:
+            if proxy[2] == proxy_to_remove:
+                proxy_to_remove_id = proxy[0]
+        is_removed = Proxy().remove_from_db(proxy_to_remove_id)
+        if is_removed:
+            self.proxy_listbox.delete(self.proxy_listbox.curselection())

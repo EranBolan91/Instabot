@@ -90,3 +90,58 @@ JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE:
 
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1623103255946	geckodriver	INFO	Listening on 127.0.0.1:57312
+1623103259019	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\123\\AppData\\Local\\Temp\\rust_mozprofile4K1jLH"
+1623103259463	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\123\\AppData\\Local\\Temp\\rust_mozprofile4K1jLH\\search.json.mozlz4", (void 0)))
+1623103261959	Marionette	INFO	Listening on port 57320
+1623103262239	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623103288994	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623103324237	Marionette	INFO	Stopped listening on port 57320
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x230030,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623103346431	geckodriver	INFO	Listening on 127.0.0.1:57773
+1623103349442	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\123\\AppData\\Local\\Temp\\rust_mozprofile4hEbZ3"
+*** You are running in headless mode.
+1623103349840	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\123\\AppData\\Local\\Temp\\rust_mozprofile4hEbZ3\\search.json.mozlz4", (void 0)))
+1623103351208	Marionette	INFO	Listening on port 57781
+1623103351502	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623103371329	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623103404578	Marionette	INFO	Stopped listening on port 57781

@@ -145,3 +145,80 @@ JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE:
 JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
 JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
 1623103404578	Marionette	INFO	Stopped listening on port 57781
+1623438058601	geckodriver	INFO	Listening on 127.0.0.1:6103
+1623438061809	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile0fXGxs"
+*** You are running in headless mode.
+1623438062999	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile0fXGxs\\search.json.mozlz4", (void 0)))
+1623438066168	Marionette	INFO	Listening on port 6111
+1623438066661	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623438115575	geckodriver	INFO	Listening on 127.0.0.1:6176
+1623438118788	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileAzLXwa"
+1623438119400	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileAzLXwa\\search.json.mozlz4", (void 0)))
+1623438122734	Marionette	INFO	Listening on port 6184
+1623438123041	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623438142770	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1623438146678	Marionette	INFO	Stopped listening on port 6184
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623438374285	geckodriver	INFO	Listening on 127.0.0.1:1053
+1623438377509	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileaknkvQ"
+1623438378168	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileaknkvQ\\search.json.mozlz4", (void 0)))
+1623438381065	Marionette	INFO	Listening on port 1063
+1623438381226	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623438395227	Marionette	INFO	Stopped listening on port 1063
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623438476180	geckodriver	INFO	Listening on 127.0.0.1:1132
+1623438479272	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileKjJ0B4"
+1623438479808	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileKjJ0B4\\search.json.mozlz4", (void 0)))
+1623438483162	Marionette	INFO	Listening on port 1140
+1623438483507	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623438489589	Marionette	INFO	Stopped listening on port 1140
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623444392455	geckodriver	INFO	Listening on 127.0.0.1:1161
+1623444395659	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileubPlRN"
+*** You are running in headless mode.
+1623444396253	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileubPlRN\\search.json.mozlz4", (void 0)))
+1623444397882	Marionette	INFO	Listening on port 1169
+1623444398336	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623444486585	geckodriver	INFO	Listening on 127.0.0.1:1228
+1623444489800	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileRy0nyJ"
+*** You are running in headless mode.
+1623444490570	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileRy0nyJ\\search.json.mozlz4", (void 0)))
+1623444492395	Marionette	INFO	Listening on port 1236
+1623444492485	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623444582030	geckodriver	INFO	Listening on 127.0.0.1:1293
+1623444585242	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileGmHszr"
+1623444585846	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileGmHszr\\search.json.mozlz4", (void 0)))
+1623444589169	Marionette	INFO	Listening on port 1301
+1623444589493	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623444710645	geckodriver	INFO	Listening on 127.0.0.1:1389
+1623444713880	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileq6erqy"
+1623444714722	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileq6erqy\\search.json.mozlz4", (void 0)))
+1623444717753	Marionette	INFO	Listening on port 1398
+1623444718118	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623444738569	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1623444767816	Marionette	INFO	Stopped listening on port 1398
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

@@ -1,15 +1,14 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
-from database import db
-from database.dm import dm
-from bot_folder.combination.combination_bot import CombinationBot
 from database.combination.combination import CombinationDM
+from database import db
+from bot_folder.like.like_bot import LikeBot
 from utils.schedule import ScheduleCalc
 import threading
 
 
-class TabCombination(ttk.Frame):
+class TabLikes(ttk.Frame):
     def __init__(self, window):
         super().__init__(window)
 
@@ -221,16 +220,16 @@ class TabCombination(ttk.Frame):
             username, password, hash_tag, url, follow, like)
 
         if valid:
-            bot = CombinationBot(username, password, False, proxy_dict)
+            bot = LikeBot(username, password, False, proxy_dict)
             if schedule_action:
                 time_schedule = ScheduleCalc().calc_schedule_time(
                     action, minutes_entry, hours_entry, days_entry)
-                timing_thread = threading.Timer(time_schedule, bot.combination, [
-                                                hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users])
+                timing_thread = threading.Timer(time_schedule, bot.like(), [
+                                                hash_tag, url, like, skip_posts])
                 timing_thread.start()
             else:
-                t = threading.Thread(target=bot.combination, args=(
-                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users))
+                t = threading.Thread(target=bot.like, args=(
+                    hash_tag, url, like, skip_posts))
                 t.start()
 
     # Getting the username from the menu option, look for it on the list and sets username and password

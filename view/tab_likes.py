@@ -53,7 +53,7 @@ class TabLikes(ttk.Frame):
         for proxy in self.proxies:
             proxies_list.append(proxy[2])
 
-        ttk.Label(self, text='Combination - Follow after user who liked post', font=self.headerFont) \
+        ttk.Label(self, text='Likes - like photos', font=self.headerFont) \
             .grid(column=0, row=0, padx=10, pady=5)
 
         # username and password form
@@ -128,18 +128,9 @@ class TabLikes(ttk.Frame):
         ttk.Entry(self, textvariable=self.amount_likes).grid(
             column=0, row=8, pady=(25, 0))
 
-        ttk.Label(self, text='Enter the number of users to follow').grid(
-            column=1, row=7, pady=(50, 0))
-        ttk.Entry(self, textvariable=self.amount_follows).grid(
-            column=1, row=8, pady=(25, 0))
-
         ttk.Label(self, text='Skip posts').grid(column=2, row=7, pady=(50, 0))
         ttk.Entry(self, textvariable=self.skip_posts).grid(
             column=2, row=8, pady=(25, 0))
-
-        ttk.Label(self, text='Skip users').grid(column=2, row=8, pady=(90, 0))
-        ttk.Entry(self, textvariable=self.skip_users).grid(
-            column=2, row=9, pady=(20, 0))
 
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(
@@ -190,13 +181,10 @@ class TabLikes(ttk.Frame):
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
-        distribution = self.check_box_distribution_list.get()
-        follow = self.amount_follows.get()
         like = self.amount_likes.get()
         hash_tag = self.hashtag.get()
         url = self.url.get()
         skip_posts = self.skip_posts.get()
-        skip_users = self.skip_users.get()
         action = self.radio_var.get()
         schedule_action = self.check_box_schedule.get()
         minutes_entry = self.minutes_entry_value.get()
@@ -206,18 +194,8 @@ class TabLikes(ttk.Frame):
         proxy = db.Database().get_proxy_data_by_username(proxy_menu)
         proxy_dict = {'host': proxy[1], 'port': proxy[-1], 'user': proxy[2], 'password': proxy[3]}
 
-
-        if distribution:
-            group_name = self.distribution_menu_var.get()
-            for group in self.distribution_list:
-                if group_name == group[1]:
-                    group_id = group[0]
-        else:
-            group_name = ""
-            group_id = ""
-
         valid = self._check_form(
-            username, password, hash_tag, url, follow, like)
+            username, password, hash_tag, url, like)
 
         if valid:
             bot = LikeBot(username, password, False, proxy_dict)
@@ -252,7 +230,7 @@ class TabLikes(ttk.Frame):
                     #self.distribution_menu.grid_forget()
                 self._get_account_data_for_data_box(account[3])
 
-    def _check_form(self, username, password, hash_tag, url, follows, likes):
+    def _check_form(self, username, password, hash_tag, url, likes):
         if username == '' or password == '':
             messagebox.showerror(
                 'Credentials', 'Please enter your username or password')
@@ -263,12 +241,8 @@ class TabLikes(ttk.Frame):
                 'Search data', 'Hash tag and url entry cannot be empty')
             return False
 
-        if follows == 0:
-            messagebox.showerror('No number', 'Please enter number for follow')
-            return False
-
-        if likes < 0:
-            messagebox.showerror('Invalid number', 'Please enter number for likes')
+        if likes <= 0:
+            messagebox.showerror('Invalid number of likes', 'Please enter number for likes')
             return False
 
         if url and hash_tag:

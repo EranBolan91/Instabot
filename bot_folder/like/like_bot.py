@@ -22,11 +22,13 @@ class LikeBot(main_bot.InstagramBot):
                         self.username))
 
         for i in range(likes):
-            print("{} -- like: likes left {}/{}".format(
-                        self.username, i, likes))
+            print("{} -- like: {}/{}".format(
+                        self.username, i + 1, likes))
             self._press_like_button()
             self._go_to_next_post()
 
+        print("{} -- like: closing driver".format(
+                        self.username))
         self.driver.delete_all_cookies()
         self.driver.close()
 

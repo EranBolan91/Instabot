@@ -4,14 +4,20 @@ import tkinter.font as tkfont
 from database import db
 from database.dm import dm
 from bot_folder.combination.combination_bot import CombinationBot
+from bot_folder.proxy_manager import ProxyManager
 from database.combination.combination import CombinationDM
 from utils.schedule import ScheduleCalc
 import threading
+import time
 
 
 class TabCombination(ttk.Frame):
     def __init__(self, window):
         super().__init__(window)
+
+        self.__proxy_manager = ProxyManager()
+        self.__threads = {}
+        threading.Thread(target=self.thread_inspector).start()
 
         self.dividerFont = tkfont.Font(family="Helvetica", size=25)
         self.headerFont = tkfont.Font(
@@ -203,10 +209,6 @@ class TabCombination(ttk.Frame):
         minutes_entry = self.minutes_entry_value.get()
         hours_entry = self.hours_entry_value.get()
         days_entry = self.days_entry_value.get()
-        proxy_menu = self.proxy_menu.get()
-        proxy = db.Database().get_proxy_data_by_username(proxy_menu)
-        proxy_dict = {'host': proxy[1], 'port': proxy[-1], 'user': proxy[2], 'password': proxy[3]}
-
 
         if distribution:
             group_name = self.distribution_menu_var.get()
@@ -221,6 +223,15 @@ class TabCombination(ttk.Frame):
             username, password, hash_tag, url, follow, like)
 
         if valid:
+            try:
+                peoxy_username = self.__proxy_manager.add_user(username)
+            except Exception as e:
+                messagebox.showerror(e)
+                return
+
+            proxy = db.Database().get_proxy_data_by_username(peoxy_username)
+            proxy_dict = {'host': proxy[1], 'port': proxy[-1], 'user': proxy[2], 'password': proxy[3]}
+
             bot = CombinationBot(username, password, False, proxy_dict)
             if schedule_action:
                 time_schedule = ScheduleCalc().calc_schedule_time(
@@ -232,6 +243,7 @@ class TabCombination(ttk.Frame):
                 t = threading.Thread(target=bot.combination, args=(
                     hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users))
                 t.start()
+                self.__threads[username] = t
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
@@ -319,6 +331,16 @@ class TabCombination(ttk.Frame):
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
+
+    def thread_inspector(self):
+        while True:
+            time.sleep(5)
+            for username in self.__threads.copy():
+                if not self.__threads[username].is_alive():
+                    self.__proxy_manager.remove_user(username)
+                    del self.__threads[username]
+                    print("removed " + username + " from list")
+
 
     def _get_proxies(self):
         self.proxies = db.Database().get_proxy_data()

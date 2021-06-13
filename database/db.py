@@ -428,3 +428,16 @@ class Database:
         finally:
             conn.close()
             return data[0]
+
+    def get_proxies_usernames(self):
+        data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            data = cur.execute(" SELECT USERNAME FROM proxy").fetchall()
+            data = [username[0] for username in data]
+        except Exception as e:
+            print('get proxy data: ', e)
+        finally:
+            conn.close()
+            return data

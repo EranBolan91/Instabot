@@ -22,8 +22,12 @@ WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 
 
 class CombinationBot(main_bot.InstagramBot):
-    def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users):
-        self.automation(followers, hashtag, url, skip_posts, likes)
+    def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users, clients):
+        try:
+            self.automation(followers, hashtag, url, skip_posts, likes)
+            clients[self.username] = 'finished'
+        except:
+            clients[self.username] = 'crashed'
 
     def automation(self, max_followers, hashtag, url, skip_posts, likes):
         wait = WebDriverWait(self.driver, 5)

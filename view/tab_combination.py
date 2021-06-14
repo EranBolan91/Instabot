@@ -12,9 +12,10 @@ import time
 
 
 class TabCombination(ttk.Frame):
-    def __init__(self, window):
+    def __init__(self, window, clients):
         super().__init__(window)
 
+        self.__clients = clients
         self.__proxy_manager = ProxyManager()
         self.__threads = {}
         threading.Thread(target=self.thread_inspector).start()
@@ -241,9 +242,10 @@ class TabCombination(ttk.Frame):
                 timing_thread.start()
             else:
                 t = threading.Thread(target=bot.combination, args=(
-                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users))
+                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users, self.__clients))
                 t.start()
                 self.__threads[username] = t
+                self.__clients[username] = 'running'
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):

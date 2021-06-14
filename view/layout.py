@@ -8,6 +8,7 @@ from .tab_dm import *
 from .tab_statistics import *
 from .tab_combination import *
 from .tab_likes import *
+from .tab_clients import *
 import tkinter as tkr
 
 
@@ -47,8 +48,11 @@ class Layout:
         follow_followers_tab = TabFollowFollowers(tab_control)
         dm_tab = TabDM(tab_control)
         statistics_tab = StatisticsTab(tab_control)
-        combination_tab = TabCombination(tab_control)
         likes_tab = TabLikes(tab_control)
+
+        clients = {}
+        combination_tab = TabCombination(tab_control, clients)
+        clients_tab = TabClients(tab_control, clients)
 
         tab_control.add(hash_tag_tab, text='Hash Tag')
         tab_control.add(followers_tab, text='Followers')
@@ -58,6 +62,7 @@ class Layout:
         tab_control.add(combination_tab, text='Combination')
         tab_control.add(statistics_tab, text='Statistics')
         tab_control.add(likes_tab, text="Likes")
+        tab_control.add(clients_tab, text="Clients")
 
         tab_control.pack(expand=1, fill="both")
 

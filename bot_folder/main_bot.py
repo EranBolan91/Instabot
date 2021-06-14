@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -11,6 +12,7 @@ import time, random, requests
 import os
 from base64 import b64encode
 import json
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 class InstagramBot:
     def __init__(self, username, password, is_mobile, proxy_dict):
@@ -31,9 +33,20 @@ class InstagramBot:
         options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
 
         """
-        firefox proxy
+        firefox proxy  
         """
         fp = webdriver.FirefoxProfile()
+
+        # add new header
+        fp.add_extension("modify_headers-0.7.1.1-fx.xpi")
+        fp.set_preference("extensions.modify_headers.currentVersion", "0.7.1.1-fx")
+        fp.set_preference("modifyheaders.config.active", True)
+        fp.set_preference("modifyheaders.headers.count", 1)
+        fp.set_preference("modifyheaders.headers.action0", "Add")
+        fp.set_preference("modifyheaders.headers.name0", "Proxy-Switch-Ip")
+        fp.set_preference("modifyheaders.headers.value0", "yes")
+        fp.set_preference("modifyheaders.headers.enabled0", True)
+
         fp.add_extension('closeproxy.xpi')
         fp.set_preference('network.proxy.type', 1)
         fp.set_preference('network.proxy.http', proxy_dict['host'])
@@ -42,6 +55,7 @@ class InstagramBot:
         credentials = '{user}:{password}'.format(**proxy_dict)
         credentials = b64encode(credentials.encode('ascii')).decode('utf-8')
         fp.set_preference('extensions.closeproxyauth.authtoken', credentials)
+        fp.update_preferences()
 
         if is_mobile:
             #firefox_options = webdriver.FirefoxOptions()
@@ -50,7 +64,7 @@ class InstagramBot:
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
-            self.driver = webdriver.Firefox(fp, options=options)
+            self.driver = webdriver.Firefox(firefox_profile=fp, options=options)
 
 
     def get_username(self):

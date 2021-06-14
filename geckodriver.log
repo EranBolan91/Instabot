@@ -294,3 +294,10 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1623658804526	geckodriver	INFO	Listening on 127.0.0.1:1064
+1623658807626	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileJZZKca"
+1623658807968	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileJZZKca\\search.json.mozlz4", (void 0)))
+1623658809855	Marionette	INFO	Listening on port 1074
+1623658810278	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623658814108	Marionette	INFO	Stopped listening on port 1074

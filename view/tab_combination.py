@@ -341,16 +341,15 @@ class TabCombination(ttk.Frame):
                     del self.__threads[username]
                     print("removed " + username + " from list")
 
-
     def _get_proxies(self):
         self.proxies = db.Database().get_proxy_data()
         proxy_list = []
-        try:
-            menu = self.proxy_option_menu['menu']
-        except Exception:
-            self.proxy_option_menu = ttk.OptionMenu(self, self.proxy_menu, proxy_list[0], *proxy_list,
-                       command="")
-            self.proxy_option_menu.grid(column=2, row=2)
+
+        self.proxy_option_menu = ttk.OptionMenu(self, self.proxy_menu, proxy_list[0], *proxy_list,
+                   command="")
+        self.proxy_option_menu.grid(column=2, row=2)
+
+        menu = self.proxy_option_menu['menu']
 
         menu.delete(0, 'end')
         for proxy in self.proxies:

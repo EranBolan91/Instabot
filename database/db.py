@@ -422,7 +422,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            data = cur.execute(" SELECT * FROM proxy WHERE USERNAME == " + username).fetchall()
+            data = cur.execute(" SELECT * FROM proxy WHERE USERNAME='{}'".format(username)).fetchall()
         except Exception as e:
             print('get proxy data: ', e)
         finally:

@@ -5,7 +5,9 @@ PROXY_PORT = 10000
 PROXY_USER = '4y3xkj012elb568z'
 PROXY_PASS = 'qk3m2z94tofyw7su'
 
-manifest_json = """
+
+def get_proxy_plugin(host, port, user, password):
+    manifest_json = """
 {
     "version": "1.0.0",
     "manifest_version": 2,
@@ -26,7 +28,7 @@ manifest_json = """
 }
 """
 
-background_js = """
+    background_js = """
 var config = {
         mode: "fixed_servers",
         rules: {
@@ -55,11 +57,9 @@ chrome.webRequest.onAuthRequired.addListener(
             {urls: ["<all_urls>"]},
             ['blocking']
 );
-""" % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS)
+""" % (host, port, user, password)
 
-
-def get_proxy_plugin():
-    pluginfile = 'proxy_auth_plugin.zip'
+    pluginfile = user + '.zip'
     with zipfile.ZipFile(pluginfile, 'w') as zp:
         zp.writestr("manifest.json", manifest_json)
         zp.writestr("background.js", background_js)

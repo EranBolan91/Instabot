@@ -12,11 +12,11 @@ import time
 
 
 class TabCombination(ttk.Frame):
-    def __init__(self, window, clients):
+    def __init__(self, window, clients, proxy_manager):
         super().__init__(window)
 
         self.__clients = clients
-        self.__proxy_manager = ProxyManager()
+        self.__proxy_manager = proxy_manager
         self.__threads = {}
         threading.Thread(target=self.thread_inspector).start()
 
@@ -227,7 +227,7 @@ class TabCombination(ttk.Frame):
             try:
                 peoxy_username = self.__proxy_manager.add_user(username)
             except Exception as e:
-                messagebox.showerror(e)
+                messagebox.showerror('', e)
                 return
 
             proxy = db.Database().get_proxy_data_by_username(peoxy_username)

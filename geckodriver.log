@@ -462,3 +462,701 @@ interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
 JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678685229	geckodriver	INFO	Listening on 127.0.0.1:1063
+1623678688883	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilei7Jlat"
+*** You are running in headless mode.
+1623678689688	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilei7Jlat\\search.json.mozlz4", (void 0)))
+1623678691999	Marionette	INFO	Listening on port 1071
+1623678692072	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678706832	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678722924	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678744521	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+ise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678815602	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678850990	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionetJavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ent@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+78856827	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foJavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678912985	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623678934069	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/14fe74f9e1f6.js, line 220: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623679012606	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623679896426	geckodriver	INFO	Listening on 127.0.0.1:1029
+1623679900070	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile5nDNCg"
+*** You are running in headless mode.
+1623679900802	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile5nDNCg\\search.json.mozlz4", (void 0)))
+1623679902745	Marionette	INFO	Listening on port 1040
+1623679903303	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623680027965	geckodriver	INFO	Listening on 127.0.0.1:19570
+1623680031597	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilebRP6je"
+1623680032341	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilebRP6je\\search.json.mozlz4", (void 0)))
+1623680036123	Marionette	INFO	Listening on port 19578
+1623680036482	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623680054472	Marionette	INFO	Stopped listening on port 19578
+1623681060227	geckodriver	INFO	Listening on 127.0.0.1:32483
+1623681063862	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileTGM7mF"
+*** You are running in headless mode.
+1623681064491	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileTGM7mF\\search.json.mozlz4", (void 0)))
+1623681066396	Marionette	INFO	Listening on port 32492
+1623681066575	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 1623681081461	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" 1623681081797	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource1623681082038	Marionette	INFO	Marionette enabled
+consolJavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+A content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down
+[Parent 14684, IPC I/O Parent] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:544
+OINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623681100705	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+A content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x390084,name=PContent::Msg_DispatchBeforeUnloadToSubtree) Channel error: cannot send/recv
+
+Marionette threw an error: TypeError: browsingContextFn().currentWindowGlobal is null
+getMarionetteCommandsActorProxy/get/<@chrome://marionette/content/actors/MarionetteCommandsParent.jsm:327:29
+permitUnload@chrome://global/content/elements/browser-custom-element.js:1716:21
+CanCloseWindow@chrome://browser/content/browser.js:7860:36
+canClose@chrome://browser/content/browser.js:6233:12
+observe@resource:///modules/ContentCrashHandlers.jsm:177:28
+
+1623681190779	geckodriver	INFO	Listening on 127.0.0.1:4370
+1623681194549	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileYDCKNl"
+*** You are running in headless mode.
+1623681195256	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileYDCKNl\\search.json.mozlz4", (void 0)))
+1623681197771	Marionette	INFO	Listening on port 4378
+1623681198270	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623681214624	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623681679813	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623681715273	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+e 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623682197927	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1623682217148	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+Exiting due to channel error.
+Exiting due to channel error.
+es/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+Exiting due to channel error.
+/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+Exiting due to channel error.
+Exiting due to channel error.
+chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+Exiting due to channel error.
+Exiting due to channel error.
+ntent/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1623682804450	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623692689993	geckodriver	INFO	Listening on 127.0.0.1:9956
+1623692693222	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileGBouM1"
+1623692693883	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileGBouM1\\search.json.mozlz4", (void 0)))
+1623692696093	Marionette	INFO	Listening on port 9964
+1623692696407	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623692740285	Marionette	INFO	Stopped listening on port 9964
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623692804094	geckodriver	INFO	Listening on 127.0.0.1:10015
+1623692807286	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile6NS5YZ"
+1623692807631	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile6NS5YZ\\search.json.mozlz4", (void 0)))
+1623692809502	Marionette	INFO	Listening on port 10023
+1623692809947	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623693880176	geckodriver	INFO	Listening on 127.0.0.1:7615
+1623693883824	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileMOnKuF"
+1623693884490	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileMOnKuF\\search.json.mozlz4", (void 0)))
+1623693887709	Marionette	INFO	Listening on port 7623
+1623693888022	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623693932203	geckodriver	INFO	Listening on 127.0.0.1:7674
+1623693935877	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileBjTUFI"
+1623693936545	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileBjTUFI\\search.json.mozlz4", (void 0)))
+1623693940030	Marionette	INFO	Listening on port 7682
+1623693940137	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623694126905	geckodriver	INFO	Listening on 127.0.0.1:7734
+1623694130505	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileiFNCeM"
+1623694131355	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileiFNCeM\\search.json.mozlz4", (void 0)))
+1623694134734	Marionette	INFO	Listening on port 7742
+1623694134830	Marionette	WARN	TLS certificate errors will be ignored for this session
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+1623694876178	geckodriver	INFO	Listening on 127.0.0.1:25324
+1623694879880	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileRkPYJE"
+1623694880563	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileRkPYJE\\search.json.mozlz4", (void 0)))
+1623694884289	Marionette	INFO	Listening on port 25332
+1623694884717	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623694921899	Marionette	INFO	Stopped listening on port 25332
+1623694923970	geckodriver	INFO	Listening on 127.0.0.1:25383
+1623694927660	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileKQTsAH"
+1623694928659	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileKQTsAH\\search.json.mozlz4", (void 0)))
+1623694932356	Marionette	INFO	Listening on port 25391
+1623694932503	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623694955742	Marionette	INFO	Stopped listening on port 25391
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623695001801	geckodriver	INFO	Listening on 127.0.0.1:4532
+1623695005428	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile4KENaM"
+1623695005960	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile4KENaM\\search.json.mozlz4", (void 0)))
+console.error: services.settings: 
+  main/message-groups Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1623695010161	Marionette	FATAL	Remote protocol server failed to start: [Exception... "Component returned failure code: 0xc1f30001 (NS_ERROR_NOT_INITIALIZED) [nsIServerSocket.asyncListen]"  nsresult: "0xc1f30001 (NS_ERROR_NOT_INITIALIZED)"  location: "JS frame :: chrome://marionette/content/server.js :: set acceptConnections :: line 90"  data: no] Stack trace: set acceptConnections()@server.js:90
+start()@server.js:115
+init/<()@jar:file:///C:/Program%20Files/Mozilla%20Firefox/omni.ja!/components/marionette.js:502
+observe()@resource://gre/modules/AsyncShutdown.jsm:575
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623695117299	geckodriver	INFO	Listening on 127.0.0.1:21423
+1623695120977	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileAbVgQG"
+1623695121589	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileAbVgQG\\search.json.mozlz4", (void 0)))
+1623695124681	Marionette	INFO	Listening on port 21431
+1623695125206	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623695196369	Marionette	INFO	Stopped listening on port 21431
+1623695198843	geckodriver	INFO	Listening on 127.0.0.1:21481
+1623695202437	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileMSOdET"
+1623695203283	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileMSOdET\\search.json.mozlz4", (void 0)))
+1623695206456	Marionette	INFO	Listening on port 21489
+1623695206678	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623695220270	Marionette	INFO	Stopped listening on port 21489
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623695282656	geckodriver	INFO	Listening on 127.0.0.1:1030
+1623695286376	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofiletyeCy2"
+1623695287129	Marionette	INFO	Marionette enabled
+1623695306680	geckodriver	INFO	Listening on 127.0.0.1:1044
+1623695310324	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileMkgMCZ"
+1623695311081	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileMkgMCZ\\search.json.mozlz4", (void 0)))
+1623695314685	Marionette	INFO	Listening on port 1053
+1623695315169	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623695367202	Marionette	INFO	Stopped listening on port 1053
+1623695499052	geckodriver	INFO	Listening on 127.0.0.1:1049
+1623695502720	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile4FGrFg"
+1623695503305	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile4FGrFg\\search.json.mozlz4", (void 0)))
+1623695506866	Marionette	INFO	Listening on port 1058
+1623695506952	Marionette	WARN	TLS certificate errors will be ignored for this session
+1623695518130	Marionette	INFO	Stopped listening on port 1058
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623695568930	geckodriver	INFO	Listening on 127.0.0.1:1063
+1623695572270	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileUzWUr7"
+1623695572947	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileUzWUr7\\search.json.mozlz4", (void 0)))
+1623695576458	Marionette	INFO	Listening on port 1072
+1623695576627	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623695672145	geckodriver	INFO	Listening on 127.0.0.1:32981
+1623695675772	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileYtDP4p"
+1623695676509	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileYtDP4p\\search.json.mozlz4", (void 0)))
+1623695680114	Marionette	INFO	Listening on port 32989
+1623695680643	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623695776139	geckodriver	INFO	Listening on 127.0.0.1:33067
+1623695779698	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileyI9IVh"
+1623695780408	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileyI9IVh\\search.json.mozlz4", (void 0)))
+1623695783583	Marionette	INFO	Listening on port 33075
+1623695783931	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623695887345	geckodriver	INFO	Listening on 127.0.0.1:9251
+1623695890952	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileS2mEJZ"
+1623695891688	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileS2mEJZ\\search.json.mozlz4", (void 0)))
+1623695895215	Marionette	INFO	Listening on port 9259
+1623695895271	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623696014065	geckodriver	INFO	Listening on 127.0.0.1:3327
+1623696017644	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileujlArL"
+1623696018344	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileujlArL\\search.json.mozlz4", (void 0)))
+1623696021812	Marionette	INFO	Listening on port 3335
+1623696021936	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623696172293	geckodriver	INFO	Listening on 127.0.0.1:3401
+1623696176012	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile5JHKIC"
+1623696176726	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile5JHKIC\\search.json.mozlz4", (void 0)))
+1623696180155	Marionette	INFO	Listening on port 3409
+1623696180239	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623770346671	geckodriver	INFO	Listening on 127.0.0.1:1086
+1623770349896	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileRVonWr"
+1623770350709	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileRVonWr\\search.json.mozlz4", (void 0)))
+1623770353305	Marionette	INFO	Listening on port 1094
+1623770353564	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623770372291	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623770415901	Marionette	INFO	Stopped listening on port 1094
+1623770421136	geckodriver	INFO	Listening on 127.0.0.1:1186
+1623770424337	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileKJ8hos"
+1623770424682	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileKJ8hos\\search.json.mozlz4", (void 0)))
+1623770426473	Marionette	INFO	Listening on port 1194
+1623770426505	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623770444095	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+Marionette threw an error: TypeError: browsingContextFn().currentWindowGlobal is null
+getMarionetteCommandsActorProxy/get/<@chrome://marionette/content/actors/MarionetteCommandsParent.jsm:327:29
+
+1623770462640	Marionette	INFO	Stopped listening on port 1194
+1623771020651	geckodriver	INFO	Listening on 127.0.0.1:1060
+1623771023739	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileYKE9x6"
+*** You are running in headless mode.
+1623771024060	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileYKE9x6\\search.json.mozlz4", (void 0)))
+1623771025076	Marionette	INFO	Listening on port 1074
+1623771025270	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623771045941	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1623771065793	geckodriver	INFO	Listening on 127.0.0.1:1149
+1623771068872	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileHIGxR5"
+1623771069211	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileHIGxR5\\search.json.mozlz4", (void 0)))
+1623771071251	Marionette	INFO	Listening on port 1157
+1623771071556	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
+1623771101500	Marionette	INFO	Stopped listening on port 1157

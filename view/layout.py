@@ -9,6 +9,8 @@ from .tab_statistics import *
 from .tab_combination import *
 from .tab_likes import *
 from .tab_clients import *
+from.tab_dm_to_followers import *
+from bot_folder.proxy_manager import ProxyManager
 import tkinter as tkr
 
 
@@ -42,6 +44,9 @@ class Layout:
         # tab config
         tab_control = ttk.Notebook(window)
 
+        clients = {}
+        proxy_manager = ProxyManager()
+
         hash_tag_tab = TabHashTag(tab_control)
         followers_tab = TabFollowers(tab_control)
         location_tab = TabLocation(tab_control)
@@ -50,8 +55,8 @@ class Layout:
         statistics_tab = StatisticsTab(tab_control)
         likes_tab = TabLikes(tab_control)
 
-        clients = {}
-        combination_tab = TabCombination(tab_control, clients)
+        followers_dm_tab = TabFollowersToDM(tab_control, proxy_manager)
+        combination_tab = TabCombination(tab_control, clients, proxy_manager)
         clients_tab = TabClients(tab_control, clients)
 
         tab_control.add(hash_tag_tab, text='Hash Tag')
@@ -63,6 +68,7 @@ class Layout:
         tab_control.add(statistics_tab, text='Statistics')
         tab_control.add(likes_tab, text="Likes")
         tab_control.add(clients_tab, text="Clients")
+        tab_control.add(followers_dm_tab, text="dm to followers")
 
         tab_control.pack(expand=1, fill="both")
 

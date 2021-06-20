@@ -4,7 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from database.combination.combination import CombinationDM
 from database.followers.followers import FollowersDB
-from selenium.webdriver.common.action_chains import ActionChains
 from utils.utils import Utils as utils
 from models.combination import Combination
 from models.account_actions import AccountActions
@@ -12,6 +11,7 @@ import time
 import datetime as dt
 from random import randint
 from database import db
+import sys
 from models.followers import Followers
 from bs4 import BeautifulSoup as bs
 
@@ -28,6 +28,7 @@ class CombinationBot(main_bot.InstagramBot):
             clients[self.username] = 'finished'
         except:
             clients[self.username] = 'crashed'
+        sys.exit()
 
     def automation(self, max_followers, hashtag, url, skip_posts, likes):
         wait = WebDriverWait(self.driver, 5)

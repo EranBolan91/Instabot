@@ -41,8 +41,6 @@ class InstagramBot:
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
             self.driver = webdriver.Chrome(options=options, chrome_options=chrome_options)
-            self.driver.get('https://httpbin.org/ip')
-
 
     def get_username(self):
         return self.username

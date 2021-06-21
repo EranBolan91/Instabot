@@ -17,8 +17,6 @@ class TabCombination(ttk.Frame):
 
         self.__clients = clients
         self.__proxy_manager = proxy_manager
-        self.__threads = {}
-        threading.Thread(target=self.thread_inspector).start()
 
         self.dividerFont = tkfont.Font(family="Helvetica", size=25)
         self.headerFont = tkfont.Font(
@@ -238,13 +236,12 @@ class TabCombination(ttk.Frame):
                 time_schedule = ScheduleCalc().calc_schedule_time(
                     action, minutes_entry, hours_entry, days_entry)
                 timing_thread = threading.Timer(time_schedule, bot.combination, [
-                                                hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users])
+                                                hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users, self.__proxy_manager])
                 timing_thread.start()
             else:
                 t = threading.Thread(target=bot.combination, args=(
-                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users, self.__clients))
+                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users, self.__clients, self.__proxy_manager))
                 t.start()
-                self.__threads[username] = t
                 self.__clients[username] = 'running'
 
     # Getting the username from the menu option, look for it on the list and sets username and password
@@ -333,15 +330,6 @@ class TabCombination(ttk.Frame):
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
-
-    def thread_inspector(self):
-        while True:
-            time.sleep(5)
-            for username in self.__threads.copy():
-                if not self.__threads[username].is_alive():
-                    self.__proxy_manager.remove_user(username)
-                    del self.__threads[username]
-                    print("removed " + username + " from list")
 
     def _get_proxies(self):
         self.proxies = db.Database().get_proxy_data()

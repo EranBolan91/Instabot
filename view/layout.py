@@ -9,7 +9,7 @@ from .tab_statistics import *
 from .tab_combination import *
 from .tab_likes import *
 from .tab_clients import *
-from.tab_dm_to_followers import *
+from .tab_dm_to_followers import *
 from bot_folder.proxy_manager import ProxyManager
 import tkinter as tkr
 
@@ -73,7 +73,8 @@ class Layout:
         tab_control.pack(expand=1, fill="both")
 
         # status bar config
-        status_bar = Label(window, text="status bar", bd=1, relief=SUNKEN, anchor=W)
+        status_bar = Label(window, text="status bar",
+                           bd=1, relief=SUNKEN, anchor=W)
         status_bar.pack(side=BOTTOM, fill=X)
 
     def _accounts(self):

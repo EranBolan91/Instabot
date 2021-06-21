@@ -1160,3 +1160,315 @@ JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE:
 JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
 JavaScript error: resource://gre/modules/Prompter.jsm, line 66: NS_NOINTERFACE: 
 1623771101500	Marionette	INFO	Stopped listening on port 1157
+1624216888955	geckodriver	INFO	Listening on 127.0.0.1:54505
+1624216891967	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilea5LuC5"
+1624216892729	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilea5LuC5\\search.json.mozlz4", (void 0)))
+1624216897445	Marionette	INFO	Listening on port 54514
+1624216898007	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624216898013	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54504","noProxy":[],"sslProxy":"127.0.0.1:54504"}
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+1624216920757	Marionette	INFO	Stopped listening on port 54514
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624216929565	geckodriver	INFO	Listening on 127.0.0.1:54928
+1624216932590	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilejSyoXz"
+1624216933193	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilejSyoXz\\search.json.mozlz4", (void 0)))
+1624216938056	Marionette	INFO	Listening on port 54937
+1624216938168	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624216938173	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54927","noProxy":[],"sslProxy":"127.0.0.1:54927"}
+1624217701656	geckodriver	INFO	Listening on 127.0.0.1:58416
+1624217704581	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilepskdHz"
+1624217705291	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilepskdHz\\search.json.mozlz4", (void 0)))
+1624217710152	Marionette	INFO	Listening on port 58427
+1624217710619	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624217710625	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:58415","noProxy":[],"sslProxy":"127.0.0.1:58415"}
+1624217716110	Marionette	INFO	Stopped listening on port 58427
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624217754598	geckodriver	INFO	Listening on 127.0.0.1:58499
+1624217757632	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilemooujg"
+1624217758274	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilemooujg\\search.json.mozlz4", (void 0)))
+1624217762554	Marionette	INFO	Listening on port 58509
+1624217762989	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624217762996	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:58498","noProxy":[],"sslProxy":"127.0.0.1:58498"}
+1624217772977	Marionette	INFO	Stopped listening on port 58509
+1624218041508	geckodriver	INFO	Listening on 127.0.0.1:59034
+1624218044545	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileCb7j9m"
+*** You are running in headless mode.
+1624218045351	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileCb7j9m\\search.json.mozlz4", (void 0)))
+1624218047927	Marionette	INFO	Listening on port 59043
+1624218048274	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624218048280	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59033","noProxy":[],"sslProxy":"127.0.0.1:59033"}
+1624218090512	geckodriver	INFO	Listening on 127.0.0.1:59138
+1624218093551	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile9HWpb5"
+*** You are running in headless mode.
+1624218094254	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile9HWpb5\\search.json.mozlz4", (void 0)))
+1624218096531	Marionette	INFO	Listening on port 59147
+1624218096799	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624218096807	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59137","noProxy":[],"sslProxy":"127.0.0.1:59137"}
+1624218127501	geckodriver	INFO	Listening on 127.0.0.1:59213
+1624218130531	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilePWXYC5"
+1624218131383	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilePWXYC5\\search.json.mozlz4", (void 0)))
+1624218137292	Marionette	INFO	Listening on port 59223
+1624218137400	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624218137405	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59212","noProxy":[],"sslProxy":"127.0.0.1:59212"}
+1624218143359	Marionette	INFO	Stopped listening on port 59223
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624218191974	geckodriver	INFO	Listening on 127.0.0.1:59315
+1624218194979	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileF6NL9O"
+1624218195706	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileF6NL9O\\search.json.mozlz4", (void 0)))
+1624218201669	Marionette	INFO	Listening on port 59324
+1624218201785	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624218201792	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59314","noProxy":[],"sslProxy":"127.0.0.1:59314"}
+1624218411288	geckodriver	INFO	Listening on 127.0.0.1:59496
+1624218414174	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileye6QT9"
+1624218415115	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileye6QT9\\search.json.mozlz4", (void 0)))
+1624218420546	Marionette	INFO	Listening on port 59506
+1624218420743	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624218420751	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59495","noProxy":[],"sslProxy":"127.0.0.1:59495"}
+1624304180316	geckodriver	INFO	Listening on 127.0.0.1:50974
+1624304183390	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilezpGSyJ"
+1624304184010	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilezpGSyJ\\search.json.mozlz4", (void 0)))
+1624304187239	Marionette	INFO	Listening on port 50983
+1624304187598	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304187601	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:50973","noProxy":[],"sslProxy":"127.0.0.1:50973"}
+1624304238864	Marionette	INFO	Stopped listening on port 50983
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624304260239	geckodriver	INFO	Listening on 127.0.0.1:51103
+1624304263290	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileq0XhLT"
+1624304263755	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileq0XhLT\\search.json.mozlz4", (void 0)))
+1624304267075	Marionette	INFO	Listening on port 51112
+1624304267541	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304267546	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:51102","noProxy":[],"sslProxy":"127.0.0.1:51102"}
+1624304314282	Marionette	INFO	Stopped listening on port 51112
+1624304316360	geckodriver	INFO	Listening on 127.0.0.1:51229
+1624304319438	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile0hP5lV"
+1624304319907	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile0hP5lV\\search.json.mozlz4", (void 0)))
+1624304322950	Marionette	INFO	Listening on port 51238
+1624304323154	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304323157	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:51228","noProxy":[],"sslProxy":"127.0.0.1:51228"}
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+*************************
+A coding exception was thrown in a Promise resolution callback.
+See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+
+Full message: TypeError: container.editor is undefined
+Full stack: showNode/<@resource://devtools/client/inspector/markup/markup.js:1620:9
+process@resource://gre/modules/Promise-backend.js:961:38
+walkerLoop@resource://gre/modules/Promise-backend.js:845:29
+Promise*scheduleWalkerLoop@resource://gre/modules/Promise-backend.js:775:19
+schedulePromise@resource://gre/modules/Promise-backend.js:809:12
+completePromise@resource://gre/modules/Promise-backend.js:741:12
+checkForCompletion@resource://gre/modules/Promise-backend.js:596:16
+resolver@resource://gre/modules/Promise-backend.js:603:47
+
+*************************
+console.error: (new TypeError("container.editor is undefined", "resource://devtools/client/inspector/markup/markup.js", 1620))
+1624304447172	geckodriver	INFO	Listening on 127.0.0.1:51391
+1624304450248	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileW0G9xI"
+1624304450869	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileW0G9xI\\search.json.mozlz4", (void 0)))
+1624304453755	Marionette	INFO	Listening on port 51399
+1624304453986	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304453992	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:51390","noProxy":[],"sslProxy":"127.0.0.1:51390"}
+1624304498431	Marionette	INFO	Stopped listening on port 51399
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624304693055	geckodriver	INFO	Listening on 127.0.0.1:51980
+1624304696101	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileKKXi8M"
+1624304696588	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileKKXi8M\\search.json.mozlz4", (void 0)))
+1624304699638	Marionette	INFO	Listening on port 51990
+1624304699811	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304699814	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:51979","noProxy":[],"sslProxy":"127.0.0.1:51979"}
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+1624304782548	Marionette	INFO	Stopped listening on port 51990
+1624304813599	geckodriver	INFO	Listening on 127.0.0.1:52187
+1624304816668	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilecU4DHN"
+1624304817160	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilecU4DHN\\search.json.mozlz4", (void 0)))
+1624304820469	Marionette	INFO	Listening on port 52195
+1624304820902	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304820906	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:52186","noProxy":[],"sslProxy":"127.0.0.1:52186"}
+JavaScript error: , line 0: uncaught exception: Object
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+1624304943408	geckodriver	INFO	Listening on 127.0.0.1:52356
+1624304946473	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileyyE96U"
+1624304946964	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileyyE96U\\search.json.mozlz4", (void 0)))
+1624304950450	Marionette	INFO	Listening on port 52367
+1624304950705	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624304950709	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:52355","noProxy":[],"sslProxy":"127.0.0.1:52355"}
+1624305049922	geckodriver	INFO	Listening on 127.0.0.1:52520
+1624305052965	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileXzo36d"
+1624305053460	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileXzo36d\\search.json.mozlz4", (void 0)))
+1624305056674	Marionette	INFO	Listening on port 52530
+1624305057157	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624305057162	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:52519","noProxy":[],"sslProxy":"127.0.0.1:52519"}
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+console.error: (new TypeError("parent is null", "resource://devtools/client/inspector/shared/style-change-tracker.js", 67))
+TypeError: parent is null: canMutationImpactCurrentStyles@resource://devtools/client/inspector/shared/style-change-tracker.js:67:24
+onMutations@resource://devtools/client/inspector/shared/style-change-tracker.js:84:41
+_emit@resource://devtools/shared/event-emitter.js:226:34
+emit@resource://devtools/shared/event-emitter.js:172:18
+emit@resource://devtools/shared/event-emitter.js:324:18
+getMutations@resource://devtools/client/fronts/walker.js:358:10
+
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2310))
+1624305380735	Marionette	INFO	Stopped listening on port 52530
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624305462352	geckodriver	INFO	Listening on 127.0.0.1:52869
+1624305465389	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileZp7krH"
+1624305465932	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileZp7krH\\search.json.mozlz4", (void 0)))
+1624305469005	Marionette	INFO	Listening on port 52878
+1624305469077	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624305469081	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:52866","noProxy":[],"sslProxy":"127.0.0.1:52866"}
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+1624305608549	geckodriver	INFO	Listening on 127.0.0.1:53233
+1624305611580	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileqh3BgQ"
+1624305612054	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileqh3BgQ\\search.json.mozlz4", (void 0)))
+1624305615081	Marionette	INFO	Listening on port 53242
+1624305615283	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624305615287	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:53232","noProxy":[],"sslProxy":"127.0.0.1:53232"}
+1624307494893	geckodriver	INFO	Listening on 127.0.0.1:53818
+1624307497952	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilelxjPaP"
+1624307498496	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilelxjPaP\\search.json.mozlz4", (void 0)))
+1624307502148	Marionette	INFO	Listening on port 53829
+1624307502283	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624307502288	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:53817","noProxy":[],"sslProxy":"127.0.0.1:53817"}
+1624307650628	geckodriver	INFO	Listening on 127.0.0.1:54019
+1624307653667	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileRjhW74"
+1624307654140	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileRjhW74\\search.json.mozlz4", (void 0)))
+1624307657280	Marionette	INFO	Listening on port 54028
+1624307657370	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624307657374	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54018","noProxy":[],"sslProxy":"127.0.0.1:54018"}
+JavaScript error: , line 0: uncaught exception: Object
+1624307697865	Marionette	INFO	Stopped listening on port 54028
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624307722126	geckodriver	INFO	Listening on 127.0.0.1:54166
+1624307725188	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileR1i26i"
+1624307725661	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileR1i26i\\search.json.mozlz4", (void 0)))
+1624307728475	Marionette	INFO	Listening on port 54175
+1624307728888	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624307728893	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54165","noProxy":[],"sslProxy":"127.0.0.1:54165"}
+1624307780709	Marionette	INFO	Stopped listening on port 54175
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624308013790	geckodriver	INFO	Listening on 127.0.0.1:54377
+1624308016856	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileQajJPA"
+1624308017334	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileQajJPA\\search.json.mozlz4", (void 0)))
+1624308020402	Marionette	INFO	Listening on port 54388
+1624308020574	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624308020578	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54376","noProxy":[],"sslProxy":"127.0.0.1:54376"}
+1624308074455	geckodriver	INFO	Listening on 127.0.0.1:54530
+1624308077494	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilefnzOex"
+1624308077973	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilefnzOex\\search.json.mozlz4", (void 0)))
+1624308081307	Marionette	INFO	Listening on port 54539
+1624308081719	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624308081723	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54529","noProxy":[],"sslProxy":"127.0.0.1:54529"}
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+1624308297077	geckodriver	INFO	Listening on 127.0.0.1:54737
+1624308300131	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilenHyG2t"
+1624308300623	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilenHyG2t\\search.json.mozlz4", (void 0)))
+1624308304128	Marionette	INFO	Listening on port 54746
+1624308304334	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624308304339	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54736","noProxy":[],"sslProxy":"127.0.0.1:54736"}
+1624308487213	geckodriver	INFO	Listening on 127.0.0.1:54894
+1624308490315	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileEMHl2D"
+1624308490812	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileEMHl2D\\search.json.mozlz4", (void 0)))
+1624308493817	Marionette	INFO	Listening on port 54904
+1624308494022	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624308494026	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:54893","noProxy":[],"sslProxy":"127.0.0.1:54893"}
+1624308550850	Marionette	INFO	Stopped listening on port 54904
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624308571344	geckodriver	INFO	Listening on 127.0.0.1:55055
+1624308574409	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile7HBDsR"
+1624308574915	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile7HBDsR\\search.json.mozlz4", (void 0)))
+1624308577863	Marionette	INFO	Listening on port 55065
+1624308578135	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624308578139	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:55054","noProxy":[],"sslProxy":"127.0.0.1:55054"}
+1624308591635	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out

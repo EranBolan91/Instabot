@@ -1,3 +1,4 @@
+from socket import SocketIO
 from bot_folder import main_bot
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,6 +21,9 @@ class DMTtoFollowers(main_bot.InstagramBot):
 
         time.sleep(2)
         self._nav_user(self.username)
+
+        if not limit_msg:
+            limit_msg = self._get_max_followers() - 1
 
         self._open_followers()
         scroll_box = self._get_scroll_box()
@@ -58,6 +62,12 @@ class DMTtoFollowers(main_bot.InstagramBot):
 
         return followers
 
+    def _get_max_followers(self):
+        time.sleep(3)
+        followers = self.driver.find_element_by_xpath(
+            '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span').text
+        return int(followers)
+
     def _get_followers(self, scroll_box, limit):
         followers = []
         time.sleep(2)
@@ -65,6 +75,7 @@ class DMTtoFollowers(main_bot.InstagramBot):
         while len(followers) < limit:
             self._scroll_down(scroll_box)
             followers = self._get_current_followers()
+            time.sleep(1.5)
 
         return followers[:limit]
 

@@ -1472,3 +1472,201 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1624308591635	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624309913913	Marionette	INFO	Stopped listening on port 55065
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624309933663	geckodriver	INFO	Listening on 127.0.0.1:55634
+1624309936759	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileTJ18NI"
+1624309937274	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileTJ18NI\\search.json.mozlz4", (void 0)))
+1624309940616	Marionette	INFO	Listening on port 55642
+1624309940977	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624309940981	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:55633","noProxy":[],"sslProxy":"127.0.0.1:55633"}
+1624309942214	Marionette	INFO	Stopped listening on port 55642
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624309970551	geckodriver	INFO	Listening on 127.0.0.1:55697
+1624309973616	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileuL6eAj"
+1624309974076	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileuL6eAj\\search.json.mozlz4", (void 0)))
+1624309977232	Marionette	INFO	Listening on port 55706
+1624309977321	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624309977324	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:55696","noProxy":[],"sslProxy":"127.0.0.1:55696"}
+1624310058343	geckodriver	INFO	Listening on 127.0.0.1:55855
+1624310061396	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilenMIW70"
+1624310061881	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilenMIW70\\search.json.mozlz4", (void 0)))
+1624310064752	Marionette	INFO	Listening on port 55863
+1624310065123	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310065127	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:55854","noProxy":[],"sslProxy":"127.0.0.1:55854"}
+1624310095822	Marionette	INFO	Stopped listening on port 55863
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624310168162	geckodriver	INFO	Listening on 127.0.0.1:56000
+1624310171207	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileo9Dynt"
+1624310171699	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileo9Dynt\\search.json.mozlz4", (void 0)))
+1624310174701	Marionette	INFO	Listening on port 56009
+1624310174917	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310174920	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:55999","noProxy":[],"sslProxy":"127.0.0.1:55999"}
+1624310196963	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+Handler function _httpResponseExaminer threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_httpResponseExaminer@resource://devtools/server/actors/network-monitor/network-observer.js:445:10
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function _httpResponseExaminer threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_httpResponseExaminer@resource://devtools/server/actors/network-monitor/network-observer.js:445:10
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function _httpResponseExaminer threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_httpResponseExaminer@resource://devtools/server/actors/network-monitor/network-observer.js:445:10
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+1624310455495	geckodriver	INFO	Listening on 127.0.0.1:56314
+1624310458528	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileaodvjh"
+1624310459017	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileaodvjh\\search.json.mozlz4", (void 0)))
+1624310461947	Marionette	INFO	Listening on port 56323
+1624310462224	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310462227	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:56313","noProxy":[],"sslProxy":"127.0.0.1:56313"}
+1624310513004	geckodriver	INFO	Listening on 127.0.0.1:56455
+1624310516065	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileyzP2ru"
+1624310516520	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileyzP2ru\\search.json.mozlz4", (void 0)))
+1624310519873	Marionette	INFO	Listening on port 56465
+1624310520284	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310520288	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:56454","noProxy":[],"sslProxy":"127.0.0.1:56454"}
+JavaScript error: , line 0: uncaught exception: Object
+SourceActor threw an exception: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ProfilePageContainer.js/8df7d748884c.js. Code 2147500036.
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:556:16
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 556, column: 16
+console.error: (new Error("Failed to fetch https://www.instagram.com/static/bundles/es6/ProfilePageContainer.js/8df7d748884c.js. Code 2147500036.", "resource://devtools/shared/DevToolsUtils.js", 556))
+SourceActor threw an exception: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ConsumerAsyncCommons.js/c4ca4238a0b9.js. Code 2147500036.
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:556:16
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 556, column: 16
+console.error: (new Error("Failed to fetch https://www.instagram.com/static/bundles/es6/ConsumerAsyncCommons.js/c4ca4238a0b9.js. Code 2147500036.", "resource://devtools/shared/DevToolsUtils.js", 556))
+SourceActor threw an exception: Error: Failed to fetch https://www.instagram.com/Bambi_boost8/. Code 2147500036.
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:556:16
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 556, column: 16
+console.error: (new Error("Failed to fetch https://www.instagram.com/Bambi_boost8/. Code 2147500036.", "resource://devtools/shared/DevToolsUtils.js", 556))
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 556: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ProfilePageContainer.js/8df7d748884c.js. Code 2147500036.
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 556: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ConsumerAsyncCommons.js/c4ca4238a0b9.js. Code 2147500036.
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 556: Error: Failed to fetch https://www.instagram.com/Bambi_boost8/. Code 2147500036.
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2310))
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2310))
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2310))
+1624310632686	geckodriver	INFO	Listening on 127.0.0.1:56613
+1624310635727	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileO2Ni7Z"
+1624310636257	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileO2Ni7Z\\search.json.mozlz4", (void 0)))
+1624310639409	Marionette	INFO	Listening on port 56621
+1624310639443	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310639450	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:56612","noProxy":[],"sslProxy":"127.0.0.1:56612"}
+JavaScript error: https://www.facebook.com/instagram/login_sync/, line 4: ReferenceError: requireLazy is not defined
+JavaScript error: https://www.facebook.com/instagram/login_sync/, line 9: ReferenceError: requireLazy is not defined
+JavaScript error: https://www.facebook.com/instagram/login_sync/, line 10: ReferenceError: requireLazy is not defined
+JavaScript error: https://www.facebook.com/instagram/login_sync/, line 11: ReferenceError: requireLazy is not defined
+1624310682770	geckodriver	INFO	Listening on 127.0.0.1:56782
+1624310685812	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilefV4Vi0"
+1624310686276	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilefV4Vi0\\search.json.mozlz4", (void 0)))
+1624310689217	Marionette	INFO	Listening on port 56790
+1624310689535	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310689539	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:56781","noProxy":[],"sslProxy":"127.0.0.1:56781"}
+SourceActor threw an exception: [Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 567"  data: no]
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:567:34
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 567, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 567: NS_BASE_STREAM_CLOSED: Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]
+1624310794316	geckodriver	INFO	Listening on 127.0.0.1:56931
+1624310797369	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofiletwVOwS"
+1624310797874	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofiletwVOwS\\search.json.mozlz4", (void 0)))
+1624310800953	Marionette	INFO	Listening on port 56941
+1624310801082	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310801085	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:56930","noProxy":[],"sslProxy":"127.0.0.1:56930"}
+1624310928694	geckodriver	INFO	Listening on 127.0.0.1:57104
+1624310931731	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilebBDHgN"
+1624310932179	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilebBDHgN\\search.json.mozlz4", (void 0)))
+1624310935194	Marionette	INFO	Listening on port 57119
+1624310935404	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624310935408	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57103","noProxy":[],"sslProxy":"127.0.0.1:57103"}
+1624311038525	geckodriver	INFO	Listening on 127.0.0.1:57284
+1624311041573	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile5Nzi6R"
+1624311042082	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile5Nzi6R\\search.json.mozlz4", (void 0)))
+1624311045008	Marionette	INFO	Listening on port 57293
+1624311045245	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624311045248	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57283","noProxy":[],"sslProxy":"127.0.0.1:57283"}
+1624311140492	geckodriver	INFO	Listening on 127.0.0.1:57428
+1624311143527	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile3FV82T"
+1624311144003	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile3FV82T\\search.json.mozlz4", (void 0)))
+1624311147192	Marionette	INFO	Listening on port 57438
+1624311147243	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624311147246	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57427","noProxy":[],"sslProxy":"127.0.0.1:57427"}
+JavaScript error: , line 0: uncaught exception: Object
+SourceActor threw an exception: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ProfilePageContainer.js/8df7d748884c.js. Code 2147500036.
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:556:16
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 556, column: 16
+console.error: (new Error("Failed to fetch https://www.instagram.com/static/bundles/es6/ProfilePageContainer.js/8df7d748884c.js. Code 2147500036.", "resource://devtools/shared/DevToolsUtils.js", 556))
+SourceActor threw an exception: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ConsumerAsyncCommons.js/c4ca4238a0b9.js. Code 2147500036.
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:556:16
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 556, column: 16
+console.error: (new Error("Failed to fetch https://www.instagram.com/static/bundles/es6/ConsumerAsyncCommons.js/c4ca4238a0b9.js. Code 2147500036.", "resource://devtools/shared/DevToolsUtils.js", 556))
+SourceActor threw an exception: Error: Failed to fetch https://www.instagram.com/Bambi_boost8/. Code 2147500036.
+Stack: onResponse@resource://devtools/shared/DevToolsUtils.js:556:16
+onStopRequest@resource://gre/modules/NetUtil.jsm:128:18
+Line: 556, column: 16
+console.error: (new Error("Failed to fetch https://www.instagram.com/Bambi_boost8/. Code 2147500036.", "resource://devtools/shared/DevToolsUtils.js", 556))
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 556: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ProfilePageContainer.js/8df7d748884c.js. Code 2147500036.
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 556: Error: Failed to fetch https://www.instagram.com/static/bundles/es6/ConsumerAsyncCommons.js/c4ca4238a0b9.js. Code 2147500036.
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 556: Error: Failed to fetch https://www.instagram.com/Bambi_boost8/. Code 2147500036.
+1624311249295	geckodriver	INFO	Listening on 127.0.0.1:57604
+1624311252338	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileMbpaNw"
+1624311252831	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileMbpaNw\\search.json.mozlz4", (void 0)))
+1624311255822	Marionette	INFO	Listening on port 57615
+1624311256068	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624311256072	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57603","noProxy":[],"sslProxy":"127.0.0.1:57603"}
+1624311383701	geckodriver	INFO	Listening on 127.0.0.1:57777
+1624311386734	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileMXfOrI"
+1624311387235	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileMXfOrI\\search.json.mozlz4", (void 0)))
+1624311390221	Marionette	INFO	Listening on port 57785
+1624311390410	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624311390414	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57776","noProxy":[],"sslProxy":"127.0.0.1:57776"}
+1624311458143	geckodriver	INFO	Listening on 127.0.0.1:57922
+1624311461197	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile4HTCng"
+1624311461686	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile4HTCng\\search.json.mozlz4", (void 0)))
+1624311464685	Marionette	INFO	Listening on port 57931
+1624311464918	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624311464921	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57921","noProxy":[],"sslProxy":"127.0.0.1:57921"}
+1624311629377	Marionette	INFO	Stopped listening on port 57931
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

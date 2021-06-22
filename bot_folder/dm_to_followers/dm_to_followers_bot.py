@@ -11,10 +11,12 @@ import time
 from utils.utils import Utils as utils
 import datetime as dt
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class DMTtoFollowers(main_bot.InstagramBot):
     def send_message_to_followers(self, message, limit_msg):
+        is_first = True
         self.wait = WebDriverWait(self.driver, 4)
 
         self._login()
@@ -30,12 +32,19 @@ class DMTtoFollowers(main_bot.InstagramBot):
         followers = self._get_followers(scroll_box, limit_msg)
 
         for follower in followers:
+            time.sleep(2)
+
             self._nav_user(follower)
             self._follow_back()
+
             try:
-                self._send_msg(message)
-            except Exception:
-                pass
+                self._send_msg(message, is_first)
+                is_first = False
+            except Exception as e:
+                print(e)
+
+        self.driver.delete_all_cookies()
+        self.driver.close()
 
     def _follow_back(self):
         try:
@@ -77,7 +86,7 @@ class DMTtoFollowers(main_bot.InstagramBot):
             followers = self._get_current_followers()
             time.sleep(1.5)
 
-        return followers[:limit]
+        return followers[3:limit]
 
     def _get_scroll_box(self):
         return self.wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[5]/div/div/div[2]")))
@@ -102,13 +111,20 @@ class DMTtoFollowers(main_bot.InstagramBot):
         return self.driver.find_element_by_xpath(
             '/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea')
 
-    def _send_msg(self, msg):
+    def _send_msg(self, msg, is_first):
         self._open_message()
-        self._pop_up_box()
+        time.sleep(1)
+
+        if is_first:
+            self._pop_up_box()
 
         # click on message area
-        send = self._get_text_area()
+        area = self._get_text_area()
+        area.send_keys(msg)
 
-        # types message
-        send.send_keys(msg)
-        time.sleep(1)
+    def _type(self, string, text_area):
+        actions = ActionChains(self.driver)
+        actions.click(text_area).perform()
+        for s in string:
+            text_area.send_keys(s)
+            time.sleep(0.2)

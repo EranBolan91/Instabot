@@ -24,6 +24,7 @@ class TabFollowersToDM(ttk.Frame):
         self.username = StringVar()
         self.password = StringVar()
         self.limit_msg = IntVar()
+        self.skip_users = IntVar()
 
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -65,6 +66,11 @@ class TabFollowersToDM(ttk.Frame):
         ttk.Entry(self, textvariable=self.limit_msg).grid(
             column=0, row=7, pady=8)
 
+        ttk.Label(self, text='Skip Users', font=self.bold).grid(
+            column=1, row=6, pady=16)
+        ttk.Entry(self, textvariable=self.skip_users).grid(
+            column=1, row=7, pady=8)
+
         # Run the script button
         ttk.Button(self, text="SEND", command=self._run_script).grid(
             column=0, row=8, pady=16)
@@ -74,6 +80,7 @@ class TabFollowersToDM(ttk.Frame):
         password = self.password.get()
         message_text = self.text_message.get("1.0", END)
         limit_msg = self.limit_msg.get()
+        skip_users = self.skip_users.get()
 
         valid = self._check_form(username, password, message_text)
 
@@ -90,7 +97,7 @@ class TabFollowersToDM(ttk.Frame):
 
             bot = DMTtoFollowers(username, password, False, proxy_dict)
             t = threading.Thread(
-                target=bot.send_message_to_followers, args=(message_text, limit_msg))
+                target=bot.send_message_to_followers, args=(message_text, limit_msg, skip_users))
             t.start()
 
     def _check_form(self, username, password, message):

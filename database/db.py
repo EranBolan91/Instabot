@@ -152,6 +152,17 @@ class Database:
                                port INT)
                                """)
 
+        # Table Statistics
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS statistics (
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               user_id INT,
+                               date DATETIME,
+                               likes INT,
+                               follow INT,
+                               unfollow INT,
+                               follow_back INT)
+                               """)
+
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db
@@ -198,7 +209,8 @@ class Database:
         cur = conn.cursor()
         is_deleted = False
         try:
-            cur.execute("DELETE FROM accounts WHERE username='{}' ".format(str(username)))
+            cur.execute(
+                "DELETE FROM accounts WHERE username='{}' ".format(str(username)))
             conn.commit()
             is_deleted = True
         except Exception as e:
@@ -260,7 +272,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute('INSERT INTO unfollow(user_id, username) VALUES(?,?)', (user_id, user))
+            cur.execute(
+                'INSERT INTO unfollow(user_id, username) VALUES(?,?)', (user_id, user))
             conn.commit()
         except Exception as e:
             print(e)
@@ -273,7 +286,8 @@ class Database:
         cur = conn.cursor()
         users = []
         try:
-            cur.execute("SELECT * FROM unfollow WHERE user_id='{}'".format(user_id))
+            cur.execute(
+                "SELECT * FROM unfollow WHERE user_id='{}'".format(user_id))
             users = cur.fetchall()
         except Exception as e:
             print(e)
@@ -286,7 +300,8 @@ class Database:
         cur = conn.cursor()
         user_id = -1
         try:
-            cur.execute("SELECT id FROM accounts WHERE username='{}'".format(username))
+            cur.execute(
+                "SELECT id FROM accounts WHERE username='{}'".format(username))
             user_id = cur.fetchone()
         except Exception as e:
             print(e)
@@ -302,7 +317,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute('INSERT INTO groups(group_name, user_id) VALUES(?,?)', (group_name, user_id))
+            cur.execute(
+                'INSERT INTO groups(group_name, user_id) VALUES(?,?)', (group_name, user_id))
             conn.commit()
             is_saved = True
         except Exception as e:
@@ -316,7 +332,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute("SELECT * FROM groups WHERE user_id={}".format(user_id))
+            cur.execute(
+                "SELECT * FROM groups WHERE user_id={}".format(user_id))
             groups = cur.fetchall()
         except Exception as e:
             print("get distribution lists by username ", e)
@@ -330,7 +347,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute("DELETE FROM groups WHERE group_name='{}' AND user_id='{}'".format(group_name, owner_group_id))
+            cur.execute("DELETE FROM groups WHERE group_name='{}' AND user_id='{}'".format(
+                group_name, owner_group_id))
             conn.commit()
             is_deleted = True
         except Exception as e:
@@ -343,7 +361,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (user, group_id))
+            cur.execute(
+                'INSERT INTO dm_users(username, group_id) VALUES(?,?)', (user, group_id))
             conn.commit()
         except Exception as e:
             print("add username to distribution group: ", e)
@@ -354,7 +373,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute(" DELETE FROM unfollow WHERE username='{}' AND user_id={} ".format(username, user_id))
+            cur.execute(" DELETE FROM unfollow WHERE username='{}' AND user_id={} ".format(
+                username, user_id))
             conn.commit()
         except Exception as e:
             print('remove username from distribution group: ', e)
@@ -378,12 +398,14 @@ class Database:
 
     # Getting all the users name from DM_users to a specific group
     def get_users_from_dm_users(self, group_name, owner_group_name):
-        group_id = self.get_group_id_by_group_name_and_id(group_name, owner_group_name)
+        group_id = self.get_group_id_by_group_name_and_id(
+            group_name, owner_group_name)
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         dm_users = []
         try:
-            cur.execute("SELECT username FROM dm_users WHERE group_id={}".format(group_id))
+            cur.execute(
+                "SELECT username FROM dm_users WHERE group_id={}".format(group_id))
             dm_users = cur.fetchall()
         except Exception as e:
             print("get users from dm users ", e)
@@ -422,7 +444,8 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            data = cur.execute(" SELECT * FROM proxy WHERE USERNAME='{}'".format(username)).fetchall()
+            data = cur.execute(
+                " SELECT * FROM proxy WHERE USERNAME='{}'".format(username)).fetchall()
         except Exception as e:
             print('get proxy data: ', e)
         finally:

@@ -15,7 +15,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 class DMTtoFollowers(main_bot.InstagramBot):
-    def send_message_to_followers(self, message, limit_msg):
+    def send_message_to_followers(self, message, limit_msg, skip_users):
         is_first = True
         self.wait = WebDriverWait(self.driver, 4)
 
@@ -29,7 +29,7 @@ class DMTtoFollowers(main_bot.InstagramBot):
 
         self._open_followers()
         scroll_box = self._get_scroll_box()
-        followers = self._get_followers(scroll_box, limit_msg)
+        followers = self._get_followers(scroll_box, limit_msg, skip_users)
 
         for follower in followers:
             time.sleep(2)
@@ -37,9 +37,11 @@ class DMTtoFollowers(main_bot.InstagramBot):
             self._nav_user(follower)
             self._follow_back()
 
+            self._send_msg(message, is_first)
+            is_first = False
+
             try:
-                self._send_msg(message, is_first)
-                is_first = False
+                pass
             except Exception as e:
                 print(e)
 
@@ -56,8 +58,10 @@ class DMTtoFollowers(main_bot.InstagramBot):
 
     def _open_followers(self):
         time.sleep(2)
-        self.wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//a[contains(@href,'/followers')]"))).click()
+        self.driver.find_element_by_xpath(
+            "//a[contains(@href,'/followers')]").click()
+        # self.wait.until(EC.element_to_be_clickable(
+        #    (By.XPATH, "//a[contains(@href,'/followers')]"))).click()
 
     def _get_current_followers(self):
         users_name_list = self.driver.find_elements_by_class_name('_0imsa')
@@ -77,8 +81,9 @@ class DMTtoFollowers(main_bot.InstagramBot):
             '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span').text
         return int(followers)
 
-    def _get_followers(self, scroll_box, limit):
+    def _get_followers(self, scroll_box, limit, skip_users):
         followers = []
+        limit += skip_users
         time.sleep(2)
 
         while len(followers) < limit:
@@ -86,7 +91,7 @@ class DMTtoFollowers(main_bot.InstagramBot):
             followers = self._get_current_followers()
             time.sleep(1.5)
 
-        return followers[3:limit]
+        return followers[skip_users:limit]
 
     def _get_scroll_box(self):
         return self.wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[5]/div/div/div[2]")))
@@ -108,8 +113,8 @@ class DMTtoFollowers(main_bot.InstagramBot):
         first_post.click()
 
     def _get_text_area(self):
-        return self.driver.find_element_by_xpath(
-            '/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea')
+        return self.wait.until(
+            EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea')))
 
     def _send_msg(self, msg, is_first):
         self._open_message()
@@ -121,6 +126,7 @@ class DMTtoFollowers(main_bot.InstagramBot):
         # click on message area
         area = self._get_text_area()
         area.send_keys(msg)
+        time.sleep(2)
 
     def _type(self, string, text_area):
         actions = ActionChains(self.driver)

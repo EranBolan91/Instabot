@@ -1798,3 +1798,151 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1624374404533	geckodriver	INFO	Listening on 127.0.0.1:57954
+1624374407546	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilesNS72E"
+1624374408101	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilesNS72E\\search.json.mozlz4", (void 0)))
+1624374411385	Marionette	INFO	Listening on port 57962
+1624374411757	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624374411761	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:57953","noProxy":[],"sslProxy":"127.0.0.1:57953"}
+JavaScript error: https://www.instagram.com/meitalnoymark/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/the.small.detailss/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/shaked_kor30/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+1624374527394	Marionette	INFO	Stopped listening on port 57962
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624374602925	geckodriver	INFO	Listening on 127.0.0.1:58160
+1624374605997	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileTLa3Ty"
+1624374606545	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileTLa3Ty\\search.json.mozlz4", (void 0)))
+1624374609557	Marionette	INFO	Listening on port 58169
+1624374609711	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624374609714	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:58159","noProxy":[],"sslProxy":"127.0.0.1:58159"}
+JavaScript error: https://www.instagram.com/meitalnoymark/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/viktoriiahifive/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/messiah_il/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/my_minds.il/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/atiavaks/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/hadar3659/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/tzlilalaluf/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/orshmtov/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/netanel12556/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+1624374772930	Marionette	INFO	Stopped listening on port 58169
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624374948735	geckodriver	INFO	Listening on 127.0.0.1:58483
+1624374951767	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileCgZsmE"
+1624374952321	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileCgZsmE\\search.json.mozlz4", (void 0)))
+1624374955787	Marionette	INFO	Listening on port 58492
+1624374955928	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624374955932	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:58482","noProxy":[],"sslProxy":"127.0.0.1:58482"}
+JavaScript error: https://www.instagram.com/miriam_555_/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/mitcalcelet/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/sarit7701/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/invest_btc_with_1/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/koral_moses/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+1624375134901	Marionette	INFO	Stopped listening on port 58492
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1624375140225	geckodriver	INFO	Listening on 127.0.0.1:58721
+1624375143253	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileBtPgP0"
+1624375143792	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileBtPgP0\\search.json.mozlz4", (void 0)))
+1624375146924	Marionette	INFO	Listening on port 58730
+1624375147454	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624375147459	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:58720","noProxy":[],"sslProxy":"127.0.0.1:58720"}
+1624375324663	geckodriver	INFO	Listening on 127.0.0.1:58895
+1624375327727	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileL4lCIa"
+1624375328239	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileL4lCIa\\search.json.mozlz4", (void 0)))
+1624375331227	Marionette	INFO	Listening on port 58903
+1624375331431	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624375331434	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:58894","noProxy":[],"sslProxy":"127.0.0.1:58894"}
+1624375603599	geckodriver	INFO	Listening on 127.0.0.1:59166
+1624375606641	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilep1UtSo"
+1624375607136	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofilep1UtSo\\search.json.mozlz4", (void 0)))
+1624375610261	Marionette	INFO	Listening on port 59174
+1624375610343	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624375610347	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59165","noProxy":[],"sslProxy":"127.0.0.1:59165"}
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/mars.luzor/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/dilipsinghpanw/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/thomasjohnellisfans/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/fancharlidamelio461/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+1624375798696	geckodriver	INFO	Listening on 127.0.0.1:59385
+1624375801761	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile9hEw6M"
+1624375802308	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofile9hEw6M\\search.json.mozlz4", (void 0)))
+1624375805493	Marionette	INFO	Listening on port 59394
+1624375806005	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624375806009	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59384","noProxy":[],"sslProxy":"127.0.0.1:59384"}
+1624375902583	geckodriver	INFO	Listening on 127.0.0.1:59523
+1624375905628	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileJMczbC"
+1624375906130	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\roeem\\AppData\\Local\\Temp\\rust_mozprofileJMczbC\\search.json.mozlz4", (void 0)))
+1624375909385	Marionette	INFO	Listening on port 59532
+1624375909844	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624375909850	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:59522","noProxy":[],"sslProxy":"127.0.0.1:59522"}
+JavaScript error: https://www.instagram.com/mars.luzor/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/dilipsinghpanw/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/thomasjohnellisfans/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/fancharlidamelio461/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/87fbc81ecb72.js, line 64: AjaxError: item_id is incorrect
+JavaScript error: , line 0: uncaught exception: Object
+1624375989948	Marionette	INFO	Stopped listening on port 59532
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

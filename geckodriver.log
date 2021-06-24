@@ -1805,7 +1805,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1624521685108	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624521685111	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1180","noProxy":[],"sslProxy":"127.0.0.1:1180"}
 1624522194041	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
-rogram Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilerV0ADv"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+nette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilerV0ADv"
 *** You are running in headless mode.
 1624521730386	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilerV0ADv\\search.json.mozlz4", (void 0)))
@@ -1813,7 +1814,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1624521731649	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624521731652	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1278","noProxy":[],"sslProxy":"127.0.0.1:1278"}
 1624522240452	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
-rogram Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilezUNb4i"
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+nette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilezUNb4i"
 *** You are running in headless mode.
 1624521899468	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilezUNb4i\\search.json.mozlz4", (void 0)))
@@ -1826,3 +1828,4 @@ TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 1624522410079	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE

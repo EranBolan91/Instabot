@@ -1197,11 +1197,10 @@ interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
- mode.
-1624234023083	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileghIK46\\search.json.mozlz4", (void 0)))
-1624234024270	Marionette	INFO	Listening on port 6445
-1624234024343	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofilesYo2Xj\bookmarkbackups\bookmarks-2021-06-21_11_w8NlZEITmTnQm4XW1e+Msg==.jsonlz4) because it does not exist
+1624343254549	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ this session
 1624234024345	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:6408","noProxy":[],"sslProxy":"127.0.0.1:6408"}
 1624234067462	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
@@ -1268,9 +1267,9 @@ TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624239659972	Marionette	WARN1624240061124	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
+162423961624343254551	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+e@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/co1624240986548	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
@@ -1280,10 +1279,10 @@ webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 1624241449258	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624241913554	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
+interaction.flushEventLoop@chrome://marionette/content/inter1624343254546	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+tte/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
@@ -1296,12 +1295,11 @@ webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624243763324	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+webdriverCliJavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileHXuPxY\bookmarkbackups\bookmarks-2021-06-21_11_sJP-PHkkEAlMhE1LymM8WA==.jsonlz4) because it does not exist
+1624343254460	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+:31
 1624243795793	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
@@ -1354,14 +1352,12 @@ TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
-Promise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624250668981	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofile2guIi6\bookmarkbackups\bookmarks-2021-06-21_11_0lPZijNg37D4oS5nv+Deww==.jsonlz4) because it does not exist
+1624343254517	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+ise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 1624250699211	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
@@ -1427,11 +1423,11 @@ TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
-ionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624258116307	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
+1624343254499	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+mise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 1624258160614	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
@@ -1445,13 +1441,11 @@ TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
-/marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624257619867	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofilehKACmk\bookmarkbackups\bookmarks-2021-06-21_11_9m5vlI92V3w35yGigPMCwg==.jsonlz4) because it does not exist
+1624343254699	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 1624257652172	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
@@ -1486,12 +1480,11 @@ TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
-ERROR_NOT_AVAILABLE
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
-ew profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileh9X36x\\search.json.mozlz4", (void 0)))
-1624259072448	Marionette	INFO	Listening on port 1168
-1624259072900	Marionette	WARN	TLS certificate errors will be ignored for this session
-1624259072903	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1155","noProxy":[],"sslProxy":"127.0.0.1:1155"}
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileghIK46\bookmarkbackups\bookmarks-2021-06-21_11_cgQV-tAypu1624346507681	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[GFX1-]: Receive IPC close with reason=AbnormalShut[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+s initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1155","noProxy":[],"sslProxy":"127.0.0.1:1155"}
 1624259131829	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
@@ -1501,42 +1494,57 @@ JavaScript error: , line 0: uncaught exception: Object
 1624259582535	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-1624260265486	geckodriver	INFO	Listening on 127.0.0.1:18704
-1624260268548	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileFjaqum"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileh9X36x\bookmarkbackups\bookmarks-2021-06-21_11_df5LbskBz9cdIbVTq2TyBA==.jsonlz4) because it does not exist
+1624346507656	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+le" "c:\\temp\\rust_mozprofileFjaqum"
 *** You are running in headless mode.
 1624260268868	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileFjaqum\\search.json.mozlz4", (void 0)))
 1624260270114	Marionette	INFO	Listening on port 18715
 1624260270601	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624260270604	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:18703","noProxy":[],"sslProxy":"127.0.0.1:18703"}
-1624260277103	geckodriver	INFO	Listening on 127.0.0.1:18758
-1624260280164	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileKekT7k"
-*** You are running in headless mode.
-1624260280468	Marionette	INFO	Marionette enabled
+1624260783256	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileFjaqum\bookmarkbackups\bookmarks-2021-06-21_11_SXKn-XXIYsnY5pf1ykIXag==.jsonlz4) because it does not exist
+1624349966608	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+0280468	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileKekT7k\\search.json.mozlz4", (void 0)))
 1624260282001	Marionette	INFO	Listening on port 18766
 1624260282213	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624260282216	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:18757","noProxy":[],"sslProxy":"127.0.0.1:18757"}
-1624260286855	geckodriver	INFO	Listening on 127.0.0.1:18819
-1624260289909	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile9AKciZ"
+1624260794899	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624349966607	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+n64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile9AKciZ"
 *** You are running in headless mode.
 1624260290221	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile9AKciZ\\search.json.mozlz4", (void 0)))
 1624260291269	Marionette	INFO	Listening on port 18829
 1624260291450	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624260291452	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:18818","noProxy":[],"sslProxy":"127.0.0.1:18818"}
-1624260306356	geckodriver	INFO	Listening on 127.0.0.1:18892
-1624260309401	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileOdAx9f"
-*** You are running in headless mode.
-1624260309699	Marionette	INFO	Marionette enabled
+1624260804587	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofile9AKciZ\bookmarkbackups\bookmarks-2021-06-21_11_A77T85Ep1Ltl1qFB711Pgw==.jsonlz4) because it does not exist
+1624349966665	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+tte enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileOdAx9f\\search.json.mozlz4", (void 0)))
 1624260310704	Marionette	INFO	Listening on port 18902
 1624260310934	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624260310936	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:18891","noProxy":[],"sslProxy":"127.0.0.1:18891"}
-1624260403472	geckodriver	INFO	Listening on 127.0.0.1:22933
-1624260406546	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileYHqKYa"
-*** You are running in headless mode.
-1624260406842	Marionette	INFO	Marionette enabled
+1624260824097	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileOdAx9f\bookmarkbackups\bookmarks-2021-06-21_11_Wct23mu7Lf09yfHlBZ-Y3A==.jsonlz4) because it does not exist
+1624349966632	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+tte enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileYHqKYa\\search.json.mozlz4", (void 0)))
 1624260407901	Marionette	INFO	Listening on port 22951
 1624260408110	Marionette	WARN	TLS certificate errors will be ignored for this session
@@ -1561,74 +1569,260 @@ TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624260568489	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624260568489	Marionette	WARN	JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624262332443	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-ew NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile3Cc9vZ\\search.json.mozlz4", (void 0)))
-1624260446751	Marionette	INFO	Listening on port 23194
-1624260446816	Marionette	WARN	TLS certificate errors will be ignored for this session
-1624260446818	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:23169","noProxy":[],"sslProxy":"127.0.0.1:23169"}
-1624260470003	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624262362504	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624260498912	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624262396365	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/c1624263254330	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-JavaScript error: https://www.instagram.com/nataliakezikova/, line 52: TypeError: window.__bufferedErrors is undefined
-JavaScript error: https://www.instagram.com/nataliakezikova/, line 52: TypeError: window.__bufferedErrors is undefined
-ionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:23289","noProxy":[],"sslProxy":"127.0.0.1:23289"}
-1624260486009	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624263716461	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624260514821	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624263746747	Marionette	WA1624264203035	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624260548370	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624265099092	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624260578992	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624265164559	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/contJavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+1624349968747	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ent/actors/MarionetteCommandsParent.jsm:390:15
+GeckoDriver.prototype.deleteSession@chrome://marionette/content/driver.js:2335:3
+onClosed@chrome://marionette/content/server.js:194:17
+close@chrome://marionette/content/transport.js:225:18
+onInputStreamReady@chrome://marionette/content/transport.js:379:14
+
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteCommands'
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\1624349968696	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[Child 24316, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:544
+Exiting due to channel error.
+utdown
+/marionette/content/interaction.js:179:31
+1624265158045	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TJavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileBJ7q5G\bookmarkbackups\bookmarks-2021-06-21_11_qSaEShAHqeVqd4zbmvACAw==.jsonlz4) because it does not exist
+1624341624349968766	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: eJavaScJavaScript error: , line 0: NS_ERROR_NOT_AVAIL[Child 23524, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:544
+me://marionette/content/interaction.js:179:31
+1624260704720	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-n the file at C:\\temp\\rust_mozprofileD8sVYy\\search.json.mozlz4", (void 0)))
-1624260524458	Marionette	INFO	Listening on port 1120
-1624260524677	Marionette	WARN	TLS certificate errors will be ignored for this session
-1624260524682	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1089","noProxy":[],"sslProxy":"127.0.0.1:1089"}
-1624260554250	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+1624262915402	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624262936678	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624262957911	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624262979265	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624263472600	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624263491228	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624260563719	geckodriver	INFO	Listening on 127.0.0.1:1360
-1624260566766	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilez66T8B"
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofilez66T8B\bookmarkbackups\bookmarks-2021-06-21_11_Bacm4SMCfo+dKgg0a+mXFg==.jsonlz4) because it does not exist
+1624349968744	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+[Child 25216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:544
+Exiting due to channel error.
+24262052437	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624262084420	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+1624262116113	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+1624263442675	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624263533784	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+1624263560204	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624264886705	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624264933594	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/7f89944a2535.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofileTca4c2\bookmarkbackups\bookmarks-2021-06-21_11_NKXPMC4Bq9jXBxCmxd-1YQ==.jsonlz4) because it does not exist
+1624349968686	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+Exiting due to channel error.
+1624521394629	geckodriver	INFO	Listening on 127.0.0.1:25872
+1624521397699	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileFqJMJV"
 *** You are running in headless mode.
-1624260567145	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilez66T8B\\search.json.mozlz4", (void 0)))
-1624260568756	Marionette	INFO	Listening on port 1372
-1624260568864	Marionette	WARN	TLS certificate errors will be ignored for this session
-1624260568877	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1359","noProxy":[],"sslProxy":"127.0.0.1:1359"}
-1624260618770	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624521398647	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileFqJMJV\\search.json.mozlz4", (void 0)))
+1624521400052	Marionette	INFO	Listening on port 25880
+1624521400378	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521400381	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:25871","noProxy":[],"sslProxy":"127.0.0.1:25871"}
+1624521421527	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileTca4c2"
+1624521436623	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624522348761	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624522387598	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624521468694	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624521499430	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624521530438	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+console.log: WebExtensions: reconsole.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addonJavaScript error: , line 0: NSJavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ble-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofile538Cb1"
 *** You are running in headless mode.
-1624260594369	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileTca4c2\\search.json.mozlz4", (void 0)))
-1624260595505	Marionette	INFO	Listening on port 1490
-1624260595627	Marionette	WARN	TLS certificate errors will be ignored for this session
-1624260595633	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1475","noProxy":[],"sslProxy":"127.0.0.1:1475"}
+1624521479742	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile538Cb1\\search.json.mozlz4", (void 0)))
+1624521481120	Marionette	INFO	Listening on port 26242
+1624521481503	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521481509	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:26231","noProxy":[],"sslProxy":"127.0.0.1:26231"}
+1624521505698	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+87	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofiledbbCl2\\search.json.mozlz4", (void 0)))
+1624521494693	Marionette	INFO	Listening on port 26312
+1624521495025	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521495028	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:26301","noProxy":[],"sslProxy":"127.0.0.1:26301"}
+1624521516877	Marionette	WARN	TimedPromise timed out after 51624521517621	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; 1624521532417	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+red for this session
+1624521519687	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:26460","noProxy":[],"sslProxy":"127.0.0.1:26460"}
+1624522028492	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+nette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilesw3gWe"
+*** You are running in headless mode.
+1624521600382	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilesw3gWe\\search.json.mozlz4", (void 0)))
+1624521601540	Marionette	INFO	Listening on port 1059
+1624521601620	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521601622	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1048","noProxy":[],"sslProxy":"127.0.0.1:1048"}
+1624522110437	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+nette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofiledGhlYY"
+*** You are running in headless mode.
+1624521683841	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofiledGhlYY\\search.json.mozlz4", (void 0)))
+1624521685031	Marionette	INFO	Listening on port 1189
+1624521685108	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521685111	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1180","noProxy":[],"sslProxy":"127.0.0.1:1180"}
+1624522194041	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+rogram Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilerV0ADv"
+*** You are running in headless mode.
+1624521730386	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilerV0ADv\\search.json.mozlz4", (void 0)))
+1624521731633	Marionette	INFO	Listening on port 1287
+1624521731649	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521731652	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1278","noProxy":[],"sslProxy":"127.0.0.1:1278"}
+1624522240452	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+rogram Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilezUNb4i"
+*** You are running in headless mode.
+1624521899468	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilezUNb4i\\search.json.mozlz4", (void 0)))
+1624521900642	Marionette	INFO	Listening on port 3373
+1624521900735	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624521900738	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:3364","noProxy":[],"sslProxy":"127.0.0.1:3364"}
+1624521925048	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624522410079	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error

@@ -26,7 +26,8 @@ class CombinationBot(main_bot.InstagramBot):
         try:
             self.automation(followers, hashtag, url, skip_posts, likes)
             clients[self.username] = 'finished'
-        except:
+        except Exception as e:
+            print(e)
             clients[self.username] = 'crashed'
 
         proxy_manager.remove_user(self.username)

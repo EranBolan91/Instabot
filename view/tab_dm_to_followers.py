@@ -14,7 +14,8 @@ class TabFollowersToDM(ttk.Frame):
 
         self.__proxy_manager = proxy_manager
 
-        self.headerFont = tkfont.Font(family="Helvetica", size=12, weight='bold')
+        self.headerFont = tkfont.Font(
+            family="Helvetica", size=12, weight='bold')
         self.titleFont = tkfont.Font(family="Helvetica", size=9)
         self.h3 = tkfont.Font(family="Helvetica", size=11, weight='bold')
         self.bold = tkfont.Font(weight='bold', size=10)
@@ -23,6 +24,7 @@ class TabFollowersToDM(ttk.Frame):
         self.username = StringVar()
         self.password = StringVar()
         self.limit_msg = IntVar()
+        self.skip_users = IntVar()
 
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -30,40 +32,55 @@ class TabFollowersToDM(ttk.Frame):
             user_name_list.append(account[3])
 
         ttk.Label(self, text='Send direct messages to distribution groups', font=self.headerFont)\
-                 .grid(column=0, row=0, padx=10, pady=10)
+            .grid(column=0, row=0, padx=10, pady=10)
 
         # username and password form
         ttk.Label(self, text='Please enter username and password', font=self.titleFont)\
             .grid(column=0, row=1, padx=10, pady=10)
-        ttk.Label(self, text='username:', font=self.bold).grid(column=0, row=2, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.username, show='*').grid(column=0, row=2)
-        ttk.Label(self, text='password:', font=self.bold).grid(column=0, row=3, padx=10, pady=10, sticky='w')
-        ttk.Entry(self, textvariable=self.password, show='*').grid(column=0, row=3)
+        ttk.Label(self, text='username:', font=self.bold).grid(
+            column=0, row=2, padx=10, pady=10, sticky='w')
+        ttk.Entry(self, textvariable=self.username,
+                  show='*').grid(column=0, row=2)
+        ttk.Label(self, text='password:', font=self.bold).grid(
+            column=0, row=3, padx=10, pady=10, sticky='w')
+        ttk.Entry(self, textvariable=self.password,
+                  show='*').grid(column=0, row=3)
 
-        ttk.Label(self, text='Choose user', font=self.titleFont).grid(column=1, row=1, padx=10, pady=10)
+        ttk.Label(self, text='Choose user', font=self.titleFont).grid(
+            column=1, row=1, padx=10, pady=10)
         if len(user_name_list) > 0:
             ttk.OptionMenu(self, self.users_menu, user_name_list[0], *user_name_list,
-                       command=self._set_username_password).grid(column=1, row=2)
+                           command=self._set_username_password).grid(column=1, row=2)
         else:
             ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
                 .grid(column=1, row=2, padx=10, pady=10)
 
         # Direct Messages
-        ttk.Label(self, text='Type your message', font=self.titleFont).grid(column=0, row=4, padx=10, pady=10)
+        ttk.Label(self, text='Type your message', font=self.titleFont).grid(
+            column=0, row=4, padx=10, pady=10)
         self.text_message = Text(self, height=7, width=50)
         self.text_message.grid(column=0, row=5, padx=20)
 
-        ttk.Label(self, text='Limit messages', font=self.bold).grid(column=0, row=6, pady=16)
-        ttk.Entry(self, textvariable=self.limit_msg).grid(column=0, row=7, pady=8)
+        ttk.Label(self, text='Limit messages', font=self.bold).grid(
+            column=0, row=6, pady=16)
+        ttk.Entry(self, textvariable=self.limit_msg).grid(
+            column=0, row=7, pady=8)
+
+        ttk.Label(self, text='Skip Users', font=self.bold).grid(
+            column=1, row=6, pady=16)
+        ttk.Entry(self, textvariable=self.skip_users).grid(
+            column=1, row=7, pady=8)
 
         # Run the script button
-        ttk.Button(self, text="SEND", command=self._run_script).grid(column=0, row=8, pady=16)
+        ttk.Button(self, text="SEND", command=self._run_script).grid(
+            column=0, row=8, pady=16)
 
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
         message_text = self.text_message.get("1.0", END)
         limit_msg = self.limit_msg.get()
+        skip_users = self.skip_users.get()
 
         valid = self._check_form(username, password, message_text)
 
@@ -75,15 +92,18 @@ class TabFollowersToDM(ttk.Frame):
                 return
 
             proxy = db.Database().get_proxy_data_by_username(peoxy_username)
-            proxy_dict = {'host': proxy[1], 'port': proxy[-1], 'user': proxy[2], 'password': proxy[3]}
+            proxy_dict = {
+                'host': proxy[1], 'port': proxy[-1], 'user': proxy[2], 'password': proxy[3]}
 
             bot = DMTtoFollowers(username, password, False, proxy_dict)
-            t = threading.Thread(target=bot.send_message_to_followers, args=(message_text, limit_msg))
+            t = threading.Thread(
+                target=bot.send_message_to_followers, args=(message_text, limit_msg, skip_users))
             t.start()
 
     def _check_form(self, username, password, message):
         if username == '' or password == '':
-            messagebox.showerror('Credentials', 'Please enter your username or password')
+            messagebox.showerror(
+                'Credentials', 'Please enter your username or password')
             return False
 
         if message == '':
@@ -105,7 +125,7 @@ class TabFollowersToDM(ttk.Frame):
                     self.groups_list.append(group[1])
                 if len(self.groups_list) > 0:
                     self.distribution_menu = ttk.OptionMenu(self, self.distribution_menu_var, self.groups_list[0],
-                            *self.groups_list, command=self._display_users_to_boxlist)
+                                                            *self.groups_list, command=self._display_users_to_boxlist)
                     self.distribution_menu.grid(column=1, row=3, rowspan=3)
                     self.distribution_title.grid_forget()
                     self.listbox.delete(0, 'end')
@@ -122,7 +142,8 @@ class TabFollowersToDM(ttk.Frame):
         for user in self.distribution_users:
             self.listbox.insert(END, user[0])
             self.num_distribution_users += 1
-        self.title_amount_users_list.config(text="{} Users".format(self.num_distribution_users), font=self.h3)
+        self.title_amount_users_list.config(text="{} Users".format(
+            self.num_distribution_users), font=self.h3)
 
     # method to enable and disable entry by clicking the radio button
     def _enable_entry(self):
@@ -141,7 +162,8 @@ class TabFollowersToDM(ttk.Frame):
             self.days_entry.config(state=NORMAL)
 
     def _remove_all_dm_list(self, users_list):
-        to_delete = messagebox.askyesno('Remove', 'Are you sure you want to REMOVE all of them?')
+        to_delete = messagebox.askyesno(
+            'Remove', 'Are you sure you want to REMOVE all of them?')
         if to_delete:
             group_id = self._get_group_id(self.distribution_menu_var.get())
             for user in users_list:

@@ -40,7 +40,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         self._login()
         print("{} -- combination log in".format(
-                        self.username))
+            self.username))
 
         self._get_wanted_post(
             hashtag, url, skip_posts, wait)
@@ -216,7 +216,7 @@ class CombinationBot(main_bot.InstagramBot):
         self.driver.switch_to.window(self.driver.window_handles[1])
 
         print("{} -- combination likes: likes left {}".format(
-                        self.username, likes))
+            self.username, likes))
 
         first_post = wait.until(
             EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
@@ -229,7 +229,7 @@ class CombinationBot(main_bot.InstagramBot):
             self._go_to_next_post(wait)
             self._like_post(wait)
             print("{} -- combination likes: likes left {}/{}".format(
-                        self.username, i, likes))
+                self.username, i, likes))
 
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])

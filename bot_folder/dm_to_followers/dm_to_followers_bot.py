@@ -12,13 +12,15 @@ from utils.utils import Utils as utils
 import datetime as dt
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from random import randint
 
 
 class DMTtoFollowers(main_bot.InstagramBot):
     def send_message_to_followers(self, message, limit_msg, skip_users):
         is_first = True
         self.wait = WebDriverWait(self.driver, 4)
-
+        messages = ["אהלן זה בשבלך wwww.bambiboost.com",
+                    """רוצה עוקבים פעילים לאינסטגרם ?, לקוחות ? .. יש לנו המון ניסיון והמחיר נוח לכל כיס. יש לך הרבה פוטנציאל בעמוד"""]
         self._login()
 
         time.sleep(2)
@@ -30,18 +32,20 @@ class DMTtoFollowers(main_bot.InstagramBot):
         self._open_followers()
         scroll_box = self._get_scroll_box()
         followers = self._get_followers(scroll_box, limit_msg, skip_users)
+        i = 0
 
         for follower in followers:
+            message = messages[randint(0, 1)]
             time.sleep(2)
 
             self._nav_user(follower)
             self._follow_back()
 
-            self._send_msg(message, is_first)
-            is_first = False
-
             try:
-                pass
+                self._send_msg(message, is_first)
+                i += 1
+                print('{} -- {}. sent to {}'.format(self.username, i, follower))
+                is_first = False
             except Exception as e:
                 print(e)
 
@@ -125,12 +129,10 @@ class DMTtoFollowers(main_bot.InstagramBot):
 
         # click on message area
         area = self._get_text_area()
+        # types message
         area.send_keys(msg)
-        time.sleep(2)
+        time.sleep(1)
 
-    def _type(self, string, text_area):
-        actions = ActionChains(self.driver)
-        actions.click(text_area).perform()
-        for s in string:
-            text_area.send_keys(s)
-            time.sleep(0.2)
+        # send message
+        area.send_keys(Keys.RETURN)
+        time.sleep(60)

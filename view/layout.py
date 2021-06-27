@@ -12,6 +12,7 @@ from .tab_clients import *
 from .tab_dm_to_followers import *
 from bot_folder.proxy_manager import ProxyManager
 import tkinter as tkr
+import sys
 
 
 class Layout:
@@ -89,3 +90,4 @@ class Layout:
 
     def _exit(self):
         self.window.destroy()
+        sys.exit()

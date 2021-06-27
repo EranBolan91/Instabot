@@ -10,9 +10,9 @@ class ProxyManager:
             self.__proxies[username] = []
 
     def add_user(self, username):
-        for username in db.Database().get_proxies_usernames():
-            if username not in self.__proxies:
-                self.__proxies[username] = []
+        for proxy_username in db.Database().get_proxies_usernames():
+            if proxy_username not in self.__proxies:
+                self.__proxies[proxy_username] = []
 
         for proxy in self.__proxies:
             if len(self.__proxies[proxy]) < MAX_USERS_IN_ONE_PROXY:

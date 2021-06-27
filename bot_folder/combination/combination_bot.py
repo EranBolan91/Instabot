@@ -51,6 +51,10 @@ class CombinationBot(main_bot.InstagramBot):
         while max_followers > 0:
             follow_counter = 0
 
+            unfollow_users = self.database.get_unfollow_users(self.username)
+            self._unfollow_users(
+                unfollow_users, self.database.get_user_id(self.username), wait)
+
             while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0:
                 curr_follow_add = randint(1, 4)
                 i = 0
@@ -64,8 +68,11 @@ class CombinationBot(main_bot.InstagramBot):
 
                     # checking for buttons if not, reload them
                     if not follow_buttons:
-                        follow_buttons, curr_height, scroll_box = self._get_buttons(
-                            scroll_box, curr_height, wait)
+                        try:
+                            follow_buttons, curr_height, scroll_box = self._get_buttons(
+                                scroll_box, curr_height, wait)
+                        except Exception as e:
+                            print(e)
 
                     try:
                         if follow_buttons[0][1].text == 'Follow':
@@ -76,16 +83,13 @@ class CombinationBot(main_bot.InstagramBot):
                     except Exception as e:
                         print(e)
 
-                    # remove the first button
-                    follow_buttons.pop(0)
+                    if follow_buttons:
+                        # remove the first button
+                        follow_buttons.pop(0)
 
                 print("{} -- waiting {} seconds".format(
                     self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
                 time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
-
-            unfollow_users = self.database.get_unfollow_users(self.username)
-            self._unfollow_users(
-                unfollow_users, self.database.get_user_id(self.username), wait)
 
         self.driver.delete_all_cookies()
         self.driver.close()
@@ -269,11 +273,14 @@ class CombinationBot(main_bot.InstagramBot):
                 print("{} -- combination unfollow: {} people left to unfollow".format(
                     self.username, len(user_list) - curr_user))
 
-                if self._unfollow(user_list[curr_user][2], account_id, wait) == -1:
-                    self._send_email(self.username, curr_user, dt.datetime.now().strftime(
-                        '%H:%M:%S'), 'Followers')
-                    self.driver.close()
-                    self.global_block_message(self.username, "Followers")
+                try:
+                    if self._unfollow(user_list[curr_user][2], account_id, wait) == -1:
+                        self._send_email(self.username, curr_user, dt.datetime.now().strftime(
+                            '%H:%M:%S'), 'Followers')
+                        self.driver.close()
+                        self.global_block_message(self.username, "Followers")
+                except Exception:
+                    pass
 
                 curr_user += 1
 
@@ -365,7 +372,11 @@ class CombinationBot(main_bot.InstagramBot):
             except Exception as e:
                 pass
 
-        _find_and_click_unfollow()
+        try:
+            _find_and_click_unfollow()
+        except Exception:
+            pass
+
         try:
             is_action_blocked = self._blocked_action_popup()
             if is_action_blocked:

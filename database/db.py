@@ -471,7 +471,7 @@ class Database:
         try:
             cur.execute(
                 'INSERT INTO gains(user_id, date, likes, follow, unfollow,follow_back) VALUES(?,?,?,?,?,?)',
-                (user_id, dt.datetime.today().day, likes, follow, unfollow, follow_back))
+                (user_id, dt.datetime.today().strftime('%Y-%m-%d'), likes, follow, unfollow, follow_back))
             conn.commit()
         except Exception as e:
             print("Database Error: save data account action: ", e)

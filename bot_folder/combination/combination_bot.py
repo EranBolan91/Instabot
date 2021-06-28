@@ -29,6 +29,7 @@ class CombinationBot(main_bot.InstagramBot):
         except Exception as e:
             print(e)
             clients[self.username] = 'crashed'
+            self._save_data()
 
         proxy_manager.remove_user(self.username)
 
@@ -50,6 +51,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         while max_followers > 0:
             follow_counter = 0
+            self.__reset_data()
 
             unfollow_users = self.database.get_unfollow_users(self.username)
             self._unfollow_users(
@@ -80,6 +82,7 @@ class CombinationBot(main_bot.InstagramBot):
                                 follow_counter += 1
                                 max_followers -= 1
                                 i += 1
+                                self.follow += 1
                     except Exception as e:
                         print(e)
 
@@ -91,8 +94,21 @@ class CombinationBot(main_bot.InstagramBot):
                     self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
                 time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
 
+            self._save_data()
+
         self.driver.delete_all_cookies()
         self.driver.close()
+
+    def __reset_data(self):
+        self.follow = 0
+        self.unfollow = 0
+        self.follow_back = 0
+        self.likes = 0
+
+    def _save_data(self):
+        user_id = db.Database().get_user_id(self.username)
+        db.Database().save_gains(user_id, self.likes,
+                                 self.follow, self.unfollow, self.follow_back)
 
     def _scroll_down(self, scroll_box):
         height = self.driver.execute_script("""
@@ -159,6 +175,7 @@ class CombinationBot(main_bot.InstagramBot):
         soup = bs(like.get_attribute('innerHTML'), 'html.parser')
         if(soup.find('svg')['aria-label'] == 'Like'):
             like.click()
+            self.likes += 1
 
     def _open_likes(self, wait):
         try:
@@ -283,6 +300,7 @@ class CombinationBot(main_bot.InstagramBot):
                     pass
 
                 curr_user += 1
+                self.unfollow += 1
 
             print("{} -- waiting {} secodns".format(
                 self.username, WAIT_FOR_EACH_FOLLOW * follow_sub))
@@ -292,7 +310,6 @@ class CombinationBot(main_bot.InstagramBot):
         self.driver.switch_to.window(self.driver.window_handles[0])
 
     def _unfollow(self, user, account_id, wait):
-        follow_back = False
         self._nav_user(user)
 
         def _find_and_click_unfollow():
@@ -387,7 +404,7 @@ class CombinationBot(main_bot.InstagramBot):
         try:
             wait.until(EC.element_to_be_clickable(
                 (By.XPATH, '//button[text()="Follow Back"]')))
-            follow_back = True
+            self.follow_back += 1
         except Exception as e:
             pass
 

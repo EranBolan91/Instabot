@@ -153,10 +153,10 @@ class Database:
                                """)
 
         # Table Statistics
-        self.cur.execute(""" CREATE TABLE IF NOT EXISTS statistics (
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS gains (
                                id INTEGER PRIMARY KEY AUTOINCREMENT,
                                user_id INT,
-                               date DATETIME,
+                               date TEXT,
                                likes INT,
                                follow INT,
                                unfollow INT,
@@ -459,6 +459,45 @@ class Database:
         try:
             data = cur.execute(" SELECT USERNAME FROM proxy").fetchall()
             data = [username[0] for username in data]
+        except Exception as e:
+            print('get proxy data: ', e)
+        finally:
+            conn.close()
+            return data
+
+    def save_gains(self, user_id, likes, follow, unfollow, follow_back):
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            cur.execute(
+                'INSERT INTO gains(user_id, date, likes, follow, unfollow,follow_back) VALUES(?,?,?,?,?,?)',
+                (user_id, dt.datetime.today().strftime('%Y-%m-%d'), likes, follow, unfollow, follow_back))
+            conn.commit()
+        except Exception as e:
+            print("Database Error: save data account action: ", e)
+        finally:
+            conn.close()
+
+    def get_gains(self, user_id):
+        data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            data = cur.execute(
+                " SELECT date, follow_back FROM gains WHERE user_id='{}'".format(user_id)).fetchall()
+        except Exception as e:
+            print('get proxy data: ', e)
+        finally:
+            conn.close()
+            return data
+
+    def get_statistics(self, user_id):
+        data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            data = cur.execute(
+                " SELECT date, follow_back, likes, follow, unfollow FROM gains WHERE user_id='{}'".format(user_id)).fetchall()
         except Exception as e:
             print('get proxy data: ', e)
         finally:

@@ -4446,8 +4446,8 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-gnoring event 'pageshow' because document has an invalid readyState of 'interactive'.
-1624956186616	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+nt 'pageshow' because document has an invalid readyState of 'interactive'.
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
@@ -4699,5 +4699,6 @@ console.log: WebExtensions: reset-default-search: starting.
 console.log: WebExtensions: reset-default-search: No addons in our list are installed.
 JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: , line 0: uncaught exception: Object

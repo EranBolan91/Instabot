@@ -1794,7 +1794,9 @@ JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624781365014	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-ld not open the file at C:\\temp\\rust_mozprofilesw3gWe\\search.json.mozlz4", (void 0)))
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+
 1624521601540	Marionette	INFO	Listening on port 1059
 1624521601620	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624521601622	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1048","noProxy":[],"sslProxy":"127.0.0.1:1048"}
@@ -1806,7 +1808,8 @@ JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624781446974	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-ld not open the file at C:\\temp\\rust_mozprofiledGhlYY\\search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+p\\rust_mozprofiledGhlYY\\search.json.mozlz4", (void 0)))
 1624521685031	Marionette	INFO	Listening on port 1189
 1624521685108	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624521685111	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1180","noProxy":[],"sslProxy":"127.0.0.1:1180"}
@@ -1847,8 +1850,8 @@ JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624781745145	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileZ45Nr1\\search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+rn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileZ45Nr1\\search.json.mozlz4", (void 0)))
 1624522797189	Marionette	INFO	Listening on port 1258
 1624522797492	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624522797494	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1249","noProxy":[],"sslProxy":"127.0.0.1:1249"}
@@ -2523,8 +2526,9 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624718000140	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-n64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileE2cNIy"
-*** You are running in headless mode.
+1624804403701	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ning in headless mode.
 1624630982363	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileE2cNIy\\search.json.mozlz4", (void 0)))
 1624630983647	Marionette	INFO	Listening on port 26130
@@ -2554,8 +2558,9 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624718044967	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-n64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileeDkMLC"
-*** You are running in headless mode.
+1624804449283	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ning in headless mode.
 1624631017134	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileeDkMLC\\search.json.mozlz4", (void 0)))
 1624631018444	Marionette	INFO	Listening on port 26501
@@ -2566,8 +2571,9 @@ JavaScript error: https://www.instagram.com/accounts/login/, line 269: Error: Re
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624718053025	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-n64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileHdUzAq"
-*** You are running in headless mode.
+1624804457639	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ning in headless mode.
 1624631167394	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileHdUzAq\\search.json.mozlz4", (void 0)))
 1624631168640	Marionette	INFO	Listening on port 23171
@@ -2668,10 +2674,9 @@ JavaScript error: https://www.instagram.com/accounts/login/, line 269: Error: Re
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 1624719758275	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-file" "c:\\temp\\rust_mozprofilebrUPWU"
-*** You are running in headless mode.
-1624632739197	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilebrUPWU\\search.json.mozlz4", (void 0)))
+1624806169286	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+tings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilebrUPWU\\search.json.mozlz4", (void 0)))
 1624632740600	Marionette	INFO	Listening on port 29127
 1624632740962	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624632740965	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:29108","noProxy":[],"sslProxy":"127.0.0.1:29108"}
@@ -2925,18 +2930,18 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-reground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilebrjwqE"
-*** You are running in headless mode.
-1624731111075	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilebrjwqE\\search.json.mozlz4", (void 0)))
+1624817919033	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilebrjwqE\\search.json.mozlz4", (void 0)))
 1624731112436	Marionette	INFO	Listening on port 9483
 1624731112765	Marionette	WARN	TLS certificate errors will be ignored for this session
 1624731112768	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:9467","noProxy":[],"sslProxy":"127.0.0.1:9467"}
 1624731621575	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-1624732865640	geckodriver	INFO	Listening on 127.0.0.1:13913
-1624732868705	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilen3a3T9"
+1624818147692	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+onette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilen3a3T9"
 *** You are running in headless mode.
 1624732869041	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilen3a3T9\\search.json.mozlz4", (void 0)))
@@ -3016,9 +3021,9 @@ JavaScript error: https://www.instagram.com/alejandro09_11/, line 52: TypeError:
 JavaScript error: https://www.instagram.com/alejandro09_11/, line 52: TypeError: window.__bufferedErrors is undefined
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: , line 0: uncaught exception: Object
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: u1624819960312	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+r: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/ali_barzamini_00/, line 52: TypeError: window.__bufferedErrors is undefined
 JavaScript error: https://www.instagram.com/ali_barzamini_00/, line 52: TypeError: window.__bufferedErrors is undefined
@@ -3041,7 +3046,9 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1624736989760	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:18260","noProxy":[],"sslProxy":"127.0.0.1:18260"}
 1624737498557	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-onette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileY6jCLx"
+1624824024727	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+n64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileY6jCLx"
 *** You are running in headless mode.
 1624736999217	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileY6jCLx\\search.json.mozlz4", (void 0)))
@@ -3226,15 +3233,17 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a
 1624775992786	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624776014048	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624776035298	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624776056568	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624776079820	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+161624824069845	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+w' because document has an invalid readyState of 'uninitialized'.
 1624776101046	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624776122302	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624776143544	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-tte	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624775608454	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624824046457	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+ has an invalid readyState of 'uninitialized'.
 1624775629674	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624775650909	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624775672150	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
@@ -3250,8 +3259,10 @@ tte	WARN	Ignoring event 'pageshow' because document has an invalid readyState of
 1624775886978	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624775908233	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624775929475	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624775950756	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624775972014	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624775950756	Marionette	1624824036005	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+itialized'.
 1624775993261	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624776014494	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624776037757	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
@@ -3271,10 +3282,9 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f0
 JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: Network failure.
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
- timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+1624824056306	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+EventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 1624776911790	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
@@ -3345,9 +3355,10 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a
 JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 1624778477118	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624778498455	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624778519714	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624778542995	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624778498455	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid1624860078203	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+eshow' because document has an invalid readyState of 'uninitialized'.
 1624778564248	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624778585480	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 1624778606801	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
@@ -3369,8 +3380,10 @@ TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:171624771624778992970	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette1624778993216	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-rionette/content/interaction.js:431:10
-webdriverClickElement@chJavaScript error: https://www.instagram.com/statiJavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03aJavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624824087873	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+Exiting due to channel error.
+t error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 1624780255416	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
@@ -3432,39 +3445,29 @@ TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interJavaScript error: , line 0: uncaught exception: Object
-mise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624790483517	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624790514477	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624791916236	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:JavaScript error: , line 0: uncaught exception: Object
-:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624794256005	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
-1624795611150	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1624797415747	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
-interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
-webdriverClickElement@chrome://marionette/conteJavaScript error: , line 01624799282413	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
-TimedPromise/<@chrome://marionette/content/sync.js:237:19
-TimedPromise@chrome://marionette/content/sync.js:222:10
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/lia_raz_shnirer/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/lia_raz_shnirer/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/nicolyudelevich/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/nicolyudelevich/, line 52: TypeError: window.__bufferedErrors is undefined
+1624864765122	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624865197748	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624865198079	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+ise/<@chrome://marionette/content/sync.js:237:JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+[GFX1-]: Failed buffer for 0, 0, 1349, 2560
+[GFX1-]: Failed buffer for 0, 0, 1349, 2560
+[GFX1-]: Failed buffer for 0, 0, 1349, 675
+JavaScript error: , line 0: uncaught exception: out of memory
+JavaScript error: , line 0: uncaught exception: out of memory
+JavaScript error: https://www.instagram.com/leamost_/, line 289: Error: Requiring unknown module "68".
+1624864675315	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624864675507	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+ment@chrome://marionette/conteJavaScript error: , line 01624799282413	Marionette	WARN	1624865094088	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+e@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 1624800632397	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
@@ -3477,19 +3480,702 @@ TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-chSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofile2zLLZy\\search.json.mozlz4", (void 0)))
-1624785970211	Marionette	INFO	Listening on port 1651
-1624785970729	Marionette	WARN	TLS certificate errors will be ignored for this session
-1624785970734	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1621","noProxy":[],"sslProxy":"127.0.0.1:1621"}
-1624786023054	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+1624805634360	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624809295664	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624812446416	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624813828365	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624814725160	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624814792928	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverCliExiting due to channel error.
+ontent/interaction.js:179:31
+1624821090224	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624821988063	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624823798632	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624825629011	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624825659279	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624827903068	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624827949744	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624830660466	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/odel_yohonanov/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/odel_yohonanov/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624864101147	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624864101384	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624865420433	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624865420797	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624865421015	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: httJavaScript error: https://www.instagram.com/shayshadi45/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/shayshadi45/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/gregkomarnitzki/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/gregkomarnitzki/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/lia_mejahez_/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/lia_mejahez_/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/orel_dadush1/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/orel_dadush1/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/hodaya_bakalo/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/hodaya_bakalo/, line 52: TypeError: window.__bufferedErrors is undefined
+[GFX1-]: Failed buffer for 0, 675, 1349, 1885
+[GFX1-]: Failed buffer for 0, 0, 1349, 2560
+[GFX1-]: Failed buffer for 0, 0, 1349, 2560
+1624864424013	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624864424300	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624864424501	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+QTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/pazzshomron/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/pazzshomron/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624843619481	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624843619571	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624843619674	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+ne 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+ailure.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: Network failure.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: Network failure.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: Network failure.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: Network failure.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: Network failure.
+1624848465198	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624848496446	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624849848111	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
 TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-1624786497577	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: timeout
+JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624851373707	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624851406521	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624851437366	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624854124533	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624855489004	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624855981897	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624856012533	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624857340670	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624857371550	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624857410726	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624858738492	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+1624858958367	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624860760255	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+[GFX1-]: Failed buffer for 0, 0, 1366, 768
+[GFX1-]: Failed buffer for 0, 0, 1366, 768
+[GFX1-]: Failed buffer for 0, 0, 1366, 675
+[GFX1-]: Failed buffer for 11, 1648, 356, 509
+[GFX1-]: Failed buffer for 0, 0, 1366, 675
+[GFX1-]: Failed buffer for 11, 1503, 356, 654
+[GFX1-]: Failed buffer for 0, 0, 1366, 675
+[GFX1-]: Failed buffer for 11, 1503, 356, 654
+[GFX1-]: Failed buffer for 0, 0, 1366, 675
+[GFX1-]: Failed buffer for 11, 1503, 356, 654
+[GFX1-]: Failed buffer for 0, 0, 1366, 675
+[GFX1-]: Failed buffer for 0, 0, 1366, 675
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+1624862744059	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624862775714	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624864146790	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+1624867526688	geckodriver	INFO	Listening on 127.0.0.1:4144
+1624867529713	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--no-sandbox" "--disable-gpu" "--disable-dev-shm-usage" "--disable-notifications" "--headless" "--disable-extensions" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofileG3rBcZ"
+*** You are running in headless mode.
+1624867530579	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofileG3rBcZ\\search.json.mozlz4", (void 0)))
+1624867532941	Marionette	INFO	Listening on port 4152
+1624867533417	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624867533423	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:4143","noProxy":[],"sslProxy":"127.0.0.1:4143"}
+1624867570047	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/mor.bushari/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/mor.bushari/, line 52: TypeError: window.__bufferedErrors is undefined
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: https://www.instagram.com/agamsarel/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/agamsarel/, line 52: TypeError: window.__bufferedErrors is undefined
+1624893562653	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624893595834	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624893626316	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624896340360	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624899048833	JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624927138245	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624928959278	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624929888531	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624931720427	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+Time1624954650897	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+e/content/interaction.js:179:31
+1624933494621	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624933972967	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624935326841	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/mor_v_/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/mor_v_/, line 52: TypeError: window.__bufferedErrors is undefined
+1624937156479	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624937219066	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624938977361	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriv1624954686418	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+arionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624939037650	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624939067550	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624940828076	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624940858375	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624941752786	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624941799012	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624944513095	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624945871874	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/239c96db3834.js, line 42: OZ_SOURCE_BUFFER: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: https://www.instagram.com/static/bundles/es6/oz-player.main.js/7771e8e4ab39.js, line 33: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1624945901831	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624947717087	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624947747447	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624947777348	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624949990329	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624952249814	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:311624955536009	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+e/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624954098609	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624956340869	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/239c96db3834.js, line 42: OZ_SOURCE_BUFFER: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: https://www.instagram.com/static/bundles/es6/oz-player.main.js/7771e8e4ab39.js, line 33: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1624956371189	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624956422702	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624959144824	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+rionette/content/interaction.js:179:31
+1624932611154	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624933988495	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624935783144	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624936262413	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624938074398	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624939003856	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624940797222	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624941717447	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:4JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/239c96db3834.js, line 42: OZ_SOURCE_BUFFER: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: https://www.instagram.com/static/bundles/es6/oz-player.main.js/7771e8e4ab39.js, line 33: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1624943572404	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624944898973	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624945379992	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624946734086	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interacJavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: https://www.instagram.com/gyhbrz/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/gyhbrz/, line 52: TypeError: window.__bufferedErrors is undefined
+se timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624950370975	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/239c96db3834.js, line 42: OZ_SOURCE_BUFFER: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: https://www.instagram.com/static/bundles/es6/oz-player.main.js/7771e8e4ab39.js, line 33: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+w.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
@@ -3502,6 +4188,10 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
@@ -3512,6 +4202,252 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavJavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+les/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\temp\rust_mozprofilef6LYvL\bookmarkbackups\bookmarks-2021-06-28_11_BkgF-qek7Rz1Ua3Lw2Sc6Q==.jsonlz4) because it does not exist
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624929275155	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624929737340	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624929769689	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624930664472	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624930694737	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624932056602	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624933848862	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624934761971	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624935397226	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624937206854	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624937237335	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624937269590	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624938596686	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+1624941026091	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/5c60bfeee156.js, line 222: NS_ERROR_NOT_INITIALIZED: 
+1624941062700	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624945098442	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+1624945304013	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624947162695	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624948165801	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/a03f08815937.js, line 42: OZ_NETWORK: HTTP error.
+1624948810761	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624948840579	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624949736045	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624951097421	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624952014932	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+1624952929490	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624952961727	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624952995189	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624954312085	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954333470	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954356984	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954378270	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954399557	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954420830	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954442107	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954463488	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954484745	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954505987	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954527276	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954550567	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954571903	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954593192	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954614498	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954635782	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954657063	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954678352	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954699604	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954712034	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+1624954720852	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954742161	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954763400	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954786721	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954807985	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954829282	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954850549	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954871907	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954893195	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954914447	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954935697	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624954956997	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954978280	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624954999541	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+00	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: resource://devtools/client/jsonview/Sniffer.jsm, line 53: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsIChannel.contentType]
+1624954810482	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624954810624	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624954810718	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624955644359	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: error
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1624956107012	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956107327	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956107436	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956107524	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+gnoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956186616	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
@@ -3522,34 +4458,246 @@ JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-s, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundlJavaScript error: , line 0: uncaught exception: Object
-blish Timed Out
+3a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624954225535	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624955089797	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624955522025	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624955522159	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624955522256	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956818521	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956818803	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+JavaScript error: https://www.instagram.com/noam_itzhak009/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/noam_itzhak009/, line 52: TypeError: window.__bufferedErrors is undefined
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
-rror: Publish Timed Out
-JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+/marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624931102076	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624931133263	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624931163803	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624932490776	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624932529408	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624932581676	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624934341625	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624934804076	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624934834906	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+1624935050084	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624935080760	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624936839831	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624937497808	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624937528491	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624938872148	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624938905896	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+1624940232714	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624940263083	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624942231366	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624943131980	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624943153317	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624943174531	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1624943207380	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624943672765	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624943703502	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+1624943891670	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/5c60bfeee156.js, line 222: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624945668035	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624946578756	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624947064035	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624947112589	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/Consumer.js/239c96db3834.js, line 42: OZ_SOURCE_BUFFER: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: https://www.instagram.com/static/bundles/es6/oz-player.main.js/7771e8e4ab39.js, line 33: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1624948873368	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1624948920880	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+1624949110459	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+1624953154965	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624954451282	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624954451725	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624954451845	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624954451935	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956180295	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624956180736	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624957044999	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
+1624957045197	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'interactive'.
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
 JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+JavaScript error: https://www.instagram.com/static/bundles/es6/DirectMQTT.js/03a056c35ba5.js, line 17: Error: Publish Timed Out
+o) Chrome/91.0.4472.77 Safari/537.36" "-foreground" "-no-remote" "-profile" "c:\\temp\\rust_mozprofilextpQHO"
+*** You are running in headless mode.
+1624960556059	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\temp\\rust_mozprofilextpQHO\\search.json.mozlz4", (void 0)))
+1624960557950	Marionette	INFO	Listening on port 1050
+1624960558028	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624960558033	Marionette	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:1036","noProxy":[],"sslProxy":"127.0.0.1:1036"}
+JavaScript error: https://www.instagram.com/accounts/onetap/?next=%2F, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/5c60bfeee156.js, line 64: AjaxError: 
+JavaScript error: https://www.instagram.com/dorrefaeli/, line 52: TypeError: window.__bufferedErrors is undefined
+JavaScript error: https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/5c60bfeee156.js, line 64: AjaxError: 
+1624960586376	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object

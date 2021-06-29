@@ -72,7 +72,13 @@ class CombinationBot(main_bot.InstagramBot):
                             follow_buttons, curr_height, scroll_box = self._get_buttons(
                                 scroll_box, curr_height, wait)
                         except Exception as e:
-                            print(e)
+                            skip_posts += 1
+                            self._get_wanted_post(
+                                hashtag, url, skip_posts, wait)
+
+                            self._open_likes(wait)
+                            scroll_box = self._get_scroll_box(wait)
+                            continue
 
                     try:
                         if follow_buttons[0][1].text == 'Follow':

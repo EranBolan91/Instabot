@@ -24,6 +24,7 @@ WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users, clients, proxy_manager):
         try:
+            self.__reset_data()
             self.automation(followers, hashtag, url, skip_posts, likes)
             clients[self.username] = 'finished'
         except Exception as e:

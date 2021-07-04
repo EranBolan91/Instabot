@@ -8,9 +8,9 @@ class TabActions(ttk.Frame):
     def __init__(self, window):
         super().__init__(window)
 
-        self.__accounts()
+        self.__accounts("")
 
-    def __accounts(self):
+    def __accounts(self, username):
         self.menu = StringVar()
         self.accounts = db.Database().get_accounts()
         user_name_list = []
@@ -18,7 +18,7 @@ class TabActions(ttk.Frame):
             user_name_list.append(account[3])
         ttk.Label(self, text='Choose user').grid(
             sticky='NE', padx=10, pady=(25, 0))
-        self.accounts_option_menu = ttk.OptionMenu(self, self.menu, "", *user_name_list,
+        self.accounts_option_menu = ttk.OptionMenu(self, self.menu, username, *user_name_list,
                                                    command=self.__refresh)
         self.accounts_option_menu.grid(sticky='NE')
 
@@ -64,4 +64,7 @@ class TabActions(ttk.Frame):
         e.insert(END, text)
 
     def __refresh(self, username):
+        for widget in self.winfo_children():
+            widget.destroy()
+        self.__accounts(username)
         self.__build_table(self.__update_data(username))

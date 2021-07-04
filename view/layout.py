@@ -50,28 +50,13 @@ class Layout:
         clients = {}
         proxy_manager = ProxyManager()
 
-        hash_tag_tab = TabHashTag(tab_control)
-        followers_tab = TabFollowers(tab_control)
-        location_tab = TabLocation(tab_control)
-        follow_followers_tab = TabFollowFollowers(tab_control)
-        dm_tab = TabDM(tab_control)
-        statistics_tab = StatisticsTab(tab_control)
-        likes_tab = TabLikes(tab_control)
-
         followers_dm_tab = TabFollowersToDM(tab_control, proxy_manager)
         combination_tab = TabCombination(tab_control, clients, proxy_manager)
         clients_tab = TabClients(tab_control, clients)
         gains_tab = TabGains(tab_control)
         actions_tab = TabActions(tab_control)
 
-        tab_control.add(hash_tag_tab, text='Hash Tag')
-        tab_control.add(followers_tab, text='Followers')
-        tab_control.add(location_tab, text='Location')
-        tab_control.add(follow_followers_tab, text='Follow Followers')
-        tab_control.add(dm_tab, text='DM')
         tab_control.add(combination_tab, text='Combination')
-        tab_control.add(statistics_tab, text='Statistics')
-        tab_control.add(likes_tab, text="Likes")
         tab_control.add(clients_tab, text="Clients")
         tab_control.add(followers_dm_tab, text="dm to followers")
         tab_control.add(gains_tab, text="Gains")

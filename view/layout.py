@@ -2,19 +2,13 @@ import sys
 import tkinter as tkr
 from bot_folder.proxy_manager import ProxyManager
 from .accounts import *
-from .tab_follow_followers import *
-from .tab_location import *
-from .tab_followers import *
-from .tab_hash_tag import *
 from .settings import *
-from .tab_dm import *
-from .tab_statistics import *
 from .tab_combination import *
-from .tab_likes import *
 from .tab_clients import *
 from .tab_dm_to_followers import *
 from .tab_gains import *
 from .tab_actions import *
+from .tab_strategy import *
 
 
 class Layout:
@@ -55,12 +49,14 @@ class Layout:
         clients_tab = TabClients(tab_control, clients)
         gains_tab = TabGains(tab_control)
         actions_tab = TabActions(tab_control)
+        strategy_tab = StrategyTab(tab_control, clients, proxy_manager)
 
         tab_control.add(combination_tab, text='Combination')
         tab_control.add(clients_tab, text="Clients")
         tab_control.add(followers_dm_tab, text="dm to followers")
         tab_control.add(gains_tab, text="Gains")
         tab_control.add(actions_tab, text="Actions")
+        tab_control.add(strategy_tab, text="strategy")
 
         tab_control.pack(expand=1, fill="both")
 

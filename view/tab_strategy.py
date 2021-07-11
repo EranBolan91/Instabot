@@ -1,17 +1,11 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
-from database import db
-from database.dm import dm
-from bot_folder.combination.combination_bot import CombinationBot
-from bot_folder.proxy_manager import ProxyManager
-from database.combination.combination import CombinationDM
-from utils.schedule import ScheduleCalc
+from bot_folder.strategy.strategy_bot import StrategyBot
 import threading
-import time
+from database import db
 
-
-class TabCombination(ttk.Frame):
+class StrategyTab(ttk.Frame):
     def __init__(self, window, clients, proxy_manager):
         super().__init__(window)
 
@@ -111,17 +105,12 @@ class TabCombination(ttk.Frame):
                 .grid(column=2, row=2, padx=10, pady=10)
 
         ttk.Button(self, text='REFRESH PROXY', compound=LEFT, command=self._get_proxies).grid(column=2, columnspan=3,
-                                                                                                row=2, padx=(0, 0))
+                                                                                              row=2, padx=(0, 0))
         # Input of amount for likes and follow
         ttk.Label(self, text='Enter the number of posts to like').grid(
             column=0, row=7, pady=(50, 0))
         ttk.Entry(self, textvariable=self.amount_likes).grid(
             column=0, row=8, pady=(25, 0))
-
-        ttk.Label(self, text='Enter the number of users to follow').grid(
-            column=1, row=7, pady=(50, 0))
-        ttk.Entry(self, textvariable=self.amount_follows).grid(
-            column=1, row=8, pady=(25, 0))
 
         # Run the script button
         ttk.Button(self, text="RUN", command=self._run_script).grid(
@@ -130,30 +119,12 @@ class TabCombination(ttk.Frame):
     def _run_script(self):
         username = self.username.get()
         password = self.password.get()
-        distribution = self.check_box_distribution_list.get()
-        follow = self.amount_follows.get()
         like = self.amount_likes.get()
         hash_tag = self.hashtag.get()
         url = self.url.get()
-        skip_posts = self.skip_posts.get()
-        skip_users = self.skip_users.get()
-        action = self.radio_var.get()
-        schedule_action = self.check_box_schedule.get()
-        minutes_entry = self.minutes_entry_value.get()
-        hours_entry = self.hours_entry_value.get()
-        days_entry = self.days_entry_value.get()
-
-        if distribution:
-            group_name = self.distribution_menu_var.get()
-            for group in self.distribution_list:
-                if group_name == group[1]:
-                    group_id = group[0]
-        else:
-            group_name = ""
-            group_id = ""
 
         valid = self._check_form(
-            username, password, hash_tag, url, follow, like)
+            username, password, hash_tag, url, like)
 
         if valid:
             try:
@@ -165,18 +136,11 @@ class TabCombination(ttk.Frame):
             proxy = db.Database().get_proxy_data_by_username(peoxy_username)
             proxy_dict = {'host': proxy[1], 'port': proxy[-1], 'user': proxy[2], 'password': proxy[3]}
 
-            bot = CombinationBot(username, password, False, proxy_dict)
-            if schedule_action:
-                time_schedule = ScheduleCalc().calc_schedule_time(
-                    action, minutes_entry, hours_entry, days_entry)
-                timing_thread = threading.Timer(time_schedule, bot.combination, [
-                                                hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users, self.__proxy_manager])
-                timing_thread.start()
-            else:
-                t = threading.Thread(target=bot.combination, args=(
-                    hash_tag, url, like, follow, distribution, 0, group_name, group_id, skip_posts, skip_users, self.__clients, self.__proxy_manager))
-                t.start()
-                self.__clients[username] = 'running'
+            bot = StrategyBot(username, password, False, proxy_dict)
+            t = threading.Thread(target=bot.strategy, args=(
+                hash_tag, url, like, self.__clients, self.__proxy_manager))
+            t.start()
+            self.__clients[username] = 'running'
 
     # Getting the username from the menu option, look for it on the list and sets username and password
     def _set_username_password(self, value):
@@ -186,7 +150,7 @@ class TabCombination(ttk.Frame):
                 self.username.set(account[3])
                 self.password.set(account[4])
 
-    def _check_form(self, username, password, hash_tag, url, follows, likes):
+    def _check_form(self, username, password, hash_tag, url, likes):
         if username == '' or password == '':
             messagebox.showerror(
                 'Credentials', 'Please enter your username or password')
@@ -195,10 +159,6 @@ class TabCombination(ttk.Frame):
         if not hash_tag and not url:
             messagebox.showerror(
                 'Search data', 'Hash tag and url entry cannot be empty')
-            return False
-
-        if follows == 0:
-            messagebox.showerror('No number', 'Please enter number for follow')
             return False
 
         if likes < 0:
@@ -247,10 +207,10 @@ class TabCombination(ttk.Frame):
 
         if len(user_name_list) > 0:
             self.accounts_option_menu = ttk.OptionMenu(self, self.menu, user_name_list[0], *user_name_list,
-                       command=self._set_username_password)
+                                                       command=self._set_username_password)
             self.accounts_option_menu.grid(column=1, row=2)
         else:
-            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont)\
+            ttk.Label(self, text='No Users, go to Accounts', font=self.titleFont) \
                 .grid(column=1, row=2, padx=10, pady=10)
 
     def _get_proxies(self):
@@ -258,7 +218,7 @@ class TabCombination(ttk.Frame):
         proxy_list = []
 
         self.proxy_option_menu = ttk.OptionMenu(self, self.proxy_menu, proxy_list[0], *proxy_list,
-                   command="")
+                                                command="")
         self.proxy_option_menu.grid(column=2, row=2)
 
         menu = self.proxy_option_menu['menu']
@@ -270,8 +230,8 @@ class TabCombination(ttk.Frame):
 
         if len(proxy_list) > 0:
             self.proxy_option_menu = ttk.OptionMenu(self, self.proxy_menu, proxy_list[0], *proxy_list,
-                       command="")
+                                                    command="")
             self.proxy_option_menu.grid(column=2, row=2)
         else:
-            ttk.Label(self, text='No proxies, go to Settings', font=self.titleFont)\
+            ttk.Label(self, text='No proxies, go to Settings', font=self.titleFont) \
                 .grid(column=2, row=2, padx=10, pady=10)

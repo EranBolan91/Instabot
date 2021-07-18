@@ -16,7 +16,7 @@ from models.followers import Followers
 from bs4 import BeautifulSoup as bs
 
 
-PROCESS_TIME = 60 * 60 * 12
+PROCESS_TIME = 60 * 60 * 1
 MAX_FOLLOWERS_EACH_PROCESS = 100
 WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 
@@ -25,24 +25,31 @@ class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users, clients, proxy_manager):
         try:
             self.__reset_data()
-            self.automation(followers, hashtag, url, skip_posts, likes)
+            mutex = proxy_manager.get_mutex(self.username)
+            self.automation(followers, hashtag, url, skip_posts, likes, proxy_manager, mutex)
             clients[self.username] = 'finished'
         except Exception as e:
             print(e)
+            mutex.unlock()
             clients[self.username] = 'crashed'
             self._save_data()
 
         proxy_manager.remove_user(self.username)
 
-    def automation(self, max_followers, hashtag, url, skip_posts, likes):
+    def automation(self, max_followers, hashtag, url, skip_posts, likes, proxy_manager, mutex):
         wait = WebDriverWait(self.driver, 5)
         settings_data_from_db = CombinationDM().get_data_from_settings()
         follow_buttons = []
         curr_height = 0
+        first_day = True
 
         self._login()
         print("{} -- combination log in".format(
             self.username))
+
+        unfollow_users = self.database.get_unfollow_users(self.username)
+        self._unfollow_users(
+            unfollow_users, self.database.get_user_id(self.username), wait)
 
         self._get_wanted_post(
             hashtag, url, skip_posts, wait)
@@ -53,11 +60,7 @@ class CombinationBot(main_bot.InstagramBot):
         while max_followers > 0:
             follow_counter = 0
             self.__reset_data()
-
-            unfollow_users = self.database.get_unfollow_users(self.username)
-            self._unfollow_users(
-                unfollow_users, self.database.get_user_id(self.username), wait)
-
+            mutex.lock()
             while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0:
                 curr_follow_add = randint(1, 4)
                 i = 0
@@ -101,7 +104,14 @@ class CombinationBot(main_bot.InstagramBot):
                     self.username, WAIT_FOR_EACH_FOLLOW * curr_follow_add))
                 time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
 
+            if not first_day:
+                unfollow_users = self.database.get_unfollow_users(self.username)[:MAX_FOLLOWERS_EACH_PROCESS]
+                self._unfollow_users(
+                    unfollow_users, self.database.get_user_id(self.username), wait)
+
+            first_day = False
             self._save_data()
+            mutex.unlock()
 
         self.driver.delete_all_cookies()
         self.driver.close()
@@ -306,6 +316,8 @@ class CombinationBot(main_bot.InstagramBot):
                 except Exception:
                     pass
 
+                print(user_list[curr_user][2], 'Removed from db of', self.username)
+                db.Database().remove_username_from_unfollow_list(user_list[curr_user][2], account_id)
                 curr_user += 1
                 self.unfollow += 1
 
@@ -414,30 +426,3 @@ class CombinationBot(main_bot.InstagramBot):
             self.follow_back += 1
         except Exception as e:
             pass
-
-        # Remove username from unfollow list
-        # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
-        # into unfollow. In this situation, i prefer not to remove the username from database
-
-        try:
-            follow_btn = wait.until(
-                EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
-            if follow_btn:
-                print(user, 'Removed from db of', self.username)
-                db.Database().remove_username_from_unfollow_list(user, account_id)
-
-        except Exception as e:
-            pass
-        try:
-            follow_btn = wait.until(
-                EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
-            if follow_btn:
-                print(user, 'Removed from db', self.username)
-                db.Database().remove_username_from_unfollow_list(user, account_id)
-
-        except Exception as e:
-            pass
-
-        # save the amount of followers back
-        followers_obj = Followers(account_id, self.username, follow_back)
-        FollowersDB().save_in_db(followers_obj)

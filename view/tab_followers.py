@@ -20,6 +20,7 @@ class TabFollowers(ttk.Frame):
         self.results = tkfont.Font(size=11, weight='bold')
         self.check_box_reverse = IntVar()
         self.limit_unfollow_everyone = IntVar()
+        self.remove_not_found_user = BooleanVar()
         self.limit_unfollow_list = IntVar()
         self.minutes_entry_value = IntVar()
         self.hours_entry_value = IntVar()
@@ -74,10 +75,12 @@ class TabFollowers(ttk.Frame):
         ttk.Entry(self, textvariable=self.limit_unfollow_list).grid(column=1, columnspan=2, row=12, pady=(10, 0), padx=(0, 0))
         ttk.Label(self, text='unfollow users that are not following back from the above list').grid(column=0, row=12, pady=(10, 5))
         ttk.Button(self, text="REMOVE UNFOLLOWERS USERS", command=lambda: self._remove_users_who_not_follow_back(self.unfollow_users)).grid(column=0, row=13, padx=(15, 0), pady=(10, 0))
-        ttk.Checkbutton(self, text='To reverse?', variable=self.check_box_reverse).grid(column=2, columnspan=2, row=9, padx=(0, 160))
+
+        ttk.Checkbutton(self, text='Remove not found users?', variable=self.remove_not_found_user).grid(column=2, columnspan=2,rowspan=2, row=8, padx=(0, 160))
+        ttk.Checkbutton(self, text='To reverse?', variable=self.check_box_reverse).grid(column=2, columnspan=2, row=9, padx=(0, 230))
         # Schedule Button
         ttk.Checkbutton(self, text='Schedule action', variable=self.check_box_schedule) \
-            .grid(column=2, columnspan=2, rowspan=2, row=9, pady=(75, 0), padx=(1, 140))
+            .grid(column=2, columnspan=2, rowspan=2, row=9, pady=(75, 0), padx=(1, 200))
 
         # box list display all the names of people that are not following you back
         ttk.Label(self, text='Search results:', font=self.titleFont).grid(column=3, row=1)
@@ -220,6 +223,7 @@ class TabFollowers(ttk.Frame):
                 for username in user_list:
                     users_name_list.append(username)
 
+            remove_not_found_users = self.remove_not_found_user.get()
             limit_unfollow_list = self.limit_unfollow_list.get()
             to_reverse = self.check_box_reverse.get()
             action = self.radio_var.get()
@@ -231,6 +235,7 @@ class TabFollowers(ttk.Frame):
             password = self.password.get()
             proxy = self.proxy.get()
             port = self.port.get()
+
             proxy_dict = {"proxy": proxy, "port": port}
             bot = FollowersBot(username, password, False, proxy_dict)
             account_id = -1
@@ -241,10 +246,10 @@ class TabFollowers(ttk.Frame):
                         account_id = account[0]
             if schedule_action:
                 time_schedule = ScheduleCalc().calc_schedule_time(action, minutes_entry, hours_entry, days_entry)
-                timing_thread = threading.Timer(time_schedule, bot.unfollow_users, [users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list])
+                timing_thread = threading.Timer(time_schedule, bot.unfollow_users, [users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list, remove_not_found_users])
                 timing_thread.start()
             else:
-                t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list))
+                t = threading.Thread(target=bot.unfollow_users, args=(users_name_list, is_unfollow_list, account_id, 1, to_reverse, limit_unfollow_list, remove_not_found_users))
                 t.start()
 
     def _unfollow_all_users_account_follow_them(self):

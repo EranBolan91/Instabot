@@ -25,7 +25,9 @@ class Database:
                         amount_followers TEXT DEFAULT 0,
                         is_schedule BOOLEAN DEFAULT 0,
                         schedule_hour INT DEFAULT 0,
-                        modify DATETIME)
+                        modify DATETIME,
+                        headless BOOLEAN DEFAULT false,
+                        amount_posts INT DEFAULT 0)
                         """)
         # Table unfollow
         self.cur.execute(""" CREATE TABLE IF NOT EXISTS unfollow (
@@ -152,6 +154,12 @@ class Database:
                                port INT)
                                """)
 
+        # Table Websites
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS website (
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               website TEXT,
+                               modify DATE)""")
+
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db
@@ -224,15 +232,17 @@ class Database:
             conn.close()
             return is_update
 
-    def save_settings(self, likes_amount, followers_amount, schedule_hours, is_active):
+    def save_settings(self, likes_amount, followers_amount, schedule_hours, is_active, headless, posts_amount):
         modify_time = dt.datetime.now()
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         is_saved = False
         try:
             cur.execute("UPDATE settings SET amount_likes='{}',"
-                        "amount_followers='{}', is_schedule='{}', schedule_hour='{}', modify='{}' WHERE id='{}' "
-                        .format(likes_amount, followers_amount, is_active, schedule_hours, modify_time, 1))
+                        "amount_followers='{}', is_schedule='{}', schedule_hour='{}', modify='{}',"
+                        " headless={}, amount_posts='{}' WHERE id='{}' "
+                        .format(likes_amount, followers_amount, is_active,
+                        schedule_hours, modify_time, headless, posts_amount, 1))
             conn.commit()
             is_saved = True
         except Exception as e:
@@ -413,6 +423,18 @@ class Database:
             data = cur.execute(" SELECT * FROM proxy ").fetchall()
         except Exception as e:
             print('get proxy data: ', e)
+        finally:
+            conn.close()
+            return data
+
+    def get_websites_data(self):
+        data = 0
+        conn = sqlite3.connect(self.database_name)
+        cur = conn.cursor()
+        try:
+            data = cur.execute(" SELECT * FROM website ").fetchall()
+        except Exception as e:
+            print('get websites data: ', e)
         finally:
             conn.close()
             return data

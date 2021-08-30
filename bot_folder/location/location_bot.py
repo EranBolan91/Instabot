@@ -13,7 +13,8 @@ import datetime as dt
 class LocationBot(main_bot.InstagramBot):
     # search for location posts by the URL that the user provides
     def search_location_by_url(self, url, amount, like, follow, comment, split_comment, to_distribution, group_name, group_id, time_schedule):
-        self._login()
+        if not self._login():
+            return
         amount_likes = self.database.get_data_from_settings()
         i = 1
         loops = 1

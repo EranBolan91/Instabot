@@ -3,7 +3,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.firefox.options import Options
+from seleniumwire import webdriver
 from utils.utils import Utils as utils
 from database import db
 from bot_folder import proxy
@@ -27,27 +29,39 @@ class InstagramBot:
         options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--disable-notifications")
+        headless = db.Database().get_data_from_settings()[6]
+        if headless:
+            options.add_argument("--headless")
         #options.add_extension(proxy.get_proxy_plugin())
-        options.add_argument("--headless")
-        options.add_argument('--disable-extensions')
+        #options.add_argument('--disable-extensions')
         options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
 
         """
         firefox proxy
         """
-        fp = webdriver.FirefoxProfile()
-        fp.add_extension('closeproxy.xpi')
-        fp.set_preference('network.proxy.type', 1)
-        fp.set_preference('network.proxy.http', proxy['host'])
-        fp.set_preference('network.proxy.http_port', int(proxy['port']))
-        fp.set_preference('network.proxy.no_proxies_on', 'localhost, 127.0.0.1')
-        credentials = '{user}:{password}'.format(**proxy)
-        credentials = b64encode(credentials.encode('ascii')).decode('utf-8')
-        fp.set_preference('extensions.closeproxyauth.authtoken', credentials)
-
-        if proxy_dict["proxy"]:
-            PROXY = "{}:{}".format(proxy_dict["proxy"], proxy_dict["port"])
-            options.add_argument('--proxy-server=%s' % PROXY)
+        # proxy_options = {
+        #     'proxy': {
+        #         'http': 'http://{}:{}@{}:{}'.format("4y3xkj012elb568z", "qk3m2z94tofyw7su", "highspeed1.thesocialproxy.com",
+        #                                             10000),
+        #         'https': 'https://{}:{}@{}:{}'.format("4y3xkj012elb568z", "qk3m2z94tofyw7su", "highspeed1.thesocialproxy.com",
+        #                                             10000),
+        #         'no_proxy': 'localhost,127.0.0.1,dev_server:8080'
+        #     }
+        # }
+        # TODO: need to check if all these changes are ok
+        # fp = webdriver.FirefoxProfile()
+        # fp.add_extension('closeproxy.xpi')
+        # fp.set_preference('network.proxy.type', 1)
+        # fp.set_preference('network.proxy.http', proxy['host'])
+        # fp.set_preference('network.proxy.http_port', int(proxy['port']))
+        # fp.set_preference('network.proxy.no_proxies_on', 'localhost, 127.0.0.1')
+        # credentials = '{user}:{password}'.format(**proxy)
+        # credentials = b64encode(credentials.encode('ascii')).decode('utf-8')
+        # fp.set_preference('extensions.closeproxyauth.authtoken', credentials)
+        #
+        # if proxy_dict["proxy"]:
+        #     PROXY = "{}:{}".format(proxy_dict["proxy"], proxy_dict["port"])
+        #     options.add_argument('--proxy-server=%s' % PROXY)
 
         if is_mobile:
             #firefox_options = webdriver.FirefoxOptions()
@@ -56,9 +70,9 @@ class InstagramBot:
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
-            self.driver = webdriver.Firefox(fp, options=options)
-            #self.driver = webdriver.Chrome('chromedriver.exe', options=options)
-
+            self.driver = webdriver.Firefox(options=options)
+            # self.driver = webdriver.Firefox(options=options, seleniumwire_options=proxy_options)
+            # self.driver = webdriver.Chrome('chromedriver.exe', options=options)
 
     def get_username(self):
         return self.username
@@ -67,16 +81,28 @@ class InstagramBot:
         return self.password
 
     def _login(self):
+        websites = self.database.get_websites_data()
+        if websites:
+            random_website_num = random.randint(0, len(websites) - 1)
+            self.driver.get(websites[random_website_num][1])
+            time.sleep(3.5)
         self.driver.get('{}/accounts/login/'.format(self.base_url))
         WebDriverWait(self.driver, 7).until(
             EC.element_to_be_clickable((By.NAME, 'username'))).send_keys(self.username)
-        #self.driver.find_element_by_name('username').send_keys(self.username)
         self.driver.find_element_by_name('password').send_keys(self.password + Keys.RETURN)
-        time.sleep(2.2)
+        time.sleep(2.0)
+        
+        is_login_successful = self.is_login_successful()
+        if not is_login_successful: # if its False, means  it didn't logged in
+            print("User: ", self.username, " Didn't log in successful")
+            return False
+        return True
+
 
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
 
+    # TODO: this "new tab" func opens new window. Need to change it to open new tab and not new window
     def _nav_user_new_tab(self, username):
         self.driver.execute_script("window.open('{}');".format(self.base_url + '/' + username))
 
@@ -144,7 +170,8 @@ class InstagramBot:
                 print('follow user: ', e)
 
     def _unfollow_user(self, username, user_id):
-        self._login()
+        if not self._login():
+            return
         self._nav_user(username)
         time.sleep(2)
         try:
@@ -174,6 +201,18 @@ class InstagramBot:
         if popup_unfollow:
             self.driver.find_element_by_xpath('//button[text()="Unfollow"]').click()
 
+    def _user_not_found_broken_link(self):
+        user_not_found = False
+        try:
+            header = WebDriverWait(self.driver, 7).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div/div[1]/div/div/h2'))).text
+            para = WebDriverWait(self.driver, 7).until(
+                EC.visibility_of_element_located((By.XPATH, '/html/body/div/div[1]/div/div/p'))).text
+            if header == utils.NOT_FOUND_USER_TITLE and para == utils.NOT_FOUND_USER_PARA:
+                user_not_found = True
+        except Exception as e:
+            pass
+        return user_not_found
+
     def _check_if_blocked(self):
         try:
             error_text = self.driver.find_element_by_xpath('/html/body/div/div[1]/div/div/h2').text
@@ -193,8 +232,10 @@ class InstagramBot:
         self.driver.implicitly_wait(3)
         has_profile_image = self._has_profile_image()
         clean_number = -1
+        post_amount = -1
         if has_profile_image == -1:
             try:
+                post_amount = utils().clean_post_number(self.get_post_amount())
                 button_list = self.driver.find_elements_by_class_name('g47SY')
                 followers_number = button_list[1].text
                 self.driver.close()
@@ -202,7 +243,7 @@ class InstagramBot:
                 clean_number = utils().clean_number(followers_number)
             except Exception as e:
                 print('get followers number: ', e)
-            return clean_number, has_profile_image
+            return clean_number, has_profile_image, post_amount
         else:
             self.driver.close()
             self.driver.switch_to.window(self.driver.window_handles[0])
@@ -262,6 +303,7 @@ class InstagramBot:
         popup_blocked = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "bIiDR")))
         if popup_blocked:
             self._screen_shot(self.username)
+            time.sleep(1)
             popup_blocked.click()
             return True
         else:
@@ -309,7 +351,27 @@ class InstagramBot:
         wait = WebDriverWait(self.driver, 7)
         for post in range(num_of_skips):
             wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-            time.sleep(1.5)
+            time.sleep(1.0)
 
     def save_account_action(self, account_action):
         db.Database().save_data_account_action(account_action)
+
+    # get the number of posts
+    def get_post_amount(self):
+        posts_amount = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/section/main/div/header/section/ul/li[1]/span/span'))).text
+        return posts_amount
+
+    # getting current url
+    def check_current_url(self):
+        return self.driver.current_url
+
+    def is_login_successful(self):
+        flag = True
+        try:
+            time.sleep(1.5)
+            text = self.driver.find_element_by_class_name("eiCW- ").text
+            if text == utils.UNSUCCESSFUL_LOG_IN_TEXT:
+                flag = False
+        except:
+            pass
+        return flag

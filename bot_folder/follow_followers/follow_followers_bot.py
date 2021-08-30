@@ -12,7 +12,8 @@ import datetime as dt
 class FollowFollowersBot(main_bot.InstagramBot):
     def follow_after_followers(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule, num_skip):
         settings_data_from_db = FollowFollowersDB().get_data_from_settings()
-        self._login()
+        if not self._login():
+            return
         time.sleep(1.5)
         self.driver.get(user_url)
         time.sleep(1.5)
@@ -110,7 +111,8 @@ class FollowFollowersBot(main_bot.InstagramBot):
 
     def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule, num_skip):
         settings_data_from_db = FollowFollowersDB().get_data_from_settings()
-        self._login()
+        if not self._login():
+            return
         time.sleep(2)
         self.driver.get(user_url)
         time.sleep(2)

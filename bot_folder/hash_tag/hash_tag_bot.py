@@ -2,7 +2,6 @@ from bot_folder import main_bot
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-
 from database.combination.combination import CombinationDM
 from database.followers.followers import FollowersDB
 from database.hashtag.hashtag import HashtagDB
@@ -21,8 +20,9 @@ class HashTagBot(main_bot.InstagramBot):
     # search instagram page by the hash tag
     def search_hash_tag(self, hash_tag, amount, like, comment, follow, split_comment, to_distribution, group_name,
                         group_id, time_schedule):
-        self._login()
-        # amount_likes = self.database.get_data_from_settings()
+        if not self._login():
+            return
+            # amount_likes = self.database.get_data_from_settings()
         i = 0
         loops = 0
         click_count = 0

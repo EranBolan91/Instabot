@@ -18,7 +18,8 @@ class FollowersBot(main_bot.InstagramBot):
         self.scroll_box_xpath = '/html/body/div[5]/div/div/div[2]'
 
     def get_unfollowers(self):
-        self._login()
+        if not self._login():
+            return
         time.sleep(2)
         self._nav_user(self.username)
         time.sleep(2)
@@ -66,7 +67,8 @@ class FollowersBot(main_bot.InstagramBot):
     # This unfollow, goes to the current account, click on the 'Following'
     # and go over all the users and then unfollow them one by one
     def unfollow_all_users(self, limit_unfollowers):
-        self._login()
+        if not self._login():
+            return
         time.sleep(2)
         self.driver.get(self.base_url + "/" + self.username)
         time.sleep(2)
@@ -134,12 +136,13 @@ class FollowersBot(main_bot.InstagramBot):
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
-    def unfollow_users(self, user_list, to_remove_from_db, account_id, to_login, to_reverse, limit_unfollow_list):
+    def unfollow_users(self, user_list, to_remove_from_db, account_id, to_login, to_reverse, limit_unfollow_list, remove_not_found_users):
         i = 1
         remove_clicks = 0
         follow_back = 0
         if to_login:
-            self._login()
+            if not self._login():
+                return
         time.sleep(1.5)
         if to_reverse:
             user_list.reverse()
@@ -163,8 +166,6 @@ class FollowersBot(main_bot.InstagramBot):
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 pass
-                #print('did not find the follow - FIRST')
-                # print('did not find the follow icon')
             try:
                 following_btn = self.wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button')))
@@ -179,8 +180,6 @@ class FollowersBot(main_bot.InstagramBot):
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 pass
-                #print('did not find the follow - SECOND')
-                # print('did not find the follow icon')
             try:
                 following_btn = self.wait.until(
                     EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/div[2]/div/span/span[1]/button')))
@@ -195,8 +194,6 @@ class FollowersBot(main_bot.InstagramBot):
                     print('unfollow users pop up exception: ', e)
             except Exception as e:
                 pass
-                #print('did not find the follow - THIRED')
-                # print('did not find the follow icon')
             # This try is for accounts that when they access to another user page, it display them "following"
             try:
                 following_btn = self.wait.until(
@@ -265,6 +262,11 @@ class FollowersBot(main_bot.InstagramBot):
                         db.Database().remove_username_from_unfollow_list(user, account_id)
                 except Exception as e:
                     pass
+            # if username is not found, then delete it from list of unfollow (this is optionally)
+            if remove_not_found_users:
+                if self._user_not_found_broken_link():
+                    db.Database().remove_username_from_unfollow_list(user, account_id)
+                    remove_clicks += 1
             print('{} Removed from {} account'.format(remove_clicks, self.username))
             if int(i * utils.TIME_SLEEP) == 500:
                 i = 1
@@ -291,7 +293,8 @@ class FollowersBot(main_bot.InstagramBot):
     # Getting list of the account followers and compare it with the list of the followers of the account
     # unfollow every user that the account following him and the user not following back
     def unfollow_users_who_not_return_follow(self, unfollowers_list, account_id, to_reverse):
-        self._login()
+        if not self._login():
+            return
         time.sleep(2)
         self._nav_user(self.username)
         time.sleep(2)

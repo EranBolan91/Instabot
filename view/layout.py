@@ -8,7 +8,8 @@ from .tab_dm import *
 from .tab_statistics import *
 from .tab_combination import *
 import tkinter as tkr
-
+# TODO: TO delete
+from.testing import *
 
 class Layout:
     def __init__(self, window):
@@ -33,6 +34,7 @@ class Layout:
         sub_menu = Menu(menu, tearoff=0)
         sub_menu.add_command(label='Accounts', command=self._accounts)
         sub_menu.add_command(label='Settings', command=self._settings)
+        sub_menu.add_command(label='testing', command=self._testing)
         sub_menu.add_command(label='Exit', command=self._exit)
         menu.add_cascade(label='Main', menu=sub_menu)
         window.config(menu=menu)
@@ -69,8 +71,19 @@ class Layout:
 
     def _settings(self):
         win = Toplevel(self.window)
+        w, h = self.window.winfo_screenwidth(), self.window.winfo_screenheight()
+        win.geometry("%dx%d+0+0" % (w, h))
         win.iconbitmap('insta_bot.ico')
         Settings(win)
+
+    def _testing(self):
+        win = Toplevel(self.window)
+        #win.attributes('-fullscreen', True)
+        w, h = self.window.winfo_screenwidth(), self.window.winfo_screenheight()
+        win.geometry("%dx%d+0+0" % (w, h))
+        win.iconbitmap('insta_bot.ico')
+        Testing(win)
+
 
     def _exit(self):
         self.window.destroy()

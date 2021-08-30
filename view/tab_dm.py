@@ -95,7 +95,7 @@ class TabDM(ttk.Frame):
         schedule_frame = ttk.LabelFrame(self, text='Schedule Action')
         schedule_frame.grid(column=3, row=2, rowspan=2, ipadx=25, ipady=10, padx=(30, 0))
         entry_frame = ttk.Frame(schedule_frame)
-        radio_min = ttk.Radiobutton(schedule_frame, text='Minuts', variable=self.radio_var, value=self.MINUTES,
+        radio_min = ttk.Radiobutton(schedule_frame, text='Minutes', variable=self.radio_var, value=self.MINUTES,
                                     command=self._enable_entry)
         radio_hours = ttk.Radiobutton(schedule_frame, text='Hours', variable=self.radio_var, value=self.HOURS,
                                       command=self._enable_entry)

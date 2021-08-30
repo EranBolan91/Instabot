@@ -12,7 +12,8 @@ import datetime as dt
 class DM(main_bot.InstagramBot):
     def send_message_to_distribution_group(self, message, dm_users, group_name, is_schedule, to_login, account_id, group_id, limit_msg):
         if to_login:
-            self._login()
+            if not self._login():
+                return
         i = 0
         sent = 0
         size_list = len(dm_users)
@@ -27,7 +28,8 @@ class DM(main_bot.InstagramBot):
                 self._nav_user(user[0])
                 wait = WebDriverWait(self.driver, 4)
                 try:
-                    message_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Message"]')))
+                    message_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]/div/div[1]/button')))
+                    #message_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Message"]')))
                     message_button.click()
                     # Gets to the input message
                     text_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/div[2]/div/div/div[2]/div/div/div/textarea')))
@@ -86,7 +88,8 @@ class DM(main_bot.InstagramBot):
             self.driver.close()
 
     def send_message_to_following_list(self, message, is_schedule):
-        self._login()
+        if not self._login():
+            return
         time.sleep(1)
         self._nav_user(self.username)
         wait = WebDriverWait(self.driver, 4)

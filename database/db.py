@@ -159,6 +159,20 @@ class Database:
                                id INTEGER PRIMARY KEY AUTOINCREMENT,
                                website TEXT,
                                modify DATE)""")
+        # TODO: need to finish creating models and the whole shit for the database
+        # Table Inspect Settings
+        self.cur.execute(""" CREATE TABLE IF NOT EXISTS inspect_settings (
+                                       id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                       page_not_found TEXT DEFAULT ('Sorry, this page isnt available.'),
+                                       user_not_found TEXT DEFAULT ('The link you followed may be broken, or the page may have been removed. Go back to Instagram.'),
+                                       block_restriction TEXT DEFAULT ('https://www.instagram.com/restriction/'),
+                                       block_change_pass TEXT DEFAULT ('https://www.instagram.com/challenge/?next=/'),
+                                       scroll_box_xml TEXT DEFAULT ('/html/body/div[7]/div/div/div[2]/div'),
+                                       scroll_box_close_btn TEXT DEFAULT ('/html/body/div[7]/div/div/div[1]/div/div[2]/button'),
+                                       like_btn_xml TEXT DEFAULT ('/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/a'),
+                                       second_like_btn_xml TEXT DEFAULT ('/html/body/div[6]/div[2]/div/article/div/div[2]/div[2]/section[2]/div/div[2]/a'),
+                                       unsuccessful_login_txt TEXT DEFAULT ('Sorry, your password was incorrect. Please double-check your password.'),
+                                       date_modify DATE)""")
 
         # Commit changes
         self.conn.commit()

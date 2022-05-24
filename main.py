@@ -13,7 +13,6 @@ from view.layout import Layout
 # TODO: add table to unfollow that counts how many users follow back when i unfollow them **created table, just need to display **
 # TODO: create table for UI so i can change it dynamic when the UI of insta changes
 #   need to create new window under settings. A lot of work
-# TODO: check why saving websites is not working
 # window = ThemedTk(theme='equilux')
 window = ThemedTk(theme='aqua')
 window.iconbitmap('insta_bot.ico')
@@ -21,3 +20,4 @@ window.attributes('-fullscreen', True)
 Layout(window)
 
 window.mainloop()
+

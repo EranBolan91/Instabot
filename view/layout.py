@@ -4,6 +4,7 @@ from .tab_location import *
 from .tab_followers import *
 from .tab_hash_tag import *
 from .settings import *
+from .inspect_settings import *
 from .tab_dm import *
 from .tab_statistics import *
 from .tab_combination import *
@@ -11,29 +12,19 @@ import tkinter as tkr
 # TODO: TO delete
 from.testing import *
 
+
 class Layout:
     def __init__(self, window):
         self.window = window
 
-        # width_of_window = 1280
-        # height_of_window = 800
-
         window.title('Insta Bot')
-        # Center the program video: https://www.youtube.com/watch?v=gjU3Lx8XMS8
-        # screen_width = window.winfo_screenwidth()
-        # screen_height = window.winfo_screenheight()
-        # x_coordinate = (screen_width/2) - (width_of_window/2)
-        # y_coordinate = (screen_height / 2) - (height_of_window / 2)
-        # window.geometry("%dx%d+%d+%d" % (width_of_window, height_of_window, x_coordinate, y_coordinate))
-
-        scroll_bar = tkr.Scrollbar(window)
-        scroll_bar.pack(side=tkr.RIGHT, fill="y")
 
         # menu config
         menu = Menu(window)
         sub_menu = Menu(menu, tearoff=0)
         sub_menu.add_command(label='Accounts', command=self._accounts)
         sub_menu.add_command(label='Settings', command=self._settings)
+        sub_menu.add_command(label='Inspect Settings', command=self._inspect_settings)
         sub_menu.add_command(label='testing', command=self._testing)
         sub_menu.add_command(label='Exit', command=self._exit)
         menu.add_cascade(label='Main', menu=sub_menu)
@@ -76,6 +67,13 @@ class Layout:
         win.iconbitmap('insta_bot.ico')
         Settings(win)
 
+    def _inspect_settings(self):
+        win = Toplevel(self.window)
+        w, h = self.window.winfo_screenwidth(), self.window.winfo_screenheight()
+        win.geometry("%dx%d+0+0" % (w, h))
+        win.iconbitmap('insta_bot.ico')
+        InspectSettings(win)
+
     def _testing(self):
         win = Toplevel(self.window)
         #win.attributes('-fullscreen', True)
@@ -83,7 +81,6 @@ class Layout:
         win.geometry("%dx%d+0+0" % (w, h))
         win.iconbitmap('insta_bot.ico')
         Testing(win)
-
 
     def _exit(self):
         self.window.destroy()

@@ -8,9 +8,10 @@ class Utils:
     BLOCK_CHANGE_PASSWORD = "https://www.instagram.com/challenge/?next=/"
     SCROLL_BOX = "/html/body/div[7]/div/div/div[2]/div"
     LIKES_BUTTON = "/html/body/div[5]/div[2]/div/article/div[3]/section[2]/div/div/a"
-    SECOND_LIKES_BUTTON = "/html/body/div[6]/div[2]/div/article/div[3]/section[2]/div/div/a"
+    SECOND_LIKES_BUTTON = "/html/body/div[6]/div[2]/div/article/div/div[2]/div[2]/section[2]/div/div[2]/a"
     CLOSE_BUTTON_SCROLL_BOX = "/html/body/div[7]/div/div/div[1]/div/div[2]/button"
     UNSUCCESSFUL_LOG_IN_TEXT = "Sorry, your password was incorrect. Please double-check your password."
+
     @staticmethod
     def _check_username_password(username, password):
         if username == '' or password == '':

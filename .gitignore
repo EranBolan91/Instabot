@@ -5,3 +5,8 @@ images
 debug.log
 chromedriver.exe
 *.pyc
+.env
+geckodriver.log
+geckodriver.exe
+proxy_auth_plugin.zip
+insta_bot.ico

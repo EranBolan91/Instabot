@@ -32,36 +32,7 @@ class InstagramBot:
         headless = db.Database().get_data_from_settings()[6]
         if headless:
             options.add_argument("--headless")
-        #options.add_extension(proxy.get_proxy_plugin())
-        #options.add_argument('--disable-extensions')
         options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
-
-        """
-        firefox proxy
-        """
-        # proxy_options = {
-        #     'proxy': {
-        #         'http': 'http://{}:{}@{}:{}'.format("4y3xkj012elb568z", "qk3m2z94tofyw7su", "highspeed1.thesocialproxy.com",
-        #                                             10000),
-        #         'https': 'https://{}:{}@{}:{}'.format("4y3xkj012elb568z", "qk3m2z94tofyw7su", "highspeed1.thesocialproxy.com",
-        #                                             10000),
-        #         'no_proxy': 'localhost,127.0.0.1,dev_server:8080'
-        #     }
-        # }
-        # TODO: need to check if all these changes are ok
-        # fp = webdriver.FirefoxProfile()
-        # fp.add_extension('closeproxy.xpi')
-        # fp.set_preference('network.proxy.type', 1)
-        # fp.set_preference('network.proxy.http', proxy['host'])
-        # fp.set_preference('network.proxy.http_port', int(proxy['port']))
-        # fp.set_preference('network.proxy.no_proxies_on', 'localhost, 127.0.0.1')
-        # credentials = '{user}:{password}'.format(**proxy)
-        # credentials = b64encode(credentials.encode('ascii')).decode('utf-8')
-        # fp.set_preference('extensions.closeproxyauth.authtoken', credentials)
-        #
-        # if proxy_dict["proxy"]:
-        #     PROXY = "{}:{}".format(proxy_dict["proxy"], proxy_dict["port"])
-        #     options.add_argument('--proxy-server=%s' % PROXY)
 
         if is_mobile:
             #firefox_options = webdriver.FirefoxOptions()
@@ -98,11 +69,9 @@ class InstagramBot:
             return False
         return True
 
-
     def _nav_user(self, user):
         self.driver.get('{}/{}/'.format(self.base_url, user))
 
-    # TODO: this "new tab" func opens new window. Need to change it to open new tab and not new window
     def _nav_user_new_tab(self, username):
         self.driver.execute_script("window.open('{}');".format(self.base_url + '/' + username))
 

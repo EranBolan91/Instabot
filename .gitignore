@@ -9,5 +9,5 @@ chromedriver.exe
 geckodriver.log
 geckodriver.exe
 proxy_auth_plugin.zip
-insta_bot.ico
 view/testing.py
+venv

@@ -1,5 +1,10 @@
-from ttkthemes import ThemedTk
+#from ttkthemes import ThemedTk
+import tkinter as tk
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 from view.layout import Layout
+
+import tkinter as tk
 # TODO: need to change the logic in follow followers to scroll and the follow (like combination)
 # TODO: need to fix when the account follow after a user he wants to access to his followers list. It returns -1 buttons
 # TODO: need to change the logic of unfollow only users who are not following back.-**changed-still need to run tests **
@@ -13,9 +18,9 @@ from view.layout import Layout
 # TODO: add table to unfollow that counts how many users follow back when i unfollow them **created table, just need to display **
 # TODO: create table for UI so i can change it dynamic when the UI of insta changes
 #   need to create new window under settings. A lot of work
-# window = ThemedTk(theme='equilux')
-window = ThemedTk(theme='aqua')
-window.iconbitmap('insta_bot.ico')
+
+window = ttk.Window(themename="darkly")
+#window.iconbitmap("insta_bot.ico")
 window.attributes('-fullscreen', True)
 Layout(window)
 

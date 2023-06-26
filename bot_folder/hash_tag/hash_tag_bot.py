@@ -29,7 +29,7 @@ class HashTagBot(main_bot.InstagramBot):
         time.sleep(1.5)
         try:
             self.driver.get('{}/explore/tags/{}'.format(self.base_url, hash_tag))
-            first_post = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
+            first_post = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_aagu')))
             first_post.click()
             while i < int(amount):
                 if loops % utils.TIME_SLEEP == 0:
@@ -50,13 +50,13 @@ class HashTagBot(main_bot.InstagramBot):
                         self._follow_user(to_distribution, group_id)
                     # click on the right arrow
                     try:
-                        self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-                    except Exception:
+                        self.wait.until(EC.element_to_be_clickable((By.XPATH, utils.RIGHT_ARROW))).click()
+                    except Exception as e:
                         print('error on finding the right arrow: ', e)
                     i += 1
                     loops += 1
                 else:
-                    self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+                    self.wait.until(EC.element_to_be_clickable((By.XPATH, utils.RIGHT_ARROW))).click()
                     i += 1
                     loops += 1
                 if int(i * utils.TIME_SLEEP) == 500:

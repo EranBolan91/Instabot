@@ -54,21 +54,21 @@ class Layout:
 
     def _accounts(self):
         win = Toplevel(self.window)
-        win.iconbitmap('insta_bot.ico')
+        #win.iconbitmap('insta_bot.ico')
         AccountsNew(win)
 
     def _settings(self):
         win = Toplevel(self.window)
         w, h = self.window.winfo_screenwidth(), self.window.winfo_screenheight()
         win.geometry("%dx%d+0+0" % (w, h))
-        win.iconbitmap('insta_bot.ico')
+        #win.iconbitmap('insta_bot.ico')
         Settings(win)
 
     def _inspect_settings(self):
         win = Toplevel(self.window)
         w, h = self.window.winfo_screenwidth(), self.window.winfo_screenheight()
         win.geometry("%dx%d+0+0" % (w, h))
-        win.iconbitmap('insta_bot.ico')
+        #win.iconbitmap('insta_bot.ico')
         InspectSettings(win)
 
     def _exit(self):

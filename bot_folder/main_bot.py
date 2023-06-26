@@ -1,18 +1,16 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.firefox.options import Options
-from seleniumwire import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from utils.utils import Utils as utils
-from database import db
-from bot_folder import proxy
+#from seleniumwire import webdriver
+from selenium import webdriver
 import time, random, requests
+from database import db
 import os
-from base64 import b64encode
-import json
 
 proxy = {'host': 'highspeed1.thesocialproxy.com', 'port': 10000, 'user': '4y3xkj012elb568z', 'password': 'qk3m2z94tofyw7su'}
 
@@ -22,6 +20,7 @@ class InstagramBot:
         self.username = username
         self.password = password
         self.base_url = 'https://www.instagram.com'
+
         # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
         options.page_load_strategy = 'eager'
@@ -41,9 +40,9 @@ class InstagramBot:
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
-            self.driver = webdriver.Firefox(options=options)
-            # self.driver = webdriver.Firefox(options=options, seleniumwire_options=proxy_options)
-            # self.driver = webdriver.Chrome('chromedriver.exe', options=options)
+            self.driver = webdriver.Chrome(ChromeDriverManager().install())
+
+        self.wait = WebDriverWait(self.driver, 5)
 
     def get_username(self):
         return self.username
@@ -77,8 +76,7 @@ class InstagramBot:
 
     def _like_post(self):
         try:
-            wait = WebDriverWait(self.driver, 7)
-            wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "fr66n"))).click() # click the 'like' button
+            self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "_aamw"))).click() # click the 'like' button
         except Exception as e:
             self._screen_shot(self.username)
             print("_like_post on main: ", e)
@@ -111,29 +109,32 @@ class InstagramBot:
         comment = random.choice(split_comment)
         time.sleep(2)
         # first need to click on the Entry ('add comment...')
-        self.driver.find_element_by_class_name('Ypffh').click()
+        self.driver.find_element_by_tag_name('textarea').click()
         # Then enter the comment and click post
-        self.driver.find_element_by_class_name('Ypffh').send_keys(comment + Keys.RETURN)
+        self.driver.find_element_by_tag_name('textarea').send_keys(comment + Keys.RETURN)
 
     def _follow_user(self, to_distribution, group_id):
         settings_data = self.database.get_data_from_settings()
-        time.sleep(1)
-        follow_button = self.driver.find_element_by_xpath(
-            "/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button")
+        follow_button = ""
+        try:
+            follow_button = self.wait.until(EC.presence_of_all_elements_located((By.XPATH, utils.FOLLOW_BTN)))[0]
+        except Exception as e:
+            print("_follow_user: username not found")
+            return
+        username = None
         if follow_button.text == 'Follow':
             try:
                 # Get the username
-                username = self.driver.find_element_by_xpath(
-                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
-                followers_num, no_use_data = self._get_followers_number(username)
+                try:
+                    username = self.driver.find_element_by_xpath(utils.POST_USERNAME).text
+                except Exception as e:
+                    print("follow_user_func: did not find the username. -> " ,e)
+                followers_num, no_use_data, no_use_d = self._get_followers_number(username)
                 if followers_num != -1:
                     if int(followers_num) >= int(settings_data[2]):
                         follow_button.click()
                         self.database.save_unfollow_users(username, self.username)
                         if to_distribution:
-                            # Get the username
-                            username = self.driver.find_element_by_xpath(
-                                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a').text
                             self.database.add_username_to_distribution_group(username, group_id)
             except Exception as e:
                 print('follow user: ', e)
@@ -205,7 +206,7 @@ class InstagramBot:
         if has_profile_image == -1:
             try:
                 post_amount = utils().clean_post_number(self.get_post_amount())
-                button_list = self.driver.find_elements_by_class_name('g47SY')
+                button_list = self.driver.find_elements_by_class_name(utils.POSTS_FOLLOWERS_FOLLOWING)
                 followers_number = button_list[1].text
                 self.driver.close()
                 self.driver.switch_to.window(self.driver.window_handles[0])
@@ -281,11 +282,10 @@ class InstagramBot:
     def _has_profile_image(self):
         # if this method returns -1, means the user has profile image.
         # if it returns a number bigger then -1 means the user has no profile image
-        wait = WebDriverWait(self.driver, 7)
         try:
             # this is for private accounts
-            image = wait.until(
-                EC.element_to_be_clickable((By.CLASS_NAME, "be6sR")))
+            image = self.wait.until(
+                EC.element_to_be_clickable((By.XPATH, utils.PROFILE_IMAGE_XPATH)))
             src_text = image.get_attribute("src")
             has_text = src_text.find('44884218_345707102882519_2446069589734326272_n.jpg')
             return has_text
@@ -293,7 +293,7 @@ class InstagramBot:
             pass
         try:
             # this is for none private accounts
-            image = wait.until(
+            image = self.wait.until(
                 EC.element_to_be_clickable((By.CLASS_NAME, "_6q-tv")))
             src_text = image.get_attribute("src")
             has_text = src_text.find('44884218_345707102882519_2446069589734326272_n.jpg')
@@ -327,7 +327,12 @@ class InstagramBot:
 
     # get the number of posts
     def get_post_amount(self):
-        posts_amount = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/section/main/div/header/section/ul/li[1]/span/span'))).text
+        posts_amount = 0
+        try:
+            posts_amount = self.wait.until(EC.visibility_of_all_elements_located((By.CLASS_NAME, utils.POSTS_FOLLOWERS_FOLLOWING)))[0].text
+            return posts_amount
+        except Exception as e:
+            print("get_post_amount - Error")
         return posts_amount
 
     # getting current url

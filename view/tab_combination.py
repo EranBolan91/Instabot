@@ -1,11 +1,10 @@
-from tkinter import *
-from tkinter import ttk, messagebox
-import tkinter.font as tkfont
-from database import db
-from database.dm import dm
 from bot_folder.combination.combination_bot import CombinationBot
 from database.combination.combination import CombinationDM
 from utils.schedule import ScheduleCalc
+from tkinter import ttk, messagebox
+import tkinter.font as tkfont
+from database import db
+from tkinter import *
 import threading
 
 

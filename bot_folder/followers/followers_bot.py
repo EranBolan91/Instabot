@@ -37,7 +37,7 @@ class FollowersBot(main_bot.InstagramBot):
             return not_following_back
         else:
             print('Something fucked up with the followers,'
-                  'it counted {} followers and the current user has {} followers'.format(len(followers), len(followers_amount)))
+                  'it counted {} followers and the current user has {} followers'.format(len(followers), followers_amount))
             return False
 
     def _get_names(self):

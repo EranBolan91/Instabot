@@ -9,7 +9,8 @@ ttkbootstrap
 selenium==3.141.0
 # 1.26 is the newest urllib3 that selenium 3 works with; 1.25 can't be imported on Python 3.12+
 urllib3==1.26.20
-webdriver-manager==3.8.6
+# 4.x downloads the ChromeDriver that matches the installed Chrome (3.x stops at Chrome 114)
+webdriver-manager==4.0.2
 beautifulsoup4==4.9.3
 requests==2.32.3
 python-dotenv>=1.0

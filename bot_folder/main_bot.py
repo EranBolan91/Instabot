@@ -39,10 +39,10 @@ class InstagramBot:
             chrome_options = webdriver.ChromeOptions()
             mobile_emulation = {"deviceName": "Nexus 5"}
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-            self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options, chrome_options=chrome_options)
         else:
-            #self.driver = webdriver.Chrome(ChromeDriverManager().install())
-            self.driver = webdriver.Chrome((ChromeDriverManager(version='114.0.5735.90').install()))
+            # ChromeDriverManager finds the installed Chrome's version and downloads the matching driver
+            self.driver = webdriver.Chrome(ChromeDriverManager().install())
 
         self.wait = WebDriverWait(self.driver, 7)
 

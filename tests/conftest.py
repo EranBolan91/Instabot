@@ -62,3 +62,23 @@ def log_bridge(qapp):
     bridge = LogBridge()
     yield bridge
     bridge.uninstall()
+
+
+@pytest.fixture
+def confirm_yes(monkeypatch):
+    """Answer "yes" to every destructive-action confirmation."""
+    asked = []
+
+    def ask(parent, title, text, confirm_text="Delete"):
+        asked.append(title)
+        return True
+
+    monkeypatch.setattr("ui.widgets.confirm.ask", ask)
+    return asked
+
+
+@pytest.fixture
+def themed(qapp, workdir):
+    """The real theme, and a throwaway database, for widget and dialog tests."""
+    configure_app(qapp)
+    return qapp

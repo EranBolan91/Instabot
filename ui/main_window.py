@@ -7,6 +7,9 @@ from PySide6.QtWidgets import (QDockWidget, QHBoxLayout, QLabel, QListWidget, QL
                                QMessageBox, QStackedWidget, QToolButton, QVBoxLayout, QWidget)
 
 from ui.core.db_helpers import account_username
+from ui.dialogs.accounts_dialog import AccountsDialog
+from ui.dialogs.inspect_settings_dialog import InspectSettingsDialog
+from ui.dialogs.settings_dialog import SettingsDialog
 from ui.core.demo_job import DemoBot
 from ui.core.jobs import CANCELLED, DONE, FAILED, RUNNING, JobManager
 from ui.pages.combination_page import CombinationPage
@@ -46,6 +49,7 @@ class MainWindow(QMainWindow):
         if APP_ICON.exists():
             self.setWindowIcon(QIcon(str(APP_ICON)))
         self.setMinimumSize(1000, 640)
+        self.current_dialog = None
 
         self.pages = [page_class(jobs=self.jobs) for page_class in PAGE_CLASSES]
 
@@ -250,19 +254,29 @@ class MainWindow(QMainWindow):
         else:
             self.set_status("No accounts yet. Add one in Accounts.")
 
-    # ---------- Dialogs (built in phase 3) ----------
+    # ---------- Dialogs ----------
 
     def _open_accounts(self):
-        self._dialog_not_ready("Accounts")
+        dialog = AccountsDialog(self)
+        # keep the header (and every page) in sync while the dialog is open
+        dialog.accounts_changed.connect(lambda: self.account_picker.refresh())
+        self._open_dialog(dialog)
 
     def _open_settings(self):
-        self._dialog_not_ready("Settings")
+        dialog = SettingsDialog(self, username=self.account_picker.current_username())
+        # pages show the account's distribution lists
+        dialog.lists_changed.connect(lambda: self.account_picker.refresh())
+        self._open_dialog(dialog)
 
     def _open_inspect_settings(self):
-        self._dialog_not_ready("Inspect Settings")
+        self._open_dialog(InspectSettingsDialog(self))
 
-    def _dialog_not_ready(self, name):
-        self.set_status("The {} window isn't rebuilt yet. Use the old window for now: python main_tk.py".format(name))
+    def _open_dialog(self, dialog):
+        # open() is modal like exec(), but doesn't block the caller (or the tests)
+        dialog.setAttribute(Qt.WA_DeleteOnClose)
+        dialog.finished.connect(lambda _result: setattr(self, "current_dialog", None))
+        self.current_dialog = dialog
+        dialog.open()
 
     # ---------- Window state ----------
 

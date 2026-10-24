@@ -64,12 +64,19 @@ def test_menu_shortcuts(make_window):
     assert window.exit_action.shortcut().toString() == "Ctrl+Q"
 
 
-def test_unbuilt_dialogs_point_to_old_window(make_window):
+def test_header_actions_open_each_dialog(make_window):
+    from ui.dialogs.accounts_dialog import AccountsDialog
+    from ui.dialogs.inspect_settings_dialog import InspectSettingsDialog
+    from ui.dialogs.settings_dialog import SettingsDialog
+
     window = make_window()
-    for action in (window.accounts_action, window.settings_action, window.inspect_action):
-        window.set_status("")
+    for action, dialog_class in ((window.accounts_action, AccountsDialog), (window.settings_action, SettingsDialog),
+                                 (window.inspect_action, InspectSettingsDialog)):
         action.trigger()
-        assert "main_tk.py" in window.status_label.text()
+        assert isinstance(window.current_dialog, dialog_class)
+        assert window.current_dialog.isVisible()
+        window.current_dialog.reject()
+        assert window.current_dialog is None
 
 
 def test_window_state_is_remembered(make_window):

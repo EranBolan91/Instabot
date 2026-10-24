@@ -22,6 +22,8 @@ def load_tokens(theme="dark"):
 
 def load_stylesheet(theme="dark"):
     text = _read(theme)
+    # url(@icons/x.svg): the theme's icon folder, as an absolute path
+    text = text.replace("@icons", (THEME_DIR / "icons").as_posix())
     tokens = load_tokens(theme)
     # longest names first, so "@accent_hover" isn't clobbered by "@accent"
     for name in sorted(tokens, key=len, reverse=True):

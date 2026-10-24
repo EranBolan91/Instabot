@@ -6,6 +6,6 @@ class DmPage(BasePage):
     subtitle = "Send direct messages to the users in a distribution list."
     icon = "fa5s.envelope"
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, jobs=None, parent=None):
+        super().__init__(jobs, parent)
         self.add_placeholder()

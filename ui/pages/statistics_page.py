@@ -6,6 +6,6 @@ class StatisticsPage(BasePage):
     subtitle = "Results of past runs, per feature."
     icon = "fa5s.chart-bar"
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, jobs=None, parent=None):
+        super().__init__(jobs, parent)
         self.add_placeholder()

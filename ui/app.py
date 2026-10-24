@@ -1,3 +1,4 @@
+import os
 import sys
 
 from PySide6.QtGui import QColor, QPalette
@@ -54,9 +55,22 @@ def _dark_palette():
 
 def run():
     # imported here so create_app() works without building any widgets
+    from ui.core.log_bridge import LogBridge
     from ui.main_window import MainWindow
 
     app = create_app()
-    window = MainWindow()
+    log_bridge = LogBridge()
+    log_bridge.install()
+    window = MainWindow(log_bridge=log_bridge)
     window.show_initial()
-    sys.exit(app.exec())
+    code = app.exec()
+    log_bridge.uninstall()
+
+    if window.jobs.has_live_threads():
+        # A stopped bot can still be inside a long time.sleep(), and Qt's
+        # thread pool waits for it on exit, so the app would hang. Its Chrome
+        # was already closed by JobManager.shutdown(), so exit right away.
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os._exit(code)
+    sys.exit(code)

@@ -4,9 +4,11 @@ import qtawesome as qta
 from PySide6.QtCore import QSettings, QSize, Qt
 from PySide6.QtGui import QAction, QIcon, QKeySequence
 from PySide6.QtWidgets import (QDockWidget, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QMainWindow,
-                               QPlainTextEdit, QStackedWidget, QToolButton, QVBoxLayout, QWidget)
+                               QMessageBox, QStackedWidget, QToolButton, QVBoxLayout, QWidget)
 
 from ui.core.db_helpers import account_username
+from ui.core.demo_job import DemoBot
+from ui.core.jobs import CANCELLED, DONE, FAILED, RUNNING, JobManager
 from ui.pages.combination_page import CombinationPage
 from ui.pages.dm_page import DmPage
 from ui.pages.follow_followers_page import FollowFollowersPage
@@ -16,6 +18,9 @@ from ui.pages.location_page import LocationPage
 from ui.pages.statistics_page import StatisticsPage
 from ui.theme.palette import color
 from ui.widgets.account_picker import AccountPicker
+from ui.widgets.jobs_panel import JobsPanel
+from ui.widgets.log_panel import LogPanel
+from ui.widgets.toast import Toast
 
 # Same order as the old Tkinter tabs.
 PAGE_CLASSES = (HashtagPage, FollowersPage, LocationPage, FollowFollowersPage, DmPage, CombinationPage,
@@ -31,9 +36,10 @@ def _icon(name):
 class MainWindow(QMainWindow):
     """Header + sidebar + page stack, with Jobs and Log docks at the bottom."""
 
-    def __init__(self, settings=None):
+    def __init__(self, settings=None, jobs=None, log_bridge=None):
         super().__init__()
         self.settings = settings if settings is not None else QSettings()
+        self.jobs = jobs if jobs is not None else JobManager(parent=self)
         self._geometry_restored = False
 
         self.setWindowTitle("Instabot")
@@ -41,16 +47,26 @@ class MainWindow(QMainWindow):
             self.setWindowIcon(QIcon(str(APP_ICON)))
         self.setMinimumSize(1000, 640)
 
-        self.pages = [page_class() for page_class in PAGE_CLASSES]
+        self.pages = [page_class(jobs=self.jobs) for page_class in PAGE_CLASSES]
 
         self._create_actions()
         self._build_menu()
         self._build_central()
         self._build_docks()
         self._build_status_bar()
+        self.toast = Toast(self.centralWidget())
 
         self.sidebar.currentRowChanged.connect(self.stack.setCurrentIndex)
         self.account_picker.account_changed.connect(self._on_account_changed)
+
+        self.jobs.job_added.connect(self.log_panel.add_job)
+        self.jobs.job_removed.connect(self.log_panel.remove_job)
+        self.jobs.job_updated.connect(self._on_job_updated)
+        self.jobs_panel.job_activated.connect(self.show_job_log)
+        self.jobs_panel.summary_changed.connect(self.jobs_dock.setWindowTitle)
+        self.log_panel.block_detected.connect(self._on_block_line)
+        if log_bridge is not None:
+            log_bridge.text_written.connect(self.log_panel.write)
 
         self._restore_state()
 
@@ -72,6 +88,12 @@ class MainWindow(QMainWindow):
         self.exit_action = QAction("Exit", self)
         self.exit_action.setShortcut(QKeySequence("Ctrl+Q"))
         self.exit_action.triggered.connect(self.close)
+
+        # temporary, until the pages run real bots (phase 4)
+        self.demo_action = QAction("Run demo job", self)
+        self.demo_action.triggered.connect(lambda: self.run_demo_job(0))
+        self.demo_scheduled_action = QAction("Run demo job in 10 seconds", self)
+        self.demo_scheduled_action.triggered.connect(lambda: self.run_demo_job(10))
 
     def _build_menu(self):
         main_menu = self.menuBar().addMenu("&Main")
@@ -141,24 +163,21 @@ class MainWindow(QMainWindow):
         return header
 
     def _build_docks(self):
-        jobs_placeholder = QLabel("No jobs yet. Jobs you run or schedule will show up here.")
-        jobs_placeholder.setProperty("muted", True)
-        jobs_placeholder.setAlignment(Qt.AlignCenter)
-        self.jobs_dock = self._make_dock("Jobs", "JobsDock", jobs_placeholder)
-
-        self.log_view = QPlainTextEdit()
-        self.log_view.setReadOnly(True)
-        self.log_view.setPlaceholderText("Bot output will appear here.")
-        self.log_dock = self._make_dock("Log", "LogDock", self.log_view)
+        self.jobs_panel = JobsPanel(self.jobs)
+        self.jobs_dock = self._make_dock("Jobs", "JobsDock", self.jobs_panel)
+        self.log_panel = LogPanel()
+        self.log_dock = self._make_dock("Log", "LogDock", self.log_panel)
 
         self.addDockWidget(Qt.BottomDockWidgetArea, self.jobs_dock)
         self.addDockWidget(Qt.BottomDockWidgetArea, self.log_dock)
         self.tabifyDockWidget(self.jobs_dock, self.log_dock)
         self.jobs_dock.raise_()
-        self.resizeDocks([self.jobs_dock], [200], Qt.Vertical)
 
         self.view_menu.addAction(self.jobs_dock.toggleViewAction())
         self.view_menu.addAction(self.log_dock.toggleViewAction())
+        self.view_menu.addSeparator()
+        self.view_menu.addAction(self.demo_action)
+        self.view_menu.addAction(self.demo_scheduled_action)
 
     def _make_dock(self, title, object_name, widget):
         dock = QDockWidget(title, self)
@@ -182,6 +201,44 @@ class MainWindow(QMainWindow):
 
     def set_running_count(self, count):
         self.running_label.setText("{} running".format(count))
+
+    def show_toast(self, text, kind="info"):
+        self.toast.show_message(text, kind)
+
+    # ---------- Jobs ----------
+
+    def _on_job_updated(self, job):
+        self.set_running_count(self.jobs.running_count())
+        if job.status == RUNNING:
+            self.set_status("{} started".format(job.label))
+        elif job.status == DONE:
+            self.set_status("{} finished".format(job.label))
+        elif job.status == CANCELLED:
+            self.set_status("{} cancelled".format(job.label))
+        elif job.status == FAILED:
+            self.set_status("{} failed: {}".format(job.label, job.error))
+            self.show_toast("{} failed. See the log for details.".format(job.label), "error")
+
+    def _on_block_line(self, job_id, _line):
+        job = self.jobs.get(job_id)
+        who = "@" + job.account if job else "An account"
+        self.show_toast("{} may be blocked. See the log for details.".format(who), "error")
+
+    def show_job_log(self, job_id):
+        self.log_panel.filter_to_job(job_id)
+        self.log_dock.show()
+        self.log_dock.raise_()
+
+    def run_demo_job(self, delay_seconds):
+        username = self.account_picker.current_username() or "demo"
+        # the bot is built inside the worker, like a real one would be
+        self.jobs.submit("Demo", username, "Fake bot: prints 8 steps, no Chrome",
+                         make_bot=lambda: DemoBot(username), run=lambda bot: bot.run(),
+                         delay_seconds=delay_seconds)
+        if delay_seconds:
+            self.show_toast("Demo job scheduled in {} seconds".format(delay_seconds), "success")
+        else:
+            self.show_toast("Demo job started for @{}".format(username), "success")
 
     # ---------- Account ----------
 
@@ -214,6 +271,10 @@ class MainWindow(QMainWindow):
             self.show()
         else:
             self.showMaximized()
+            # first launch: room for about 6 jobs (later the saved layout is used)
+            self.resizeDocks([self.jobs_dock], [300], Qt.Vertical)
+        # otherwise the account combo starts focused and looks highlighted
+        self.sidebar.setFocus()
 
     def _restore_state(self):
         geometry = self.settings.value("window/geometry")
@@ -228,6 +289,17 @@ class MainWindow(QMainWindow):
         self.account_picker.refresh(prefer_username=self.settings.value("account/username"))
 
     def closeEvent(self, event):
+        if self.jobs.active_count():
+            answer = QMessageBox.question(
+                self, "Quit Instabot",
+                "{} running and {} scheduled jobs.\n\nQuit anyway? Running jobs are stopped and their Chrome "
+                "windows closed. Scheduled jobs are cancelled.".format(
+                    self.jobs.running_count(), self.jobs.scheduled_count()))
+            if answer != QMessageBox.Yes:
+                event.ignore()
+                return
+            self.jobs.shutdown()
+
         self.settings.setValue("window/geometry", self.saveGeometry())
         self.settings.setValue("window/state", self.saveState())
         self.settings.setValue("window/page", self.sidebar.currentRow())

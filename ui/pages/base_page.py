@@ -8,15 +8,17 @@ class BasePage(QWidget):
     """Common frame for the sidebar pages: title, subtitle and a scrollable body.
 
     Subclasses set ``title``, ``subtitle`` and ``icon`` (a qtawesome name used
-    by the sidebar) and add their cards to ``self.body_layout``.
+    by the sidebar) and add their cards to ``self.body_layout``. Bot runs go
+    through ``self.jobs`` (the JobManager), never straight to a thread.
     """
 
     title = ""
     subtitle = ""
     icon = ""
 
-    def __init__(self, parent=None):
+    def __init__(self, jobs=None, parent=None):
         super().__init__(parent)
+        self.jobs = jobs
         self.account = None
         self._placeholder_account = None
 

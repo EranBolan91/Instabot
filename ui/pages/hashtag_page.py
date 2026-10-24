@@ -6,6 +6,6 @@ class HashtagPage(BasePage):
     subtitle = "Like, comment on and follow posts found through a hashtag."
     icon = "fa5s.hashtag"
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, jobs=None, parent=None):
+        super().__init__(jobs, parent)
         self.add_placeholder()

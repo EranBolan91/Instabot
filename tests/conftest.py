@@ -24,14 +24,41 @@ def settings(workdir):
 
 @pytest.fixture
 def make_window(qapp, qtbot, settings):
+    from PySide6.QtCore import QThreadPool
+
     from ui.main_window import MainWindow
 
     configure_app(qapp)
+    windows = []
 
-    def make():
-        window = MainWindow(settings=settings)
-        qtbot.addWidget(window)
+    def make(**kwargs):
+        window = MainWindow(settings=settings, **kwargs)
         window.show()
+        windows.append(window)
         return window
 
-    return make
+    yield make
+
+    # Close the windows here rather than with qtbot.addWidget: pytest-qt closes
+    # them before fixture cleanup, and a window with active jobs would open its
+    # "Quit anyway?" dialog and wait for a click forever.
+    for window in windows:
+        window.jobs.shutdown()
+        window.close()
+        window.deleteLater()
+    QThreadPool.globalInstance().waitForDone(5000)
+
+
+@pytest.fixture
+def log_bridge(qapp):
+    """Routes print() into the Log panel, like the real app does.
+
+    Call ``log_bridge.install()`` inside the test body: pytest replaces
+    sys.stdout with its own capture when the body starts, which would drop a
+    bridge installed here.
+    """
+    from ui.core.log_bridge import LogBridge
+
+    bridge = LogBridge()
+    yield bridge
+    bridge.uninstall()

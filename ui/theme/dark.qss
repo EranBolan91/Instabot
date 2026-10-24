@@ -223,12 +223,16 @@ QTableView {
     selection-color: #FFFFFF;
 }
 
+QTableView::item {
+    padding: 0 10px;
+}
+
 QHeaderView::section {
     background-color: @raised;
     color: @muted;
     border: none;
     border-bottom: 1px solid @border;
-    padding: 6px 8px;
+    padding: 6px 10px;
 }
 
 /* ---------- Tabs ---------- */
@@ -320,6 +324,29 @@ QStatusBar::item {
 
 QStatusBar QLabel {
     padding: 0 8px;
+}
+
+/* ---------- Toast ---------- */
+
+#Toast {
+    background-color: @raised;
+    color: @text;
+    border: 1px solid @border;
+    border-left: 4px solid @accent;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+#Toast[kind="success"] {
+    border-left-color: @success;
+}
+
+#Toast[kind="warning"] {
+    border-left-color: @warning;
+}
+
+#Toast[kind="error"] {
+    border-left-color: @danger;
 }
 
 /* ---------- Scroll bars ---------- */

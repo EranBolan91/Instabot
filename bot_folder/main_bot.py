@@ -3,6 +3,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from utils.utils import Utils as utils
@@ -40,9 +41,10 @@ class InstagramBot:
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
             self.driver = webdriver.Chrome('chromedriver.exe', options=options, chrome_options=chrome_options)
         else:
-            self.driver = webdriver.Chrome(ChromeDriverManager().install())
+            #self.driver = webdriver.Chrome(ChromeDriverManager().install())
+            self.driver = webdriver.Chrome((ChromeDriverManager(version='114.0.5735.90').install()))
 
-        self.wait = WebDriverWait(self.driver, 5)
+        self.wait = WebDriverWait(self.driver, 7)
 
     def get_username(self):
         return self.username
@@ -145,14 +147,11 @@ class InstagramBot:
         self._nav_user(username)
         time.sleep(2)
         try:
-            self.driver.find_element_by_xpath('//button[text()="Following"]').click()
-            try:
-                self._popup_unfollow()
-                db.Database().remove_username_from_unfollow_list(username, user_id)
-            except Exception as e:
-                print('Following unfollow user: ', e)
+            self.driver.find_element_by_xpath(utils.FOLLOW_BTN).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, utils.UNFOLLOW_BTN))).click()
+            db.Database().remove_username_from_unfollow_list(username, user_id)
         except Exception as e:
-            pass
+            print('Following unfollow user: ', e)
         try:
             self.driver.find_element_by_xpath('//button[text()="Requested"]').click()
             try:

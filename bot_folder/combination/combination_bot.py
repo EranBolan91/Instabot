@@ -38,6 +38,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         if not self._login():
             return
+
         self._get_wanted_post(
             hashtag, url, skip_posts, wait)
 
@@ -119,8 +120,10 @@ class CombinationBot(main_bot.InstagramBot):
             scroll_box = self._get_scroll_box(wait)
             height = self._scroll_down(scroll_box)
 
-        users_name_list = self.driver.find_elements_by_class_name(
-            'MBL3Z')
+        # users_name_list = self.driver.find_elements_by_class_name(
+        #     'MBL3Z')
+        users_name_element_list = scroll_box.find_elements_by_class_name(utils.USERNAME_IN_SCROLL_BOX)
+        users_name_list = [name.text for name in users_name_element_list if name.text != '']
         buttons = scroll_box.find_elements_by_tag_name('button')[:11]
 
         # convert the 2 lists to 1 list of tuples
@@ -138,18 +141,15 @@ class CombinationBot(main_bot.InstagramBot):
         FollowersDB().save_data_account_action(account_action)
 
     def _get_wanted_post(self, hashtag, url, skip_posts, wait):
-        time.sleep(3)
         try:
             if hashtag:
+                time.sleep(3)
                 self.driver.get('{}/explore/tags/{}'.format(self.base_url, hashtag))
             elif url:
                 self.driver.get(url)
             # click on the first post
-            first_post = wait.until(
-                EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
-            first_post.click()
+            wait.until(EC.element_to_be_clickable((By.CLASS_NAME, utils.FIRST_POST))).click()
             self.skip_posts(skip_posts)
-            time.sleep(1.3)
         except Exception as e:
             print('Combination: get wanted post ', e)
 
@@ -163,15 +163,13 @@ class CombinationBot(main_bot.InstagramBot):
 
     def _open_likes(self, wait):
         try:
-            wait.until(EC.element_to_be_clickable(
-                (By.XPATH, utils().LIKES_BUTTON))).click()
+            wait.until(EC.presence_of_element_located((By.XPATH, utils().LIKES_TEXT))).click()
         except Exception as e:
             try:
-                wait.until(
-                    EC.element_to_be_clickable((By.XPATH, utils().SECOND_LIKES_BUTTON))).click()
+                wait.until(EC.element_to_be_clickable((By.XPATH, utils().OTHERS_TEXT))).click()
             except Exception as e:
                 self._go_to_next_post(wait)
-                self._open_likes(wait)
+                #self._open_likes(wait)
 
     def _get_scroll_box(self, wait):
         try:
@@ -242,13 +240,10 @@ class CombinationBot(main_bot.InstagramBot):
 
     def _go_to_next_post(self, wait):
         try:
-            wait.until(EC.element_to_be_clickable(
-                (By.XPATH, utils().CLOSE_BUTTON_SCROLL_BOX))).click()
-            wait.until(EC.element_to_be_clickable(
-                (By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+            # wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+            wait.until(EC.element_to_be_clickable((By.XPATH, '//svg[@aria-label="Next"]'))).click()
         except Exception as e:
-            wait.until(EC.element_to_be_clickable(
-                (By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
+            print("Combination: _go_to_next_post -> ",e)
 
         time.sleep(1)
 

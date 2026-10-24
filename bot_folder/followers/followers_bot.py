@@ -48,8 +48,8 @@ class FollowersBot(main_bot.InstagramBot):
         except Exception as e:
             pass
 
-        scroll_box = self.wait.until(EC.element_to_be_clickable((By.XPATH, self.scroll_box_xpath)))
-        button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div/div/div[1]/div/div[2]/button')))
+        scroll_box = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, utils.SCROLL_BOX)))
+        button_close = self.wait.until(EC.element_to_be_clickable((By.XPATH, utils.CLOSE_BUTTON_SCROLL_BOX)))
         last_height, height = 0, 1
         while last_height != height:
             last_height = height
@@ -58,7 +58,7 @@ class FollowersBot(main_bot.InstagramBot):
                 arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                 return arguments[0].scrollHeight;
                 """, scroll_box)
-        links = scroll_box.find_elements_by_class_name('Jv7Aj')
+        links = scroll_box.find_elements_by_class_name(utils.USERNAME_IN_SCROLL_BOX)
         names = [name.text for name in links if name.text != '']
         # close button
         button_close.click()
@@ -153,9 +153,8 @@ class FollowersBot(main_bot.InstagramBot):
                 time.sleep(i*utils.TIME_SLEEP)
             # This try is for accounts that when they access to another user page, it display them Icon following
             try:
-                following_btn = self.wait.until(
-                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/button ')))
-                following_btn.click()
+                self.wait.until(EC.element_to_be_clickable((By.XPATH, utils.FOLLOW_BTN))).click()
+                self.wait.until(EC.element_to_be_clickable((By.XPATH, utils.UNFOLLOW_BTN))).click()
                 i += 1
                 remove_clicks += 1
                 try:

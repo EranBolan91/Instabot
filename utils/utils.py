@@ -6,17 +6,28 @@ class Utils:
     NOT_FOUND_USER_PARA = "The link you followed may be broken, or the page may have been removed. Go back to Instagram."
     BLOCK_RESTRICTION = "https://www.instagram.com/restriction/"
     BLOCK_CHANGE_PASSWORD = "https://www.instagram.com/challenge/?next=/"
-    SCROLL_BOX = "/html/body/div[7]/div/div/div[2]/div"
+    #SCROLL_BOX = "/html/body/div[7]/div/div/div[2]/div"
     SECOND_LIKES_BUTTON = "/html/body/div[6]/div[2]/div/article/div/div[2]/div[2]/section[2]/div/div[2]/a"
-    CLOSE_BUTTON_SCROLL_BOX = "/html/body/div[7]/div/div/div[1]/div/div[2]/button"
+    #CLOSE_BUTTON_SCROLL_BOX = "/html/body/div[7]/div/div/div[1]/div/div[2]/button"
+    #self.driver.find_element_by_xpath('//button[text()="Following"]').click()
     UNSUCCESSFUL_LOG_IN_TEXT = "Sorry, your password was incorrect. Please double-check your password."
 
     RIGHT_ARROW = "//*[name()='svg' and @aria-label='Next']"
     POST_USERNAME = "/html/body/div[2]/div/div/div[3]/div/div/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a"
     FOLLOW_BTN = "//div[@class='_aacl _aaco _aacw _aad6 _aade']"
-    LIKE_BUTTON = "_aamw"
     PROFILE_IMAGE_XPATH = "/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div[2]/section/main/div/header/div/div/span/img"
     POSTS_FOLLOWERS_FOLLOWING = "_ac2a"
+    LIKE_BUTTON = "_aamw"
+    SCROLL_BOX = "/html/body/div[6]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div"
+    FIRST_POST = "_aagw"
+    CLOSE_BUTTON_SCROLL_BOX = "//*[name()='svg' and @aria-label='Close']"
+    USERNAME_IN_SCROLL_BOX = "_aacl._aaco._aacw._aacx._aad7._aade"
+    UNFOLLOW_BTN = "//span[text()='Unfollow']"
+    #LIKES_TEXT = "//*[contains(text(),'likes')]"
+    LIKES_TEXT = "/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/section[2]/div/div/span/a"
+    OTHERS_TEXT = "/html/body/div[6]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[2]/section[2]/div/div[2]/span/a"
+    # OTHERS_TEXT = "//span[contains(text()='others')]"
+
 
     @staticmethod
     def _check_username_password(username, password):

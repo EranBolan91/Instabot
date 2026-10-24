@@ -5,8 +5,8 @@ A program that can like/follow/comment posts and also send direct messages autom
 
 1) Clone this project: git@github.com:EranBolan91/Instabot.git
 2) CD Instabot
-3) Install packages: `pip install requirements.txt` 
-4) Run main.py
+3) Install packages: `pip install -r requirements.txt` 
+4) Run main.py (the old Tkinter window is still available with `python main_tk.py`)
 
 4.a) If it doesn't work, you might need to download `chromedriver.exe` from https://chromedriver.chromium.org/downloads 
 and save it in the same folder with the bot.py file.

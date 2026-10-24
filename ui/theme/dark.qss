@@ -1,0 +1,354 @@
+/*
+ * Instabot dark theme.
+ *
+ * Color tokens. This is the only place colors are defined:
+ * ui/theme/palette.py reads these lines and replaces every @name
+ * in this file with its value before the stylesheet is applied.
+ *
+ * @bg:           #111318;
+ * @surface:      #1A1D24;
+ * @raised:       #232733;
+ * @border:       #2E3340;
+ * @text:         #E6E8EE;
+ * @muted:        #9AA1B2;
+ * @disabled:     #5C6375;
+ * @accent:       #7C5CFF;
+ * @accent_hover: #8F74FF;
+ * @success:      #2EBD85;
+ * @warning:      #F5A524;
+ * @danger:       #F04438;
+ */
+
+/* ---------- Base ---------- */
+
+QMainWindow, QDialog {
+    background-color: @bg;
+}
+
+QWidget {
+    color: @text;
+}
+
+QLabel {
+    background: transparent;
+}
+
+QLabel[muted="true"] {
+    color: @muted;
+}
+
+QToolTip {
+    background-color: @raised;
+    color: @text;
+    border: 1px solid @border;
+    padding: 4px 8px;
+}
+
+/* ---------- Header ---------- */
+
+#Header {
+    background-color: @surface;
+    border-bottom: 1px solid @border;
+}
+
+#HeaderTitle {
+    font-size: 14pt;
+    font-weight: 600;
+}
+
+/* ---------- Sidebar ---------- */
+
+#Sidebar {
+    background-color: @surface;
+    border: none;
+    border-right: 1px solid @border;
+    padding: 12px 8px;
+    outline: 0;
+}
+
+#Sidebar::item {
+    color: @muted;
+    padding: 0 12px;
+    margin: 2px 0;
+    border-radius: 8px;
+}
+
+#Sidebar::item:hover {
+    background-color: @raised;
+    color: @text;
+}
+
+#Sidebar::item:selected {
+    background-color: @accent;
+    color: #FFFFFF;
+}
+
+/* ---------- Pages and cards ---------- */
+
+#PageTitle {
+    font-size: 18pt;
+    font-weight: 600;
+}
+
+#PageSubtitle {
+    color: @muted;
+}
+
+#PageBody, QScrollArea, QScrollArea > QWidget > QWidget {
+    background: transparent;
+    border: none;
+}
+
+#Card {
+    background-color: @surface;
+    border: 1px solid @border;
+    border-radius: 8px;
+}
+
+#CardTitle {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+/* ---------- Buttons ---------- */
+
+QPushButton {
+    background-color: transparent;
+    color: @text;
+    border: 1px solid @border;
+    border-radius: 8px;
+    padding: 6px 14px;
+}
+
+QPushButton:hover {
+    border-color: @accent;
+}
+
+QPushButton:pressed {
+    background-color: @raised;
+}
+
+QPushButton:disabled {
+    color: @disabled;
+    border-color: @raised;
+}
+
+QPushButton[variant="primary"] {
+    background-color: @accent;
+    border-color: @accent;
+    color: #FFFFFF;
+}
+
+QPushButton[variant="primary"]:hover {
+    background-color: @accent_hover;
+    border-color: @accent_hover;
+}
+
+QPushButton[variant="primary"]:disabled {
+    background-color: @raised;
+    border-color: @raised;
+    color: @disabled;
+}
+
+QPushButton[variant="danger"] {
+    border-color: @danger;
+    color: @danger;
+}
+
+QPushButton[variant="danger"]:hover {
+    background-color: @danger;
+    color: #FFFFFF;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+QToolButton:hover {
+    background-color: @raised;
+    border-color: @border;
+}
+
+/* ---------- Inputs ---------- */
+
+QLineEdit, QSpinBox, QComboBox, QPlainTextEdit, QTextEdit {
+    background-color: @raised;
+    color: @text;
+    border: 1px solid @border;
+    border-radius: 8px;
+    padding: 5px 8px;
+    selection-background-color: @accent;
+    selection-color: #FFFFFF;
+}
+
+QLineEdit:focus, QSpinBox:focus, QComboBox:focus, QPlainTextEdit:focus, QTextEdit:focus {
+    border-color: @accent;
+}
+
+QLineEdit:disabled, QSpinBox:disabled, QComboBox:disabled, QPlainTextEdit:disabled, QTextEdit:disabled {
+    background-color: @surface;
+    color: @disabled;
+    border-color: @raised;
+}
+
+QLineEdit[invalid="true"], QSpinBox[invalid="true"], QComboBox[invalid="true"], QPlainTextEdit[invalid="true"] {
+    border-color: @danger;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 22px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: @raised;
+    border: 1px solid @border;
+    selection-background-color: @accent;
+    selection-color: #FFFFFF;
+    outline: 0;
+}
+
+/* ---------- Tables ---------- */
+
+QTableView {
+    background-color: @surface;
+    alternate-background-color: @raised;
+    gridline-color: @border;
+    border: 1px solid @border;
+    border-radius: 8px;
+    selection-background-color: @accent;
+    selection-color: #FFFFFF;
+}
+
+QHeaderView::section {
+    background-color: @raised;
+    color: @muted;
+    border: none;
+    border-bottom: 1px solid @border;
+    padding: 6px 8px;
+}
+
+/* ---------- Tabs ---------- */
+
+QTabWidget::pane {
+    border: 1px solid @border;
+    border-radius: 8px;
+}
+
+QTabBar::tab {
+    background: transparent;
+    color: @muted;
+    padding: 6px 14px;
+    border-bottom: 2px solid transparent;
+}
+
+QTabBar::tab:selected {
+    color: @text;
+    border-bottom-color: @accent;
+}
+
+QTabBar::tab:hover {
+    color: @text;
+}
+
+/* ---------- Menus ---------- */
+
+QMenuBar {
+    background-color: @surface;
+}
+
+QMenuBar::item {
+    padding: 4px 10px;
+    background: transparent;
+}
+
+QMenuBar::item:selected {
+    background-color: @raised;
+    border-radius: 6px;
+}
+
+QMenu {
+    background-color: @surface;
+    border: 1px solid @border;
+    padding: 4px;
+}
+
+QMenu::item {
+    padding: 6px 24px;
+    border-radius: 6px;
+}
+
+QMenu::item:selected {
+    background-color: @accent;
+    color: #FFFFFF;
+}
+
+QMenu::item:disabled {
+    color: @disabled;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: @border;
+    margin: 4px 8px;
+}
+
+/* ---------- Docks and status bar ---------- */
+
+QDockWidget {
+    color: @muted;
+}
+
+QDockWidget::title {
+    background-color: @surface;
+    padding: 6px 10px;
+    border-top: 1px solid @border;
+}
+
+QStatusBar {
+    background-color: @surface;
+    border-top: 1px solid @border;
+    color: @muted;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+QStatusBar QLabel {
+    padding: 0 8px;
+}
+
+/* ---------- Scroll bars ---------- */
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 2px;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background-color: @border;
+    border-radius: 3px;
+    min-height: 24px;
+    min-width: 24px;
+}
+
+QScrollBar::handle:hover {
+    background-color: @disabled;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line, QScrollBar::add-page, QScrollBar::sub-page {
+    width: 0;
+    height: 0;
+    background: none;
+}

@@ -51,3 +51,30 @@ def proxy_pair(host, port):
     if bool(host.strip()) != bool(port):
         return "Enter both the proxy host and the port, or leave both empty"
     return None
+
+
+_INSTAGRAM_RE = re.compile(r"^https?://(www\.)?instagram\.com/\S+$", re.IGNORECASE)
+
+
+def instagram_url(value, example):
+    if not value.strip():
+        return "Enter the address"
+    if not _INSTAGRAM_RE.match(value.strip()):
+        return "Enter a full Instagram address, e.g. {}".format(example)
+    return None
+
+
+def instagram_location_url(value):
+    error = instagram_url(value, "https://www.instagram.com/explore/locations/212988663/new-york-new-york/")
+    if error:
+        return error
+    if "/explore/locations/" not in value:
+        return "This isn't a location page. Its address contains /explore/locations/"
+    return None
+
+
+def hashtag(value):
+    """A leading # is allowed (the page strips it)."""
+    tag = value.strip().lstrip("#")
+    return first_error(required(tag, "Hashtag"), no_spaces(tag, "A hashtag"),
+                       "A hashtag can only contain letters, numbers and _" if re.search(r"[^\w]", tag) else None)

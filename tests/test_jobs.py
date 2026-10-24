@@ -182,16 +182,6 @@ def test_block_lines_are_highlighted_and_toasted(make_window, qtbot, log_bridge)
     assert "@alice" in window.toast.text()
 
 
-def test_demo_job_from_the_view_menu(make_window, qtbot):
-    window = make_window()
-    window.demo_action.trigger()
-    job = window.jobs.get(1)
-    assert job.kind == "Demo"
-    qtbot.waitUntil(lambda: job.status == RUNNING, timeout=WAIT_MS)
-    window.jobs.stop(job.id)
-    qtbot.waitUntil(lambda: not window.jobs.has_live_threads(), timeout=WAIT_MS)
-
-
 def test_job_manager_without_a_window(qapp, qtbot):
     from PySide6.QtCore import QThreadPool
 

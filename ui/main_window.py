@@ -10,7 +10,6 @@ from ui.core.db_helpers import account_username
 from ui.dialogs.accounts_dialog import AccountsDialog
 from ui.dialogs.inspect_settings_dialog import InspectSettingsDialog
 from ui.dialogs.settings_dialog import SettingsDialog
-from ui.core.demo_job import DemoBot
 from ui.core.jobs import CANCELLED, DONE, FAILED, RUNNING, JobManager
 from ui.pages.combination_page import CombinationPage
 from ui.pages.dm_page import DmPage
@@ -69,6 +68,9 @@ class MainWindow(QMainWindow):
         self.jobs_panel.job_activated.connect(self.show_job_log)
         self.jobs_panel.summary_changed.connect(self.jobs_dock.setWindowTitle)
         self.log_panel.block_detected.connect(self._on_block_line)
+        for page in self.pages:
+            if hasattr(page, "notify"):
+                page.notify.connect(self.show_toast)
         if log_bridge is not None:
             log_bridge.text_written.connect(self.log_panel.write)
 
@@ -93,11 +95,6 @@ class MainWindow(QMainWindow):
         self.exit_action.setShortcut(QKeySequence("Ctrl+Q"))
         self.exit_action.triggered.connect(self.close)
 
-        # temporary, until the pages run real bots (phase 4)
-        self.demo_action = QAction("Run demo job", self)
-        self.demo_action.triggered.connect(lambda: self.run_demo_job(0))
-        self.demo_scheduled_action = QAction("Run demo job in 10 seconds", self)
-        self.demo_scheduled_action.triggered.connect(lambda: self.run_demo_job(10))
 
     def _build_menu(self):
         main_menu = self.menuBar().addMenu("&Main")
@@ -179,9 +176,6 @@ class MainWindow(QMainWindow):
 
         self.view_menu.addAction(self.jobs_dock.toggleViewAction())
         self.view_menu.addAction(self.log_dock.toggleViewAction())
-        self.view_menu.addSeparator()
-        self.view_menu.addAction(self.demo_action)
-        self.view_menu.addAction(self.demo_scheduled_action)
 
     def _make_dock(self, title, object_name, widget):
         dock = QDockWidget(title, self)
@@ -232,17 +226,6 @@ class MainWindow(QMainWindow):
         self.log_panel.filter_to_job(job_id)
         self.log_dock.show()
         self.log_dock.raise_()
-
-    def run_demo_job(self, delay_seconds):
-        username = self.account_picker.current_username() or "demo"
-        # the bot is built inside the worker, like a real one would be
-        self.jobs.submit("Demo", username, "Fake bot: prints 8 steps, no Chrome",
-                         make_bot=lambda: DemoBot(username), run=lambda bot: bot.run(),
-                         delay_seconds=delay_seconds)
-        if delay_seconds:
-            self.show_toast("Demo job scheduled in {} seconds".format(delay_seconds), "success")
-        else:
-            self.show_toast("Demo job started for @{}".format(username), "success")
 
     # ---------- Account ----------
 

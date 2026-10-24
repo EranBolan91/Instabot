@@ -24,7 +24,7 @@ def settings(workdir):
 
 @pytest.fixture
 def make_window(qapp, qtbot, settings):
-    from PySide6.QtCore import QThreadPool
+    from PySide6.QtCore import QCoreApplication, QEvent, QThreadPool
 
     from ui.main_window import MainWindow
 
@@ -47,6 +47,8 @@ def make_window(qapp, qtbot, settings):
         window.close()
         window.deleteLater()
     QThreadPool.globalInstance().waitForDone(5000)
+    # deleteLater() only runs from the event loop; delete them now so later tests stay fast
+    QCoreApplication.sendPostedEvents(None, QEvent.DeferredDelete)
 
 
 @pytest.fixture

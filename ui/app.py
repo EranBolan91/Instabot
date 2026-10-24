@@ -14,6 +14,10 @@ def create_app(argv=None):
 
 
 def configure_app(app):
+    # re-applying the stylesheet restyles every existing widget, which is slow
+    if app.property("instabot_configured"):
+        return
+    app.setProperty("instabot_configured", True)
     # QSettings() with no arguments uses these names
     app.setOrganizationName("Instabot")
     app.setApplicationName("Instabot")

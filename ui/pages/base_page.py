@@ -1,8 +1,5 @@
 from PySide6.QtWidgets import QLabel, QScrollArea, QVBoxLayout, QWidget
 
-from ui.core.db_helpers import account_username
-from ui.widgets.card import Card
-
 
 class BasePage(QWidget):
     """Common frame for the sidebar pages: title, subtitle and a scrollable body.
@@ -20,7 +17,6 @@ class BasePage(QWidget):
         super().__init__(parent)
         self.jobs = jobs
         self.account = None
-        self._placeholder_account = None
 
         title_label = QLabel(self.title)
         title_label.setObjectName("PageTitle")
@@ -48,19 +44,3 @@ class BasePage(QWidget):
     def set_account(self, row):
         """Called by MainWindow whenever the header account changes."""
         self.account = row
-        if self._placeholder_account is not None:
-            self._placeholder_account.setText(
-                "Selected account: @{}".format(account_username(row)) if row else "No account selected")
-
-    # Temporary content until the page is rebuilt (UI_MIGRATION.md, phase 4).
-    def add_placeholder(self):
-        card = Card("Coming soon")
-        text = QLabel("This page is being rebuilt. Until it's ready, the old window still works: "
-                      "run <code>python main_tk.py</code>.")
-        text.setWordWrap(True)
-        self._placeholder_account = QLabel("No account selected")
-        self._placeholder_account.setProperty("muted", True)
-        card.content.addWidget(text)
-        card.content.addWidget(self._placeholder_account)
-        self.body_layout.addWidget(card)
-        self.body_layout.addStretch(1)

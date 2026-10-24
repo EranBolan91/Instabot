@@ -87,6 +87,11 @@ class FormValidator(QObject):
             signal.connect(lambda *_, field=field: self._edited(field))
         return field
 
+    def add_check(self, check, *signals):
+        """A check whose widget shows its own error (e.g. ScheduleBox), or none at all."""
+        self._rules.append((None, check))
+        self.watch(*signals)
+
     def watch(self, *signals):
         """Other changes that can change a check's result (e.g. a checkbox)."""
         for signal in signals:
@@ -102,7 +107,8 @@ class FormValidator(QObject):
             error = check()
             if error:
                 valid = False
-            field.set_error(error if field in self._touched else None)
+            if field is not None:
+                field.set_error(error if field in self._touched else None)
         if valid != self._valid:
             self._valid = valid
             self.validity_changed.emit(valid)
@@ -112,7 +118,7 @@ class FormValidator(QObject):
         return self.revalidate()
 
     def touch_all(self):
-        self._touched = {field for field, _ in self._rules}
+        self._touched = {field for field, _ in self._rules if field is not None}
         return self.revalidate()
 
     def reset(self):

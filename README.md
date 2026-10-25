@@ -21,7 +21,7 @@ The right ChromeDriver for your Chrome is downloaded automatically the first tim
 Optional: to get an e-mail with a screenshot when Instagram blocks an account, copy `.env.example` to `.env` and fill in `MAILGUN_DOMAIN`, `MAILGUN_API` and `ALERT_EMAIL`. The proxy plugin reads `PROXY_HOST`, `PROXY_PORT`, `PROXY_USER` and `PROXY_PASS` from the same file.
 
 ## Using it
-1. **Main → Accounts:** add your Instagram account (username and password, saved in a local SQLite file, `instabot.db`).
+1. **Main → Accounts:** add your Instagram account (username and password, saved in a local SQLite file, `instabot.db`). The password is encrypted; the key is kept in your system's password store (Windows Credential Manager, macOS Keychain), or in `instabot.key` when there is none. Moving `instabot.db` to another computer without the key means typing the passwords again, unless you set `INSTABOT_SECRET_KEY` in `.env` on both.
 2. Pick the account in the header.
 3. Choose a page in the sidebar, fill the form and click Run. Each run becomes a **job** with its own Chrome window. You can run it now or schedule it for later.
 4. The **Jobs** tab at the bottom shows every job; you can stop a running one. The **Log** tab shows what the bots are doing.

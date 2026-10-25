@@ -9,6 +9,19 @@ from PySide6.QtCore import QSettings
 from ui.app import configure_app
 
 
+@pytest.fixture(autouse=True)
+def secret_key(monkeypatch):
+    """A test key for saved passwords, so tests never touch the real system password store."""
+    from cryptography.fernet import Fernet
+
+    from utils import crypto
+
+    monkeypatch.setenv(crypto.ENV_KEY, Fernet.generate_key().decode())
+    crypto.reset()
+    yield
+    crypto.reset()
+
+
 @pytest.fixture
 def workdir(tmp_path, monkeypatch):
     """Run in an empty folder, so Database() creates a throwaway instabot.db there."""

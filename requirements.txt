@@ -8,3 +8,7 @@ selenium==4.51.0
 beautifulsoup4==4.9.3
 requests==2.32.3
 python-dotenv>=1.0
+
+# Encrypting saved passwords; the key is kept in the system password store
+cryptography>=44.0
+keyring>=25.0

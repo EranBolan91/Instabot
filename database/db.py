@@ -1,5 +1,6 @@
 import sqlite3
 import datetime as dt
+from utils import crypto
 from utils.log import get_logger
 
 log = get_logger(__name__)
@@ -177,17 +178,33 @@ class Database:
                                        unsuccessful_login_txt TEXT DEFAULT ('Sorry, your password was incorrect. Please double-check your password.'),
                                        date_modify DATE)""")
 
+        self._encrypt_plain_passwords()
+
         # Commit changes
         self.conn.commit()
         # Close every time you finish with db
         self.conn.close()
+
+    def _encrypt_plain_passwords(self):
+        """Encrypts passwords saved before encryption was added. Runs on every start; does nothing once done."""
+        rows = self.cur.execute("SELECT id, password FROM accounts").fetchall()
+        plain = [(account_id, password) for account_id, password in rows
+                 if password and not crypto.is_encrypted(password)]
+        if not plain:
+            return
+        try:
+            self.cur.executemany("UPDATE accounts SET password = ? WHERE id = ?",
+                                 [(crypto.encrypt(password), account_id) for account_id, password in plain])
+            log.info("Database: encrypted %d saved password(s)", len(plain))
+        except Exception:
+            log.exception("Database: could not encrypt the saved passwords, they stay as they were")
 
     def save_account(self, name, phone, username, password):
         time_now = dt.datetime.now()
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         cur.execute("INSERT INTO accounts (name,phone,username,password,creation_date,last_login) VALUES(?,?,?,?,?,?)",
-                    (name, phone, username, password, dt.datetime.strftime(time_now, "%d/%m/%Y, %H:%M:%S"), ''))
+                    (name, phone, username, crypto.encrypt(password), dt.datetime.strftime(time_now, "%d/%m/%Y, %H:%M:%S"), ''))
         conn.commit()
         conn.close()
         self._init_settings()
@@ -213,10 +230,22 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         cur.execute("SELECT * FROM accounts")
-        accounts = cur.fetchall()
+        accounts = [self._with_plain_password(row) for row in cur.fetchall()]
         conn.commit()
         conn.close()
         return accounts
+
+    @staticmethod
+    def _with_plain_password(row):
+        """The account row with its password decrypted (column 4). An unreadable password becomes empty."""
+        row = list(row)
+        try:
+            row[4] = crypto.decrypt(row[4])
+        except crypto.DecryptError:
+            log.error("Database: the saved password of %s can't be decrypted (the key changed or was lost). "
+                      "Type it again in Main -> Accounts.", row[3])
+            row[4] = ""
+        return tuple(row)
 
     def delete_account(self, username):
         conn = sqlite3.connect(self.database_name)
@@ -239,7 +268,7 @@ class Database:
         is_update = False
         try:
             cur.execute("UPDATE accounts SET name = ?, phone = ?, username = ?, password = ? WHERE id = ?",
-                        (name, phone, username, password, account_id))
+                        (name, phone, username, crypto.encrypt(password), account_id))
             conn.commit()
             is_update = True
         except Exception:

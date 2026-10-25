@@ -36,7 +36,7 @@ class CombinationDM(db.Database):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            data = cur.execute(" SELECT * FROM combination WHERE account= '{}' ".format(account_name)).fetchall()
+            data = cur.execute(" SELECT * FROM combination WHERE account = ? ", (account_name,)).fetchall()
         except Exception as e:
             print('combination: get account data: ', e)
         finally:

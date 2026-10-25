@@ -23,7 +23,7 @@ class Proxy(db.Database):
         try:
             conn = sqlite3.connect(self.database_name)
             cur = conn.cursor()
-            cur.execute("DELETE FROM proxy WHERE id='{}' ".format(proxy_id))
+            cur.execute("DELETE FROM proxy WHERE id = ?", (proxy_id,))
             conn.commit()
             is_removed = True
         except Exception as e:

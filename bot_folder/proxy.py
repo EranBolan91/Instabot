@@ -1,9 +1,7 @@
+import os
 import zipfile
 
-PROXY_HOST = 'highspeed1.thesocialproxy.com'
-PROXY_PORT = 10000
-PROXY_USER = '4y3xkj012elb568z'
-PROXY_PASS = 'qk3m2z94tofyw7su'
+# the proxy details come from .env (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS)
 
 manifest_json = """
 {
@@ -26,7 +24,7 @@ manifest_json = """
 }
 """
 
-background_js = """
+background_js_template = """
 var config = {
         mode: "fixed_servers",
         rules: {
@@ -55,10 +53,15 @@ chrome.webRequest.onAuthRequired.addListener(
             {urls: ["<all_urls>"]},
             ['blocking']
 );
-""" % (PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASS)
+"""
 
 
 def get_proxy_plugin():
+    try:
+        background_js = background_js_template % (os.environ["PROXY_HOST"], os.environ["PROXY_PORT"],
+                                                  os.environ["PROXY_USER"], os.environ["PROXY_PASS"])
+    except KeyError as missing:
+        raise RuntimeError("set {} in .env to use the proxy plugin".format(missing)) from None
     pluginfile = 'proxy_auth_plugin.zip'
     with zipfile.ZipFile(pluginfile, 'w') as zp:
         zp.writestr("manifest.json", manifest_json)

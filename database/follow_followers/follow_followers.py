@@ -35,7 +35,7 @@ class FollowFollowersDB(db.Database):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            data = cur.execute(" SELECT * FROM follow_followers WHERE account= '{}' ".format(account_name)).fetchall()
+            data = cur.execute(" SELECT * FROM follow_followers WHERE account = ? ", (account_name,)).fetchall()
         except Exception as e:
             print('follow_followers: get account data: ', e)
         finally:

@@ -1,11 +1,10 @@
 from bot_folder import main_bot
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from database.dm.dm import DMDB
 from models.dm import DM as dm_model
 import time
 from utils.utils import Utils as utils
+from utils.instagram_selectors import S
 import datetime as dt
 
 
@@ -26,15 +25,17 @@ class DM(main_bot.InstagramBot):
                     print('Account', self.username, 'Time start: ', dt.datetime.now(), ' Sleep time: ', i * utils.TIME_SLEEP, 'seconds')
                     time.sleep(i*utils.TIME_SLEEP)
                 self._nav_user(user[0])
-                wait = WebDriverWait(self.driver, 4)
                 try:
-                    message_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]/div/div[1]/button')))
-                    #message_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Message"]')))
-                    message_button.click()
+                    S.click(self.driver, "profile.message_button", timeout=4)
                     # Gets to the input message
-                    text_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/div[2]/div/div/div[2]/div/div/div/textarea')))
-                    text_input.send_keys(message)
-                    self.driver.find_element_by_xpath('//*[@id="react-root"]/section/div[2]/div/div/div[2]/div/div/div[2]/button').click()
+                    text_input = S.get(self.driver, "dm.message_input", timeout=10)
+                    self._type_message(text_input, message)
+                    send_button = S.find(self.driver, "dm.send_button", timeout=2)
+                    if send_button is not None:
+                        S.clickable(send_button).click()
+                    else:
+                        text_input.send_keys(Keys.RETURN)
+                    time.sleep(1.5)
                     # after sending the message, delete the user from the list
                     DMDB().remove_dm_user_from_list(user[0], group_id)
                     sent += 1
@@ -43,8 +44,7 @@ class DM(main_bot.InstagramBot):
                     pass
                 try:
                     # Requested
-                    requested_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Requested"]')))
-                    requested_btn.click()
+                    S.click(self.driver, "profile.requested_button", timeout=4)
                     try:
                         self._popup_unfollow()
                         DMDB().remove_dm_user_from_list(user[0], group_id)
@@ -56,9 +56,9 @@ class DM(main_bot.InstagramBot):
                     pass
                 try:
                     # Checks if the button is 'follow' - means, I'm not following the user
-                    follow_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
+                    follow_btn = S.get(self.driver, "profile.follow_button", timeout=4)
                     try:
-                        if follow_btn.text == 'Follow':
+                        if follow_btn.text.startswith('Follow'):
                             DMDB().remove_dm_user_from_list(user[0], group_id)
                             DMDB().remove_username_from_unfollow_list(user[0], account_id)
                             print('Removed user from distribution list and database: ', user[0])
@@ -92,12 +92,18 @@ class DM(main_bot.InstagramBot):
             return
         time.sleep(1)
         self._nav_user(self.username)
-        wait = WebDriverWait(self.driver, 4)
-        following_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@href,'/followers')]")))
-        following_button.click()
+        S.click(self.driver, "profile.followers_counter", timeout=4)
 
         users_name = self._get_usersname()
         self.send_message_to_distribution_group(message, users_name, self.username, is_schedule, False)
+
+    # In the chat box Enter sends, so line breaks are typed as Shift+Enter
+    def _type_message(self, text_input, message):
+        for index, line in enumerate(message.split("\n")):
+            if index:
+                text_input.send_keys(Keys.SHIFT, Keys.ENTER)
+            if line:
+                text_input.send_keys(line)
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, message, group, num_members, num_failed_members, is_schedule):

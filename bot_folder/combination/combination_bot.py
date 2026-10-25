@@ -1,11 +1,9 @@
 from bot_folder import main_bot
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 from database.combination.combination import CombinationDM
 from database.followers.followers import FollowersDB
-from selenium.webdriver.common.action_chains import ActionChains
 from utils.utils import Utils as utils
+from utils.instagram_selectors import S
 from models.combination import Combination
 from models.account_actions import AccountActions
 import time
@@ -15,13 +13,13 @@ import datetime as dt
 from random import randint
 from database import db
 from models.followers import Followers
-from bs4 import BeautifulSoup as bs
-from re import search
 
 PROCESS_TIME = 60 * 60 * 12
 MAX_FOLLOWERS_EACH_PROCESS = 100
 WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / MAX_FOLLOWERS_EACH_PROCESS
 #WAIT_FOR_EACH_FOLLOW = 5
+# give up after this many likes lists in a row with nobody new in them
+MAX_EMPTY_LISTS = 5
 
 
 class CombinationBot(main_bot.InstagramBot):
@@ -29,12 +27,16 @@ class CombinationBot(main_bot.InstagramBot):
         self.automation(followers, hashtag, url, skip_posts, likes)
 
     def automation(self, max_followers, hashtag, url, skip_posts, likes):
-        wait = WebDriverWait(self.driver, 6)
+        wait = None  # kept in the helper signatures; the selectors do their own waiting
         settings_data_from_db = CombinationDM().get_data_from_settings()
         follow_buttons = []
         curr_height = 0
         is_follow = False
         is_blocked = False
+        out_of_users = False
+        empty_lists = 0
+        # usernames already looked at in the likes lists
+        self._seen = set()
 
         if not self._login():
             return
@@ -46,10 +48,10 @@ class CombinationBot(main_bot.InstagramBot):
         self._open_likes(wait)
         scroll_box = self._get_scroll_box(wait)
 
-        while max_followers > 0:
+        while max_followers > 0 and not out_of_users:
             follow_counter = 0
 
-            while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0:
+            while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0 and not out_of_users:
                 # follow between 1 - 4 users
                 curr_follow_add = randint(1, 4)
                 i = 0
@@ -61,28 +63,34 @@ class CombinationBot(main_bot.InstagramBot):
                     if max_followers <= 0:
                         break
 
-                    # checking for buttons if not, reload them
-                    # always getting 11 buttons
+                    # checking for rows, if not, load more of them
                     if not follow_buttons:
                         follow_buttons, curr_height, scroll_box = self._get_buttons(
                             scroll_box, curr_height, wait)
+                        if not follow_buttons:
+                            empty_lists += 1
+                            if empty_lists >= MAX_EMPTY_LISTS:
+                                print("Combination: no more users to follow")
+                                out_of_users = True
+                                break
+                            continue
+                        empty_lists = 0
 
+                    username, button = follow_buttons.pop(0)
                     try:
-                        if follow_buttons[0][1].text == 'Follow':
-                            is_follow, is_blocked = self._follow(follow_buttons[0][1], follow_buttons[0][0].text, settings_data_from_db, follow_counter, wait, likes)
+                        if button is not None and button.text == 'Follow':
+                            is_follow, is_blocked = self._follow(button, username, settings_data_from_db, follow_counter, wait, likes)
                             if is_follow:
                                 follow_counter += 1
                                 max_followers -= 1
                                 i += 1
                     except Exception as e:
-                        pass
+                        print("Combination: follow {} -> {}".format(username, e))
                     # break the inner while loop
                     if is_blocked:
                         break
-                    # remove the first button
-                    follow_buttons.pop(0)
                 # break the middle while loop
-                if is_blocked:
+                if is_blocked or out_of_users:
                     break
                 print("{} : {} -- sleep for {} minutes".format(dt.datetime.now().strftime('%H:%M:%S'),
                     self.username, strftime("%M:%S", gmtime(WAIT_FOR_EACH_FOLLOW * curr_follow_add))))
@@ -100,34 +108,31 @@ class CombinationBot(main_bot.InstagramBot):
         self.driver.close()
 
     def _scroll_down(self, scroll_box):
-        height = self.driver.execute_script("""
-                                        arguments[0].scrollTo(
-                                            0, arguments[0].scrollHeight);
-                                        return arguments[0].scrollHeight;
-                                        """, scroll_box)
-
+        height = S.scroll_to_bottom(self.driver, scroll_box)
         time.sleep(2)
         return height
 
+    # rows of the likes list not looked at yet, as (username, button or None)
+    def _new_rows(self):
+        rows = [(username, button) for username, button in S.dialog_rows(self.driver) if username not in self._seen]
+        self._seen.update(username for username, _ in rows)
+        return rows
+
     def _get_buttons(self, scroll_box, last_height, wait):
         height = self._scroll_down(scroll_box)
+        rows = self._new_rows()
 
-        # checking if we made it to the end of the post
-        if height == last_height:
+        # checking if we made it to the end of the post's likes
+        if not rows and height == last_height:
+            self._close_list()
             self._go_to_next_post(wait)
 
             self._open_likes(wait)
             scroll_box = self._get_scroll_box(wait)
             height = self._scroll_down(scroll_box)
+            rows = self._new_rows()
 
-        # users_name_list = self.driver.find_elements_by_class_name(
-        #     'MBL3Z')
-        users_name_element_list = scroll_box.find_elements_by_class_name(utils.USERNAME_IN_SCROLL_BOX)
-        users_name_list = [name.text for name in users_name_element_list if name.text != '']
-        buttons = scroll_box.find_elements_by_tag_name('button')[:11]
-
-        # convert the 2 lists to 1 list of tuples
-        return list(zip(users_name_list, buttons)), height, scroll_box
+        return rows, height, scroll_box
 
     # Saving Combination data to display in the statistics
     def _prepare_data_for_db(self, url, hashtag, num_likes, num_failed_likes, num_followers,
@@ -144,47 +149,44 @@ class CombinationBot(main_bot.InstagramBot):
         try:
             if hashtag:
                 time.sleep(3)
-                self.driver.get('{}/explore/tags/{}'.format(self.base_url, hashtag))
+                self.driver.get(S.url("hashtag", tag=hashtag))
             elif url:
                 self.driver.get(url)
-            # click on the first post
-            wait.until(EC.element_to_be_clickable((By.CLASS_NAME, utils.FIRST_POST))).click()
+            # a post's own address is already the post; anything else is a grid: open its first post
+            if hashtag or not ("/p/" in url or "/reel/" in url):
+                S.click(self.driver, "grid.first_post")
+            time.sleep(2)
             self.skip_posts(skip_posts)
         except Exception as e:
             print('Combination: get wanted post ', e)
 
     def _like_post(self, wait):
         time.sleep(2)
-        like = wait.until(
-            EC.element_to_be_clickable((By.CLASS_NAME, 'fr66n')))
-        soup = bs(like.get_attribute('innerHTML'), 'html.parser')
-        if(soup.find('svg')['aria-label'] == 'Like'):
-            like.click()
+        # only found while the post isn't liked yet
+        like = S.find(self.driver, "post.like_button", timeout=5)
+        if like is not None:
+            S.clickable(like).click()
 
     def _open_likes(self, wait):
         try:
-            wait.until(EC.presence_of_element_located((By.XPATH, utils().LIKES_TEXT))).click()
+            S.click(self.driver, "post.likes_link")
+            time.sleep(3)
         except Exception as e:
-            try:
-                wait.until(EC.element_to_be_clickable((By.XPATH, utils().OTHERS_TEXT))).click()
-            except Exception as e:
-                self._go_to_next_post(wait)
-                #self._open_likes(wait)
+            self._go_to_next_post(wait)
 
     def _get_scroll_box(self, wait):
-        try:
-            return wait.until(EC.element_to_be_clickable(
-                (By.XPATH, utils().SCROLL_BOX)))
-        except Exception as e:
-            return wait.until(
-                EC.element_to_be_clickable((By.XPATH, '/html/body/div[7]/div/div/div[3]/div')))
+        return S.get(self.driver, "dialog.scroll_area")
+
+    # closes the likes list (Escape closes the top dialog; a Close click could hit the post's)
+    def _close_list(self):
+        self.driver.find_element_by_tag_name("body").send_keys(Keys.ESCAPE)
+        time.sleep(1)
 
     def _follow(self, button, username, settings_data_from_db, follow_count, wait, likes):
         followed = False
         is_action_blocked = False
-        # check if in the current url, the block url appears. (check if left url, appears on right url)
-        if search(utils.BLOCK_RESTRICTION, self.check_current_url()) or\
-                search(utils.BLOCK_CHANGE_PASSWORD, self.check_current_url()):
+        # check if Instagram sent us to a restriction / security check page
+        if any(part in self.check_current_url() for part in S.text("restriction_urls")):
             is_action_blocked = True
         else:
             followers_num, has_image_profile, post_amount = self._get_followers_number(username)
@@ -194,19 +196,17 @@ class CombinationBot(main_bot.InstagramBot):
                     self.database.save_unfollow_users(username, self.username)
                     followed = True
                     # print("{} -- followed {}".format(self.username, username))
-                    try:
-                        is_action_blocked = self._blocked_action_popup()
-                        if is_action_blocked:
-                            self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),'Combination')
-                            self.global_block_message(self.username, "Combination")
-                            followed = False
-                    except Exception as e:
-                        pass
+                    is_action_blocked = self._blocked_action_popup()
+                    if is_action_blocked:
+                        self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),'Combination')
+                        self.global_block_message(self.username, "Combination")
+                        followed = False
 
                     try:
                         if followed and likes > 0:
                             self._like_posts(wait, username, likes)
                     except Exception as e:
+                        print("Combination: like posts of {} -> {}".format(username, e))
                         self.driver.close()
                         self.driver.switch_to.window(self.driver.window_handles[0])
 
@@ -216,9 +216,8 @@ class CombinationBot(main_bot.InstagramBot):
         self._nav_user_new_tab(username)
         self.driver.switch_to.window(self.driver.window_handles[1])
 
-        first_post = wait.until(
-            EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
-        first_post.click()
+        S.click(self.driver, "profile.first_post")
+        time.sleep(2)
 
         self._like_post(wait)
         likes -= 1
@@ -240,8 +239,7 @@ class CombinationBot(main_bot.InstagramBot):
 
     def _go_to_next_post(self, wait):
         try:
-            # wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'coreSpriteRightPaginationArrow'))).click()
-            wait.until(EC.element_to_be_clickable((By.XPATH, '//svg[@aria-label="Next"]'))).click()
+            S.click(self.driver, "post.next_button")
         except Exception as e:
             print("Combination: _go_to_next_post -> ",e)
 
@@ -263,7 +261,7 @@ class CombinationBot(main_bot.InstagramBot):
 
                 print("{} -- combination unfollow: {} people left to unfollow".format(
                     self.username, len(user_list) - curr_user))
-                # IF the func unfollow returns -1, it means the user got block, then i want to stop the whole process
+                # if _unfollow says blocked, stop the whole process
                 is_follow_back, is_blocked = self._unfollow(user_list[curr_user][2], account_id, wait)
                 if is_blocked:
                     self._screen_shot(self.username)
@@ -294,95 +292,28 @@ class CombinationBot(main_bot.InstagramBot):
         follow_back = False
         self._nav_user(user)
 
-        def _find_and_click_unfollow():
-            try:
-                wait.until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'Following')]"))).click()
-                try:
-                    self._popup_unfollow()
-                except Exception as e:
-                    print('unfollow users pop up exception: ', e)
-                return
-            except Exception as e:
-                pass
-
-            try:
-                wait.until(EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'Requested')]"))).click()
-                try:
-                    self._popup_unfollow()
-                except Exception as e:
-                    pass
-                return
-            except Exception as e:
-                pass
-
-            # This try is for accounts that when they access to another user page, it display them Icon following
-            try:
-                wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/button '))).click()
-                try:
-                    self._popup_unfollow()
-                except Exception as e:
-                    print('unfollow users pop up exception: ', e)
-                return
-            except Exception as e:
-                pass
-
-            # TODO: only this worked, maybe i should delete the others
-            try:
-                wait.until(
-                    EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button'))).click()
-                try:
-                    self._popup_unfollow()
-                except Exception as e:
-                    print('unfollow users pop up exception: ', e)
-                return
-            except Exception as e:
-                pass
-
-            # try:
-            #     wait.until(
-            #         EC.element_to_be_clickable((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[2]/div/div[2]/div/span/span[1]/button'))).click()
-            #     try:
-            #         self._popup_unfollow()
-            #     except Exception as e:
-            #         print('unfollow users pop up exception: ', e)
-            #     return
-            # except Exception as e:
-            #     pass
-
-        _find_and_click_unfollow()
         try:
-            is_action_blocked = self._blocked_action_popup()
-            if is_action_blocked:
-                return False, True  # return False for follow_back and True for blocked
+            if S.exists(self.driver, "profile.following_button", timeout=6):
+                # "Following" opens a menu; "Unfollow" in it unfollows
+                S.click(self.driver, "profile.following_button")
+                self._popup_unfollow()
+            elif S.exists(self.driver, "profile.requested_button"):
+                S.click(self.driver, "profile.requested_button")
+                self._popup_unfollow()
         except Exception as e:
-            pass
+            print('unfollow users exception: ', e)
+
+        if self._blocked_action_popup():
+            return False, True  # return False for follow_back and True for blocked
         # count how many users follow back
-        try:
-            wait.until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
+        if S.exists(self.driver, "profile.follow_back_button", timeout=4):
             follow_back = True
-        except Exception as e:
-            pass
 
         # Remove username from unfollow list
-        # This two try and catch are double check, if the bot clicks on 'unfollow' and it does not turn
-        # into unfollow. In this situation, i prefer not to remove the username from database
-        try:
-            # This try checks if the button changed to Follow, means everything is fine and in successfully unfollow
-            follow_btn = wait.until(
-                EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow"]')))
-            if follow_btn:
-                print(user, 'Removed from db of', self.username)
-                db.Database().remove_username_from_unfollow_list(user, account_id)
-        except Exception as e:
-            pass
-
-        try:
-            follow_btn = wait.until(
-                EC.element_to_be_clickable((By.XPATH, '//button[text()="Follow Back"]')))
-            if follow_btn:
-                print(user, 'Removed from db', self.username)
-                db.Database().remove_username_from_unfollow_list(user, account_id)
-        except Exception as e:
-            pass
+        # Only when the button really turned into Follow / Follow Back: if the bot clicked
+        # 'unfollow' and it didn't work, the username stays in the database
+        if S.exists(self.driver, "profile.follow_button", timeout=4):
+            print(user, 'Removed from db of', self.username)
+            db.Database().remove_username_from_unfollow_list(user, account_id)
 
         return follow_back, False

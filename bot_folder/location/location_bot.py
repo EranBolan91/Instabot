@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from models.location import Location
 import time
 from utils.utils import Utils as utils
+from utils.instagram_selectors import S
 import datetime as dt
 
 
@@ -22,9 +23,7 @@ class LocationBot(main_bot.InstagramBot):
         time.sleep(2)
         try:
             self.driver.get(url)  # open web browser by the URL
-            wait = WebDriverWait(self.driver, 4)
-            first_post = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_9AhH0')))
-            first_post.click()
+            S.click(self.driver, "grid.first_post")
             while i <= int(amount):
                 if loops % utils.TIME_SLEEP == 0:
                     if int(amount) != int(i):
@@ -41,7 +40,7 @@ class LocationBot(main_bot.InstagramBot):
                 if int(follow) == 1:
                     self._follow_user(to_distribution, group_id)
                     # click on the right arrow
-                self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+                S.click(self.driver, "post.next_button")
                 i += 1
                 loops += 1
                 # else:
@@ -68,7 +67,7 @@ class LocationBot(main_bot.InstagramBot):
         i = 1
         self._search_entry(location_name)
         time.sleep(2)
-        self.driver.find_element_by_class_name('_9AhH0').click()  # click the post
+        S.click(self.driver, "grid.first_post")  # click the post
         while i <= int(amount):
             if int(like) == 1:
                 self._like_post()
@@ -76,15 +75,13 @@ class LocationBot(main_bot.InstagramBot):
                 self._comment_post(split_comment)
             if int(follow) == 1:
                 self._follow_user()
-            self.driver.find_element_by_class_name(
-                'coreSpriteRightPaginationArrow ').click()  # click on the right arrow
+            S.click(self.driver, "post.next_button")  # click on the right arrow
             i += 1
 
     def _search_entry(self, name):
         time.sleep(1)
-        self.driver.find_element_by_xpath('/html/body/div[1]/section/nav/div[2]/div/div/div[2]/input').click()
-        self.driver.find_element_by_xpath('/html/body/div[1]/section/nav/div[2]/div/div/div[2]/input') \
-            .send_keys(name + Keys.RETURN)
+        S.click(self.driver, "search.input")
+        S.get(self.driver, "search.input").send_keys(name + Keys.RETURN)
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, hash_tag, amount, like, comment, follow,

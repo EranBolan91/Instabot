@@ -17,12 +17,6 @@ def tmp_db(tmp_path, monkeypatch):
 @pytest.fixture
 def chrome_calls(tmp_db, monkeypatch):
     calls = []
-
-    class FakeManager:
-        def install(self):
-            return "chromedriver"
-
-    monkeypatch.setattr(main_bot, "ChromeDriverManager", FakeManager)
     monkeypatch.setattr(main_bot.webdriver, "Chrome", lambda *a, **kw: calls.append((a, kw)) or object())
     return calls
 
@@ -39,7 +33,8 @@ def test_chrome_gets_its_options(chrome_calls, is_mobile):
     (_args, kwargs), = chrome_calls
     caps = kwargs["options"].to_capabilities()["goog:chromeOptions"]
     assert "--headless" in caps["args"]
-    assert kwargs["desired_capabilities"]["pageLoadStrategy"] == "eager"
+    assert kwargs["options"].to_capabilities()["pageLoadStrategy"] == "eager"
+    assert "desired_capabilities" not in kwargs and "executable_path" not in kwargs
     assert "chrome_options" not in kwargs
     has_desktop_agent = any(a.startswith("user-agent=") for a in caps["args"])
     assert has_desktop_agent is not is_mobile

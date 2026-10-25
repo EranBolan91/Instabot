@@ -76,13 +76,12 @@ NOT_FOUND = """<main><span>Sorry, this page isn't available.</span><span>The lin
 @pytest.fixture(scope="module")
 def driver():
     from selenium import webdriver
-    from webdriver_manager.chrome import ChromeDriverManager
 
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     try:
-        browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        browser = webdriver.Chrome(options=options)
     except Exception as error:  # no Chrome or no network for the driver download
         pytest.skip("headless Chrome isn't available: {}".format(error))
     yield browser

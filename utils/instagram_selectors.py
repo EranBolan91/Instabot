@@ -16,6 +16,7 @@ import time
 from pathlib import Path
 
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 PATH = Path(__file__).with_name("instagram_selectors.json")
@@ -180,16 +181,16 @@ class Selectors:
     def _find_way(driver, scope, way):
         root = scope or driver
         if "css" in way:
-            return root.find_elements_by_css_selector(way["css"])
+            return root.find_elements(By.CSS_SELECTOR, way["css"])
         if "xpath" in way:
             xpath = way["xpath"]
             if scope is not None and xpath.startswith("//"):
                 xpath = "." + xpath  # search inside the element, not the whole page
             if scope is not None and xpath.startswith("(//"):
                 xpath = "(.//" + xpath[3:]
-            return root.find_elements_by_xpath(xpath)
+            return root.find_elements(By.XPATH, xpath)
         if "name" in way:
-            return root.find_elements_by_name(way["name"])
+            return root.find_elements(By.NAME, way["name"])
         if "text" in way:
             return driver.execute_script(_TEXT_JS, scope, way["text"]) or []
         if "scrollable" in way:

@@ -1,4 +1,5 @@
 from bot_folder import main_bot
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from database.combination.combination import CombinationDM
 from database.followers.followers import FollowersDB
@@ -198,7 +199,7 @@ class CombinationBot(main_bot.InstagramBot):
 
     # closes the likes list (Escape closes the top dialog; a Close click could hit the post's)
     def _close_list(self):
-        self.driver.find_element_by_tag_name("body").send_keys(Keys.ESCAPE)
+        self.driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
         time.sleep(1)
 
     def _follow(self, button, username, settings_data_from_db, follow_count, wait, likes):

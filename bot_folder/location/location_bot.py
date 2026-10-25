@@ -51,7 +51,7 @@ class LocationBot(main_bot.InstagramBot):
                     # because if the next post will have less likes then again it will sleep
                     # i += 1
                     # loops += 1
-                    # self.driver.find_element_by_class_name('coreSpriteRightPaginationArrow ').click()
+                    # self.driver.find_element(By.CLASS_NAME, 'coreSpriteRightPaginationArrow').click()
                 print('Loops: {}/{}'.format(amount, click_count), 'Username: ', self.username)
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1

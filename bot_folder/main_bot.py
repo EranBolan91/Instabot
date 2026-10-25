@@ -2,7 +2,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -14,8 +15,6 @@ import time, random, requests
 from database import db
 import os
 
-proxy = {'host': 'highspeed1.thesocialproxy.com', 'port': 10000, 'user': '4y3xkj012elb568z', 'password': 'qk3m2z94tofyw7su'}
-
 class InstagramBot:
     def __init__(self, username, password, is_mobile, proxy_dict):
         self.database = db.Database()
@@ -23,9 +22,7 @@ class InstagramBot:
         self.password = password
         self.base_url = 'https://www.instagram.com'
 
-        # the options from this website -> https://www.selenium.dev/documentation/en/webdriver/page_loading_strategy/
         options = Options()
-        options.page_load_strategy = 'eager'
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
         options.add_argument('--disable-dev-shm-usage')
@@ -33,17 +30,19 @@ class InstagramBot:
         headless = db.Database().get_data_from_settings()[6]
         if headless:
             options.add_argument("--headless")
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
-
         if is_mobile:
-            #firefox_options = webdriver.FirefoxOptions()
-            chrome_options = webdriver.ChromeOptions()
-            mobile_emulation = {"deviceName": "Nexus 5"}
-            chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options, chrome_options=chrome_options)
+            options.add_experimental_option("mobileEmulation", {"deviceName": "Nexus 5"})
         else:
-            # ChromeDriverManager finds the installed Chrome's version and downloads the matching driver
-            self.driver = webdriver.Chrome(ChromeDriverManager().install())
+            # the phone emulation sets its own user-agent, so only the desktop gets this one
+            options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
+
+        # Selenium 3 has no options.page_load_strategy, so 'eager' goes in as a capability
+        capabilities = DesiredCapabilities.CHROME.copy()
+        capabilities["pageLoadStrategy"] = "eager"
+
+        # ChromeDriverManager finds the installed Chrome's version and downloads the matching driver
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options,
+                                       desired_capabilities=capabilities)
 
         self.wait = WebDriverWait(self.driver, 7)
 
@@ -218,16 +217,20 @@ class InstagramBot:
         self.driver.save_screenshot("screen_shots/{}.png".format(username))
 
     def _send_email(self, username, success_posts, time, section):
-        print('sending email')
         mailgun_domain = os.environ.get('MAILGUN_DOMAIN')
         mailgun_api = os.environ.get('MAILGUN_API')
+        alert_email = os.environ.get('ALERT_EMAIL')
+        if not (mailgun_domain and mailgun_api and alert_email):
+            print('not sending an error e-mail: set MAILGUN_DOMAIN, MAILGUN_API and ALERT_EMAIL in .env')
+            return
+        print('sending email')
         image_name = username + '.png'
         requests.post("https://api.mailgun.net/v3/{}/messages".format(mailgun_domain),
                       auth=("api", "{}".format(mailgun_api)),
                       files=[("attachment", (username,
                                 open("screen_shots/{}".format(image_name), "rb").read()))],
-                      data={"from": "RocketBot <eranbolan91@gmail.com>",
-                            "to": ["eranbolan91@gmail.com"],
+                      data={"from": "RocketBot <{}>".format(alert_email),
+                            "to": [alert_email],
                             "subject": "RocketBot Error - {}".format(username),
                             "text": """ 
                             Username: {} 

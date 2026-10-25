@@ -207,9 +207,7 @@ No bot contains a raw XPath, CSS or class name any more. They find everything th
 ### 5.1 `bot_folder/main_bot.py` — `class InstagramBot` (base class)
 Holds a `db.Database()`, the credentials, `base_url = 'https://www.instagram.com'` and the Selenium `driver`.
 
-**`__init__(username, password, is_mobile, proxy_dict)`** builds options: eager page load, no-sandbox, disable GPU and notifications, a fixed desktop user-agent, and `--headless` if `settings.headless`. It then starts Chrome with the driver from `ChromeDriverManager().install()`:
-- mobile: with the options and the "Nexus 5" mobile emulation.
-- desktop: **without the options** (known issue #4).
+**`__init__(username, password, is_mobile, proxy_dict)`** builds Chrome options: no-sandbox, disable GPU and notifications, `--headless` if `settings.headless`, and either the "Nexus 5" mobile emulation (mobile) or a fixed desktop user-agent (desktop). Eager page load is passed as the `pageLoadStrategy` capability, since Selenium 3 options can't hold it. It then starts Chrome with those options and the driver from `ChromeDriverManager().install()`.
 It also sets `self.wait = WebDriverWait(driver, 7)`.
 
 | Method | What it does |
@@ -233,7 +231,7 @@ It also sets `self.wait = WebDriverWait(driver, 7)`.
 | `_check_if_follow_back()` | If `profile.follow_back_button` appears, clicks it and returns `True`. |
 | `_get_usersname()` | Scrolls the open list (`dialog.scroll_area`) to the end and returns `[(username,), ...]` (`S.dialog_rows`). |
 | `_screen_shot(username)` | Saves `screen_shots/<username>.png`. |
-| `_send_email(username, success_posts, time, section)` | Sends an error e-mail with the screenshot attached through the Mailgun API, using env vars `MAILGUN_DOMAIN` and `MAILGUN_API`. Sender and recipient addresses are hard-coded. |
+| `_send_email(username, success_posts, time, section)` | Sends an error e-mail with the screenshot attached through the Mailgun API, using env vars `MAILGUN_DOMAIN`, `MAILGUN_API` and `ALERT_EMAIL` (sender and recipient). Sends nothing if any is missing. |
 | `_blocked_action_popup()` | Waits up to 4 s for `block.popup`. If it appears: screenshot, click `block.popup_ok`, return `True`. |
 | `global_block_message(username, section)` | Prints "User … has been blocked" (the Log panel highlights it and shows a toast). |
 | `global_complate_task(username, section, results)` | Prints a task-complete message. Unused. |
@@ -311,7 +309,7 @@ This is the most "human-like" feature: **follow ~100 users over 12 hours, then u
 - The `wait` parameter is still in the helper signatures but unused (the selectors wait by themselves).
 
 ### 5.8 `bot_folder/proxy.py`
-Builds a Chrome extension zip (`proxy_auth_plugin.zip`) with `manifest.json` and `background.js` that sets a fixed HTTP proxy with username/password auth (`get_proxy_plugin()`). **Not used anywhere.** The proxy host and credentials are **hard-coded** in this file (and also as a `proxy` dict at the top of `main_bot.py`, #6). `closeproxy.xpi` in the repo root is a Firefox proxy extension, also unused.
+Builds a Chrome extension zip (`proxy_auth_plugin.zip`) with `manifest.json` and `background.js` that sets a fixed HTTP proxy with username/password auth (`get_proxy_plugin()`). **Not used anywhere.** The proxy host and credentials are read from `PROXY_HOST`, `PROXY_PORT`, `PROXY_USER` and `PROXY_PASS` in `.env` when it is called. `closeproxy.xpi` in the repo root is a Firefox proxy extension, also unused.
 
 ---
 
@@ -463,7 +461,7 @@ Notes on today's Instagram (checked 2026-10-25):
 ## 9. Cross-cutting behavior
 
 - **Anti-detection measures:**
-  - A random "warm-up" website before login, and a fixed desktop user-agent (mobile Chrome only, #4).
+  - A random "warm-up" website before login, and a fixed desktop user-agent (desktop Chrome).
   - Progressive sleeps (`loops × 5s` every 5 actions), and random 1–4 follow bursts with long waits in Combination.
   - Only following users with a real profile picture and above the follower/post thresholds.
   - Block detection (restriction/challenge URLs, the "action blocked" popup) that stops the job.
@@ -493,9 +491,9 @@ The issues below were found by reading the code. The numbers are kept stable bec
 3. **Fixed.** The ChromeDriver is no longer pinned: webdriver-manager 4 downloads the one matching the installed Chrome.
 
 **Driver and config**
-4. In the desktop branch of `InstagramBot.__init__`, the `options` are **not passed** to `webdriver.Chrome`, so headless mode, the user-agent and the other flags are ignored. The `Options` import is from `selenium.webdriver.firefox.options`, even though Chrome is used.
+4. **Fixed.** Chrome now gets its options in both desktop and mobile mode (before, desktop ignored them and mobile's `chrome_options` replaced them), and `Options` is imported from `selenium.webdriver.chrome.options`.
 5. `proxy_dict` is never applied. The proxy fields and the `proxy` table have no effect. (**Fixed** in the UI: the old Settings window's inverted Save check.)
-6. Hard-coded proxy credentials are committed in `bot_folder/main_bot.py` and `bot_folder/proxy.py`, and an e-mail address is hard-coded in `_send_email`. Move these to `.env` and rotate the leaked credentials.
+6. **Fixed.** The proxy credentials and the alert e-mail now come from `.env` (see `.env.example`). The old values are still in the git history, so they must be rotated.
 7. If the `settings` row does not exist (no account added yet), `get_data_from_settings()` returns `None` and `InstagramBot.__init__` crashes on `[6]`. (**Fixed** in the UI: Settings shows defaults. In practice bots always have an account, and adding one creates the row.)
 8. **Fixed.** `requirements.txt` lists every dependency and installs on Python 3.14. The README uses `pip install -r`.
 
@@ -516,7 +514,7 @@ The issues below were found by reading the code. The numbers are kept stable bec
 22. `screen_shots/` is now created by `main.py` (**Fixed**), but `_send_email` still fails if the screenshot is missing.
 
 **Security and quality**
-23. SQL is built with `str.format` in many queries (injection, quoting bugs). Use `?` parameters. Until then the UI refuses apostrophes in usernames and list names.
+23. **Fixed.** All SQL uses `?` parameters. The UI still refuses apostrophes in usernames and list names; that check can now be dropped.
 24. Instagram passwords are stored in plain text in SQLite. (The Accounts table no longer shows them.)
 25. Wide `try/except Exception: pass` blocks in the bots hide most failures, and there is no logging framework. (**Partly fixed:** there are now tests, and running jobs can be stopped.)
 26. Automating Instagram actions violates Instagram's Terms of Use and can get accounts restricted or banned. The block-detection code exists for this reason.

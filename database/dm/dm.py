@@ -33,7 +33,7 @@ class DMDB(db.Database):
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute("DELETE FROM dm_users WHERE username='{}' AND group_id='{}'".format(username, group_id))
+            cur.execute("DELETE FROM dm_users WHERE username = ? AND group_id = ?", (username, group_id))
             conn.commit()
         except Exception as e:
             print('remove dm user from list: ', e)

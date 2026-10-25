@@ -220,7 +220,7 @@ class Database:
         cur = conn.cursor()
         is_deleted = False
         try:
-            cur.execute("DELETE FROM accounts WHERE username='{}' ".format(str(username)))
+            cur.execute("DELETE FROM accounts WHERE username = ?", (str(username),))
             conn.commit()
             is_deleted = True
         except Exception as e:
@@ -235,8 +235,8 @@ class Database:
         cur = conn.cursor()
         is_update = False
         try:
-            cur.execute("UPDATE accounts SET name='{}', phone='{}', username='{}', password='{}' WHERE id='{}' "
-                        .format(name, phone, username, password, account_id))
+            cur.execute("UPDATE accounts SET name = ?, phone = ?, username = ?, password = ? WHERE id = ?",
+                        (name, phone, username, password, account_id))
             conn.commit()
             is_update = True
         except Exception as e:
@@ -252,11 +252,10 @@ class Database:
         cur = conn.cursor()
         is_saved = False
         try:
-            cur.execute("UPDATE settings SET amount_likes='{}',"
-                        "amount_followers='{}', is_schedule='{}', schedule_hour='{}', modify='{}',"
-                        " headless={}, amount_posts='{}' WHERE id='{}' "
-                        .format(likes_amount, followers_amount, is_active,
-                        schedule_hours, modify_time, headless, posts_amount, 1))
+            cur.execute("UPDATE settings SET amount_likes = ?, amount_followers = ?, is_schedule = ?,"
+                        " schedule_hour = ?, modify = ?, headless = ?, amount_posts = ? WHERE id = ?",
+                        (likes_amount, followers_amount, is_active,
+                         schedule_hours, str(modify_time), headless, posts_amount, 1))
             conn.commit()
             is_saved = True
         except Exception as e:
@@ -297,7 +296,7 @@ class Database:
         cur = conn.cursor()
         users = []
         try:
-            cur.execute("SELECT * FROM unfollow WHERE user_id='{}'".format(user_id))
+            cur.execute("SELECT * FROM unfollow WHERE user_id = ?", (user_id,))
             users = cur.fetchall()
         except Exception as e:
             print(e)
@@ -310,7 +309,7 @@ class Database:
         cur = conn.cursor()
         user_id = -1
         try:
-            cur.execute("SELECT id FROM accounts WHERE username='{}'".format(username))
+            cur.execute("SELECT id FROM accounts WHERE username = ?", (username,))
             user_id = cur.fetchone()
         except Exception as e:
             print(e)
@@ -340,7 +339,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute("SELECT * FROM groups WHERE user_id={}".format(user_id))
+            cur.execute("SELECT * FROM groups WHERE user_id = ?", (user_id,))
             groups = cur.fetchall()
         except Exception as e:
             print("get distribution lists by username ", e)
@@ -354,7 +353,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute("DELETE FROM groups WHERE group_name='{}' AND user_id='{}'".format(group_name, owner_group_id))
+            cur.execute("DELETE FROM groups WHERE group_name = ? AND user_id = ?", (group_name, owner_group_id))
             conn.commit()
             is_deleted = True
         except Exception as e:
@@ -378,7 +377,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            cur.execute(" DELETE FROM unfollow WHERE username='{}' AND user_id={} ".format(username, user_id))
+            cur.execute("DELETE FROM unfollow WHERE username = ? AND user_id = ?", (username, user_id))
             conn.commit()
         except Exception as e:
             print('remove username from distribution group: ', e)
@@ -392,7 +391,7 @@ class Database:
         group_id = -1
         try:
             cur.execute(
-                "SELECT id FROM groups WHERE group_name = '{}' AND user_id='{}' ".format(group_name, owner_group_id))
+                "SELECT id FROM groups WHERE group_name = ? AND user_id = ?", (group_name, owner_group_id))
             group_id = cur.fetchone()
         except Exception as e:
             print("get group id by group name: ", e)
@@ -407,7 +406,7 @@ class Database:
         cur = conn.cursor()
         dm_users = []
         try:
-            cur.execute("SELECT username FROM dm_users WHERE group_id={}".format(group_id))
+            cur.execute("SELECT username FROM dm_users WHERE group_id = ?", (group_id,))
             dm_users = cur.fetchall()
         except Exception as e:
             print("get users from dm users ", e)

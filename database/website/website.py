@@ -23,7 +23,7 @@ class Website(db.Database):
         try:
             conn = sqlite3.connect(self.database_name)
             cur = conn.cursor()
-            cur.execute("DELETE FROM website WHERE id='{}' ".format(website_id))
+            cur.execute("DELETE FROM website WHERE id = ?", (website_id,))
             conn.commit()
             is_removed = True
         except Exception as e:

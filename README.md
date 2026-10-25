@@ -18,7 +18,7 @@ You need Python 3.12 or newer and Google Chrome.
 
 The right ChromeDriver for your Chrome is downloaded automatically the first time a bot runs.
 
-Optional: to get an e-mail with a screenshot when Instagram blocks an account, put `MAILGUN_DOMAIN` and `MAILGUN_API` in a `.env` file.
+Optional: to get an e-mail with a screenshot when Instagram blocks an account, copy `.env.example` to `.env` and fill in `MAILGUN_DOMAIN`, `MAILGUN_API` and `ALERT_EMAIL`. The proxy plugin reads `PROXY_HOST`, `PROXY_PORT`, `PROXY_USER` and `PROXY_PASS` from the same file.
 
 ## Using it
 1. **Main → Accounts:** add your Instagram account (username and password, saved in a local SQLite file, `instabot.db`).

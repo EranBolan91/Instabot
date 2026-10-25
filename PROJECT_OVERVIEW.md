@@ -63,7 +63,7 @@ ui/                          → PySide6 GUI
     widgets/                 → reusable widgets (forms, pickers, tables, panels)
     pages/                   → one page per feature (sidebar entries)
     dialogs/                 → Accounts, Settings, Inspect Settings
-    theme/                   → dark.qss + palette.py (color tokens)
+    theme/                   → dark.qss + palette.py (color tokens), icons/ (app.png + stylesheet icons)
 bot_folder/                  → Selenium bots (business logic, one per feature)
     main_bot.py              → InstagramBot base class (shared browser helpers)
 database/                    → SQLite access layer
@@ -99,8 +99,8 @@ Every bot inherits `InstagramBot(username, password, is_mobile, proxy_dict)`.
 Calls `load_dotenv()`, creates `screen_shots/` (the bots fail without it), and calls `ui.app.run()`.
 
 ### `ui/app.py`
-- `create_app()`: creates the `QApplication` (Fusion style, app name) and calls `configure_app`.
-- `configure_app(app)`: loads `ui/theme/dark.qss`, replaces its color tokens and `@icons` path, and applies it. It is idempotent: it marks the app with the `instabot_configured` property.
+- `create_app()`: creates the `QApplication` (or reuses the existing one) and calls `configure_app`.
+- `configure_app(app)`: sets the app name, the Fusion style, the font, the dark palette and the app icon (`ui/theme/icons/app.png`, the camera shown on the window and dialogs). It then loads `ui/theme/dark.qss`, replaces its color tokens and `@icons` path, and applies it. It is idempotent: it marks the app with the `instabot_configured` property.
 - `run()`: installs the `LogBridge`, shows `MainWindow`, runs the event loop. If bot threads are still alive after the window closes (a Chrome that wouldn't quit), it ends the process with `os._exit` so it doesn't hang.
 
 ### `ui/main_window.py` — `class MainWindow`
@@ -546,6 +546,7 @@ The issues below were found by reading the code. The numbers are kept stable bec
 | `ui/dialogs/settings_dialog.py` | Settings (thresholds, headless, distribution lists, proxies, websites) |
 | `ui/dialogs/inspect_settings_dialog.py` | Selector editor and checker |
 | `ui/theme/dark.qss`, `ui/theme/palette.py` | Stylesheet and color tokens |
+| `ui/theme/icons/` | The app icon (`app.png`) and the stylesheet's arrow/check icons |
 | `bot_folder/main_bot.py` | `InstagramBot` base class |
 | `bot_folder/hash_tag/hash_tag_bot.py` | `HashTagBot` |
 | `bot_folder/location/location_bot.py` | `LocationBot` |

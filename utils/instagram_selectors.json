@@ -1,0 +1,437 @@
+{
+  "about": "How the bots find things on Instagram's pages. The one place to fix when Instagram changes. Each selector lists one or more ways to find it, tried in order: {\"css\": ...}, {\"xpath\": ...}, {\"name\": ...} (a form field's name), {\"text\": regex} (the smallest visible element whose whole text matches), {\"scrollable\": css} (the scrolling part inside that element). \"checked\" is the date it was last seen working on Instagram, or null if it couldn't be checked safely (it's then an educated guess).",
+  "urls": {
+    "home": "https://www.instagram.com/",
+    "login": "https://www.instagram.com/accounts/login/",
+    "profile": "https://www.instagram.com/{username}/",
+    "hashtag": "https://www.instagram.com/explore/tags/{tag}/"
+  },
+  "texts": {
+    "row_button_texts": [
+      "Follow",
+      "Following",
+      "Requested",
+      "Follow Back"
+    ],
+    "default_avatar_file": "44884218_345707102882519_2446069589734326272_n.jpg",
+    "restriction_urls": [
+      "/restriction/",
+      "/challenge/",
+      "/accounts/suspended/"
+    ]
+  },
+  "selectors": {
+    "login": {
+      "username_input": {
+        "what": "Username field on the login page",
+        "find": [
+          {
+            "name": "email"
+          },
+          {
+            "name": "username"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "password_input": {
+        "what": "Password field on the login page",
+        "find": [
+          {
+            "name": "pass"
+          },
+          {
+            "name": "password"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "error_message": {
+        "what": "Wrong username or password message",
+        "find": [
+          {
+            "text": "login information you entered is incorrect"
+          },
+          {
+            "text": "your password was incorrect"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "logged_in_marker": {
+        "what": "Something only shown when logged in (the Home icon)",
+        "find": [
+          {
+            "css": "svg[aria-label='Home']"
+          },
+          {
+            "css": "a[href^='/direct/inbox']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "not_now_button": {
+        "what": "\"Not now\" on the save-login and notifications pop-ups",
+        "find": [
+          {
+            "xpath": "//*[self::button or @role='button'][normalize-space(.)='Not now' or normalize-space(.)='Not Now']"
+          }
+        ],
+        "checked": null
+      }
+    },
+    "profile": {
+      "follow_button": {
+        "what": "Follow (or Follow Back) on a profile you don't follow (only in the profile's header, never a suggested account's)",
+        "find": [
+          {
+            "xpath": "(//main//header//button[normalize-space(.)='Follow' or normalize-space(.)='Follow Back'])[1]"
+          },
+          {
+            "xpath": "(//header//*[self::button or @role='button'][normalize-space(.)='Follow' or normalize-space(.)='Follow Back'])[1]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "follow_back_button": {
+        "what": "Follow Back on a profile that follows you",
+        "find": [
+          {
+            "xpath": "(//main//header//button[starts-with(normalize-space(.), 'Follow Back')])[1]"
+          },
+          {
+            "xpath": "(//header//*[self::button or @role='button'][starts-with(normalize-space(.), 'Follow Back')])[1]"
+          }
+        ],
+        "checked": null
+      },
+      "following_button": {
+        "what": "Following on a profile you follow (opens the unfollow menu) (only in the profile's header, never a suggested account's)",
+        "find": [
+          {
+            "xpath": "(//main//header//button[starts-with(normalize-space(.), 'Following')])[1]"
+          },
+          {
+            "xpath": "(//header//*[self::button or @role='button'][starts-with(normalize-space(.), 'Following')])[1]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "requested_button": {
+        "what": "Requested on a private profile you asked to follow",
+        "find": [
+          {
+            "xpath": "(//main//header//button[starts-with(normalize-space(.), 'Requested')])[1]"
+          },
+          {
+            "xpath": "(//header//*[self::button or @role='button'][starts-with(normalize-space(.), 'Requested')])[1]"
+          }
+        ],
+        "checked": null
+      },
+      "unfollow_confirm": {
+        "what": "Unfollow in the menu or confirm pop-up",
+        "find": [
+          {
+            "xpath": "//*[@role='dialog']//*[self::button or @role='button'][normalize-space(.)='Unfollow']"
+          },
+          {
+            "xpath": "//*[self::button or @role='button' or self::span][normalize-space(.)='Unfollow']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "message_button": {
+        "what": "Message button on a profile",
+        "find": [
+          {
+            "xpath": "(//main//*[self::button or @role='button'][normalize-space(.)='Message'])[1]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "posts_counter": {
+        "what": "\"5 posts\" counter",
+        "find": [
+          {
+            "text": "^[\\d.,KMB]+ posts?$"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "followers_counter": {
+        "what": "\"521 followers\" counter (click opens the followers list)",
+        "find": [
+          {
+            "text": "^[\\d.,KMB]+ followers?$"
+          },
+          {
+            "css": "a[href$='/followers/']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "following_counter": {
+        "what": "\"594 following\" counter (click opens the following list)",
+        "find": [
+          {
+            "text": "^[\\d.,KMB]+ following$"
+          },
+          {
+            "css": "a[href$='/following/']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "picture": {
+        "what": "The profile picture",
+        "find": [
+          {
+            "css": "header img[alt$='profile picture']"
+          },
+          {
+            "css": "header img[alt='Change profile photo']"
+          },
+          {
+            "css": "main img[alt$='profile picture']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "first_post": {
+        "what": "First post in a profile's grid",
+        "find": [
+          {
+            "css": "main a[href*='/p/']"
+          },
+          {
+            "css": "main a[href*='/reel/']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "not_found_title": {
+        "what": "Text on a profile or page that doesn't exist",
+        "find": [
+          {
+            "text": "^Sorry, this page isn't available\\.?$"
+          }
+        ],
+        "checked": "2026-10-25"
+      }
+    },
+    "grid": {
+      "first_post": {
+        "what": "First post on a hashtag or location page",
+        "find": [
+          {
+            "css": "main a[href*='/p/']"
+          },
+          {
+            "css": "main a[href*='/reel/']"
+          },
+          {
+            "css": "a[href*='/p/']"
+          }
+        ],
+        "checked": "2026-10-25"
+      }
+    },
+    "post": {
+      "like_button": {
+        "what": "The post's own Like heart (not a comment's), when not liked yet",
+        "find": [
+          {
+            "xpath": "(//*[name()='svg' and @aria-label='Comment']/ancestor::*[.//*[name()='svg' and (@aria-label='Like' or @aria-label='Unlike')]][1]//*[name()='svg' and @aria-label='Like'])[1]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "unlike_button": {
+        "what": "The post's own heart when it's already liked",
+        "find": [
+          {
+            "xpath": "(//*[name()='svg' and @aria-label='Comment']/ancestor::*[.//*[name()='svg' and (@aria-label='Like' or @aria-label='Unlike')]][1]//*[name()='svg' and @aria-label='Unlike'])[1]"
+          }
+        ],
+        "checked": null
+      },
+      "next_button": {
+        "what": "Arrow to the next post in the open post",
+        "find": [
+          {
+            "xpath": "//*[@role='dialog']//*[name()='svg' and @aria-label='Next']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "close_button": {
+        "what": "Close the open post",
+        "find": [
+          {
+            "xpath": "//*[name()='svg' and @aria-label='Close']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "comment_input": {
+        "what": "\"Add a comment…\" box",
+        "find": [
+          {
+            "css": "textarea[aria-label^='Add a comment']"
+          },
+          {
+            "css": "textarea[placeholder^='Add a comment']"
+          },
+          {
+            "css": "form textarea"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "author_link": {
+        "what": "The post author's username",
+        "find": [
+          {
+            "xpath": "(//*[@role='dialog']//a[starts-with(@href, '/') and not(contains(@href, '/p/')) and not(contains(@href, '/explore/')) and string-length(normalize-space(.)) > 0])[1]"
+          },
+          {
+            "xpath": "(//main//a[starts-with(@href, '/') and not(contains(@href, '/p/')) and not(contains(@href, '/explore/')) and string-length(normalize-space(.)) > 0])[1]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "author_follow_button": {
+        "what": "Follow next to the post author, when you don't follow them",
+        "find": [
+          {
+            "xpath": "(//*[@role='dialog']//button[normalize-space(.)='Follow'])[1]"
+          },
+          {
+            "xpath": "(//main//button[normalize-space(.)='Follow'])[1]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "likes_link": {
+        "what": "\"368K likes\" under the post (click opens who liked it)",
+        "find": [
+          {
+            "text": "^[\\d.,KMB]+ likes?$"
+          },
+          {
+            "text": "^[\\d.,KMB]+ others?$"
+          },
+          {
+            "css": "a[href$='/liked_by/']"
+          }
+        ],
+        "checked": "2026-10-25"
+      }
+    },
+    "dialog": {
+      "box": {
+        "what": "The open list (followers, following, likes)",
+        "find": [
+          {
+            "css": "[role='dialog']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "scroll_area": {
+        "what": "The scrolling part of the open list",
+        "find": [
+          {
+            "scrollable": "[role='dialog']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "user_link": {
+        "what": "A username in the open list (one per row)",
+        "find": [
+          {
+            "xpath": ".//a[starts-with(@href, '/') and not(contains(@href, '/p/')) and not(contains(@href, '/explore/')) and string-length(normalize-space(.)) > 0]"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "row_button": {
+        "what": "The Follow/Following button in a list row (its text must be in texts.row_button_texts)",
+        "find": [
+          {
+            "css": "button, [role='button']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "close_button": {
+        "what": "Close the open list",
+        "find": [
+          {
+            "xpath": "//*[@role='dialog']//*[name()='svg' and @aria-label='Close']"
+          }
+        ],
+        "checked": "2026-10-25"
+      }
+    },
+    "dm": {
+      "message_input": {
+        "what": "The message box in a chat",
+        "find": [
+          {
+            "css": "div[role='textbox'][contenteditable='true']"
+          },
+          {
+            "css": "textarea[placeholder^='Message']"
+          }
+        ],
+        "checked": "2026-10-25"
+      },
+      "send_button": {
+        "what": "Send in a chat (if missing, the bot presses Enter)",
+        "find": [
+          {
+            "xpath": "//*[self::button or @role='button'][normalize-space(.)='Send']"
+          }
+        ],
+        "checked": null
+      }
+    },
+    "block": {
+      "popup": {
+        "what": "Instagram's \"action blocked\" pop-up",
+        "find": [
+          {
+            "text": "^(Try Again Later|Action Blocked|We restrict certain activity.*)$"
+          }
+        ],
+        "checked": null
+      },
+      "popup_ok": {
+        "what": "OK on the \"action blocked\" pop-up",
+        "find": [
+          {
+            "xpath": "//*[@role='dialog']//*[self::button or @role='button'][normalize-space(.)='OK' or normalize-space(.)='Ok']"
+          }
+        ],
+        "checked": null
+      }
+    },
+    "search": {
+      "input": {
+        "what": "The search box (only the unused search-location-by-name uses it)",
+        "find": [
+          {
+            "css": "input[aria-label='Search input']"
+          },
+          {
+            "css": "input[placeholder='Search']"
+          }
+        ],
+        "checked": null
+      }
+    }
+  }
+}

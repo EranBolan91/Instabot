@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class FollowBackDB(db.Database):
@@ -10,8 +13,8 @@ class FollowBackDB(db.Database):
             cur.execute("""INSERT INTO follow_back (used_id, account, follow_back, date) VALUES(?,?,?,?)""",
                         (follow_obj.used_id, follow_obj.account, follow_obj.follow_back, follow_obj.date))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_follow_back: ', e)
+        except Exception:
+            log.exception("Database: could not save the follow-back stats")
         finally:
             conn.close()
 
@@ -21,8 +24,8 @@ class FollowBackDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM follow_back ").fetchall()
-        except Exception as e:
-            print('get follow_back data: ', e)
+        except Exception:
+            log.exception("Database: could not read the follow-back stats")
         finally:
             conn.close()
             return data
@@ -33,8 +36,8 @@ class FollowBackDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM follow_followers WHERE account = ? ", (account_name,)).fetchall()
-        except Exception as e:
-            print('follow_followers: get account data: ', e)
+        except Exception:
+            log.exception("Database: could not read the follow-back stats of %s", account_name)
         finally:
             conn.close()
             return data

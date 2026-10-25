@@ -6,6 +6,9 @@ import time
 from utils.utils import Utils as utils
 from utils.instagram_selectors import S
 import datetime as dt
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class DM(main_bot.InstagramBot):
@@ -40,46 +43,43 @@ class DM(main_bot.InstagramBot):
                     DMDB().remove_dm_user_from_list(user[0], group_id)
                     sent += 1
                     print('Removed user from distribution list: ', user[0])
-                except Exception as e:
-                    pass
-                try:
-                    # Requested
-                    S.click(self.driver, "profile.requested_button", timeout=4)
+                except Exception:
+                    log.warning("DM %s: could not send the message to %s", self.username, user[0], exc_info=True)
+                # Requested: they never accepted the follow, so cancel it and drop them
+                requested = S.find(self.driver, "profile.requested_button", timeout=4)
+                if requested is not None:
                     try:
+                        S.clickable(requested).click()
                         self._popup_unfollow()
                         DMDB().remove_dm_user_from_list(user[0], group_id)
                         DMDB().remove_username_from_unfollow_list(user[0], account_id)
                         print('Removed user from distribution list and database: ', user[0])
-                    except Exception as e:
-                        pass
-                except Exception as e:
-                    pass
-                try:
-                    # Checks if the button is 'follow' - means, I'm not following the user
-                    follow_btn = S.get(self.driver, "profile.follow_button", timeout=4)
+                    except Exception:
+                        log.exception("DM %s: could not cancel the follow request to %s", self.username, user[0])
+                # A 'Follow' button means I'm not following the user (anymore): drop them
+                follow_btn = S.find(self.driver, "profile.follow_button", timeout=4)
+                if follow_btn is not None:
                     try:
                         if follow_btn.text.startswith('Follow'):
                             DMDB().remove_dm_user_from_list(user[0], group_id)
                             DMDB().remove_username_from_unfollow_list(user[0], account_id)
                             print('Removed user from distribution list and database: ', user[0])
-                    except Exception as e:
-                        pass
-                except Exception as e:
-                    pass
+                    except Exception:
+                        log.exception("DM %s: could not remove %s from the list", self.username, user[0])
                 try:
                     is_blocked = self._check_if_blocked()
                     if is_blocked:
                         self.global_block_message(self.username, "DM")
                         break
-                except Exception as e:
-                    pass
+                except Exception:
+                    log.exception("DM %s: could not check if the account is blocked", self.username)
                 print('DM: sent message to {} {}/{}'.format(user[0], str(size_list), sent), '- Username:', self.username)
                 i += 1
                 if int(i * utils.TIME_SLEEP) == 500:
                     i = 1
                     print('reset to i')
-        except Exception as e:
-            print('send message to distribution group: ', e)
+        except Exception:
+            log.exception("DM %s: sending to distribution group %s stopped", self.username, group_name)
         finally:
             self.driver.delete_all_cookies()
             group_len = len(dm_users)

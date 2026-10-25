@@ -9,12 +9,15 @@ Keeping them separate lets the worker hold on to the bot, so a running job
 can be stopped by closing its Chrome window (bot.driver.quit()).
 """
 import threading
-import traceback
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from itertools import count
 
 from PySide6.QtCore import QObject, QRunnable, QThreadPool, QTimer, Signal
+
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 SCHEDULED = "scheduled"
 QUEUED = "queued"  # handed to the thread pool, waiting for a free thread
@@ -67,8 +70,8 @@ def _quit_driver(bot):
         return
     try:
         driver.quit()
-    except Exception as e:
-        print("Stop job: closing Chrome failed:", e)
+    except Exception:
+        log.warning("Stop job: closing Chrome failed", exc_info=True)
 
 
 class _WorkerSignals(QObject):
@@ -113,7 +116,7 @@ class JobWorker(QRunnable):
                 else:
                     result = self._run(bot)
             except Exception as e:
-                traceback.print_exc()
+                log.exception("Job #%s failed", self.job_id)
                 self.signals.failed.emit(self.job_id, "{}: {}".format(type(e).__name__, e))
             else:
                 self.signals.finished.emit(self.job_id, result)
@@ -275,7 +278,7 @@ class JobManager(QObject):
             try:
                 callback(result)
             except Exception:
-                traceback.print_exc()
+                log.exception("Job #%s: handling its result failed", job_id)
         self._finish(job, DONE)
 
     def _on_worker_failed(self, job_id, error):

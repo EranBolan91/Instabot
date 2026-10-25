@@ -1,5 +1,8 @@
 import sqlite3
 import datetime as dt
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 # TODO: should change all to Try and Catch
@@ -201,8 +204,8 @@ class Database:
                             (amount_likes, amount_followers, is_schedule, schedule_hour, modify)
                             VALUES(?,?,?,?,?)""", (0, 0, 0, 0, modify_time))
                 conn.commit()
-        except Exception as e:
-            print('_init_settings func: ', e)
+        except Exception:
+            log.exception("Database: could not create the default settings")
         finally:
             conn.close()
 
@@ -223,8 +226,8 @@ class Database:
             cur.execute("DELETE FROM accounts WHERE username = ?", (str(username),))
             conn.commit()
             is_deleted = True
-        except Exception as e:
-            print(e)
+        except Exception:
+            log.exception("Database: could not delete account %s", username)
             is_deleted = False
         finally:
             conn.close()
@@ -239,8 +242,8 @@ class Database:
                         (name, phone, username, password, account_id))
             conn.commit()
             is_update = True
-        except Exception as e:
-            print(e)
+        except Exception:
+            log.exception("Database: could not update account %s", username)
             is_update = False
         finally:
             conn.close()
@@ -258,8 +261,8 @@ class Database:
                          schedule_hours, str(modify_time), headless, posts_amount, 1))
             conn.commit()
             is_saved = True
-        except Exception as e:
-            print('save_settings func:', e)
+        except Exception:
+            log.exception("Database: could not save settings")
             is_saved = False
         finally:
             conn.close()
@@ -272,8 +275,8 @@ class Database:
             cur.execute("SELECT * FROM settings WHERE id=1")
             data = cur.fetchone()
             conn.commit()
-        except Exception as e:
-            print(e)
+        except Exception:
+            log.exception("Database: could not read settings")
         finally:
             conn.close()
             return data
@@ -285,8 +288,8 @@ class Database:
         try:
             cur.execute('INSERT INTO unfollow(user_id, username) VALUES(?,?)', (user_id, user))
             conn.commit()
-        except Exception as e:
-            print(e)
+        except Exception:
+            log.exception("Database: could not add %s to the unfollow list of %s", user, account_username)
         finally:
             conn.close()
 
@@ -298,8 +301,8 @@ class Database:
         try:
             cur.execute("SELECT * FROM unfollow WHERE user_id = ?", (user_id,))
             users = cur.fetchall()
-        except Exception as e:
-            print(e)
+        except Exception:
+            log.exception("Database: could not read the unfollow list of %s", username)
         finally:
             conn.close()
             return users
@@ -311,8 +314,8 @@ class Database:
         try:
             cur.execute("SELECT id FROM accounts WHERE username = ?", (username,))
             user_id = cur.fetchone()
-        except Exception as e:
-            print(e)
+        except Exception:
+            log.exception("Database: could not look up account %s", username)
 
         finally:
             conn.close()
@@ -328,8 +331,8 @@ class Database:
             cur.execute('INSERT INTO groups(group_name, user_id) VALUES(?,?)', (group_name, user_id))
             conn.commit()
             is_saved = True
-        except Exception as e:
-            print("Create distribution group func: ", e)
+        except Exception:
+            log.exception("Database: could not create distribution group %s", group_name)
         finally:
             conn.close()
             return is_saved
@@ -341,8 +344,8 @@ class Database:
         try:
             cur.execute("SELECT * FROM groups WHERE user_id = ?", (user_id,))
             groups = cur.fetchall()
-        except Exception as e:
-            print("get distribution lists by username ", e)
+        except Exception:
+            log.exception("Database: could not read the distribution groups of %s", username)
         finally:
             conn.close()
             return groups
@@ -356,8 +359,8 @@ class Database:
             cur.execute("DELETE FROM groups WHERE group_name = ? AND user_id = ?", (group_name, owner_group_id))
             conn.commit()
             is_deleted = True
-        except Exception as e:
-            print("remove group from distribution list: ", e)
+        except Exception:
+            log.exception("Database: could not delete distribution group %s", group_name)
         finally:
             conn.close()
             return is_deleted
@@ -368,8 +371,8 @@ class Database:
         try:
             cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (user, group_id))
             conn.commit()
-        except Exception as e:
-            print("add username to distribution group: ", e)
+        except Exception:
+            log.exception("Database: could not add %s to distribution group %s", user, group_id)
         finally:
             conn.close()
 
@@ -379,8 +382,8 @@ class Database:
         try:
             cur.execute("DELETE FROM unfollow WHERE username = ? AND user_id = ?", (username, user_id))
             conn.commit()
-        except Exception as e:
-            print('remove username from distribution group: ', e)
+        except Exception:
+            log.exception("Database: could not remove %s from the unfollow list", username)
         finally:
             conn.close()
 
@@ -393,8 +396,8 @@ class Database:
             cur.execute(
                 "SELECT id FROM groups WHERE group_name = ? AND user_id = ?", (group_name, owner_group_id))
             group_id = cur.fetchone()
-        except Exception as e:
-            print("get group id by group name: ", e)
+        except Exception:
+            log.exception("Database: could not find distribution group %s", group_name)
         finally:
             conn.close()
             return group_id[0]
@@ -408,8 +411,8 @@ class Database:
         try:
             cur.execute("SELECT username FROM dm_users WHERE group_id = ?", (group_id,))
             dm_users = cur.fetchall()
-        except Exception as e:
-            print("get users from dm users ", e)
+        except Exception:
+            log.exception("Database: could not read the users of distribution group %s", group_name)
         finally:
             conn.close()
             return dm_users
@@ -423,8 +426,8 @@ class Database:
                 (data_action.user_id, data_action.username, data_action.action, data_action.amount,
                  data_action.amount_success, data_action.date))
             conn.commit()
-        except Exception as e:
-            print("Database Error: save data account action: ", e)
+        except Exception:
+            log.exception("Database: could not save the account action")
         finally:
             conn.close()
 
@@ -434,8 +437,8 @@ class Database:
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM proxy ").fetchall()
-        except Exception as e:
-            print('get proxy data: ', e)
+        except Exception:
+            log.exception("Database: could not read proxies")
         finally:
             conn.close()
             return data
@@ -446,8 +449,8 @@ class Database:
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM website ").fetchall()
-        except Exception as e:
-            print('get websites data: ', e)
+        except Exception:
+            log.exception("Database: could not read websites")
         finally:
             conn.close()
             return data

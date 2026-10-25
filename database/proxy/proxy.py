@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class Proxy(db.Database):
@@ -12,8 +15,8 @@ class Proxy(db.Database):
                         (proxy_obj.host, proxy_obj.username, proxy_obj.password, proxy_obj.port))
             conn.commit()
             is_saved = True
-        except Exception as e:
-            print('save_in_db_proxy: ', e)
+        except Exception:
+            log.exception("Database: could not save proxy")
         finally:
             conn.close()
             return is_saved
@@ -26,8 +29,8 @@ class Proxy(db.Database):
             cur.execute("DELETE FROM proxy WHERE id = ?", (proxy_id,))
             conn.commit()
             is_removed = True
-        except Exception as e:
-            print('save_in_db_proxy: ', e)
+        except Exception:
+            log.exception("Database: could not delete proxy %s", proxy_id)
         finally:
             conn.close()
             return is_removed

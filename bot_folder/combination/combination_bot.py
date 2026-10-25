@@ -13,6 +13,9 @@ import datetime as dt
 from random import randint
 from database import db
 from models.followers import Followers
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 PROCESS_TIME = 60 * 60 * 12
 MAX_FOLLOWERS_EACH_PROCESS = 100
@@ -95,8 +98,8 @@ class CombinationBot(main_bot.InstagramBot):
                                     follow_counter += 1
                                     max_followers -= 1
                                     i += 1
-                        except Exception as e:
-                            print("Combination: follow {} -> {}".format(username, e))
+                        except Exception:
+                            log.exception("Combination %s: could not follow %s", self.username, username)
                         # break the inner while loop
                         if is_blocked:
                             break
@@ -114,8 +117,8 @@ class CombinationBot(main_bot.InstagramBot):
                 if is_blocked:
                     self._screen_shot(self.username)
                     break
-        except Exception as e:
-            print("Combination: automation -> ", e)
+        except Exception:
+            log.exception("Combination %s: run stopped", self.username)
         finally:
             self.driver.delete_all_cookies()
             self.driver.close()
@@ -171,8 +174,8 @@ class CombinationBot(main_bot.InstagramBot):
                 S.click(self.driver, "grid.first_post")
             time.sleep(2)
             self.skip_posts(skip_posts)
-        except Exception as e:
-            print('Combination: get wanted post ', e)
+        except Exception:
+            log.exception("Combination %s: could not open the post to start from", self.username)
 
     def _like_post(self, wait):
         time.sleep(2)
@@ -186,7 +189,8 @@ class CombinationBot(main_bot.InstagramBot):
         try:
             S.click(self.driver, "post.likes_link")
             time.sleep(3)
-        except Exception as e:
+        except Exception:
+            log.warning("Combination %s: could not open the likes list, skipping the post", self.username, exc_info=True)
             self._go_to_next_post(wait)
 
     def _get_scroll_box(self, wait):
@@ -221,8 +225,8 @@ class CombinationBot(main_bot.InstagramBot):
                         if followed and likes > 0:
                             self._likes_target += likes
                             self._like_posts(wait, username, likes)
-                    except Exception as e:
-                        print("Combination: like posts of {} -> {}".format(username, e))
+                    except Exception:
+                        log.exception("Combination %s: could not like the posts of %s", self.username, username)
                         self.driver.close()
                         self.driver.switch_to.window(self.driver.window_handles[0])
 
@@ -256,8 +260,8 @@ class CombinationBot(main_bot.InstagramBot):
     def _go_to_next_post(self, wait):
         try:
             S.click(self.driver, "post.next_button")
-        except Exception as e:
-            print("Combination: _go_to_next_post -> ",e)
+        except Exception:
+            log.exception("Combination %s: could not go to the next post", self.username)
 
         time.sleep(1)
 
@@ -316,8 +320,8 @@ class CombinationBot(main_bot.InstagramBot):
             elif S.exists(self.driver, "profile.requested_button"):
                 S.click(self.driver, "profile.requested_button")
                 self._popup_unfollow()
-        except Exception as e:
-            print('unfollow users exception: ', e)
+        except Exception:
+            log.exception("Combination %s: could not unfollow %s", self.username, user)
 
         if self._blocked_action_popup():
             return False, True  # return False for follow_back and True for blocked

@@ -11,3 +11,4 @@ geckodriver.exe
 proxy_auth_plugin.zip
 venv
 .venv
+logs

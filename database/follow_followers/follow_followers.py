@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class FollowFollowersDB(db.Database):
@@ -13,8 +16,8 @@ class FollowFollowersDB(db.Database):
                          follow_obj.num_failed_follow,
                          follow_obj.distribution, follow_obj.group_name, follow_obj.schedule, follow_obj.date, follow_obj.skip))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_follow_followers: ', e)
+        except Exception:
+            log.exception("Database: could not save the follow-followers stats")
         finally:
             conn.close()
 
@@ -24,8 +27,8 @@ class FollowFollowersDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM follow_followers ").fetchall()
-        except Exception as e:
-            print('get follow_followers data: ', e)
+        except Exception:
+            log.exception("Database: could not read the follow-followers stats")
         finally:
             conn.close()
             return data
@@ -36,8 +39,8 @@ class FollowFollowersDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM follow_followers WHERE account = ? ", (account_name,)).fetchall()
-        except Exception as e:
-            print('follow_followers: get account data: ', e)
+        except Exception:
+            log.exception("Database: could not read the follow-followers stats of %s", account_name)
         finally:
             conn.close()
             return data

@@ -9,6 +9,9 @@ import time
 from utils.utils import Utils as utils
 from utils.instagram_selectors import S
 import datetime as dt
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class LocationBot(main_bot.InstagramBot):
@@ -53,8 +56,8 @@ class LocationBot(main_bot.InstagramBot):
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset to loops')
-        except Exception as e:
-            print('search location by url: ', e)
+        except Exception:
+            log.exception("Location %s: run on %s stopped", self.username, url)
         finally:
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
             failed_posts_num = int(amount) - (int(click_count))

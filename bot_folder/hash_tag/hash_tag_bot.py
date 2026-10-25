@@ -11,6 +11,9 @@ import time
 from utils.utils import Utils as utils
 from utils.instagram_selectors import S
 import datetime as dt
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class HashTagBot(main_bot.InstagramBot):
@@ -51,8 +54,8 @@ class HashTagBot(main_bot.InstagramBot):
                     # click on the right arrow
                     try:
                         S.click(self.driver, "post.next_button")
-                    except Exception as e:
-                        print('error on finding the right arrow: ', e)
+                    except Exception:
+                        log.exception("Hashtag %s: could not go to the next post", self.username)
                     i += 1
                     loops += 1
                 else:
@@ -70,11 +73,11 @@ class HashTagBot(main_bot.InstagramBot):
                         self.driver.close()
                         self.global_block_message(self.username, "Hashtag")
                         break
-                except Exception as e:
-                    pass
+                except Exception:
+                    log.exception("Hashtag %s: could not check if the account is blocked", self.username)
                 print('Hashtag: {}/{}'.format(amount, i), 'Username: ', self.username)
-        except Exception as e:
-            print('Error - Username: {} \nsearch hash tag: {}'.format(self.username, e))
+        except Exception:
+            log.exception("Hashtag %s: run on #%s stopped", self.username, hash_tag)
         finally:
             # I did -1 because the for loop ends by giving +1 to i (one more then it needs)
             failed_posts_num = int(amount) - (int(click_count))

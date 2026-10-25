@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class HashtagDB(db.Database):
@@ -16,8 +19,8 @@ class HashtagDB(db.Database):
                          hashtag_obj.distribution, hashtag_obj.group_name, hashtag_obj.comment,
                          hashtag_obj.schedule, hashtag_obj.date))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_hashtag: ', e)
+        except Exception:
+            log.exception("Database: could not save the hashtag stats")
         finally:
             conn.close()
 
@@ -27,8 +30,8 @@ class HashtagDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM hashtag ").fetchall()
-        except Exception as e:
-            print('get hashtag data: ', e)
+        except Exception:
+            log.exception("Database: could not read the hashtag stats")
         finally:
             conn.close()
             return data

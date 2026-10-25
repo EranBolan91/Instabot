@@ -1,10 +1,12 @@
 import os
 import sys
 
-from PySide6.QtGui import QColor, QPalette
+from PySide6.QtGui import QColor, QIcon, QPalette
 from PySide6.QtWidgets import QApplication
 
-from ui.theme.palette import color, load_stylesheet
+from ui.theme.palette import THEME_DIR, color, load_stylesheet
+
+APP_ICON = THEME_DIR / "icons" / "app.png"
 
 
 def create_app(argv=None):
@@ -22,6 +24,8 @@ def configure_app(app):
     app.setOrganizationName("Instabot")
     app.setApplicationName("Instabot")
     app.setStyle("Fusion")
+    # the window, taskbar and dialog icon
+    app.setWindowIcon(QIcon(str(APP_ICON)))
 
     font = app.font()
     font.setPointSize(10)

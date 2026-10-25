@@ -21,6 +21,12 @@ def test_stylesheet_has_no_unresolved_tokens():
     assert TOKENS["danger"] == "#F04438"
 
 
+def test_window_has_the_app_icon(make_window):
+    window = make_window()
+    assert not window.windowIcon().isNull()
+    assert window.windowIcon().pixmap(64, 64).width() == 64
+
+
 def test_sidebar_lists_every_page_in_old_tab_order(make_window):
     window = make_window()
     titles = [window.sidebar.item(i).text() for i in range(window.sidebar.count())]

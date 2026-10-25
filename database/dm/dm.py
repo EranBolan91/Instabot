@@ -4,10 +4,10 @@ import sqlite3
 
 class DMDB(db.Database):
     def save_in_db(self, dm_obj):
+        conn = sqlite3.connect(self.database_name)
         try:
-            conn = sqlite3.connect(self.database_name)
             cur = conn.cursor()
-            cur.execute("""INSERT INTO dm (account, message, group_distribution, num_members, num_failed_members, 
+            cur.execute("""INSERT INTO dm (account, message, group_name, num_members, num_failed_members, 
             schedule, date) VALUES(?,?,?,?,?,?,?)""",
                         (dm_obj.account, dm_obj.message, dm_obj.group,
                          dm_obj.num_members, dm_obj.num_failed_members, dm_obj.schedule, dm_obj.date))

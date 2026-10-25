@@ -28,16 +28,14 @@ SECTIONS = (
       C("List", 6), C("Scheduled", 7, BOOL), C("Date", 8, DATE), C("Skipped", 9, NUMBER)), 1, None),
     ("DM", lambda: DMDB().get_dm_data(),
      (C("Account", 1), C("Message", 2), C("List", 3), C("Members", 4, NUMBER), C("Failed", 5, NUMBER),
-      C("Scheduled", 6, BOOL), C("Date", 7, DATE)), 1,
-     "Known issue: DM runs aren't saved yet (#13), so this tab stays empty."),
+      C("Scheduled", 6, BOOL), C("Date", 7, DATE)), 1, None),
     ("Follow back", lambda: FollowBackDB().get_follow_back_data(),
      (C("Account", 2), C("Followed back", 3, NUMBER), C("Date", 4, DATE)), 2,
      "After each unfollow run: how many of the unfollowed users were following you."),
     ("Combination", lambda: CombinationDM().get_combination_data(),
      (C("Account", 1), C("Post", 2), C("Hashtag", 3), C("Likes", 4, NUMBER), C("Failed likes", 5, NUMBER),
       C("Followed", 6, NUMBER), C("Failed follows", 7, NUMBER), C("Scheduled", 8, BOOL), C("Saved to list", 9, BOOL),
-      C("List", 10), C("Date", 11, DATE), C("Skipped users", 12, NUMBER)), 1,
-     "Known issue: Combination runs aren't saved yet (#12), so this tab stays empty."),
+      C("List", 10), C("Date", 11, DATE), C("Skipped users", 12, NUMBER)), 1, None),
 )
 
 

@@ -24,8 +24,13 @@ MAX_EMPTY_LISTS = 5
 
 class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users):
-        self.automation(followers, hashtag, url, skip_posts, likes)
+        if not self.automation(followers, hashtag, url, skip_posts, likes):
+            return
+        failed_follows = max(int(followers) - self._followed, 0)
+        self._prepare_data_for_db(url, hashtag, self._likes_target, self._likes_target - self._likes_done,
+                                  followers, failed_follows, schedule, to_distribution, group_name, skip_users)
 
+    # returns False when the login failed (nothing ran, nothing to save)
     def automation(self, max_followers, hashtag, url, skip_posts, likes):
         wait = None  # kept in the helper signatures; the selectors do their own waiting
         settings_data_from_db = CombinationDM().get_data_from_settings()
@@ -37,75 +42,84 @@ class CombinationBot(main_bot.InstagramBot):
         empty_lists = 0
         # usernames already looked at in the likes lists
         self._seen = set()
+        # counted while the run goes; combination() saves them for the Statistics page
+        self._followed = 0
+        self._likes_target = 0
+        self._likes_done = 0
 
         if not self._login():
-            return
+            return False
 
-        self._get_wanted_post(
-            hashtag, url, skip_posts, wait)
+        try:
+            self._get_wanted_post(
+                hashtag, url, skip_posts, wait)
 
-        # open likes button - it press on "likes" of the post
-        self._open_likes(wait)
-        scroll_box = self._get_scroll_box(wait)
+            # open likes button - it press on "likes" of the post
+            self._open_likes(wait)
+            scroll_box = self._get_scroll_box(wait)
 
-        while max_followers > 0 and not out_of_users:
-            follow_counter = 0
+            while max_followers > 0 and not out_of_users:
+                follow_counter = 0
 
-            while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0 and not out_of_users:
-                # follow between 1 - 4 users
-                curr_follow_add = randint(1, 4)
-                i = 0
+                while follow_counter < MAX_FOLLOWERS_EACH_PROCESS and max_followers > 0 and not out_of_users:
+                    # follow between 1 - 4 users
+                    curr_follow_add = randint(1, 4)
+                    i = 0
 
-                while i < curr_follow_add:
-                    print("{} : {} -- combination follow: {} people left to follow".
-                                    format(dt.datetime.now().strftime('%H:%M:%S'), self.username, max_followers))
+                    while i < curr_follow_add:
+                        print("{} : {} -- combination follow: {} people left to follow".
+                                        format(dt.datetime.now().strftime('%H:%M:%S'), self.username, max_followers))
 
-                    if max_followers <= 0:
-                        break
+                        if max_followers <= 0:
+                            break
 
-                    # checking for rows, if not, load more of them
-                    if not follow_buttons:
-                        follow_buttons, curr_height, scroll_box = self._get_buttons(
-                            scroll_box, curr_height, wait)
+                        # checking for rows, if not, load more of them
                         if not follow_buttons:
-                            empty_lists += 1
-                            if empty_lists >= MAX_EMPTY_LISTS:
-                                print("Combination: no more users to follow")
-                                out_of_users = True
-                                break
-                            continue
-                        empty_lists = 0
+                            follow_buttons, curr_height, scroll_box = self._get_buttons(
+                                scroll_box, curr_height, wait)
+                            if not follow_buttons:
+                                empty_lists += 1
+                                if empty_lists >= MAX_EMPTY_LISTS:
+                                    print("Combination: no more users to follow")
+                                    out_of_users = True
+                                    break
+                                continue
+                            empty_lists = 0
 
-                    username, button = follow_buttons.pop(0)
-                    try:
-                        if button is not None and button.text == 'Follow':
-                            is_follow, is_blocked = self._follow(button, username, settings_data_from_db, follow_counter, wait, likes)
-                            if is_follow:
-                                follow_counter += 1
-                                max_followers -= 1
-                                i += 1
-                    except Exception as e:
-                        print("Combination: follow {} -> {}".format(username, e))
-                    # break the inner while loop
-                    if is_blocked:
+                        username, button = follow_buttons.pop(0)
+                        try:
+                            if button is not None and button.text == 'Follow':
+                                is_follow, is_blocked = self._follow(button, username, settings_data_from_db, follow_counter, wait, likes)
+                                if is_follow:
+                                    self._followed += 1
+                                    follow_counter += 1
+                                    max_followers -= 1
+                                    i += 1
+                        except Exception as e:
+                            print("Combination: follow {} -> {}".format(username, e))
+                        # break the inner while loop
+                        if is_blocked:
+                            break
+                    # break the middle while loop
+                    if is_blocked or out_of_users:
                         break
-                # break the middle while loop
-                if is_blocked or out_of_users:
+                    print("{} : {} -- sleep for {} minutes".format(dt.datetime.now().strftime('%H:%M:%S'),
+                        self.username, strftime("%M:%S", gmtime(WAIT_FOR_EACH_FOLLOW * curr_follow_add))))
+                    time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
+
+                unfollow_users = self.database.get_unfollow_users(self.username)
+                self._unfollow_users(unfollow_users, self.database.get_user_id(self.username), wait)
+
+                # break the first while loop
+                if is_blocked:
+                    self._screen_shot(self.username)
                     break
-                print("{} : {} -- sleep for {} minutes".format(dt.datetime.now().strftime('%H:%M:%S'),
-                    self.username, strftime("%M:%S", gmtime(WAIT_FOR_EACH_FOLLOW * curr_follow_add))))
-                time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
-
-            unfollow_users = self.database.get_unfollow_users(self.username)
-            self._unfollow_users(unfollow_users, self.database.get_user_id(self.username), wait)
-
-            # break the first while loop
-            if is_blocked:
-                self._screen_shot(self.username)
-                break
-
-        self.driver.delete_all_cookies()
-        self.driver.close()
+        except Exception as e:
+            print("Combination: automation -> ", e)
+        finally:
+            self.driver.delete_all_cookies()
+            self.driver.close()
+        return True
 
     def _scroll_down(self, scroll_box):
         height = S.scroll_to_bottom(self.driver, scroll_box)
@@ -136,10 +150,10 @@ class CombinationBot(main_bot.InstagramBot):
 
     # Saving Combination data to display in the statistics
     def _prepare_data_for_db(self, url, hashtag, num_likes, num_failed_likes, num_followers,
-                             num_failed_followers, schedule, distribution, group_name):
-        follow_followers = Combination(self.username, url, hashtag, num_likes, num_failed_likes,
-                                       num_followers, num_failed_followers, schedule, distribution, group_name)
-        CombinationDM().save_in_db(follow_followers)
+                             num_failed_followers, schedule, distribution, group_name, skip_users):
+        combination = Combination(self.username, url, hashtag, num_likes, num_failed_likes,
+                                  num_followers, num_failed_followers, schedule, distribution, group_name, skip_users)
+        CombinationDM().save_in_db(combination)
         account_id = CombinationDM().get_user_id(self.username)
         account_action = AccountActions(
             account_id, self.username, "Combination", num_followers, num_followers - num_failed_followers)
@@ -166,6 +180,7 @@ class CombinationBot(main_bot.InstagramBot):
         like = S.find(self.driver, "post.like_button", timeout=5)
         if like is not None:
             S.clickable(like).click()
+            self._likes_done += 1
 
     def _open_likes(self, wait):
         try:
@@ -204,6 +219,7 @@ class CombinationBot(main_bot.InstagramBot):
 
                     try:
                         if followed and likes > 0:
+                            self._likes_target += likes
                             self._like_posts(wait, username, likes)
                     except Exception as e:
                         print("Combination: like posts of {} -> {}".format(username, e))

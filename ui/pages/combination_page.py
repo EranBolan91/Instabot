@@ -74,8 +74,7 @@ class CombinationPage(JobPage):
         amounts.content.addWidget(distribution_note)
 
         history = Card("Past runs")
-        self.history = RecordsTable(HISTORY_COLUMNS, "No runs saved. Known issue: the Combination bot doesn't save "
-                                                     "its runs yet (#12), so this stays empty for now.")
+        self.history = RecordsTable(HISTORY_COLUMNS, "No runs saved yet for this account.")
         self.history.setMinimumHeight(140)
         history.content.addWidget(self.history)
 

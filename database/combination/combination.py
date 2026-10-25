@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class CombinationDM(db.Database):
@@ -14,8 +17,8 @@ class CombinationDM(db.Database):
                          combo_obj.num_failed_likes, combo_obj.num_followers, combo_obj.num_failed_followers,
                          combo_obj.schedule, combo_obj.distribution, combo_obj.group_name, combo_obj.date, combo_obj.skip_users,))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_combination: ', e)
+        except Exception:
+            log.exception("Database: could not save the combination stats")
         finally:
             conn.close()
 
@@ -25,8 +28,8 @@ class CombinationDM(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM combination ").fetchall()
-        except Exception as e:
-            print('get combination data: ', e)
+        except Exception:
+            log.exception("Database: could not read the combination stats")
         finally:
             conn.close()
             return data
@@ -37,8 +40,8 @@ class CombinationDM(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM combination WHERE account = ? ", (account_name,)).fetchall()
-        except Exception as e:
-            print('combination: get account data: ', e)
+        except Exception:
+            log.exception("Database: could not read the combination stats of %s", account_name)
         finally:
             conn.close()
             return data

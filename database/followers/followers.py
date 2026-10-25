@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class FollowersDB(db.Database):
@@ -10,7 +13,7 @@ class FollowersDB(db.Database):
             cur.execute("""INSERT INTO follow_back (user_id, account, follow_back, date) VALUES(?,?,?,?)""",
                         (followers_obj.user_id, followers_obj.account, followers_obj.follow_back, followers_obj.date))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_followers: ', e)
+        except Exception:
+            log.exception("Database: could not save the followers stats")
         finally:
             conn.close()

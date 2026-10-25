@@ -14,6 +14,9 @@ from selenium import webdriver
 import time, random, requests
 from database import db
 import os
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 class InstagramBot:
     def __init__(self, username, password, is_mobile, proxy_dict):
@@ -65,7 +68,7 @@ class InstagramBot:
 
         is_login_successful = self.is_login_successful()
         if not is_login_successful: # if its False, means  it didn't logged in
-            print("User: ", self.username, " Didn't log in successful")
+            log.error("%s: login failed", self.username)
             return False
         self._dismiss_popups()
         return True
@@ -88,9 +91,9 @@ class InstagramBot:
     def _like_post(self):
         try:
             S.click(self.driver, "post.like_button")
-        except Exception as e:
+        except Exception:
+            log.exception("%s: could not like the post", self.username)
             self._screen_shot(self.username)
-            print("_like_post on main: ", e)
 
     def _get_like_amount_text(self):
         time.sleep(1)
@@ -119,8 +122,8 @@ class InstagramBot:
             # Get the username
             try:
                 username = S.get(self.driver, "post.author_link").text
-            except Exception as e:
-                print("follow_user_func: did not find the username. -> " ,e)
+            except Exception:
+                log.exception("%s: could not read the post author", self.username)
             followers_num, no_use_data, no_use_d = self._get_followers_number(username)
             if followers_num != -1:
                 if int(followers_num) >= int(settings_data[2]):
@@ -128,29 +131,34 @@ class InstagramBot:
                     self.database.save_unfollow_users(username, self.username)
                     if to_distribution:
                         self.database.add_username_to_distribution_group(username, group_id)
-        except Exception as e:
-            print('follow user: ', e)
+        except Exception:
+            log.exception("%s: could not follow %s", self.username, username)
 
     def _unfollow_user(self, username, user_id):
         if not self._login():
             return
         self._nav_user(username)
         time.sleep(2)
+        unfollowed = False
         try:
             S.click(self.driver, "profile.following_button")
             S.click(self.driver, "profile.unfollow_confirm")
             db.Database().remove_username_from_unfollow_list(username, user_id)
-        except Exception as e:
-            print('Following unfollow user: ', e)
+            unfollowed = True
+        except Exception:
+            # normal for a private account you only requested to follow
+            log.debug("%s: no Following button on %s", self.username, username, exc_info=True)
         try:
             S.click(self.driver, "profile.requested_button", timeout=2)
-            try:
-                self._popup_unfollow()
-                db.Database().remove_username_from_unfollow_list(username, user_id)
-            except Exception as e:
-                print('Requested unfollow user: ', e)
-        except Exception as e:
-            pass
+        except Exception:
+            if not unfollowed:
+                log.warning("%s: could not unfollow %s: no Following or Requested button", self.username, username)
+            return
+        try:
+            self._popup_unfollow()
+            db.Database().remove_username_from_unfollow_list(username, user_id)
+        except Exception:
+            log.exception("%s: could not cancel the follow request to %s", self.username, username)
 
     def _popup_unfollow(self):
         # when user is private and you unfollow him, it pops up a message if you sure you want to unfollow
@@ -165,11 +173,11 @@ class InstagramBot:
     def _check_if_blocked(self):
         url = self.check_current_url()
         if any(part in url for part in S.text("restriction_urls")):
-            print("Instagram restricted this account: " + url)
+            log.warning("%s: Instagram restricted this account: %s", self.username, url)
             return True
         popup = S.find(self.driver, "block.popup", timeout=0)
         if popup is not None:
-            print(popup.text)
+            log.warning("%s: Instagram blocked an action: %s", self.username, popup.text)
             return True
         return False
 
@@ -185,8 +193,8 @@ class InstagramBot:
             if has_profile_image == -1:
                 post_amount = utils().clean_number(self.get_post_amount())
                 clean_number = utils().clean_number(S.count(self.driver, "profile.followers_counter"))
-        except Exception as e:
-            print('get followers number: ', e)
+        except Exception:
+            log.exception("%s: could not read the followers of %s", self.username, username)
         finally:
             self.driver.close()
             self.driver.switch_to.window(self.driver.window_handles[0])
@@ -221,7 +229,7 @@ class InstagramBot:
         mailgun_api = os.environ.get('MAILGUN_API')
         alert_email = os.environ.get('ALERT_EMAIL')
         if not (mailgun_domain and mailgun_api and alert_email):
-            print('not sending an error e-mail: set MAILGUN_DOMAIN, MAILGUN_API and ALERT_EMAIL in .env')
+            log.warning("Not sending the alert e-mail: set MAILGUN_DOMAIN, MAILGUN_API and ALERT_EMAIL in .env")
             return
         print('sending email')
         image_name = username + '.png'
@@ -259,7 +267,7 @@ class InstagramBot:
         return (image.get_attribute("src") or "").find(S.text("default_avatar_file"))
 
     def global_block_message(self, username, seaction):
-        print("""User: {} has been blocked.\nSection: {}""".format(username, seaction))
+        log.error("%s has been blocked by Instagram (%s)", username, seaction)
 
     def global_complate_task(self, username, section, results):
         print(("""Complate tast: {},\nResults: {}\nUsername: {} """.format(section, results, username)))
@@ -284,7 +292,7 @@ class InstagramBot:
     def get_post_amount(self):
         posts_amount = S.count(self.driver, "profile.posts_counter")
         if posts_amount is None:
-            print("get_post_amount - Error")
+            log.warning("%s: could not read the number of posts", self.username)
             return 0
         return posts_amount
 
@@ -298,10 +306,10 @@ class InstagramBot:
             if S.exists(self.driver, "login.logged_in_marker"):
                 return True
             if S.exists(self.driver, "login.error_message"):
-                print("Instagram says the username or password is wrong")
+                log.error("%s: Instagram says the username or password is wrong", self.username)
                 return False
             if any(part in self.check_current_url() for part in S.text("restriction_urls")):
-                print("Instagram wants a security check: log in to this account by hand once")
+                log.error("%s: Instagram wants a security check: log in to this account by hand once", self.username)
                 return False
             time.sleep(1)
         return False

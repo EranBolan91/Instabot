@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class DMDB(db.Database):
@@ -12,8 +15,8 @@ class DMDB(db.Database):
                         (dm_obj.account, dm_obj.message, dm_obj.group,
                          dm_obj.num_members, dm_obj.num_failed_members, dm_obj.schedule, dm_obj.date))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_dm: ', e)
+        except Exception:
+            log.exception("Database: could not save the DM stats")
         finally:
             conn.close()
 
@@ -23,8 +26,8 @@ class DMDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM dm ").fetchall()
-        except Exception as e:
-            print('get_dm_data: ', e)
+        except Exception:
+            log.exception("Database: could not read the DM stats")
         finally:
             conn.close()
             return data
@@ -35,7 +38,7 @@ class DMDB(db.Database):
         try:
             cur.execute("DELETE FROM dm_users WHERE username = ? AND group_id = ?", (username, group_id))
             conn.commit()
-        except Exception as e:
-            print('remove dm user from list: ', e)
+        except Exception:
+            log.exception("Database: could not remove %s from DM group %s", username, group_id)
         finally:
             conn.close()

@@ -5,6 +5,9 @@ import time
 from utils.utils import Utils as utils
 from utils.instagram_selectors import S
 import datetime as dt
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class FollowFollowersBot(main_bot.InstagramBot):
@@ -72,8 +75,8 @@ class FollowFollowersBot(main_bot.InstagramBot):
                         print('reset loops')
                     if follow_count == num_of_following:
                         break
-        except Exception as e:
-            print('follow after followers ', e)
+        except Exception:
+            log.exception("Follow followers %s: run on %s stopped", account_username, user_url)
             self._screen_shot(self.username)
             self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
                              'Follow followers')
@@ -134,8 +137,8 @@ class FollowFollowersBot(main_bot.InstagramBot):
                     print('reset to loops')
                 if follow_count == num_of_following:
                     break
-        except Exception as e:
-            print('follow after following: ', e)
+        except Exception:
+            log.exception("Follow following %s: run on %s stopped", account_username, user_url)
         finally:
             self.driver.delete_all_cookies()
             failed_follow_num = int(num_of_following) - follow_count

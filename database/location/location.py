@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class LocationDB(db.Database):
@@ -16,8 +19,8 @@ class LocationDB(db.Database):
                          location_obj.distribution, location_obj.group_name, location_obj.comment,
                          location_obj.schedule, location_obj.date))
             conn.commit()
-        except Exception as e:
-            print('save_in_db_location: ', e)
+        except Exception:
+            log.exception("Database: could not save the location stats")
         finally:
             conn.close()
 
@@ -27,8 +30,8 @@ class LocationDB(db.Database):
         cur = conn.cursor()
         try:
             data = cur.execute(" SELECT * FROM location ").fetchall()
-        except Exception as e:
-            print('get location data: ', e)
+        except Exception:
+            log.exception("Database: could not read the location stats")
         finally:
             conn.close()
             return data

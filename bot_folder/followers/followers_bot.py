@@ -6,6 +6,9 @@ from utils.utils import Utils as utils
 from utils.instagram_selectors import S
 import datetime as dt
 import time
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class FollowersBot(main_bot.InstagramBot):
@@ -93,8 +96,8 @@ class FollowersBot(main_bot.InstagramBot):
                         button.click()
                         i += 1
                         unfollow_click += 1
-                    except Exception as e:
-                        print('unfollow all users: ', e)
+                    except Exception:
+                        log.exception("Unfollow everyone %s: could not unfollow %s", self.username, username)
                         continue
                     # Instagram asks "Unfollow @user?": confirm it
                     self._popup_unfollow()
@@ -104,8 +107,8 @@ class FollowersBot(main_bot.InstagramBot):
                         self.global_block_message(self.username, "Unfollow everyone")
                         break
                 print("Unfollow everyone: removed {}/{} account: {}".format(limit_unfollowers, unfollow_click, self.username))
-        except Exception as e:
-            print("Error in the end: ", e)
+        except Exception:
+            log.exception("Unfollow everyone %s: run stopped", self.username)
         self.driver.close()
 
     # unfollow users - gets list of users
@@ -137,8 +140,8 @@ class FollowersBot(main_bot.InstagramBot):
                     S.click(self.driver, "profile.requested_button")
                     self._popup_unfollow()
                     unfollowed = True
-            except Exception as e:
-                print('unfollow users: ', e)
+            except Exception:
+                log.exception("Unfollow %s: could not unfollow %s", self.username, user)
             if unfollowed:
                 i += 1
                 remove_clicks += 1
@@ -180,8 +183,8 @@ class FollowersBot(main_bot.InstagramBot):
     def unfollow_user(self, username, account_id):
         try:
             self._unfollow_user(username, account_id)
-        except Exception as e:
-            print('unfollow user: ', e)
+        except Exception:
+            log.exception("Unfollow %s: could not unfollow %s", self.username, username)
         finally:
             self.driver.close()
 

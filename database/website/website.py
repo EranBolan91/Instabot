@@ -1,5 +1,8 @@
 from database import db
 import sqlite3
+from utils.log import get_logger
+
+log = get_logger(__name__)
 
 
 class Website(db.Database):
@@ -12,8 +15,8 @@ class Website(db.Database):
                         (website_obj.website, website_obj.modify))
             conn.commit()
             is_saved = True
-        except Exception as e:
-            print('save_in_db_website: ', e)
+        except Exception:
+            log.exception("Database: could not save website")
         finally:
             conn.close()
             return is_saved
@@ -26,8 +29,8 @@ class Website(db.Database):
             cur.execute("DELETE FROM website WHERE id = ?", (website_id,))
             conn.commit()
             is_removed = True
-        except Exception as e:
-            print('save_in_db_website: ', e)
+        except Exception:
+            log.exception("Database: could not delete website %s", website_id)
         finally:
             conn.close()
             return is_removed

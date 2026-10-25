@@ -4,8 +4,8 @@ import sqlite3
 
 class CombinationDM(db.Database):
     def save_in_db(self, combo_obj):
+        conn = sqlite3.connect(self.database_name)
         try:
-            conn = sqlite3.connect(self.database_name)
             cur = conn.cursor()
             cur.execute("""INSERT INTO combination (account, url, hashtag, num_likes, num_failed_likes, num_followers, 
                 num_failed_followers, schedule, distribution, group_name, date, skip_users) VALUES(?,?,?,?,?,?,?,?,

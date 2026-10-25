@@ -180,10 +180,10 @@ A toggle: **Their followers** (`follow_after_followers`) or **Who they follow** 
 #### Combination (`combination_page.py`)
 "Follows about 100 users over 12 hours, then unfollows them all, and repeats."
 Source toggle **Hashtag | Post URL**. Fields: users to follow, posts to like per followed user, skip posts, skip users (not used by the bot), distribution list (not used by the bot, #12). No proxy.
-Run → `CombinationBot.combination(hashtag, url, likes, follow, distribution, 0, group_name, group_id, skip_posts, skip_users)`. A Past runs table comes from `CombinationDM.get_account_data`, but it stays empty because the bot doesn't save runs (#12).
+Run → `CombinationBot.combination(hashtag, url, likes, follow, distribution, 0, group_name, group_id, skip_posts, skip_users)`. A Past runs table comes from `CombinationDM.get_account_data`; each finished run adds a row.
 
 #### Statistics (`statistics_page.py`)
-Tabs: HashTag, Location, Follow Followers, DM, Follow back, Combination. Each is a `RecordsTable` with named columns from the schema in §6.1, searchable, sortable, with an "only the current account" filter. Refresh button, plus an automatic refresh whenever a job finishes. DM and Combination show a note that they stay empty (#13, #12).
+Tabs: HashTag, Location, Follow Followers, DM, Follow back, Combination. Each is a `RecordsTable` with named columns from the schema in §6.1, searchable, sortable, with an "only the current account" filter. Refresh button, plus an automatic refresh whenever a job finishes.
 
 ### 4.4 Dialogs (`ui/dialogs/`)
 - **Accounts** (`accounts_dialog.py`): a table of accounts (Name, Phone, Username, Created, Last login; **passwords are not shown**) and a form (Name, Phone, Username*, Password* with a show/hide button). Add (`save_account`), Edit → Save (`update_account`), Delete (`delete_account`, after a confirmation). The header's account list refreshes after any change.
@@ -279,7 +279,7 @@ It also sets `self.wait = WebDriverWait(driver, 7)`.
   - It opens the profile, clicks `profile.message_button`, types into `dm.message_input` (`_type_message`), and sends with `dm.send_button` or Enter.
   - It removes the user from `dm_users` and stops at `limit_msg` sent messages.
   - If the profile shows "Requested", it cancels the request and removes the user from `dm_users` and `unfollow`. If it shows "Follow" (we no longer follow them), it removes the user from both tables.
-  - Includes block detection and the progressive sleep. Saves a `DM` stats row, which fails silently (#13).
+  - Includes block detection and the progressive sleep. Saves a `DM` stats row when the run ends.
 - **`_type_message(text_input, message)`**: types the message line by line, with Shift+Enter between lines (Enter alone sends).
 - **`send_message_to_following_list(message, is_schedule)`**: logs in, opens its own followers list, collects usernames and calls the method above with too few arguments. Broken (#14).
 - **`_prepare_data_for_db(...)`**: saves the `DM` row.
@@ -287,7 +287,7 @@ It also sets `self.wait = WebDriverWait(driver, 7)`.
 ### 5.7 `bot_folder/combination/combination_bot.py` — `class CombinationBot(InstagramBot)`
 Module constants: `PROCESS_TIME = 12h`, `MAX_FOLLOWERS_EACH_PROCESS = 100`, `WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / 100 = 432s`, `MAX_EMPTY_LISTS = 5`.
 This is the most "human-like" feature: **follow ~100 users over 12 hours, then unfollow everyone the bot followed, and repeat.**
-- **`combination(hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users)`**: entry point. It only forwards `followers, hashtag, url, skip_posts, likes` to `automation`. Distribution, skip_users and stats saving are not implemented (#12).
+- **`combination(hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users)`**: entry point. It only forwards `followers, hashtag, url, skip_posts, likes` to `automation`. When the run ends it saves a `combination` stats row (likes and follows asked for vs. failed) and an `account_actions` row. Distribution and skip_users are not implemented (#12).
 - **`automation(max_followers, hashtag, url, skip_posts, likes)`**:
   1. Logs in and opens the starting post (`_get_wanted_post`): a hashtag's first post, a post URL itself, or the first post of any other URL. Then it skips `skip_posts` posts.
   2. Opens the post's **likes list** (`_open_likes`) and gets its scroll area.
@@ -475,7 +475,7 @@ Notes on today's Instagram (checked 2026-10-25):
 ### Developer TODO list (from the old `main.py`)
 - ~~Change the Follow Followers logic to "scroll then follow", like Combination.~~ Done: it reads the list row by row.
 - Finish and test "unfollow only users who don't follow back" against today's Instagram.
-- ~~Show Combination stats in the Statistics tab.~~ The tab exists, but the bot doesn't save runs (#12).
+- ~~Show Combination stats in the Statistics tab.~~ Done.
 - Per-account action summary boxes on the Statistics page.
 - ~~Display the follow-back counts.~~ Done: Statistics → Follow back.
 - ~~Make Instagram selectors editable from the UI.~~ Done: Inspect Settings.
@@ -501,8 +501,8 @@ The issues below were found by reading the code. The numbers are kept stable bec
 9. **Fixed.** `_get_followers_number` always returns 3 values.
 10. **Fixed.** `_follow_user` reads the 3 values and only follows users with a picture and enough followers.
 11. Hashtag likes threshold: it is replaced by `if int(20) > int(0):`, so the "Settings → likes" value is ignored.
-12. `CombinationBot.combination` ignores `to_distribution`, `group_name`, `group_id` and `skip_users`, and never saves stats (`_prepare_data_for_db` is never called, and would fail because it doesn't pass `skip_users` to `Combination`).
-13. `DMDB.save_in_db` inserts into column `group_distribution`, but the table column is `group_name`, so DM stats are never saved.
+12. `CombinationBot.combination` doesn't save followed users to the distribution list (`group_id`) and ignores `skip_users`. (**Fixed:** it now saves its stats when a run ends.)
+13. **Fixed.** `DMDB.save_in_db` inserted into column `group_distribution`, but the table column is `group_name`, so DM stats were never saved.
 14. `send_message_to_following_list` calls `send_message_to_distribution_group` with too few arguments. (The UI side is handled: "Message my followers" is disabled.)
 15. **Fixed** (the old DM tab called `DMDB.remove_dm_user_from_list` on the class).
 16. `FollowBackDB.save_in_db` uses the column `used_id` (it should be `user_id`). `FollowBackDB.get_account_data` queries `follow_followers` (copy-paste error). The app doesn't call either one: follow-back rows are saved by `FollowersDB`, and Statistics reads them with `FollowBackDB.get_follow_back_data()`.

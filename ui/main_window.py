@@ -252,7 +252,7 @@ class MainWindow(QMainWindow):
         self._open_dialog(dialog)
 
     def _open_inspect_settings(self):
-        self._open_dialog(InspectSettingsDialog(self))
+        self._open_dialog(InspectSettingsDialog(self, jobs=self.jobs, account=self.account_picker.current_account()))
 
     def _open_dialog(self, dialog):
         # open() is modal like exec(), but doesn't block the caller (or the tests)

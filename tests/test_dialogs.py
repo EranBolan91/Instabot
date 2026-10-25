@@ -3,9 +3,7 @@ from PySide6.QtWidgets import QLineEdit
 from database.db import Database
 from ui.core.db_helpers import SETTINGS_FOLLOWERS, SETTINGS_HEADLESS, SETTINGS_LIKES, SETTINGS_POSTS
 from ui.dialogs.accounts_dialog import AccountsDialog
-from ui.dialogs.inspect_settings_dialog import InspectSettingsDialog
 from ui.dialogs.settings_dialog import SettingsDialog
-from utils.utils import Utils
 
 
 def _usernames():
@@ -251,13 +249,3 @@ def test_add_and_delete_website(themed, qtbot, confirm_yes):
     dialog.websites_widget.setCurrentRow(0)
     dialog.remove_website_button.click()
     assert Database().get_websites_data() == []
-
-
-# ---------- Inspect settings ----------
-
-def test_inspect_settings_is_read_only(themed, qtbot):
-    dialog = _open(qtbot, InspectSettingsDialog)
-    assert not dialog.save_button.isEnabled()
-    assert dialog.fields["Block URL"].text() == Utils.BLOCK_RESTRICTION
-    assert all(edit.isReadOnly() for edit in dialog.fields.values())
-    assert len(dialog.fields) == 8

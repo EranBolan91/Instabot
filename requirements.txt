@@ -1,9 +1,6 @@
-# New UI
+# UI
 PySide6>=6.7
 qtawesome>=1.3
-
-# Old Tkinter window (main_tk.py), removed in UI phase 5
-ttkbootstrap
 
 # Bots
 selenium==3.141.0

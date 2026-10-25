@@ -9,6 +9,5 @@ chromedriver.exe
 geckodriver.log
 geckodriver.exe
 proxy_auth_plugin.zip
-view/testing.py
 venv
 .venv

@@ -264,13 +264,13 @@ Commit at the end of each phase. Run the smoke tests (§9) before each commit.
 - Never open real Chrome or log into Instagram in tests.
 
 **Done when:**
-- [ ] Every item in §6 works and the old `view/` folder is gone.
-- [ ] No action freezes the window (try resizing while a job runs).
-- [ ] Jobs panel shows every job's live status; scheduled jobs can be cancelled.
-- [ ] Bot output appears in the Log panel.
-- [ ] Passwords are masked everywhere in the UI.
-- [ ] Smoke tests pass, and `python main.py` starts on a fresh clone with an empty DB.
-- [ ] README and `PROJECT_OVERVIEW.md` are updated.
+- [x] Every item in §6 works and the old `view/` folder is gone.
+- [x] No action freezes the window (try resizing while a job runs).
+- [x] Jobs panel shows every job's live status; scheduled jobs can be cancelled.
+- [x] Bot output appears in the Log panel.
+- [x] Passwords are masked everywhere in the UI.
+- [x] Smoke tests pass, and `python main.py` starts on a fresh clone with an empty DB.
+- [x] README and `PROJECT_OVERVIEW.md` are updated.
 
 ---
 

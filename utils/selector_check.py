@@ -9,6 +9,7 @@ Needs a driver that is already logged in.
 import time
 from datetime import date
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from utils.instagram_selectors import S
@@ -50,7 +51,7 @@ class _Report:
 
 
 def _escape(driver):
-    driver.find_element_by_tag_name("body").send_keys(Keys.ESCAPE)
+    driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
     time.sleep(2)
 
 

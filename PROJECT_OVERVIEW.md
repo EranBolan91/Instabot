@@ -28,8 +28,8 @@ Everything is stored in a local **SQLite** database file, `instabot.db`, created
 | Concern | Library |
 |---|---|
 | GUI | `PySide6` (Qt 6) with a dark QSS theme, `qtawesome` icons |
-| Browser automation | `selenium==3.141.0` (old Selenium 3 API: `find_element_by_xpath`, etc.), with `urllib3==1.26.20` |
-| Chrome driver install | `webdriver-manager==4.0.2`: `ChromeDriverManager().install()` downloads the driver that matches the installed Chrome |
+| Browser automation | `selenium==4.51.0` (Selenium 4 API: `find_element(By.XPATH, ...)`, etc.) |
+| Chrome driver install | Selenium Manager (built into Selenium 4) downloads the driver that matches the installed Chrome |
 | Finding things on Instagram | `utils/instagram_selectors.json`, read through `utils/instagram_selectors.py` (see §8) |
 | HTML parsing | `beautifulsoup4` (imported, no longer needed by the bots) |
 | Storage | `sqlite3` (standard library) |
@@ -88,7 +88,7 @@ tests/                       → pytest-qt tests
 Every bot inherits `InstagramBot(username, password, is_mobile, proxy_dict)`.
 - `is_mobile=True` → Chrome with mobile emulation ("Nexus 5") and the options below (used by the DM bot).
 - `is_mobile=False` → desktop Chrome. The options are **not passed** here (known issue #4).
-- Both get their driver from `ChromeDriverManager().install()`.
+- Both start with `webdriver.Chrome(options=options)`; Selenium Manager finds the matching ChromeDriver.
 - `proxy_dict = {"proxy": ..., "port": ...}` is accepted everywhere but **never used** (known issue #5).
 
 ---
@@ -207,7 +207,7 @@ No bot contains a raw XPath, CSS or class name any more. They find everything th
 ### 5.1 `bot_folder/main_bot.py` — `class InstagramBot` (base class)
 Holds a `db.Database()`, the credentials, `base_url = 'https://www.instagram.com'` and the Selenium `driver`.
 
-**`__init__(username, password, is_mobile, proxy_dict)`** builds Chrome options: no-sandbox, disable GPU and notifications, `--headless` if `settings.headless`, and either the "Nexus 5" mobile emulation (mobile) or a fixed desktop user-agent (desktop). Eager page load is passed as the `pageLoadStrategy` capability, since Selenium 3 options can't hold it. It then starts Chrome with those options and the driver from `ChromeDriverManager().install()`.
+**`__init__(username, password, is_mobile, proxy_dict)`** builds Chrome options: no-sandbox, disable GPU and notifications, `--headless` if `settings.headless`, and either the "Nexus 5" mobile emulation (mobile) or a fixed desktop user-agent (desktop). Page load strategy is `eager` (`options.page_load_strategy`). It then starts Chrome with `webdriver.Chrome(options=options)`; Selenium Manager supplies the matching driver.
 It also sets `self.wait = WebDriverWait(driver, 7)`.
 
 | Method | What it does |
@@ -487,8 +487,8 @@ The issues below were found by reading the code. The numbers are kept stable bec
 
 **Selectors and Instagram changes**
 1. **Fixed.** Selectors used to be scattered, absolute or obfuscated. They now all live in `utils/instagram_selectors.json`. When Instagram changes, run **Inspect Settings → Check selectors**, then fix what's missing there.
-2. Selenium 3 API (`find_element_by_*`) is used; it was removed in Selenium 4.3+. The pinned `selenium==3.141.0` must be kept, or the code migrated to `find_element(By.X, ...)`.
-3. **Fixed.** The ChromeDriver is no longer pinned: webdriver-manager 4 downloads the one matching the installed Chrome.
+2. **Fixed.** Migrated to Selenium 4: `find_element(By.X, ...)` everywhere, no `desired_capabilities`, and Selenium Manager instead of webdriver-manager.
+3. **Fixed.** The ChromeDriver is no longer pinned: Selenium Manager downloads the one matching the installed Chrome.
 
 **Driver and config**
 4. **Fixed.** Chrome now gets its options in both desktop and mobile mode (before, desktop ignored them and mobile's `chrome_options` replaced them), and `Options` is imported from `selenium.webdriver.chrome.options`.

@@ -1,10 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from utils.utils import Utils as utils
@@ -39,13 +35,10 @@ class InstagramBot:
             # the phone emulation sets its own user-agent, so only the desktop gets this one
             options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")
 
-        # Selenium 3 has no options.page_load_strategy, so 'eager' goes in as a capability
-        capabilities = DesiredCapabilities.CHROME.copy()
-        capabilities["pageLoadStrategy"] = "eager"
+        options.page_load_strategy = "eager"
 
-        # ChromeDriverManager finds the installed Chrome's version and downloads the matching driver
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options,
-                                       desired_capabilities=capabilities)
+        # Selenium Manager (built into Selenium 4) finds the installed Chrome and downloads the matching driver
+        self.driver = webdriver.Chrome(options=options)
 
         self.wait = WebDriverWait(self.driver, 7)
 

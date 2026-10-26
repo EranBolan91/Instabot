@@ -1,4 +1,4 @@
-"""Encrypts the Instagram passwords saved in instabot.db.
+"""Encrypts the passwords saved in instabot.db (Instagram accounts and proxies).
 
 Passwords are stored as "enc:v1:<Fernet token>" (AES with an HMAC check, from
 the cryptography package). The key never goes in the database. It comes from,
@@ -10,7 +10,8 @@ in order:
 3. a file named instabot.key next to instabot.db, if there is no password store
 
 The key is made on first use. If it is lost, the saved passwords can't be read
-any more and have to be typed in again in Main → Accounts.
+any more and have to be typed in again in Main → Accounts (and the proxies
+added again in Settings → Proxies).
 """
 import os
 from pathlib import Path

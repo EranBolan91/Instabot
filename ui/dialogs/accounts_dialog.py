@@ -102,8 +102,8 @@ class AccountsDialog(QDialog):
         fields = (
             (FormField("Username *", self.username_edit), self._check_username),
             (FormField("Password *", self.password_edit), self._check_password),
-            (FormField("Name", self.name_edit), lambda: self._check_edit_text(self.name_edit, "Name")),
-            (FormField("Phone", self.phone_edit), lambda: self._check_edit_text(self.phone_edit, "Phone")),
+            (FormField("Name", self.name_edit), lambda: None),
+            (FormField("Phone", self.phone_edit), lambda: None),
         )
         for field, check in fields:
             self.validator.add(field, check, field.widget.textChanged)
@@ -135,21 +135,10 @@ class AccountsDialog(QDialog):
         return validators.first_error(
             validators.required(username, "Username"),
             validators.no_spaces(username, "Username"),
-            # deleting an account looks it up by username with formatted SQL
-            validators.no_apostrophe(username, "Username"),
             validators.unique(username, others, "An account with this username"))
 
     def _check_password(self):
-        password = self.password_edit.text()
-        return validators.first_error(
-            validators.required(password, "Password"),
-            self._check_edit_text(self.password_edit, "Password"))
-
-    def _check_edit_text(self, edit, label):
-        # Adding uses a safe query; saving an edit pastes the values into the SQL.
-        if self._editing_row is not None and "'" in edit.text():
-            return "{} can't contain an apostrophe (') when editing. Delete the account and add it again.".format(label)
-        return None
+        return validators.required(self.password_edit.text(), "Password")
 
     # ---------- Actions ----------
 

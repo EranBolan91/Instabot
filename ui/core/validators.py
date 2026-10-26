@@ -2,7 +2,7 @@
 
 Each check returns an error message to show under the field, or None when
 the value is fine. They are plain functions, so they're easy to combine:
-``first_error(required(name, "Name"), no_apostrophe(name, "Name"))``.
+``first_error(required(name, "Name"), no_spaces(name, "Name"))``.
 """
 import re
 
@@ -19,12 +19,6 @@ def required(value, label):
 
 def no_spaces(value, label):
     return "{} can't contain spaces".format(label) if re.search(r"\s", value) else None
-
-
-def no_apostrophe(value, label):
-    # several queries in database/ paste values straight into the SQL, so a '
-    # breaks them (see PROJECT_OVERVIEW.md, known issue #23)
-    return "{} can't contain an apostrophe (')".format(label) if "'" in value else None
 
 
 def http_url(value):

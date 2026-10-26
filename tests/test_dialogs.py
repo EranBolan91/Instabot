@@ -61,7 +61,7 @@ def test_password_can_be_revealed_in_the_form(themed, qtbot):
 def test_duplicate_or_bad_usernames_are_rejected(themed, qtbot):
     Database().save_account("Alice", "050", "alice", "pw")
     dialog = _open(qtbot, AccountsDialog)
-    for bad in ("ALICE", "my user", "o'neil"):
+    for bad in ("ALICE", "my user"):
         _fill_account(dialog, bad)
         assert not dialog.save_button.isEnabled(), bad
         assert dialog.username_field.error()
@@ -84,14 +84,18 @@ def test_edit_account(themed, qtbot):
     assert dialog.form_card.title_label.text() == "Add account"
 
 
-def test_editing_blocks_apostrophes_the_sql_cant_store(themed, qtbot):
+def test_apostrophes_are_allowed(themed, qtbot):
     Database().save_account("Alice", "050", "alice", "pw")
     dialog = _open(qtbot, AccountsDialog)
     dialog.table.selectRow(0)
     dialog.edit_button.click()
+    dialog.name_edit.setText("Alice O'Neil")
+    dialog.username_edit.setText("o'neil")
     dialog.password_edit.setText("it's")
-    assert not dialog.save_button.isEnabled()
-    assert "apostrophe" in dialog.password_field.error()
+    assert dialog.save_button.isEnabled()
+    dialog.save_button.click()
+    row = Database().get_accounts()[0]
+    assert (row[1], row[3], row[4]) == ("Alice O'Neil", "o'neil", "it's")
 
 
 def test_delete_account_asks_first(themed, qtbot, confirm_yes):
@@ -185,7 +189,7 @@ def test_add_and_delete_distribution_list(themed, qtbot, confirm_yes):
     dialog.list_name_edit.setText("travel")
     assert not dialog.add_list_button.isEnabled()  # duplicate
     dialog.list_name_edit.setText("Mom's list")
-    assert not dialog.add_list_button.isEnabled()  # apostrophe
+    assert dialog.add_list_button.isEnabled()  # apostrophes are fine
 
     dialog.lists_widget.setCurrentRow(0)
     dialog.remove_list_button.click()

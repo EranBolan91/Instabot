@@ -28,14 +28,17 @@ MAX_EMPTY_LISTS = 5
 
 class CombinationBot(main_bot.InstagramBot):
     def combination(self, hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users):
-        if not self.automation(followers, hashtag, url, skip_posts, likes):
+        if not self.automation(followers, hashtag, url, skip_posts, likes,
+                               group_id=group_id if to_distribution else None, skip_users=skip_users):
             return
         failed_follows = max(int(followers) - self._followed, 0)
         self._prepare_data_for_db(url, hashtag, self._likes_target, self._likes_target - self._likes_done,
                                   followers, failed_follows, schedule, to_distribution, group_name, skip_users)
 
     # returns False when the login failed (nothing ran, nothing to save)
-    def automation(self, max_followers, hashtag, url, skip_posts, likes):
+    # group_id: save each followed user to this distribution list (None = don't)
+    # skip_users: pass over this many users at the start of the likes list without following them
+    def automation(self, max_followers, hashtag, url, skip_posts, likes, group_id=None, skip_users=0):
         wait = None  # kept in the helper signatures; the selectors do their own waiting
         settings_data_from_db = CombinationDM().get_data_from_settings()
         follow_buttons = []
@@ -50,6 +53,8 @@ class CombinationBot(main_bot.InstagramBot):
         self._followed = 0
         self._likes_target = 0
         self._likes_done = 0
+        self._group_id = group_id
+        users_to_skip = max(int(skip_users or 0), 0)
 
         if not self._login():
             return False
@@ -91,6 +96,9 @@ class CombinationBot(main_bot.InstagramBot):
                             empty_lists = 0
 
                         username, button = follow_buttons.pop(0)
+                        if users_to_skip > 0:
+                            users_to_skip -= 1
+                            continue
                         try:
                             if button is not None and button.text == 'Follow':
                                 is_follow, is_blocked = self._follow(button, username, settings_data_from_db, follow_counter, wait, likes)
@@ -221,6 +229,8 @@ class CombinationBot(main_bot.InstagramBot):
                         self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),'Combination')
                         self.global_block_message(self.username, "Combination")
                         followed = False
+                    elif getattr(self, "_group_id", None) is not None:
+                        self.database.add_username_to_distribution_group(username, self._group_id)
 
                     try:
                         if followed and likes > 0:

@@ -1,5 +1,6 @@
 from database import db
 import sqlite3
+from utils import crypto
 from utils.log import get_logger
 
 log = get_logger(__name__)
@@ -12,7 +13,7 @@ class Proxy(db.Database):
             conn = sqlite3.connect(self.database_name)
             cur = conn.cursor()
             cur.execute("""INSERT INTO proxy (host, username, password, port) VALUES(?,?,?,?)""",
-                        (proxy_obj.host, proxy_obj.username, proxy_obj.password, proxy_obj.port))
+                        (proxy_obj.host, proxy_obj.username, crypto.encrypt(proxy_obj.password), proxy_obj.port))
             conn.commit()
             is_saved = True
         except Exception:

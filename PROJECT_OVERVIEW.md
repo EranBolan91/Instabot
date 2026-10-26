@@ -126,7 +126,7 @@ Calls `load_dotenv()`, creates `screen_shots/` (the bots fail without it), and c
   - At most 8 jobs run at the same time (`MAX_PARALLEL_JOBS`). A 1-second timer starts scheduled jobs when they're due.
   - `JobWorker(QRunnable)`: runs `make_bot()` and `run(bot)` in a thread named `job-<id>`, and always quits the driver at the end.
 - **`log_bridge.py`** — `LogBridge`: replaces `sys.stdout` / `sys.stderr` with writers that still echo to the console and also emit `(text, thread name, is_error)`. The Log panel uses the thread name to know which job printed a line.
-- **`validators.py`**: shared form checks that return an error text or `None`, `required`, `no_spaces`, `no_apostrophe` (an apostrophe breaks some SQL queries, known issue #23), `http_url`, `positive`, `unique`, `proxy_pair`, `instagram_url`, `instagram_location_url`, `hashtag`, and `first_error` to combine them.
+- **`validators.py`**: shared form checks that return an error text or `None`, `required`, `no_spaces`, `http_url`, `positive`, `unique`, `proxy_pair`, `instagram_url`, `instagram_location_url`, `hashtag`, and `first_error` to combine them.
 - **`db_helpers.py`**: names for the tuple indexes of DB rows (`account_id(row)`, `account_username(row)`, `account_password(row)`, `account_created(row)`, `group_id(row)`, `group_name(row)`, …) and `as_int`.
 
 ### 4.2 Widgets (`ui/widgets/`)
@@ -179,7 +179,7 @@ A toggle: **Their followers** (`follow_after_followers`) or **Who they follow** 
 
 #### Combination (`combination_page.py`)
 "Follows about 100 users over 12 hours, then unfollows them all, and repeats."
-Source toggle **Hashtag | Post URL**. Fields: users to follow, posts to like per followed user, skip posts, skip users (not used by the bot), distribution list (not used by the bot, #12). No proxy.
+Source toggle **Hashtag | Post URL**. Fields: users to follow, posts to like per followed user, skip posts, skip users (users at the top of the likes list to pass over), distribution list (each followed user is saved to it). No proxy.
 Run → `CombinationBot.combination(hashtag, url, likes, follow, distribution, 0, group_name, group_id, skip_posts, skip_users)`. A Past runs table comes from `CombinationDM.get_account_data`; each finished run adds a row.
 
 #### Statistics (`statistics_page.py`)
@@ -287,7 +287,7 @@ It also sets `self.wait = WebDriverWait(driver, 7)`.
 ### 5.7 `bot_folder/combination/combination_bot.py` — `class CombinationBot(InstagramBot)`
 Module constants: `PROCESS_TIME = 12h`, `MAX_FOLLOWERS_EACH_PROCESS = 100`, `WAIT_FOR_EACH_FOLLOW = PROCESS_TIME / 100 = 432s`, `MAX_EMPTY_LISTS = 5`.
 This is the most "human-like" feature: **follow ~100 users over 12 hours, then unfollow everyone the bot followed, and repeat.**
-- **`combination(hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users)`**: entry point. It only forwards `followers, hashtag, url, skip_posts, likes` to `automation`. When the run ends it saves a `combination` stats row (likes and follows asked for vs. failed) and an `account_actions` row. Distribution and skip_users are not implemented (#12).
+- **`combination(hashtag, url, likes, followers, to_distribution, schedule, group_name, group_id, skip_posts, skip_users)`**: entry point. It forwards `followers, hashtag, url, skip_posts, likes` to `automation`, plus `group_id` (only when `to_distribution` is on) and `skip_users`. When the run ends it saves a `combination` stats row (likes and follows asked for vs. failed) and an `account_actions` row.
 - **`automation(max_followers, hashtag, url, skip_posts, likes)`**:
   1. Logs in and opens the starting post (`_get_wanted_post`): a hashtag's first post, a post URL itself, or the first post of any other URL. Then it skips `skip_posts` posts.
   2. Opens the post's **likes list** (`_open_likes`) and gets its scroll area.
@@ -333,7 +333,7 @@ Builds a Chrome extension zip (`proxy_auth_plugin.zip`) with `manifest.json` and
 | `combination` | 0 id, 1 account, 2 url, 3 hashtag, 4 num_likes, 5 num_failed_likes, 6 num_followers, 7 num_failed_followers, 8 schedule, 9 distribution, 10 group_name, 11 date, 12 skip_users | Combination run stats. |
 | `follow_back` | 0 id, 1 user_id, 2 account, 3 follow_back, 4 date | How many unfollowed users turned out to be following us. |
 | `account_actions` | 0 id, 1 user_id, 2 account, 3 action, 4 amount, 5 amount_success, 6 date | Generic per-run action log ("HashTag", "Combination"). |
-| `proxy` | 0 id, 1 host, 2 username, 3 password, 4 port | Saved proxies (Settings → Proxies shows host, username and port). |
+| `proxy` | 0 id, 1 host, 2 username, 3 password, 4 port | Saved proxies (Settings → Proxies shows host, username and port). The password is encrypted like account passwords; `Database()` encrypts old plain-text ones on start. |
 | `website` | 0 id, 1 website, 2 modify | Random "warm-up" websites visited before login. |
 | `inspect_settings` | id, page_not_found, user_not_found, block_restriction, block_change_pass, scroll_box_xml, scroll_box_close_btn, like_btn_xml, second_like_btn_xml, unsuccessful_login_txt, date_modify | An old plan for editable selectors. Created with defaults, never used: `utils/instagram_selectors.json` replaced it. |
 
@@ -357,7 +357,7 @@ Builds a Chrome extension zip (`proxy_auth_plugin.zip`) with `manifest.json` and
 | `get_group_id_by_group_name_and_id(group_name, owner_username)` | Group id lookup. |
 | `get_users_from_dm_users(group_name, owner_username)` | Usernames in a group. |
 | `save_data_account_action(action)` | Inserts an `AccountActions` row. |
-| `get_proxy_data()` / `get_websites_data()` | All proxies / websites. |
+| `get_proxy_data()` / `get_websites_data()` | All proxies (passwords decrypted) / websites. |
 
 ### 6.2 Feature DB subclasses (all inherit `Database`)
 | File | Class | Methods |
@@ -501,7 +501,7 @@ The issues below were found by reading the code. The numbers are kept stable bec
 9. **Fixed.** `_get_followers_number` always returns 3 values.
 10. **Fixed.** `_follow_user` reads the 3 values and only follows users with a picture and enough followers.
 11. Hashtag likes threshold: it is replaced by `if int(20) > int(0):`, so the "Settings → likes" value is ignored.
-12. `CombinationBot.combination` doesn't save followed users to the distribution list (`group_id`) and ignores `skip_users`. (**Fixed:** it now saves its stats when a run ends.)
+12. **Fixed.** `CombinationBot.combination` saves its stats when a run ends, saves each followed user to the chosen distribution list, and passes over the first `skip_users` users of the likes list.
 13. **Fixed.** `DMDB.save_in_db` inserted into column `group_distribution`, but the table column is `group_name`, so DM stats were never saved.
 14. `send_message_to_following_list` calls `send_message_to_distribution_group` with too few arguments. (The UI side is handled: "Message my followers" is disabled.)
 15. **Fixed** (the old DM tab called `DMDB.remove_dm_user_from_list` on the class).
@@ -514,8 +514,8 @@ The issues below were found by reading the code. The numbers are kept stable bec
 22. `screen_shots/` is now created by `main.py` (**Fixed**), but `_send_email` still fails if the screenshot is missing.
 
 **Security and quality**
-23. **Fixed.** All SQL uses `?` parameters. The UI still refuses apostrophes in usernames and list names; that check can now be dropped.
-24. Instagram passwords are stored in plain text in SQLite. (The Accounts table no longer shows them.)
+23. **Fixed.** All SQL uses `?` parameters, and the UI allows apostrophes again.
+24. **Fixed.** Instagram and proxy passwords are encrypted in SQLite (`utils/crypto.py`). The Accounts table doesn't show them.
 25. Wide `try/except Exception: pass` blocks in the bots hide most failures, and there is no logging framework. (**Partly fixed:** there are now tests, and running jobs can be stopped.)
 26. Automating Instagram actions violates Instagram's Terms of Use and can get accounts restricted or banned. The block-detection code exists for this reason.
 

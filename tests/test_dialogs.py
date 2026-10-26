@@ -143,7 +143,7 @@ def test_settings_without_a_settings_row_shows_defaults(themed, qtbot):
     assert int(data[SETTINGS_FOLLOWERS]) == 150
 
 
-def test_settings_zero_keeps_the_current_value(themed, qtbot):
+def test_settings_zero_is_saved(themed, qtbot):
     Database().save_account("Alice", "050", "alice", "pw")
     Database().save_settings(10, 200, 0, 0, 0, 5)
     dialog = _open(qtbot, SettingsDialog)
@@ -155,7 +155,8 @@ def test_settings_zero_keeps_the_current_value(themed, qtbot):
     dialog.save_general_button.click()
 
     data = Database().get_data_from_settings()
-    assert int(data[SETTINGS_LIKES]) == 10
+    # 0 means "no minimum": it is saved, not replaced by the old value
+    assert int(data[SETTINGS_LIKES]) == 0
     assert int(data[SETTINGS_FOLLOWERS]) == 200
     assert int(data[SETTINGS_POSTS]) == 9
     assert data[SETTINGS_HEADLESS] == 1

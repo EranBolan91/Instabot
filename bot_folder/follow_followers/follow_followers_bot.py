@@ -81,11 +81,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
             self._send_email(self.username, follow_count, dt.datetime.now().strftime('%H:%M:%S'),
                              'Follow followers')
         finally:
-            self.driver.delete_all_cookies()
             failed_follow_num = int(num_of_following) - follow_count
             self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num,
                                       is_schedule, num_skip)
-            self.driver.close()
+            self._close_browser()
 
     def follow_after_following(self, user_url, account_username, num_of_following, to_distribution, group_name, group_id, is_schedule, num_skip):
         settings_data_from_db = FollowFollowersDB().get_data_from_settings()
@@ -140,11 +139,10 @@ class FollowFollowersBot(main_bot.InstagramBot):
         except Exception:
             log.exception("Follow following %s: run on %s stopped", account_username, user_url)
         finally:
-            self.driver.delete_all_cookies()
             failed_follow_num = int(num_of_following) - follow_count
             self._prepare_data_for_db(user_url, num_of_following, to_distribution, group_name, failed_follow_num,
                                       is_schedule, num_skip)
-            self.driver.close()
+            self._close_browser()
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, user_url, num_of_following, to_distribution, group_name, failed_follow_num, is_schedule, num_skip):

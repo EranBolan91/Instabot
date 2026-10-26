@@ -1,5 +1,10 @@
 import os
 
+# instabot.db, instabot.key, .env, logs/ and screen_shots/ live next to this file. Work from here
+# even when the app is started from another folder (a shortcut, another terminal folder), or it
+# would open an empty database and make a new password key there.
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 from dotenv import load_dotenv
 
 load_dotenv()  # .env was never loaded before (Mailgun vars)

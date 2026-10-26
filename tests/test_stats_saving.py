@@ -36,6 +36,9 @@ class FakeDriver:
     def close(self):
         self.closed += 1
 
+    def quit(self):
+        self.closed += 1
+
 
 def _bot(cls):
     # skip __init__, which would start Chrome

@@ -53,6 +53,17 @@ class LocationBot(main_bot.InstagramBot):
                     # loops += 1
                     # self.driver.find_element(By.CLASS_NAME, 'coreSpriteRightPaginationArrow').click()
                 print('Loops: {}/{}'.format(amount, click_count), 'Username: ', self.username)
+                # stop when Instagram blocks the account, like Hashtag does
+                try:
+                    is_blocked = self._check_if_blocked()
+                except Exception:
+                    log.exception("Location %s: could not check if the account is blocked", self.username)
+                    is_blocked = False
+                if is_blocked:
+                    self._screen_shot(self.username)
+                    self._send_email(self.username, click_count, dt.datetime.now().strftime('%H:%M:%S'), 'Location')
+                    self.global_block_message(self.username, "Location")
+                    break
                 if int(loops * utils.TIME_SLEEP) == 500:
                     loops = 1
                     print('reset to loops')
@@ -63,7 +74,7 @@ class LocationBot(main_bot.InstagramBot):
             failed_posts_num = int(amount) - (int(click_count))
             self._prepare_data_for_db(url, amount, like, comment, follow,
                                       split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
-            self.driver.close()
+            self._close_browser()
 
     # search for location posts by the location name that the user provides
     def search_location_by_name(self, location_name, amount, like, follow, comment, split_comment, to_distribution, group_name, group_id):

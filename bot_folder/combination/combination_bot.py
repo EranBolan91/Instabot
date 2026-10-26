@@ -120,7 +120,9 @@ class CombinationBot(main_bot.InstagramBot):
                     time.sleep(WAIT_FOR_EACH_FOLLOW * curr_follow_add)
 
                 unfollow_users = self.database.get_unfollow_users(self.username)
-                self._unfollow_users(unfollow_users, self.database.get_user_id(self.username), wait)
+                # a block while unfollowing stops the run too
+                if self._unfollow_users(unfollow_users, self.database.get_user_id(self.username), wait):
+                    is_blocked = True
 
                 # break the first while loop
                 if is_blocked:
@@ -129,8 +131,7 @@ class CombinationBot(main_bot.InstagramBot):
         except Exception:
             log.exception("Combination %s: run stopped", self.username)
         finally:
-            self.driver.delete_all_cookies()
-            self.driver.close()
+            self._close_browser()
         return True
 
     def _scroll_down(self, scroll_box):
@@ -238,8 +239,8 @@ class CombinationBot(main_bot.InstagramBot):
                             self._like_posts(wait, username, likes)
                     except Exception:
                         log.exception("Combination %s: could not like the posts of %s", self.username, username)
-                        self.driver.close()
-                        self.driver.switch_to.window(self.driver.window_handles[0])
+                        # close the user's tab, if it opened, never the likes list
+                        self._close_extra_tabs()
 
         return followed, is_action_blocked
 
@@ -276,6 +277,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         time.sleep(1)
 
+    # unfollows the users in the list, in a second tab. Returns True when Instagram blocked the account.
     def _unfollow_users(self, user_list, account_id, wait):
         curr_user = 0
         is_blocked = False
@@ -298,7 +300,6 @@ class CombinationBot(main_bot.InstagramBot):
                     self._screen_shot(self.username)
                     self._send_email(self.username, curr_user, dt.datetime.now().strftime(
                         '%H:%M:%S'), 'Followers')
-                    self.driver.close()
                     self.global_block_message(self.username, "Followers")
                     break
 
@@ -318,6 +319,7 @@ class CombinationBot(main_bot.InstagramBot):
 
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
+        return is_blocked
 
     def _unfollow(self, user, account_id, wait):
         follow_back = False

@@ -13,25 +13,28 @@ log = get_logger(__name__)
 
 class FollowersBot(main_bot.InstagramBot):
     def get_unfollowers(self):
-        if not self._login():
-            return
-        time.sleep(2)
-        self._nav_user(self.username)
-        time.sleep(2)
-        S.click(self.driver, "profile.following_counter")
-        following = self._get_names()
-        S.click(self.driver, "profile.followers_counter")
-        followers = self._get_names()
-        followers_amount, no_use_data, no_use_posts = self._get_followers_number(self.username)
-        if int(followers_amount) <= int((len(followers)+10)):
-            not_following_back = [user for user in following if user not in followers]
-            print(not_following_back)
-            print('Not following back: ', len(not_following_back))
-            return not_following_back
-        else:
-            print('Something fucked up with the followers,'
-                  'it counted {} followers and the current user has {} followers'.format(len(followers), followers_amount))
+        try:
+            if not self._login():
+                return
+            time.sleep(2)
+            self._nav_user(self.username)
+            time.sleep(2)
+            S.click(self.driver, "profile.following_counter")
+            following = self._get_names()
+            S.click(self.driver, "profile.followers_counter")
+            followers = self._get_names()
+            followers_amount, no_use_data, no_use_posts = self._get_followers_number(self.username)
+            if int(followers_amount) <= int((len(followers)+10)):
+                not_following_back = [user for user in following if user not in followers]
+                print(not_following_back)
+                print('Not following back: ', len(not_following_back))
+                return not_following_back
+            log.warning("%s: read %d followers but the profile says %s, so the result would be wrong",
+                        self.username, len(followers), followers_amount)
             return False
+        finally:
+            # Chrome used to stay open after this check
+            self._close_browser()
 
     # usernames in the open list, after scrolling it to the end; closes the list
     def _get_names(self):
@@ -109,7 +112,7 @@ class FollowersBot(main_bot.InstagramBot):
                 print("Unfollow everyone: removed {}/{} account: {}".format(limit_unfollowers, unfollow_click, self.username))
         except Exception:
             log.exception("Unfollow everyone %s: run stopped", self.username)
-        self.driver.close()
+        self._close_browser()
 
     # unfollow users - gets list of users
     # Go to each user and unfollow him
@@ -150,7 +153,6 @@ class FollowersBot(main_bot.InstagramBot):
 
             if self._blocked_action_popup():
                 self._send_email(self.username, remove_clicks, dt.datetime.now().strftime('%H:%M:%S'), 'Followers')
-                self.driver.close()
                 self.global_block_message(self.username, "Followers")
                 break
             # count how many users follow back
@@ -177,7 +179,7 @@ class FollowersBot(main_bot.InstagramBot):
         # save the amount of followers back
         followers_obj = Followers(account_id, self.username, follow_back)
         FollowersDB().save_in_db(followers_obj)
-        self.driver.close()
+        self._close_browser()
 
     # unfollow one user
     def unfollow_user(self, username, account_id):
@@ -186,7 +188,7 @@ class FollowersBot(main_bot.InstagramBot):
         except Exception:
             log.exception("Unfollow %s: could not unfollow %s", self.username, username)
         finally:
-            self.driver.close()
+            self._close_browser()
 
     # Getting list of the account followers and compare it with the list of the followers of the account
     # unfollow every user that the account following him and the user not following back
@@ -200,7 +202,7 @@ class FollowersBot(main_bot.InstagramBot):
         followers = self._get_names()
         not_following_back = [user for user in unfollowers_list if user not in followers]
         time.sleep(1.3)
-        self.driver.close()
+        self._close_browser()
         return not_following_back
 
     # Saving Hash-tag data to display in the statistics

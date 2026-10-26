@@ -107,10 +107,10 @@ def combination_run(tmp_db, monkeypatch):
 
 def test_combination_run_saves_stats(combination_run):
     # ask for 3 follows and 2 likes each: 2 users followed, 3 of their 4 posts liked
-    combination_run.combination("sunset", "", 2, 3, 1, 0, "Travel", 7, 0, 5)
+    combination_run.combination("sunset", "", 2, 3, 1, 0, "Travel", 7, 0, 0)
     (row,) = CombinationDM().get_account_data("me")
     assert row[1:11] == ("me", "", "sunset", 4, 1, 3, 1, 0, 1, "Travel")
-    assert row[12] == 5
+    assert row[12] == 0
     # the Account Actions log gets a row too: 3 asked, 2 done
     with sqlite3.connect("instabot.db") as conn:
         actions = conn.execute("SELECT action, amount, amount_success FROM account_actions").fetchall()
@@ -129,3 +129,36 @@ def test_combination_saves_nothing_when_login_fails(combination_run, monkeypatch
     monkeypatch.setattr(combination_run, "_login", lambda: False)
     combination_run.combination("sunset", "", 0, 3, 0, 0, "", 0, 0, 0)
     assert CombinationDM().get_account_data("me") == []
+
+
+def _list_users(group_id):
+    with sqlite3.connect("instabot.db") as conn:
+        return [u for (u,) in conn.execute("SELECT username FROM dm_users WHERE group_id = ?", (group_id,))]
+
+
+def test_combination_saves_followed_users_to_the_distribution_list(combination_run, tmp_db):
+    tmp_db.create_distribution_group("Travel", "me")
+    group_id = tmp_db.get_group_id_by_group_name_and_id("Travel", "me")
+    combination_run.combination("sunset", "", 0, 3, 1, 0, "Travel", group_id, 0, 0)
+    assert _list_users(group_id) == ["a", "b"]
+
+
+def test_combination_without_distribution_saves_no_list_users(combination_run, tmp_db):
+    tmp_db.create_distribution_group("Travel", "me")
+    group_id = tmp_db.get_group_id_by_group_name_and_id("Travel", "me")
+    combination_run.combination("sunset", "", 0, 3, 0, 0, "", group_id, 0, 0)
+    assert _list_users(group_id) == []
+
+
+def test_combination_skips_users(combination_run, tmp_db):
+    tmp_db.create_distribution_group("Travel", "me")
+    group_id = tmp_db.get_group_id_by_group_name_and_id("Travel", "me")
+    combination_run.combination("sunset", "", 0, 3, 1, 0, "Travel", group_id, 0, 1)
+    # "a" is skipped, only "b" is followed
+    with sqlite3.connect("instabot.db") as conn:
+        followed = [u for (u,) in conn.execute("SELECT username FROM unfollow")]
+    assert followed == ["b"]
+    assert _list_users(group_id) == ["b"]
+    (row,) = CombinationDM().get_account_data("me")
+    assert row[6:8] == (3, 2)
+    assert row[12] == 1

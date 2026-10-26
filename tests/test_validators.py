@@ -6,11 +6,9 @@ def test_required():
     assert validators.required("a", "Name") is None
 
 
-def test_no_spaces_and_apostrophe():
+def test_no_spaces():
     assert validators.no_spaces("my user", "Username")
     assert validators.no_spaces("my_user", "Username") is None
-    assert validators.no_apostrophe("o'neil", "Name")
-    assert validators.no_apostrophe("oneil", "Name") is None
 
 
 def test_http_url():

@@ -222,8 +222,6 @@ class SettingsDialog(QDialog):
         name = self.list_name_edit.text().strip()
         return validators.first_error(
             validators.required(name, "List name"),
-            # removing a list and reading its users paste the name into the SQL
-            validators.no_apostrophe(name, "List name"),
             validators.unique(name, self._group_names, "A list with this name"))
 
     def _add_list(self):

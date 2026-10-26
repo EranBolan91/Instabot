@@ -186,18 +186,20 @@ class Database:
         self.conn.close()
 
     def _encrypt_plain_passwords(self):
-        """Encrypts passwords saved before encryption was added. Runs on every start; does nothing once done."""
-        rows = self.cur.execute("SELECT id, password FROM accounts").fetchall()
-        plain = [(account_id, password) for account_id, password in rows
-                 if password and not crypto.is_encrypted(password)]
-        if not plain:
-            return
-        try:
-            self.cur.executemany("UPDATE accounts SET password = ? WHERE id = ?",
-                                 [(crypto.encrypt(password), account_id) for account_id, password in plain])
-            log.info("Database: encrypted %d saved password(s)", len(plain))
-        except Exception:
-            log.exception("Database: could not encrypt the saved passwords, they stay as they were")
+        """Encrypts account and proxy passwords saved before encryption was added.
+        Runs on every start; does nothing once done."""
+        for table in ("accounts", "proxy"):
+            rows = self.cur.execute("SELECT id, password FROM {}".format(table)).fetchall()
+            plain = [(row_id, password) for row_id, password in rows
+                     if password and not crypto.is_encrypted(password)]
+            if not plain:
+                continue
+            try:
+                self.cur.executemany("UPDATE {} SET password = ? WHERE id = ?".format(table),
+                                     [(crypto.encrypt(password), row_id) for row_id, password in plain])
+                log.info("Database: encrypted %d saved %s password(s)", len(plain), table)
+            except Exception:
+                log.exception("Database: could not encrypt the saved %s passwords, they stay as they were", table)
 
     def save_account(self, name, phone, username, password):
         time_now = dt.datetime.now()
@@ -245,6 +247,18 @@ class Database:
             log.error("Database: the saved password of %s can't be decrypted (the key changed or was lost). "
                       "Type it again in Main -> Accounts.", row[3])
             row[4] = ""
+        return tuple(row)
+
+    @staticmethod
+    def _proxy_with_plain_password(row):
+        """The proxy row with its password decrypted (column 3). An unreadable password becomes empty."""
+        row = list(row)
+        try:
+            row[3] = crypto.decrypt(row[3])
+        except crypto.DecryptError:
+            log.error("Database: the saved password of proxy %s can't be decrypted (the key changed or was lost). "
+                      "Delete the proxy in Settings -> Proxies and add it again.", row[1])
+            row[3] = ""
         return tuple(row)
 
     def delete_account(self, username):
@@ -465,7 +479,7 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
-            data = cur.execute(" SELECT * FROM proxy ").fetchall()
+            data = [self._proxy_with_plain_password(row) for row in cur.execute(" SELECT * FROM proxy ").fetchall()]
         except Exception:
             log.exception("Database: could not read proxies")
         finally:

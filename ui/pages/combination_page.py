@@ -65,13 +65,10 @@ class CombinationPage(JobPage):
         grid.addWidget(FormField("Posts to like per followed user", self.likes_spin), 0, 1)
         grid.addWidget(FormField("Skip posts", self.skip_posts_spin, "Start this many posts in."), 1, 0)
         grid.addWidget(FormField("Skip users", self.skip_users_spin,
-                                 "Known issue: not used by the Combination bot yet."), 1, 1)
+                                 "Pass over this many users at the top of the likes list."), 1, 1)
         amounts.content.addLayout(grid)
         self.distribution = DistributionPicker()
         amounts.content.addWidget(self.distribution)
-        distribution_note = QLabel("Known issue: the Combination bot doesn't save users to the list yet (#12).")
-        distribution_note.setProperty("muted", True)
-        amounts.content.addWidget(distribution_note)
 
         history = Card("Past runs")
         self.history = RecordsTable(HISTORY_COLUMNS, "No runs saved yet for this account.")

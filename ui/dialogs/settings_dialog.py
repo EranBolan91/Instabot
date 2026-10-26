@@ -97,7 +97,7 @@ class SettingsDialog(QDialog):
         grid.setColumnStretch(0, 1)
         grid.setColumnStretch(1, 1)
         thresholds.content.addLayout(grid)
-        thresholds.content.addWidget(_note("A value left at 0 keeps its current value, like before."))
+        thresholds.content.addWidget(_note("0 means no minimum."))
 
         browser = Card("Browser")
         self.headless_check = QCheckBox("Run Chrome hidden (headless)")
@@ -134,9 +134,10 @@ class SettingsDialog(QDialog):
         if data is None:
             database._init_settings()
             data = database.get_data_from_settings()
-        likes = self.likes_spin.value() or as_int(data[SETTINGS_LIKES])
-        followers = self.followers_spin.value() or as_int(data[SETTINGS_FOLLOWERS])
-        posts = self.posts_spin.value() or as_int(data[SETTINGS_POSTS])
+        # 0 is a real value ("no minimum"), so it is saved like any other
+        likes = self.likes_spin.value()
+        followers = self.followers_spin.value()
+        posts = self.posts_spin.value()
         # save_settings(likes, followers, schedule_hours, is_active, headless, posts). The old window passed
         # the two schedule columns the other way round, which swapped them on every save.
         saved = database.save_settings(likes, followers, data[SETTINGS_SCHEDULE_HOUR], data[SETTINGS_IS_SCHEDULE],

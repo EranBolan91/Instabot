@@ -412,6 +412,9 @@ class Database:
         conn = sqlite3.connect(self.database_name)
         cur = conn.cursor()
         try:
+            # each user once per list, so the DM page never messages anyone twice
+            if cur.execute("SELECT 1 FROM dm_users WHERE username = ? AND group_id = ?", (user, group_id)).fetchone():
+                return
             cur.execute('INSERT INTO dm_users(username, group_id) VALUES(?,?)', (user, group_id))
             conn.commit()
         except Exception:
@@ -452,7 +455,7 @@ class Database:
         cur = conn.cursor()
         dm_users = []
         try:
-            cur.execute("SELECT username FROM dm_users WHERE group_id = ?", (group_id,))
+            cur.execute("SELECT DISTINCT username FROM dm_users WHERE group_id = ?", (group_id,))
             dm_users = cur.fetchall()
         except Exception:
             log.exception("Database: could not read the users of distribution group %s", group_name)

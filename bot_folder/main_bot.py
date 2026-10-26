@@ -14,6 +14,9 @@ from utils.log import get_logger
 
 log = get_logger(__name__)
 
+# seconds to wait for Mailgun when sending an alert e-mail
+EMAIL_TIMEOUT = 30
+
 class InstagramBot:
     def __init__(self, username, password, is_mobile, proxy_dict):
         self.database = db.Database()
@@ -79,7 +82,28 @@ class InstagramBot:
         self.driver.get(S.url("profile", username=user))
 
     def _nav_user_new_tab(self, username):
-        self.driver.execute_script("window.open('{}');".format(S.url("profile", username=username)))
+        # the address goes in as an argument, so a quote in a name can't break the script
+        self.driver.execute_script("window.open(arguments[0]);", S.url("profile", username=username))
+
+    def _close_extra_tabs(self):
+        """Closes every tab but the first one and goes back to it."""
+        handles = self.driver.window_handles
+        for handle in handles[1:]:
+            self.driver.switch_to.window(handle)
+            self.driver.close()
+        self.driver.switch_to.window(handles[0])
+
+    def _close_browser(self):
+        """Ends the run: closes Chrome and its driver. Safe to call when Chrome is already gone
+        (the user pressed Stop, or a block closed it)."""
+        try:
+            self.driver.delete_all_cookies()
+        except Exception:
+            log.debug("%s: could not clear cookies, Chrome is already closed", self.username, exc_info=True)
+        try:
+            self.driver.quit()
+        except Exception:
+            log.debug("%s: Chrome was already closed", self.username, exc_info=True)
 
     def _like_post(self):
         try:
@@ -93,15 +117,22 @@ class InstagramBot:
         likes = S.count(self.driver, "post.likes_link", timeout=3)
         return utils().clean_number(likes) if likes else 0
 
-    # comment on a post
+    # comment on a post. Returns False when it couldn't, e.g. the post has comments turned off;
+    # the run goes on with the next post.
     def _comment_post(self, split_comment):
         # returning random comment from a list of comments
         comment = random.choice(split_comment)
         time.sleep(2)
-        # first need to click on the Entry ('add comment...')
-        S.get(self.driver, "post.comment_input").click()
-        # Then enter the comment and click post (found again: the box re-renders after the click)
-        S.get(self.driver, "post.comment_input").send_keys(comment + Keys.RETURN)
+        try:
+            # first need to click on the Entry ('add comment...')
+            S.get(self.driver, "post.comment_input").click()
+            # Then enter the comment and click post (found again: the box re-renders after the click)
+            S.get(self.driver, "post.comment_input").send_keys(comment + Keys.RETURN)
+            return True
+        except Exception:
+            log.warning("%s: could not comment on this post (comments may be turned off), skipping it",
+                        self.username, exc_info=True)
+            return False
 
     def _follow_user(self, to_distribution, group_id):
         settings_data = self.database.get_data_from_settings()
@@ -224,20 +255,29 @@ class InstagramBot:
         if not (mailgun_domain and mailgun_api and alert_email):
             log.warning("Not sending the alert e-mail: set MAILGUN_DOMAIN, MAILGUN_API and ALERT_EMAIL in .env")
             return
-        print('sending email')
-        image_name = username + '.png'
-        requests.post("https://api.mailgun.net/v3/{}/messages".format(mailgun_domain),
-                      auth=("api", "{}".format(mailgun_api)),
-                      files=[("attachment", (username,
-                                open("screen_shots/{}".format(image_name), "rb").read()))],
-                      data={"from": "RocketBot <{}>".format(alert_email),
-                            "to": [alert_email],
-                            "subject": "RocketBot Error - {}".format(username),
-                            "text": """ 
-                            Username: {} 
-                            Section: {}
-                            Success: {} 
-                            Time: {}""".format(username, section, success_posts, time)})
+        image_path = os.path.join("screen_shots", username + ".png")
+        files = []
+        if os.path.exists(image_path):
+            with open(image_path, "rb") as image:
+                files = [("attachment", (username + ".png", image.read()))]
+        else:
+            log.warning("Alert e-mail: no screenshot at %s, sending it without one", image_path)
+        try:
+            response = requests.post(
+                "https://api.mailgun.net/v3/{}/messages".format(mailgun_domain),
+                auth=("api", mailgun_api),
+                files=files,
+                # without a time limit a Mailgun that doesn't answer would hang the job forever
+                timeout=EMAIL_TIMEOUT,
+                data={"from": "RocketBot <{}>".format(alert_email),
+                      "to": [alert_email],
+                      "subject": "RocketBot Error - {}".format(username),
+                      "text": "Username: {}\nSection: {}\nSuccess: {}\nTime: {}".format(
+                          username, section, success_posts, time)})
+            response.raise_for_status()
+            log.info("Sent the alert e-mail for %s (%s)", username, section)
+        except Exception:
+            log.exception("Could not send the alert e-mail for %s", username)
 
     def _blocked_action_popup(self):
         popup = S.find(self.driver, "block.popup", timeout=4)

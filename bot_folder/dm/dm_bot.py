@@ -18,8 +18,10 @@ class DM(main_bot.InstagramBot):
                 return
         i = 0
         sent = 0
+        # newest first, and each user once: a list can hold someone twice (followed again on a
+        # later run), and they must not get the message twice
+        dm_users = list(dict.fromkeys(tuple(user) for user in reversed(dm_users)))
         size_list = len(dm_users)
-        dm_users.reverse()
         try:
             for user in dm_users:
                 if sent == limit_msg:
@@ -81,11 +83,10 @@ class DM(main_bot.InstagramBot):
         except Exception:
             log.exception("DM %s: sending to distribution group %s stopped", self.username, group_name)
         finally:
-            self.driver.delete_all_cookies()
             group_len = len(dm_users)
             num_failed_members = group_len - sent
             self._prepare_data_for_db(message, group_name, group_len, num_failed_members, is_schedule)
-            self.driver.close()
+            self._close_browser()
 
     def send_message_to_following_list(self, message, is_schedule):
         if not self._login():

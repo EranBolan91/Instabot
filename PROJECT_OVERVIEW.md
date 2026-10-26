@@ -188,7 +188,7 @@ Tabs: HashTag, Location, Follow Followers, DM, Follow back, Combination. Each is
 ### 4.4 Dialogs (`ui/dialogs/`)
 - **Accounts** (`accounts_dialog.py`): a table of accounts (Name, Phone, Username, Created, Last login; **passwords are not shown**) and a form (Name, Phone, Username*, Password* with a show/hide button). Add (`save_account`), Edit → Save (`update_account`), Delete (`delete_account`, after a confirmation). The header's account list refreshes after any change.
 - **Settings** (`settings_dialog.py`), four tabs:
-  1. *General:* likes / posts / followers thresholds and Headless. Saved with `save_settings`; a field left at 0 keeps its old value. If the settings row doesn't exist yet (no account added), it shows defaults. It notes that the likes threshold isn't enforced and that desktop Chrome ignores Headless.
+  1. *General:* likes / posts / followers thresholds and Headless. Saved with `save_settings`; 0 is saved as 0 (no minimum). If the settings row doesn't exist yet (no account added), it shows defaults. It notes that the likes threshold isn't enforced and that desktop Chrome ignores Headless.
   2. *Distribution lists:* pick an account, add a list (`create_distribution_group`) or remove one (`remove_group_from_distribution_list`, after a confirmation).
   3. *Proxies:* a table and a form (Host*, Port*, Username, Password) → `Proxy.save_in_db` / `remove_from_db`. It notes that the bots don't apply proxies.
   4. *Warm-up websites:* a list of URLs (`save_website` / `remove_website`).
@@ -511,7 +511,15 @@ The issues below were found by reading the code. The numbers are kept stable bec
 19. `search_location_by_name` does not log in and calls `_follow_user()` without the required arguments. Not wired in the UI.
 20. **Fixed.** `Utils.clean_number("10M")` returns 10,000,000.
 21. `Database.get_user_id` / `get_group_id_by_group_name_and_id` crash with `TypeError` when nothing is found (`None[0]`).
-22. `screen_shots/` is now created by `main.py` (**Fixed**), but `_send_email` still fails if the screenshot is missing.
+22. **Fixed.** `screen_shots/` is created by `main.py`, and `_send_email` sends without a screenshot when there is none. It waits at most 30 s for Mailgun and never stops the job.
+
+**Found in the October 2026 review (all Fixed)**
+27. A post with comments turned off ended the whole Hashtag or Location run. `_comment_post` now skips that post.
+28. DM could message the same user twice when a list held them twice. Lists now keep each user once, and the DM bot skips repeats.
+29. On a block, Hashtag, Unfollow and Combination closed Chrome twice, so the job crashed (and Combination lost its stats). Bots now end with `_close_browser()` (quits Chrome, safe if it's already gone), and a block while Combination unfollows stops the run.
+30. Location never checked for blocks. It now stops like Hashtag.
+31. Settings → thresholds couldn't be set back to 0. 0 is now saved (no minimum).
+32. `instabot.db`, `instabot.key`, `.env` and `logs/` were looked up in the folder the app was started from. `main.py` now works from its own folder.
 
 **Security and quality**
 23. **Fixed.** All SQL uses `?` parameters, and the UI allows apostrophes again.

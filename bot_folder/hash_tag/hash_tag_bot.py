@@ -70,7 +70,6 @@ class HashTagBot(main_bot.InstagramBot):
                     if is_blocked:
                         self._screen_shot(self.username)
                         self._send_email(self.username, click_count, dt.datetime.now().strftime('%H:%M:%S'), 'Hashtag')
-                        self.driver.close()
                         self.global_block_message(self.username, "Hashtag")
                         break
                 except Exception:
@@ -83,8 +82,7 @@ class HashTagBot(main_bot.InstagramBot):
             failed_posts_num = int(amount) - (int(click_count))
             self._prepare_data_for_db(hash_tag, amount, like, comment, follow,
                                       split_comment, to_distribution, group_name, failed_posts_num, time_schedule)
-            self.driver.delete_all_cookies()
-            self.driver.close()
+            self._close_browser()
 
     # Saving Hash-tag data to display in the statistics
     def _prepare_data_for_db(self, hash_tag, amount, like, comment, follow,

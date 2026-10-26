@@ -321,7 +321,7 @@ Builds a Chrome extension zip (`proxy_auth_plugin.zip`) with `manifest.json` and
 #### Tables and column order (rows are read **by index** in the code)
 | Table | Columns (index: name) | Purpose |
 |---|---|---|
-| `accounts` | 0 id, 1 name, 2 phone, 3 username, 4 password, 5 creation_date, 6 last_login | Stored Instagram accounts (plain-text passwords). |
+| `accounts` | 0 id, 1 name, 2 phone, 3 username, 4 password, 5 creation_date, 6 last_login | Stored Instagram accounts. The password is encrypted (`enc:v1:` + Fernet token, see `utils/crypto.py`); `Database()` encrypts any old plain-text ones on start. |
 | `settings` | 0 id, 1 amount_likes, 2 amount_followers, 3 is_schedule, 4 schedule_hour, 5 modify, 6 headless, 7 amount_posts | Single global row (id=1). `[2]` = min followers, `[6]` = headless, `[7]` = min posts. |
 | `unfollow` | 0 id, 1 user_id → accounts.id, 2 username | Every user the bot followed, per account. It is the source for the unfollow features. |
 | `groups` | 0 id, 1 group_name, 2 user_id → accounts.id | Distribution lists (per account). |
@@ -340,9 +340,9 @@ Builds a Chrome extension zip (`proxy_auth_plugin.zip`) with `manifest.json` and
 #### `Database` methods
 | Method | Description |
 |---|---|
-| `save_account(name, phone, username, password)` | Inserts an account, then calls `_init_settings()`. |
+| `save_account(name, phone, username, password)` | Inserts an account (password encrypted), then calls `_init_settings()`. |
 | `_init_settings()` | Inserts the default settings row if the table is empty. |
-| `get_accounts()` | All account rows. |
+| `get_accounts()` | All account rows, passwords decrypted. A password that can't be decrypted (lost key) comes back empty, with an error in the log. |
 | `delete_account(username)` / `update_account(id, name, phone, username, password)` | Return a bool. |
 | `save_settings(likes, followers, schedule_hours, is_active, headless, posts)` | Updates row id=1. |
 | `get_data_from_settings()` | Returns the settings row (tuple) or `None`. |
